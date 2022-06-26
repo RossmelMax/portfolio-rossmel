@@ -1,0 +1,106 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat&family=Major+Mono+Display&family=Quicksand:wght@300&display=swap');
+$font-family-brand: 'Caveat', cursive;
+$font-family-links: 'Major Mono Display', monospace;
+$font-family-text: 'Quicksand', sans-serif;
+
+.container
+{
+    width: 100%;
+    height: 10vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+
+    
+    .personalBrand, .links
+    {
+        height: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+
+        color: black;
+    }
+
+    .personalBrand
+    {
+        width: 40%;
+
+        p
+        {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            
+            a
+            {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+
+                width: 70%;
+                height: 80%;
+
+                background-color: yellow;
+                border-radius: 20px;
+                
+                font-family: $font-family-brand;
+                font-size: 4rem;
+                text-decoration: none;
+    
+                transition: all 0.5s ease-in-out;
+            }
+        }
+    }
+
+    .links
+    {
+        width: 60%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+        flex-wrap: wrap;
+
+        p
+        {
+            width: 20%;
+            height: 100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+
+            background-color: pink;
+            
+            a
+            {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+
+                width: 200px;
+                height: 80%;
+
+                
+                background-color: yellow;
+                border-radius: 20px;
+                
+                font-family: $font-family-links;
+                font-size: 1.5rem;
+                text-decoration: none;
+    
+                transition: all 0.5s ease-in-out;
+            }
+        }
+    }
+}
