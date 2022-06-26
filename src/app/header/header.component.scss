@@ -1,7 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Caveat&family=Major+Mono+Display&family=Quicksand:wght@300&display=swap');
-$font-family-brand: 'Caveat', cursive;
-$font-family-links: 'Major Mono Display', monospace;
-$font-family-text: 'Quicksand', sans-serif;
+@import '../../styles.scss';
 
 .container
 {
@@ -22,7 +19,22 @@ $font-family-text: 'Quicksand', sans-serif;
         justify-content: center;
         align-items: center;
 
-        color: black;
+        p
+        {
+            a
+            {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+
+                border-radius: 20px;
+                text-decoration: none;
+
+                color: $color-text;
+            }
+        }
+        color: $color-text;
     }
 
     .personalBrand
@@ -40,21 +52,14 @@ $font-family-text: 'Quicksand', sans-serif;
             
             a
             {
-                display: flex;
-                flex-direction: row;
-                justify-content: center;
-                align-items: center;
-
                 width: 70%;
                 height: 80%;
 
-                background-color: yellow;
-                border-radius: 20px;
+                
                 
                 font-family: $font-family-brand;
                 font-size: 4rem;
-                text-decoration: none;
-    
+
                 transition: all 0.5s ease-in-out;
             }
         }
@@ -79,25 +84,15 @@ $font-family-text: 'Quicksand', sans-serif;
             align-items: center;
             flex-wrap: wrap;
 
-            background-color: pink;
-            
             a
             {
-                display: flex;
-                flex-direction: row;
-                justify-content: center;
-                align-items: center;
-
                 width: 200px;
                 height: 80%;
 
+
                 
-                background-color: yellow;
-                border-radius: 20px;
-                
-                font-family: $font-family-links;
+                font-family: $font-family-cursive;
                 font-size: 1.5rem;
-                text-decoration: none;
     
                 transition: all 0.5s ease-in-out;
             }

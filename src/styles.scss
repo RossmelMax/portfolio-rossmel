@@ -46,12 +46,11 @@ table {
     border-spacing: 0;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Caveat&family=Major+Mono+Display&family=Quicksand:wght@300&display=swap');
+//GLOBAL VARIABLES
+@import url('https://fonts.googleapis.com/css2?family=Caveat&family=Nothing+You+Could+Do&family=Quicksand:wght@300&display=swap');
+
 $font-family-brand: 'Caveat', cursive;
-$font-family-links: 'Major Mono Display', monospace;
+$font-family-cursive: 'Nothing You Could Do', cursive;
 $font-family-text: 'Quicksand', sans-serif;
 
-body
-{
-    color: black;
-}
+$color-text: black;

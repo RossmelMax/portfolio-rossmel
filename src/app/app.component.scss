@@ -1,9 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Caveat&family=Major+Mono+Display&family=Quicksand:wght@300&display=swap');
-$font-family-brand: 'Caveat', cursive;
-$font-family-links: 'Major Mono Display', monospace;
-$font-family-text: 'Quicksand', sans-serif;
-
-$color-text: black;
+@import '../styles.scss';
 
 .mainContainer{
     display: flex;
@@ -15,17 +10,13 @@ $color-text: black;
 
     color: black;
 
-    background-color: lime;
-
     app-header{
         width: 100vw;
         height: 10vh;
-        background-color: red;
     }
 
     app-footer{
         width: 100vw;
         height: 10vh;
-        background-color: green;
     }
 }
