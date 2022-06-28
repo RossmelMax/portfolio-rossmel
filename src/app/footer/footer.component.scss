@@ -1,1 +1,56 @@
-@import '../../styles.scss';
+@import "../../styles.scss";
+
+.container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 10vh;
+
+  .copyright {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    width: 50%;
+    height: 100%;
+
+    font-size: 2rem;
+    color: $color-text;
+    font-family: $font-family-brand;
+    font-weight: 300;
+  }
+
+  .socialNetwork {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+    width: 50%;
+    height: 100%;
+
+    a {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      justify-content: center;
+
+      width: 10%;
+      height: 90%;
+
+      color: $color-text;
+      
+      transition: all 0.3s ease-in-out;
+
+      fa-icon {
+        font-size: 2rem;
+        cursor: pointer;
+      }
+      
+      &:hover {
+        transform: scale(1.2);
+      }
+    }
+  }
+}

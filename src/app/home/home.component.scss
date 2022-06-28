@@ -5,7 +5,20 @@
     width: 100%;
     height: 80vh;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
+
+    .aboutmeText
+    {
+        width: 50%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        text-align: center;
+        font-size: 1.5rem;
+    }
 }
