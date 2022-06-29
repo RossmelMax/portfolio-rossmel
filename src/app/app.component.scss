@@ -1,5 +1,5 @@
-@import '../styles.scss';
-
+@import '../variables.scss';
+ 
 .mainContainer{
     display: flex;
     flex-direction: column;
@@ -7,8 +7,8 @@
     justify-content: center;
     width: 100vw;
     height: 100vh;
-
-    color: black;
+    background-color: $main-light;
+    color: $main-black;
 
     app-header{
         width: 100vw;

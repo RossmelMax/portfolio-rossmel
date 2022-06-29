@@ -1,4 +1,4 @@
-@import "../../styles.scss";
+@import "../../variables.scss";
 
 .container {
   width: 100%;
@@ -9,6 +9,9 @@
   align-items: center;
   flex-wrap: wrap;
 
+  background-color: $main-light;
+  color: $main-black;
+ 
   .personalBrand,
   .links {
     height: 100%;
@@ -27,10 +30,10 @@
         border-radius: 20px;
         text-decoration: none;
 
-        color: $color-text;
+        color: $main-black;
       }
     }
-    color: $color-text;
+    color: $main-black;
   }
 
   .personalBrand {
@@ -49,9 +52,13 @@
         height: 80%;
 
         font-family: $font-family-brand;
-        font-size: 4.5rem;
+        font-size: 4rem;
 
-        transition: all 0.5s ease-in-out;
+        transition: all 0.4s ease-in-out;
+
+        &:hover {
+          transform: scale(1.04);
+        }
       }
     }
   }
@@ -74,13 +81,17 @@
       flex-wrap: wrap;
 
       a {
-        width: 200px;
+        width: 90%;
         height: 80%;
 
         font-family: $font-family-cursive;
-        font-size: 2.5rem;
+        font-size: 2rem;
 
-        transition: all 0.5s ease-in-out;
+        transition: all 0.3s ease-in-out;
+
+        &:hover {
+          transform: scale(1.1);
+        }
       }
     }
   }
