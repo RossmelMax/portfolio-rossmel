@@ -1,7 +1,7 @@
 @import "../../variables.scss";
 
 .container {
-  width: 100%;
+  width: 100vw;
   height: 10vh;
   display: flex;
   flex-direction: row;
@@ -11,7 +11,7 @@
 
   background-color: $main-light;
   color: $main-black;
- 
+
   .personalBrand,
   .links {
     height: 100%;
@@ -37,7 +37,7 @@
   }
 
   .personalBrand {
-    width: 40%;
+    width: 30%;
 
     p {
       width: 100%;
@@ -93,7 +93,9 @@
           transform: scale(1.1);
         }
       }
+      .active {
+        transform: scale(1.2);
+      }
     }
   }
 }
-

@@ -5,54 +5,57 @@
     width: 100vw;
     height: 80vh;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    flex-direction: row;
+    justify-content: space-evenly;
     align-items: center;
 
-    .title
+    .midLine
     {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-
-        width: 100%;
-        height: 20%;
-
-        h1
-        {
-            font-family: $font-family-brand;
-            font-size: 3rem;
-        }
+        height: 80%;
+        width: 5px;
+        border-radius: 50px;
+        background-color: $main-black;
     }
 
-    .content
+    .left,
+    .right
     {
         display: flex;
-        flex-direction: row;
-        justify-content: center;
+        flex-direction: column;
+        justify-content: space-evenly;
         align-items: center;
 
-        width: 100%;
-        height: 80%;
+        width: 40%;
+        height: 100%;
 
-        .midLine
-        {
-            height: 80%;
-            width: 5px;
-            background-color: $main-black;
+        text-align: center;
+
+        p {
+            font-family: $font-family-brand;
+            font-size: 2.3rem;
+
+            transition: all 0.2s ease-in-out;
+            &:hover
+            {
+                transform: scale(1.05);
+            }
         }
 
-        .left,
-        .right
+        ul
         {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-    
-            width: 80%;
-            height: 100%;
+            list-style: outside disc;
+
+            li
+            {
+                font-size: 2.2rem;
+                font-family: $font-family-brand;
+
+                transition: all 0.2s ease-in-out;
+                &:hover
+                {
+                    transform: scale(1.05);
+                }
+            }
         }
     }
 }
