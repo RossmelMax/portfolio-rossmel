@@ -16,7 +16,7 @@
 const rossmel = {
   rol: 'Frontend → Fullstack',
   base: 'Cochabamba, Bolivia · remoto',
-  experiencia: '3+ años en agencia · ~1.800 commits en productos para clientes',
+  experiencia: '3+ años en WANT · ~1.800 commits en productos para clientes',
   ahora: ['último semestre de Ing. de Sistemas', 'proyecto de grado con IA (AdvAI)', 'rOS, mi flavor de Arch'],
   ia: 'en productos (RAG, LLMs locales) y en el día a día (agentes, Claude Code)',
   idiomas: ['español', 'inglés (C1)'],

@@ -40,8 +40,8 @@ export const profile = {
 
   /** Resumen profesional (CV). 3–4 líneas, con palabras clave para ATS. */
   summary: {
-    es: 'Desarrollador Frontend con más de 3 años de experiencia en agencia construyendo SaaS multi-tenant, apps móviles y sitios web con React, Next.js, React Native y TypeScript (~1.800 commits en productos para clientes de Bolivia y EE. UU.). Base sólida de programación: autodidacta desde 2019 y años escribiendo código de producción sin asistentes de IA. Evolucionando a Fullstack con FastAPI, Node.js, SQLite/PostgreSQL, Firebase y Supabase. Desde 2025 integro IA en productos (RAG híbrido, LLMs locales y en la nube) y en mi flujo diario, para entregar más rápido sin sacrificar calidad.',
-    en: 'Frontend Developer with 3+ years of agency experience building multi-tenant SaaS, mobile apps and websites with React, Next.js, React Native and TypeScript (~1,800 commits across client products in Bolivia and the US). Solid programming foundation: self-taught since 2019, with years of writing production code without AI assistants. Growing into Fullstack with FastAPI, Node.js, SQLite/PostgreSQL, Firebase and Supabase. Since 2025 I integrate AI into products (hybrid RAG, local and cloud LLMs) and into my daily workflow, to ship faster without sacrificing quality.',
+    es: 'Desarrollador Frontend con más de 3 años de experiencia en WANT construyendo SaaS multi-tenant, apps móviles y sitios web con React, Next.js, React Native y TypeScript (~1.800 commits en productos para clientes de Bolivia y EE. UU.). Base sólida de programación: autodidacta desde 2019 y años escribiendo código de producción sin asistentes de IA. Evolucionando a Fullstack con FastAPI, Node.js, SQLite/PostgreSQL, Firebase y Supabase. Desde 2025 integro IA en productos (RAG híbrido, LLMs locales y en la nube) y en mi flujo diario, para entregar más rápido sin sacrificar calidad.',
+    en: 'Frontend Developer with 3+ years of experience at WANT building multi-tenant SaaS, mobile apps and websites with React, Next.js, React Native and TypeScript (~1,800 commits across client products in Bolivia and the US). Solid programming foundation: self-taught since 2019, with years of writing production code without AI assistants. Growing into Fullstack with FastAPI, Node.js, SQLite/PostgreSQL, Firebase and Supabase. Since 2025 I integrate AI into products (hybrid RAG, local and cloud LLMs) and into my daily workflow, to ship faster without sacrificing quality.',
   } as L,
 
   /** "Sobre mí" del portafolio: más humano que el resumen del CV. */
@@ -49,14 +49,14 @@ export const profile = {
     es: [
       'Empecé a programar solo, en 2019, con mi primera computadora propia. Desde entonces no paré: cursos, documentación, prueba y error, y muchas noches de “¿por qué no funciona esto?”.',
       'Pasé más de tres años en WANT Digital Agency, donde éramos dos en desarrollo: mi jefe en el backend y yo en el frontend. Ahí aprendí a hacer de todo — investigar, resolver, trabajar bajo presión y entregar.',
-      'Aprendí a la vieja escuela: en la agencia, casi todo ese tiempo programamos a mano — documentación, foros, depurar línea por línea. Recién en el último año incorporamos IA al trabajo.',
+      'Aprendí a la vieja escuela: en WANT, casi todo ese tiempo programamos a mano — documentación, foros, depurar línea por línea. Recién en el último año incorporamos IA al trabajo.',
       'Con el boom de la IA fui probando de todo: GitHub Copilot, ChatGPT, Gemini, DeepSeek, Groq, modelos locales y, últimamente, Claude. Me potenció muchísimo, y como vengo de escribir todo a mano, entiendo lo que genera: sé leerlo, corregirlo y mantenerlo. Y me dio más ganas de seguir aprendiendo y entender toda tecnología que llegue a mis manos.',
       'Fuera del trabajo, vivo en Linux: uso a diario rOS, mi propio flavor de Arch que quiero convertir en una distro real, y mantengo un homelab con una docena de servicios y un agente de IA que lo cuida 24/7.',
     ],
     en: [
       'I started coding on my own in 2019, with my first personal computer. I haven\'t stopped since: courses, docs, trial and error, and many “why isn\'t this working?” nights.',
       'I spent 3+ years at WANT Digital Agency, where the dev team was two people: my boss on the backend and me on the frontend. That\'s where I learned to do a bit of everything — research, solve, work under pressure and ship.',
-      'I learned the old-school way: at the agency, for almost all of that time we coded by hand — docs, forums, debugging line by line. We only brought AI into our work in the last year.',
+      'I learned the old-school way: at WANT, for almost all of that time we coded by hand — docs, forums, debugging line by line. We only brought AI into our work in the last year.',
       'When the AI boom hit I tried everything: GitHub Copilot, ChatGPT, Gemini, DeepSeek, Groq, local models and, lately, Claude. It has boosted me a lot, and since I come from writing everything by hand, I understand what it generates: I can read it, fix it and maintain it. And it made me even more eager to keep learning and understand every technology that comes my way.',
       'Outside work I live in Linux: I daily-drive rOS, my own flavor of Arch that I\'m growing into a real distro, and run a homelab with a dozen services and an AI agent that looks after it 24/7.',
     ],
@@ -221,10 +221,14 @@ export const learning = ['Platzi', 'Coursera', 'Udemy', 'freeCodeCamp', 'Google 
 /* HABILIDADES (agrupadas para ATS)                                    */
 /* ------------------------------------------------------------------ */
 
-export const skills: { group: L; items: string[] }[] = [
+/** Ítem de habilidad: nombre de tecnología (igual en ES/EN) o texto traducible. */
+export type SkillItem = string | L;
+export const tr = (x: SkillItem, lang: Lang) => (typeof x === 'string' ? x : x[lang]);
+
+export const skills: { group: L; items: SkillItem[] }[] = [
   {
     group: { es: 'Frontend y móvil', en: 'Frontend & Mobile' },
-    items: ['React', 'Next.js (Pages y App Router)', 'React Native', 'Expo', 'TypeScript', 'JavaScript', 'HTML5', 'CSS3 / Sass', 'Tailwind CSS', 'MUI', 'shadcn/ui', 'Redux Toolkit', 'i18n', 'PWA', 'Astro', 'GSAP', 'Motion'],
+    items: ['React', { es: 'Next.js (Pages y App Router)', en: 'Next.js (Pages & App Router)' }, 'React Native', 'Expo', 'TypeScript', 'JavaScript', 'HTML5', 'CSS3 / Sass', 'Tailwind CSS', 'MUI', 'shadcn/ui', 'Redux Toolkit', 'i18n', 'PWA', 'Astro', 'GSAP', 'Motion'],
   },
   {
     group: { es: 'Backend y datos', en: 'Backend & Data' },
@@ -232,7 +236,7 @@ export const skills: { group: L; items: string[] }[] = [
   },
   {
     group: { es: 'IA aplicada', en: 'Applied AI' },
-    items: ['RAG', 'Búsqueda híbrida (BM25 + embeddings)', 'Evaluación de LLMs', 'Ollama', 'Groq', 'Gemini', 'OpenAI API', 'DeepSeek', 'sqlite-vec', 'GitHub Copilot', 'Claude Code', 'Agentes'],
+    items: ['RAG', { es: 'Búsqueda híbrida (BM25 + embeddings)', en: 'Hybrid search (BM25 + embeddings)' }, { es: 'Evaluación de LLMs', en: 'LLM evaluation' }, 'Ollama', 'Groq', 'Gemini', 'OpenAI API', 'DeepSeek', 'sqlite-vec', 'GitHub Copilot', 'Claude Code', { es: 'Agentes de IA', en: 'AI agents' }],
   },
   {
     group: { es: 'DevOps, calidad y herramientas', en: 'DevOps, Quality & Tools' },
@@ -757,12 +761,12 @@ export const projects: Project[] = [
     tagline: { es: 'Sitio web de una tienda de electrónica y electrodomésticos.', en: 'Website for an electronics and home appliance retailer.' },
     role: { es: 'Desarrollo del sitio en WordPress.', en: 'WordPress site development.' },
     problem: {
-      es: "LYNX Bolivia vende electrónica y electrodomésticos de marcas líderes, con tienda en Cochabamba y envíos a todo el país. Necesitaba un sitio corporativo y tienda en línea que pudieran administrar ellos mismos. Fue de los primeros proyectos que completé en la agencia.",
-      en: "LYNX Bolivia sells electronics and home appliances from leading brands, with a store in Cochabamba and nationwide shipping. They needed a corporate site and online store they could manage themselves. It was one of the first projects I completed at the agency.",
+      es: "LYNX Bolivia vende electrónica y electrodomésticos de marcas líderes, con tienda en Cochabamba y envíos a todo el país. Necesitaba un sitio corporativo y tienda en línea que pudieran administrar ellos mismos. Fue de los primeros proyectos que completé en WANT.",
+      en: "LYNX Bolivia sells electronics and home appliances from leading brands, with a store in Cochabamba and nationwide shipping. They needed a corporate site and online store they could manage themselves. It was one of the first projects I completed at WANT.",
     },
     highlights: {
-      es: ["Sitio corporativo y tienda en línea en WordPress", "Contenido administrable por el propio cliente", "Uno de los primeros proyectos completados y entregados en la agencia"],
-      en: ["Corporate site and online store on WordPress", "Content the client can manage on their own", "One of the first projects completed and delivered at the agency"],
+      es: ["Sitio corporativo y tienda en línea en WordPress", "Contenido administrable por el propio cliente", "Uno de los primeros proyectos completados y entregados en WANT"],
+      en: ["Corporate site and online store on WordPress", "Content the client can manage on their own", "One of the first projects completed and delivered at WANT"],
     },
     learned: {
       es: ["No todo requiere código a medida: elegir la herramienta que el cliente puede mantener es parte del trabajo.", "Mi primera experiencia entregando a un cliente real: plazos, cambios y revisiones."],
@@ -782,8 +786,8 @@ export const projects: Project[] = [
     tagline: { es: 'Red social para iglesias.', en: 'Social network for churches.' },
     role: { es: 'Desarrollo frontend.', en: 'Frontend development.' },
     problem: {
-      es: "Una red social pensada para comunidades de iglesias: publicaciones, comunidad y contenido compartido entre miembros. Fue mi primer proyecto en la agencia y, aunque el producto no llegó a lanzarse, ahí aprendí a trabajar en equipo sobre un código real.",
-      en: "A social network designed for church communities: posts, community and shared content among members. It was my first project at the agency and, although the product never launched, it’s where I learned to work as a team on a real codebase.",
+      es: "Una red social pensada para comunidades de iglesias: publicaciones, comunidad y contenido compartido entre miembros. Fue mi primer proyecto en WANT y, aunque el producto no llegó a lanzarse, ahí aprendí a trabajar en equipo sobre un código real.",
+      en: "A social network designed for church communities: posts, community and shared content among members. It was my first project at WANT and, although the product never launched, it’s where I learned to work as a team on a real codebase.",
     },
     highlights: {
       es: ["Mi primer proyecto profesional, como pasante", "Interfaces móviles en React Native", "Primer contacto con revisiones de código y trabajo con un backend real"],
@@ -917,8 +921,8 @@ export const aiJourney: { period: L; title: L; body: L; tools?: string[] }[] = [
     period: { es: '2025', en: '2025' },
     title: { es: 'La IA llega al trabajo', en: 'AI arrives at work' },
     body: {
-      es: 'En el último año en la agencia incorporamos IA al flujo de desarrollo y a los productos.',
-      en: 'In my last year at the agency we brought AI into our development workflow and our products.',
+      es: 'En mi último año en WANT incorporamos IA al flujo de desarrollo y a los productos.',
+      en: 'In my last year at WANT we brought AI into our development workflow and our products.',
     },
   },
   {

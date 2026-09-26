@@ -1,0 +1,20 @@
+---
+import type { Lang } from '../data/profile';
+import { t } from '../data/i18n';
+/** Compartir un artículo: LinkedIn, X y WhatsApp (enlaces simples, sin scripts de terceros). */
+interface Props { lang: Lang; url: string; title: string }
+const { lang, url, title } = Astro.props;
+const s = t(lang);
+const u = encodeURIComponent(url);
+const links = [
+  { name: 'LinkedIn', href: `https://www.linkedin.com/sharing/share-offsite/?url=${u}` },
+  { name: 'X', href: `https://twitter.com/intent/tweet?url=${u}&text=${encodeURIComponent(title)}` },
+  { name: 'WhatsApp', href: `https://wa.me/?text=${encodeURIComponent(`${title} ${url}`)}` },
+];
+---
+<div class="flex flex-wrap items-center gap-2">
+  <span class="kicker mr-2">{s.blog.share}</span>
+  {links.map((l) => (
+    <a href={l.href} target="_blank" rel="noopener" class="kicker rounded-full border border-line px-4 py-2 transition-colors hover:border-fg hover:text-fg">{l.name}</a>
+  ))}
+</div>

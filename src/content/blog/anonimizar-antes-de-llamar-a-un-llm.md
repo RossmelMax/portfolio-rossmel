@@ -1,7 +1,7 @@
 ---
 title: 'Anonimizar un contrato antes de mandarlo a un LLM (sin otro LLM)'
 description: 'En AdvAI ningún nombre, carnet ni NIT sale de la máquina: un anonimizador por reglas los cambia por marcadores estables y el sistema los restaura en la respuesta. Cómo funciona y por qué no usé IA para esto.'
-date: 2026-09-26
+date: 2026-09-22
 tags: ['ia', 'llm', 'privacidad', 'python']
 project: 'advai'
 lang: 'es'

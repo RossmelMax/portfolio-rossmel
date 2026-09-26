@@ -1,7 +1,7 @@
 ---
 title: 'Un mapa de reportes ciudadanos con react-leaflet (y cómo lo reescribiría hoy)'
 description: 'En la hackatón Hackacom 2023 armamos Canasta: un mapa donde los vecinos reportan problemas de la ciudad y otros se suman a resolverlos. Repaso el código real, el bug clásico de los íconos de Leaflet y lo que cambiaría tres años después.'
-date: 2026-09-26
+date: 2026-09-17
 tags: ['react', 'frontend']
 project: 'canasta'
 lang: 'es'
