@@ -334,7 +334,8 @@ Flujo diario: push a `main` = producción; push a otra rama / PR = URL de vista 
 - [ ] Probar Lighthouse (meta ≥95) y accesibilidad con teclado
 - [x] v3.8: énfasis en programar sin IA (sobre mí, CV, línea de tiempo "antes y después de la IA"),
   blog con buscador/etiquetas/índice/relacionados y 11 artículos (uno o más por proyecto con código visible, más Jellyfin)
-- [x] Subdominios en "En vivo" (`liveSites` en profile.ts): notebook, rubik y selflix (confirmados por Rossmel)
+- [x] "En vivo": notebook, rubik y selflix son **proyectos** con caso de estudio propio (campo `live` en profile.ts);
+  la tarjeta abre el caso y ahí está el botón "Ver en vivo". Textos armados desde la memoria del agente: Rossmel los revisa
 
 ---
 
@@ -376,6 +377,7 @@ Ramas:
 | 2026-09 | v3.8: "programador primero". Sobre mí, CV y la sección Cómo trabajo cuentan que programó años sin IA (en WANT la IA llegó recién el último año) y qué herramientas usa hoy. |
 | 2026-09 | Blog "en condiciones": buscador de texto completo sin dependencias (índice JSON bajo demanda), etiquetas, índice por artículo, relacionados y enlaces artículo ↔ caso de estudio. Artículos en español. |
 | 2026-09 | Sección "En vivo": notebook, rubik y selflix. Fuera: music, mcu, waitlist, stream, chat, admin, admin-music, ssh, ori, class, s, test (y los del propio portafolio). |
+| 2026-09 | Los servicios en vivo pasan a ser proyectos con página de detalle (qué es, cómo funciona, lo que aprendí) en vez de enlaces directos; se elimina `liveSites`. Pedido de Rossmel. |
 | 2026-09 | Entrada del nombre fluida en móvil: las demás animaciones se preparan después del intro y en pedazos (antes, un bloqueo de ~380 ms con CPU de gama media). |
 | 2026-09 | Tono: transmitir que entiende lo que genera la IA, sin frases absolutas ni "no soy vibe coder" (pedido de Rossmel). |
 | 2026-09 | Fuera del sitio: watcher-backend, prototipos v0 (salvo SGPG), proyectos descartados, proyectos personales/regalos. |
