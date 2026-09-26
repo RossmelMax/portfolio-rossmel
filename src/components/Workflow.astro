@@ -1,10 +1,12 @@
 ---
 import type { Lang } from '../data/profile';
 import { workflow, aiJourney } from '../data/profile';
-import { t, paths } from '../data/i18n';
+import { t } from '../data/i18n';
+import { postUrlById } from '../data/blog';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 const s = t(lang);
+const essayUrl = await postUrlById('programar-antes-de-la-ia', lang);
 ---
 <section id="workflow" class="px-5 py-32 md:px-10">
   <p class="kicker mb-10">{s.workflow.kicker}</p>
@@ -26,7 +28,7 @@ const s = t(lang);
       </li>
     ))}
   </ol>
-  <a href={paths.post('programar-antes-de-la-ia')} data-hover class="mt-12 inline-flex items-center gap-2 text-accent underline-offset-4 hover:underline">{s.workflow.essay} →</a>
+  <a href={essayUrl} data-hover class="mt-12 inline-flex items-center gap-2 text-accent underline-offset-4 hover:underline">{s.workflow.essay} →</a>
 
   <p class="kicker mb-8 mt-24">{s.workflow.steps}</p>
   <ol class="grid gap-px overflow-hidden rounded-3xl border border-line bg-line md:grid-cols-4">

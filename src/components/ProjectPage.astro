@@ -4,7 +4,7 @@ import { visibleProjects as projects } from '../data/profile';
 import Base from '../layouts/Base.astro';
 import Nav from './Nav.astro';
 import { t, paths } from '../data/i18n';
-import { postsForProject, fmtDate, readingTime } from '../data/blog';
+import { postsForProject, postUrl, fmtDate, readingTime } from '../data/blog';
 import LiveSites from './LiveSites.astro';
 interface Props { lang: Lang; project: Project }
 const { lang, project: p } = Astro.props;
@@ -12,7 +12,7 @@ const s = t(lang);
 const altPath = paths.project(lang === 'es' ? 'en' : 'es', p.slug);
 const idx = projects.findIndex((x) => x.slug === p.slug);
 const next = projects[(idx + 1) % projects.length];
-const posts = await postsForProject(p.slug);
+const posts = await postsForProject(p.slug, lang);
 ---
 <Base lang={lang} altPath={altPath} title={p.name} description={p.tagline[lang]}>
   <Nav lang={lang} altPath={altPath} onHome={false} />
@@ -76,8 +76,8 @@ const posts = await postsForProject(p.slug);
         <ul class="border-t border-line">
           {posts.map((post) => (
             <li class="border-b border-line" data-reveal>
-              <a href={paths.post(post.id)} data-hover class="group grid gap-3 py-8 md:grid-cols-12 md:items-baseline md:gap-8">
-                <span class="kicker md:col-span-3">{fmtDate(post.data.date, lang)} · {readingTime(post.body)} {s.blog.read}{post.data.lang !== lang && ` · ${post.data.lang.toUpperCase()}`}</span>
+              <a href={postUrl(post)} data-hover class="group grid gap-3 py-8 md:grid-cols-12 md:items-baseline md:gap-8">
+                <span class="kicker md:col-span-3">{fmtDate(post.data.date, lang)} · {readingTime(post.body)} {s.blog.read}</span>
                 <span class="md:col-span-8">
                   <span class="display block text-3xl font-semibold transition-colors group-hover:text-accent md:text-4xl">{post.data.title}</span>
                   <span class="mt-2 block text-muted">{post.data.description}</span>

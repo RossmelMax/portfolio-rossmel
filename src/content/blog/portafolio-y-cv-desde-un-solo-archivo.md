@@ -1,7 +1,7 @@
 ---
 title: 'Cómo hice este portafolio: un solo archivo para la web, el CV y dos idiomas'
 description: 'Este sitio y mi CV en PDF salen del mismo archivo de datos. Astro, animaciones con GSAP controladas por atributos, un shader WebGL con plan B en CSS, un CV que pasa filtros ATS y un subdominio resuelto con 10 líneas en el edge.'
-date: 2026-09-26
+date: 2026-09-13
 tags: ['frontend', 'rendimiento']
 lang: 'es'
 ---
@@ -111,6 +111,7 @@ Un archivo `_routes.json` limita la función a `/` (y al endpoint del formulario
 - **CSS en línea.** Astro inserta los estilos en el HTML (`inlineStylesheets: 'always'`), así el navegador no espera un archivo CSS extra para pintar la primera pantalla.
 - **Precarga de las dos fuentes principales**, para que el título no "salte" cuando cargan.
 - **El preloader solo la primera vez.** La terminal de arranque se muestra una vez por sesión: una clase en `<html>` que se pone antes de pintar evita que aparezca aunque sea un cuadro en las visitas siguientes.
+- **Primero el nombre, después el resto.** Preparar todas las animaciones de la página justo cuando entra el título trababa los celulares unos 300 ms. Ahora se preparan cuando termina esa entrada y en pedazos de ~8 ms, cediendo un cuadro entre cada uno.
 - **Sitio estático.** No hay servidor que responder: HTML ya generado, servido desde la red de Cloudflare.
 
 ## Lo que aprendí

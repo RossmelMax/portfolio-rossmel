@@ -1,7 +1,7 @@
 ---
 title: 'Programar antes y después de la IA: lo que me dejaron los años de hacerlo a mano'
-description: 'Aprendí a la vieja escuela y recién en mi último año en la agencia metimos IA al trabajo. Qué cambió, qué no, y cómo decido cuándo dejar que la IA vaya rápido y cuándo revisar con lupa.'
-date: 2026-09-26
+description: 'Aprendí a la vieja escuela y recién en mi último año en WANT metimos IA al trabajo. Qué cambió, qué no, y cómo decido cuándo dejar que la IA vaya rápido y cuándo revisar con lupa.'
+date: 2026-09-16
 tags: ['ia', 'carrera']
 lang: 'es'
 pinned: true
@@ -15,7 +15,7 @@ Empecé solo, en 2019, con mi primera computadora propia. No había asistentes q
 
 En 2022 entré a WANT Digital Agency como pasante. Éramos dos en desarrollo: mi jefe en el backend y yo en el frontend. Ahí construí las interfaces web y móviles de productos reales para clientes de Bolivia y Estados Unidos: un SaaS multi-tenant para talleres mecánicos, apps en React Native, un menú digital para restaurantes, sitios web.
 
-Durante casi todo ese tiempo **programamos a mano**. Si algo se rompía en producción, había que leer el stack trace, reproducir el error y entender el flujo completo hasta encontrar la causa. Recién en el **último año** en la agencia incorporamos IA al trabajo.
+Durante casi todo ese tiempo **programamos a mano**. Si algo se rompía en producción, había que leer el stack trace, reproducir el error y entender el flujo completo hasta encontrar la causa. Recién en mi **último año** en WANT incorporamos IA al trabajo.
 
 Esos años me dejaron algo que hoy valoro mucho: cuando la IA me devuelve código, **lo entiendo**. Sé por qué funciona, dónde se va a romper y cómo mantenerlo.
 

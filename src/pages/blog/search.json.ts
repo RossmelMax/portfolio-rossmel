@@ -1,8 +1,6 @@
-import { getPosts, normalize, plainText } from '../../data/blog';
+import { searchIndex } from '../../data/blog';
 
-/** Índice de texto completo del blog. El buscador lo descarga solo cuando alguien empieza a buscar. */
+/** Índice de texto completo del blog (ES). El buscador lo descarga solo cuando alguien empieza a buscar. */
 export async function GET() {
-  const posts = await getPosts();
-  const index = posts.map((p) => ({ id: p.id, text: normalize(plainText(p.body)) }));
-  return new Response(JSON.stringify(index), { headers: { 'Content-Type': 'application/json' } });
+  return new Response(JSON.stringify(await searchIndex('es')), { headers: { 'Content-Type': 'application/json' } });
 }

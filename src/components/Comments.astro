@@ -1,0 +1,52 @@
+---
+import type { Lang } from '../data/profile';
+import { t } from '../data/i18n';
+/**
+ * Comentarios con giscus (GitHub Discussions del repo). Solo aparece si están definidas las variables
+ * PUBLIC_GISCUS_* en Cloudflare Pages (ver README → Blog → Comentarios). Las versiones ES y EN de un
+ * artículo comparten el mismo hilo (`term` = id del artículo en español).
+ */
+interface Props { lang: Lang; term: string }
+const { lang, term } = Astro.props;
+const s = t(lang);
+const cfg = {
+  repo: import.meta.env.PUBLIC_GISCUS_REPO,
+  repoId: import.meta.env.PUBLIC_GISCUS_REPO_ID,
+  category: import.meta.env.PUBLIC_GISCUS_CATEGORY,
+  categoryId: import.meta.env.PUBLIC_GISCUS_CATEGORY_ID,
+};
+const enabled = Object.values(cfg).every(Boolean);
+---
+{enabled && (
+  <section class="mx-auto mt-24 max-w-3xl">
+    <p class="kicker mb-6">{s.blog.comments}</p>
+    <div data-giscus data-cfg={JSON.stringify({ ...cfg, term, lang })} class="min-h-40"></div>
+  </section>
+)}
+<script>
+  // Se carga recién cuando la sección está por verse (no pesa en la carga inicial)
+  const el = document.querySelector<HTMLElement>('[data-giscus]');
+  if (el) {
+    const cfg = JSON.parse(el.dataset.cfg!);
+    const theme = () => (document.documentElement.dataset.theme === 'light' ? 'light' : 'transparent_dark');
+    const load = () => {
+      const sc = document.createElement('script');
+      sc.src = 'https://giscus.app/client.js';
+      sc.async = true;
+      sc.crossOrigin = 'anonymous';
+      Object.entries({
+        repo: cfg.repo, 'repo-id': cfg.repoId, category: cfg.category, 'category-id': cfg.categoryId,
+        mapping: 'specific', term: cfg.term, strict: '1', 'reactions-enabled': '1', 'emit-metadata': '0',
+        'input-position': 'top', theme: theme(), lang: cfg.lang, loading: 'lazy',
+      }).forEach(([k, v]) => sc.setAttribute(`data-${k}`, v));
+      el.appendChild(sc);
+    };
+    new IntersectionObserver((entries, io) => {
+      if (entries.some((e) => e.isIntersecting)) { io.disconnect(); load(); }
+    }, { rootMargin: '400px' }).observe(el);
+    // Cambiar el tema de los comentarios junto con el del sitio
+    new MutationObserver(() => {
+      el.querySelector<HTMLIFrameElement>('iframe.giscus-frame')?.contentWindow?.postMessage({ giscus: { setConfig: { theme: theme() } } }, 'https://giscus.app');
+    }).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+  }
+</script>

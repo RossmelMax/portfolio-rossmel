@@ -1,7 +1,7 @@
 ---
 title: 'PDFs de tesis: extraer datos con IA sin confiarle todo, y mostrarlos sin comerse la RAM'
 description: 'En SGPG, el sistema de proyectos de grado de mi universidad, cada PDF se procesa en el navegador: reglas deterministas donde se puede, un LLM donde conviene y heurísticas de respaldo. Y un visor que dibuja solo las páginas visibles.'
-date: 2026-09-26
+date: 2026-09-21
 tags: ['ia', 'llm', 'nextjs', 'rendimiento']
 project: 'sgpg'
 lang: 'es'
@@ -123,5 +123,5 @@ Y la limpieza al desmontar: `observer.disconnect()`, vaciar el contenedor y `doc
 
 - **Reglas donde se puede, IA donde conviene.** El LLM resuelve lo ambiguo (el título en una portada desordenada); las reglas resuelven lo que tiene que ser exacto (un resumen que no existe debe quedar vacío).
 - **Toda llamada a un modelo necesita un plan B.** Si el modelo falla o devuelve basura, el usuario igual tiene que poder trabajar.
-- **Un prototipo generado con IA es un punto de partida.** v0 me dio pantallas en horas; el rendimiento, los permisos y el versionado de documentos los tuve que resolver yo, entendiendo cada línea.
+- **Un prototipo generado con IA es un punto de partida.** v0 me dio pantallas en horas; el rendimiento, los permisos y el versionado de documentos los tuve que resolver yo, entendiendo a fondo el código.
 - **Probar con documentos reales.** Un PDF de prueba de pocas páginas no muestra un problema de memoria que sí aparece con una tesis completa.

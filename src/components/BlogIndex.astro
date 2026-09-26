@@ -2,31 +2,32 @@
 import type { Lang } from '../data/profile';
 import Base from '../layouts/Base.astro';
 import Nav from './Nav.astro';
-import { getPosts, readingTime, fmtDate, normalize, tagCounts } from '../data/blog';
+import { getPosts, postUrl, readingTime, fmtDate, normalize, tagCounts } from '../data/blog';
 import { t, paths } from '../data/i18n';
 /**
- * Portada del blog (ES en /blog/, EN en /en/blog/). Los artículos pueden estar en otro idioma.
+ * Portada del blog (ES en /blog/, EN en /en/blog/), con los artículos de ese idioma.
  * Sin JS se ve la lista completa; con JS se suman el buscador (texto completo, se descarga
- * /blog/search.json al empezar a buscar) y el filtro por etiqueta. Ambos quedan en la URL (?q=&tag=).
+ * search.json al empezar a buscar), el filtro por etiqueta y el orden. Todo queda en la URL (?q=&tag=&sort=).
  */
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 const altPath = paths.blog(lang === 'es' ? 'en' : 'es');
 const s = t(lang);
-const posts = await getPosts();
+const posts = await getPosts(lang);
+const base = paths.blog(lang);
+const sorts = [['recent', s.blog.sortRecent], ['oldest', s.blog.sortOldest], ['az', s.blog.sortAz], ['za', s.blog.sortZa], ['short', s.blog.sortShort]];
 const tags = tagCounts(posts);
 // Las etiquetas con un solo artículo se esconden detrás de "+N más" para no saturar (sobre todo en móvil)
 const extra = tags.filter(([, n]) => n < 2).length;
 ---
 <Base lang={lang} altPath={altPath} title={s.blog.kicker} description={s.blog.intro}>
-  <link slot="head" rel="alternate" type="application/rss+xml" title="Blog de Rossmel Abasto" href="/blog/rss.xml" />
   <Nav lang={lang} altPath={altPath} onHome={false} />
   <main class="px-5 pb-24 pt-40 md:px-10">
-    <p class="kicker mb-6">{s.blog.kicker} · <a href="/blog/rss.xml" class="hover:text-fg">{s.blog.rss}</a></p>
+    <p class="kicker mb-6">{s.blog.kicker} · <a href={`${base}rss.xml`} class="hover:text-fg">{s.blog.rss}</a></p>
     <h1 data-split class="display max-w-5xl text-6xl font-bold md:text-8xl">{s.blog.title}</h1>
     <p data-reveal class="mt-8 max-w-2xl text-lg text-muted md:text-xl">{s.blog.intro}</p>
 
-    <div data-blog-search data-one={s.blog.resultsOne} data-many={s.blog.resultsMany} class="mt-16">
+    <div data-blog-search data-one={s.blog.resultsOne} data-many={s.blog.resultsMany} data-index={`${base}search.json`} class="mt-16">
       <form role="search" class="relative max-w-3xl" onsubmit="return false">
         <label for="blog-q" class="sr-only">{s.blog.searchLabel}</label>
         <svg class="pointer-events-none absolute left-5 top-1/2 h-5 w-5 -translate-y-1/2 text-muted" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>
@@ -41,14 +42,22 @@ const extra = tags.filter(([, n]) => n < 2).length;
         ))}
         {extra > 0 && <button type="button" data-more class="tag-chip border-dashed">+{extra} {s.blog.moreTags}</button>}
       </div>
-      <p class="kicker mt-10" aria-live="polite" data-results>{posts.length === 1 ? s.blog.resultsOne : s.blog.resultsMany.replace('{n}', String(posts.length))}</p>
+      <div class="mt-10 flex flex-wrap items-center justify-between gap-4">
+        <p class="kicker" aria-live="polite" data-results>{posts.length === 1 ? s.blog.resultsOne : s.blog.resultsMany.replace('{n}', String(posts.length))}</p>
+        <label class="kicker flex items-center gap-3">
+          {s.blog.sort}
+          <select data-sort class="rounded-full border border-line bg-bg-2 px-4 py-2 font-mono text-xs normal-case tracking-normal text-fg outline-none focus:border-accent">
+            {sorts.map(([v, label]) => <option value={v}>{label}</option>)}
+          </select>
+        </label>
+      </div>
     </div>
 
     <ul class="mt-6 border-t border-line" data-post-list>
       {posts.map((p) => (
-        <li class="border-b border-line" data-post={p.id} data-title={normalize(p.data.title)} data-desc={normalize(p.data.description)} data-tags={p.data.tags.join(' ')}>
-          <a href={paths.post(p.id)} data-hover class="group grid gap-3 py-10 md:grid-cols-12 md:gap-8">
-            <span class="kicker md:col-span-3">{fmtDate(p.data.date, lang)} · {readingTime(p.body)} {s.blog.read}{p.data.lang !== lang && ` · ${p.data.lang.toUpperCase()}`}</span>
+        <li class="border-b border-line" data-post={p.id} data-date={p.data.date.getTime()} data-read={readingTime(p.body)} data-title={normalize(p.data.title)} data-desc={normalize(p.data.description)} data-tags={p.data.tags.join(' ')}>
+          <a href={postUrl(p)} data-hover class="group grid gap-3 py-10 md:grid-cols-12 md:gap-8">
+            <span class="kicker md:col-span-3">{fmtDate(p.data.date, lang)} · {readingTime(p.body)} {s.blog.read}</span>
             <span class="md:col-span-9">
               <span class="display block text-3xl font-semibold transition-colors group-hover:text-accent md:text-5xl">{p.data.title}</span>
               <span class="mt-3 block max-w-3xl text-muted">{p.data.description}</span>
@@ -73,18 +82,32 @@ const extra = tags.filter(([, n]) => n < 2).length;
   const count = document.querySelector<HTMLElement>('[data-results]');
   const empty = document.querySelector<HTMLElement>('[data-empty]');
   const list = document.querySelector<HTMLElement>('[data-post-list]');
+  const sortSel = document.querySelector<HTMLSelectElement>('[data-sort]');
 
   if (root && input && list) {
     // Igual que normalize() en src/data/blog.ts
     const norm = (t: string) => t.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
     const params = new URLSearchParams(location.search);
     let tag = params.get('tag') ?? '';
+    let sort = params.get('sort') ?? 'recent';
+    if (sortSel) sortSel.value = [...sortSel.options].some((o) => o.value === sort) ? sort : (sort = 'recent');
+    // Orden elegido. "recent" respeta el orden del servidor (fijados primero, luego del más nuevo al más viejo)
+    const cmp = (a: HTMLElement, b: HTMLElement, ao: number, bo: number) => {
+      const d = (x: HTMLElement) => Number(x.dataset.date);
+      switch (sort) {
+        case 'oldest': return d(a) - d(b);
+        case 'az': return a.dataset.title!.localeCompare(b.dataset.title!);
+        case 'za': return b.dataset.title!.localeCompare(a.dataset.title!);
+        case 'short': return Number(a.dataset.read) - Number(b.dataset.read) || ao - bo;
+        default: return ao - bo;
+      }
+    };
     let body: Record<string, string> | null = null;
     let loading: Promise<void> | null = null;
 
     // El texto completo se descarga solo si alguien busca
     const loadBody = () =>
-      (loading ??= fetch('/blog/search.json')
+      (loading ??= fetch(root.dataset.index!)
         .then((r) => r.json())
         .then((rows: { id: string; text: string }[]) => { body = Object.fromEntries(rows.map((r) => [r.id, r.text])); })
         .catch(() => { body = {}; }));
@@ -108,8 +131,8 @@ const extra = tags.filter(([, n]) => n < 2).length;
         }
         return { el, order, score };
       });
-      // Más relevantes primero; a igual relevancia, el orden original (más nuevo primero)
-      scored.sort((a, b) => b.score - a.score || a.order - b.order).forEach(({ el }) => list.appendChild(el));
+      // Más relevantes primero; a igual relevancia, el orden elegido
+      scored.sort((a, b) => b.score - a.score || cmp(a.el, b.el, a.order, b.order)).forEach(({ el }) => list.appendChild(el));
       const visible = scored.filter((x) => x.score >= 0);
       scored.forEach(({ el, score }) => (el.hidden = score < 0));
       const n = visible.length;
@@ -120,6 +143,7 @@ const extra = tags.filter(([, n]) => n < 2).length;
       const url = new URL(location.href);
       input.value ? url.searchParams.set('q', input.value) : url.searchParams.delete('q');
       tag ? url.searchParams.set('tag', tag) : url.searchParams.delete('tag');
+      sort !== 'recent' ? url.searchParams.set('sort', sort) : url.searchParams.delete('sort');
       history.replaceState(null, '', url);
       window.dispatchEvent(new Event('resize')); // ScrollTrigger recalcula posiciones
     };
@@ -139,6 +163,7 @@ const extra = tags.filter(([, n]) => n < 2).length;
     });
     input.addEventListener('focus', () => void loadBody(), { once: true });
     chips.forEach((c) => c.addEventListener('click', () => { tag = c.dataset.tag === tag ? '' : c.dataset.tag ?? ''; apply(); }));
+    sortSel?.addEventListener('change', () => { sort = sortSel.value; apply(); });
     document.querySelector('[data-clear]')?.addEventListener('click', () => { input.value = ''; tag = ''; apply(); input.focus(); });
     // "/" enfoca el buscador (como en GitHub o MDN)
     window.addEventListener('keydown', (e) => {
@@ -148,7 +173,7 @@ const extra = tags.filter(([, n]) => n < 2).length;
         input.focus();
       }
     });
-    if (input.value || tag) {
+    if (input.value || tag || sort !== 'recent') {
       apply();
       if (input.value) loadBody().then(apply);
     }

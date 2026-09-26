@@ -1,7 +1,7 @@
 ---
 title: 'Offline-first de verdad: una app de cobro de agua con Electron y SQLite'
 description: "Link'u registra lecturas de medidores y emite boletas para una comunidad rural donde internet no es garantía. SQLite como fuente de verdad, toda la lógica en el proceso principal, tarifas congeladas en cada boleta y respaldos cifrados con AES-256-GCM."
-date: 2026-09-26
+date: 2026-09-18
 tags: ['electron', 'react', 'seguridad']
 project: 'agua-potable'
 lang: 'es'

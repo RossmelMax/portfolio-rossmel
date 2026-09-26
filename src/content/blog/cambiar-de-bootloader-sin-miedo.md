@@ -1,7 +1,7 @@
 ---
 title: 'Cambiar de bootloader sin miedo: probar Limine una sola vez con BootNext'
 description: 'Para rOS, mi flavor de Arch, reemplacé GRUB por Limine sin arriesgar el arranque: instalarlo al lado, probarlo en un único reinicio y promoverlo solo si funciona. Scripts idempotentes, hooks de pacman y copias atómicas a la ESP.'
-date: 2026-09-26
+date: 2026-09-19
 tags: ['linux']
 project: 'ros'
 lang: 'es'

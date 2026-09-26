@@ -9,7 +9,7 @@
  * El PDF se genera desde esta misma página: `npm run cv:pdf`.
  */
 import type { Lang } from '../data/profile';
-import { profile, experience, education, skills, projects, learning } from '../data/profile';
+import { profile, experience, education, skills, projects, learning, tr } from '../data/profile';
 import { fmtMonth, paths } from '../data/i18n';
 import Base from '../layouts/Base.astro';
 interface Props { lang: Lang }
@@ -51,7 +51,7 @@ const sentence = (s: string) => { const c = clean(s); return c && !/[.!?]$/.test
 
     <section>
       <h2>{H.skills}</h2>
-      {skills.map((g) => <p><strong>{g.group[lang]}:</strong> {g.items.join(', ')}</p>)}
+      {skills.map((g) => <p><strong>{g.group[lang]}:</strong> {g.items.map((it) => tr(it, lang)).join(', ')}</p>)}
     </section>
 
     <section>

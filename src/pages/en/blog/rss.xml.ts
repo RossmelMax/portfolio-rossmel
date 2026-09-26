@@ -1,14 +1,14 @@
 import rss from '@astrojs/rss';
 import type { APIContext } from 'astro';
-import { getPosts, postUrl } from '../../data/blog';
+import { getPosts, postUrl } from '../../../data/blog';
 
 export async function GET(context: APIContext) {
-  const posts = await getPosts('es');
+  const posts = await getPosts('en');
   return rss({
-    title: "Blog de Rossmel Abasto",
-    description: 'Notas de lo que construyo: frontend, fullstack, IA y Linux.',
+    title: "Rossmel Abasto's blog",
+    description: 'Notes on what I build: frontend, fullstack, AI and Linux.',
     site: context.site!,
-    customData: '<language>es-bo</language>',
+    customData: '<language>en-us</language>',
     items: posts.map((p) => ({
       title: p.data.title,
       description: p.data.description,

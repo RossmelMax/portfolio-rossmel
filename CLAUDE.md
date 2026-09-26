@@ -26,6 +26,7 @@ Antes de dar algo por terminado: `npm run build` sin errores, y si cambió conte
 - Estilo: tokens de color en `src/styles/global.css` (`--bg`, `--fg`, `--accent`…) → clases
   Tailwind `bg-bg`, `text-fg`, `text-accent`, etc.
 - Mantener README.md al día (sección "Estado actual y pendientes" e "Historial de decisiones").
+- Artículos nuevos del blog: escribir las dos versiones (ES en `src/content/blog/`, EN en `src/content/blog/en/` con `translationOf`).
 
 ## Estado (actualizar al terminar cada sesión)
 - v3.3 (sept. 2026): PUBLICADO en portfolio.rossmel.top y cv.rossmel.top. Contenido confirmado (sin TODOs).
@@ -35,6 +36,7 @@ Antes de dar algo por terminado: `npm run build` sin errores, y si cambió conte
 - v3.6: blog (/blog, Markdown en src/content/blog), 'Lo que aprendí' por proyecto, CTAs y fondo de respaldo en el hero.
 - v3.7: correcciones de la revisión de Claude local (móvil 360 px, LCP, blog EN, contraste, validación).
 - v3.8: énfasis en programar sin IA (sobre mí, CV, línea de tiempo en Cómo trabajo); blog con buscador, etiquetas, índice, relacionados y 11 artículos (incluye cómo montar un media center con Jellyfin, enlazado desde la tarjeta de Selflix); sección "En vivo" = proyectos con campo `live` (notebook, rubik, selflix, cada uno con su caso de estudio; el resto de subdominios NO va).
+- v3.9: blog bilingüe (EN en src/content/blog/en/, `translationOf`), orden (recientes/antiguos/A-Z/Z-A/corta), compartir, giscus opcional (variables PUBLIC_GISCUS_*), SEO reforzado. Siempre "WANT", nunca "la agencia". Ítems de stack traducibles.
 - Flujo de publicación: Claude web sube a su rama y abre un PR a main; Rossmel lo aprueba en GitHub → Cloudflare publica. Antes de avisar, verificar que el PR siga ABIERTO: si ya se fusionó, abrir uno nuevo (los commits posteriores a un merge no aparecen solos).
 - Siguiente: capturas y video de AdvAI (Rossmel); GitHub/LinkedIn (docs/).
 - Analítica: inyección automática de Cloudflare, sin token.

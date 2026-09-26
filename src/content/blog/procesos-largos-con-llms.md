@@ -1,7 +1,7 @@
 ---
 title: 'Procesos largos con LLMs: varios proveedores, una cola que se reanuda y progreso en vivo'
 description: 'Analizar un contrato cláusula por cláusula puede tomar minutos. En AdvAI lo resolví con un pool de modelos que respeta los límites de cada proveedor, un trabajador que sobrevive a reinicios y Server-Sent Events para mostrar el avance.'
-date: 2026-09-26
+date: 2026-09-24
 tags: ['ia', 'llm', 'python', 'backend']
 project: 'advai'
 lang: 'es'

@@ -271,16 +271,37 @@ Respuestas de la API: `200 {ok:true}`, `400 invalid|captcha`, `502 send_failed`,
 
 ### Blog
 
-- Artículos en `src/content/blog/<slug>.md` (Markdown). La URL es `/blog/<slug>/`.
+- Artículos en `src/content/blog/<slug>.md` (Markdown, español) → `/blog/<slug>/`.
+- **Versión en inglés**: `src/content/blog/en/<slug-en>.md` con `lang: 'en'` y `translationOf: '<slug ES>'`
+  → `/en/blog/<slug-en>/`. Las dos versiones se enlazan solas (hreflang, switch ES/EN, "Read this post
+  in English") y comparten el hilo de comentarios. Etiquetas en inglés en los EN (`ai`, `privacy`,
+  `performance`, `security`, `career`…). Cada idioma tiene su portada, RSS (`/blog/rss.xml`,
+  `/en/blog/rss.xml`) e índice de búsqueda.
 - Frontmatter: `title`, `description` (1–2 frases, sale en Google y al compartir), `date`,
   `tags`, `lang` (`es`/`en`, por defecto `es`), `draft: true` para no publicar,
   `project: '<slug>'` para enlazarlo con su caso de estudio (el caso lista sus artículos y el
   artículo muestra una tarjeta al proyecto) y `pinned: true` para que salga primero.
 - Etiquetas: reusar las existentes (`ia`, `llm`, `python`, `frontend`, `react`, `linux`,
   `rendimiento`…). Las que tienen un solo artículo se agrupan tras el botón "+N más".
-- Portada con **buscador** (texto completo: el índice `/blog/search.json` se descarga solo al
-  empezar a buscar; tecla `/` para enfocar) y **filtro por etiqueta**; ambos quedan en la URL
-  (`/blog/?q=sqlite&tag=llm`), así se pueden compartir. Sin JS se ve la lista completa.
+- Portada con **buscador** (texto completo: el índice `search.json` se descarga solo al
+  empezar a buscar; tecla `/` para enfocar), **filtro por etiqueta** y **orden** (recientes, antiguos,
+  A→Z, Z→A, lectura más corta); todo queda en la URL (`/blog/?q=sqlite&tag=llm&sort=az`), así se puede
+  compartir. Sin JS se ve la lista completa.
+- Cada artículo: botones para compartir (LinkedIn, X, WhatsApp) y copiar enlace, datos estructurados
+  `BlogPosting` + `BreadcrumbList`, `article:published_time` y fecha en el sitemap (`lastmod`).
+
+#### Comentarios (giscus, opcional)
+Los comentarios usan **giscus**: se guardan como GitHub Discussions del repo (gratis, sin base de datos,
+se comenta con cuenta de GitHub). No aparecen hasta configurar estas variables:
+1. GitHub → `rossmelabasto/portfolio-rossmel` → Settings → General → Features → activar **Discussions**.
+2. Instalar la app https://github.com/apps/giscus solo en ese repo.
+3. En Discussions, crear la categoría **Comentarios** (tipo *Announcement*: solo giscus crea hilos).
+4. Entrar a https://giscus.app, poner el repo y la categoría → copiar `data-repo-id` y `data-category-id`.
+5. Cloudflare Pages → `rossmel-portfolio` → Settings → Variables and Secrets (Production), como texto:
+   `PUBLIC_GISCUS_REPO=rossmelabasto/portfolio-rossmel`, `PUBLIC_GISCUS_REPO_ID=…`,
+   `PUBLIC_GISCUS_CATEGORY=Comentarios`, `PUBLIC_GISCUS_CATEGORY_ID=…` → Deployments → Retry.
+   (No son secretos: son IDs públicos.)
+El formulario de contacto al final de cada artículo sigue funcionando igual.
 - Cada artículo: índice lateral con la sección actual resaltada (en móvil, desplegable),
   botón "Copiar enlace", tarjeta al caso de estudio y "Sigue leyendo" (mismo proyecto o etiquetas).
 - Estilo de los artículos: problema real → decisión clave → código simplificado del repo →
@@ -292,11 +313,29 @@ Respuestas de la API: `200 {ok:true}`, `400 invalid|captcha`, `502 send_failed`,
   mejor posicionamiento que un subdominio aparte).
 - Código con resaltado (Shiki, tema `vitesse-dark`); estilos del texto en `.prose` (global.css).
 
+### Analítica (visitas)
+- **Cloudflare Web Analytics** ya está activo (inyección automática, sin cookies). Para verlo:
+  dash.cloudflare.com → tu cuenta → **Analytics & Logs → Web Analytics** → `portfolio.rossmel.top`:
+  visitas, páginas vistas, páginas más vistas, de dónde llegan (referrers), países, dispositivos y
+  Core Web Vitals. También: Workers & Pages → `rossmel-portfolio` → *Metrics*.
+- **Google Search Console** (search.google.com/search-console, propiedad `rossmel.top`) → *Rendimiento*:
+  qué buscó la gente para llegar (p. ej. "rossmel abasto"), impresiones, clics y posición.
+  *Inspección de URLs* → pedir indexación de páginas nuevas (los artículos EN, por ejemplo).
+- No se usa Google Analytics a propósito: pesa más, usa cookies y pediría banner de consentimiento.
+
 ### SEO
 - `@astrojs/sitemap` genera `sitemap-index.xml` (ES/EN con hreflang); `robots.txt` lo declara.
 - Dar de alta `https://portfolio.rossmel.top` en **Google Search Console** (verificación por DNS,
   que ya está en Cloudflare) y enviar `sitemap-index.xml`.
 - `404.html` propia (bilingüe).
+- En cada página: canonical, hreflang ES/EN + `x-default`, Open Graph completo (`og:locale`, imagen
+  1200×630, `og:site_name`), Twitter card y JSON-LD `Person` (con foto, `sameAs` a GitHub/LinkedIn/GitLab,
+  universidad y temas); en la home además `WebSite`. Esto ayuda a que buscar "Rossmel Abasto" muestre
+  el portafolio y un panel con tus perfiles.
+- Para posicionar tu nombre, lo que más pesa fuera del código: que **LinkedIn, GitHub (perfil y README),
+  GitLab y cualquier perfil público enlacen a `https://portfolio.rossmel.top`**; volver a enviar el
+  sitemap en Search Console tras cada tanda de artículos; opcional, publicar copias en dev.to/Hashnode con
+  *canonical URL* apuntando al artículo original (traen lectores sin robar posicionamiento).
 
 Extras en Cloudflare (Rules → Redirect Rules):
 - `rossmel.top` y `www.rossmel.top` → 301 a `https://portfolio.rossmel.top` (preservar ruta).
@@ -332,6 +371,8 @@ Flujo diario: push a `main` = producción; push a otra rama / PR = URL de vista 
 - [x] Revisión exhaustiva con Claude local (`docs/REVISION.md`) — correcciones aplicadas en v3.7
 - [ ] Perfil de GitHub (`docs/github-profile/`, ver INSTRUCCIONES.md) y LinkedIn (`docs/LINKEDIN.md`)
 - [ ] Probar Lighthouse (meta ≥95) y accesibilidad con teclado
+- [ ] (Opcional) Activar comentarios con giscus (README → Blog → Comentarios)
+- [ ] Pedir indexación de los artículos EN en Search Console y reenviar el sitemap
 - [x] v3.8: énfasis en programar sin IA (sobre mí, CV, línea de tiempo "antes y después de la IA"),
   blog con buscador/etiquetas/índice/relacionados y 11 artículos (uno o más por proyecto con código visible, más Jellyfin)
 - [x] "En vivo": notebook, rubik y selflix son **proyectos** con caso de estudio propio (campo `live` en profile.ts);
@@ -377,6 +418,7 @@ Ramas:
 | 2026-09 | v3.8: "programador primero". Sobre mí, CV y la sección Cómo trabajo cuentan que programó años sin IA (en WANT la IA llegó recién el último año) y qué herramientas usa hoy. |
 | 2026-09 | Blog "en condiciones": buscador de texto completo sin dependencias (índice JSON bajo demanda), etiquetas, índice por artículo, relacionados y enlaces artículo ↔ caso de estudio. Artículos en español. |
 | 2026-09 | Sección "En vivo": notebook, rubik y selflix. Fuera: music, mcu, waitlist, stream, chat, admin, admin-music, ssh, ori, class, s, test (y los del propio portafolio). |
+| 2026-09 | Blog bilingüe (artículos EN en `src/content/blog/en/`, pareados con `translationOf`), orden en la portada, fechas repartidas, compartir, giscus opcional, SEO (JSON-LD Person/WebSite/BlogPosting/Breadcrumb, og:locale, x-default, lastmod). Stack traducible (`SkillItem`). "La agencia" → WANT. |
 | 2026-09 | Los servicios en vivo pasan a ser proyectos con página de detalle (qué es, cómo funciona, lo que aprendí) en vez de enlaces directos; se elimina `liveSites`. Pedido de Rossmel. |
 | 2026-09 | Entrada del nombre fluida en móvil: las demás animaciones se preparan después del intro y en pedazos (antes, un bloqueo de ~380 ms con CPU de gama media). |
 | 2026-09 | Tono: transmitir que entiende lo que genera la IA, sin frases absolutas ni "no soy vibe coder" (pedido de Rossmel). |

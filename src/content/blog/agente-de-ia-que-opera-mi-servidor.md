@@ -1,7 +1,7 @@
 ---
 title: 'Un agente de IA que opera mi servidor: memoria en archivos y skills como procedimientos'
 description: 'Mi homelab lo mantiene un agente (OpenClaw) que corre 24/7. Lo que lo hace confiable no es el modelo: es la memoria escrita en Markdown, las líneas rojas y los procedimientos con criterios de éxito. Así lo organicé.'
-date: 2026-09-26
+date: 2026-09-23
 tags: ['ia', 'linux']
 project: 'homelab'
 lang: 'es'
