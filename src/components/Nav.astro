@@ -12,6 +12,7 @@ const items = [
   ['#work', s.nav.work],
   ['#contact', s.nav.contact],
 ] as const;
+const blogHref = paths.blog();
 ---
 <header data-nav class="fixed inset-x-0 top-0 z-50 px-5 py-4 md:px-10">
   <nav class="flex items-center justify-between gap-6 rounded-full border border-line bg-bg/60 px-5 py-3 backdrop-blur-xl">
@@ -20,6 +21,7 @@ const items = [
       {items.map(([href, label]) => (
         <li><a href={base + href} class="transition-colors hover:text-fg">{label}</a></li>
       ))}
+      <li><a href={blogHref} class="transition-colors hover:text-fg">{s.nav.blog}</a></li>
     </ul>
     <div class="flex items-center gap-2 font-mono text-xs">
       <a href={paths.cv(lang)} class="rounded-full bg-accent px-4 py-2 font-medium text-accent-ink">{s.nav.cv}</a>
@@ -36,7 +38,8 @@ const items = [
         <a href={base + href} data-menu-link class="display block text-6xl font-bold" style={`--i:${i}`}>{label}</a>
       </li>
     ))}
-    <li class="overflow-hidden"><a href={paths.cv(lang)} data-menu-link class="display block text-6xl font-bold text-accent" style={`--i:${items.length}`}>{s.nav.cv}</a></li>
+    <li class="overflow-hidden"><a href={blogHref} data-menu-link class="display block text-6xl font-bold" style={`--i:${items.length}`}>{s.nav.blog}</a></li>
+    <li class="overflow-hidden"><a href={paths.cv(lang)} data-menu-link class="display block text-6xl font-bold text-accent" style={`--i:${items.length + 1}`}>{s.nav.cv}</a></li>
   </ul>
 </div>
 <style>

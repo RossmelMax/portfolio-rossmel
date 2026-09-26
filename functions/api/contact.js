@@ -36,6 +36,8 @@ export async function onRequestPost({ request, env }) {
   const email = String(data.get('email') ?? '').trim();
   const message = String(data.get('message') ?? '').trim();
   const lang = data.get('lang') === 'en' ? 'en' : 'es';
+  // Artículo del blog desde el que se escribe (opcional)
+  const context = String(data.get('context') ?? '').replace(/\s+/g, ' ').trim().slice(0, 200);
   if (!name || !message || !EMAIL_RE.test(email) || name.length > MAX.name || email.length > MAX.email || message.length > MAX.message) {
     return json({ ok: false, error: 'invalid' }, 400);
   }
@@ -58,9 +60,9 @@ export async function onRequestPost({ request, env }) {
       from: env.CONTACT_FROM || 'Portafolio <contacto@rossmel.top>',
       to: [env.CONTACT_TO || 'abastorossmel@gmail.com'],
       reply_to: email,
-      subject: `Portafolio: mensaje de ${name}`,
-      text: `Nombre: ${name}\nCorreo: ${email}\nIdioma del sitio: ${lang}\n\n${message}`,
-      html: `<p><b>Nombre:</b> ${escapeHtml(name)}<br><b>Correo:</b> ${escapeHtml(email)}<br><b>Idioma del sitio:</b> ${lang}</p><p style="white-space:pre-wrap">${escapeHtml(message)}</p>`,
+      subject: context ? `Blog: comentario de ${name} sobre "${context}"` : `Portafolio: mensaje de ${name}`,
+      text: `Nombre: ${name}\nCorreo: ${email}\nIdioma del sitio: ${lang}${context ? `\nArtículo: ${context}` : ''}\n\n${message}`,
+      html: `<p><b>Nombre:</b> ${escapeHtml(name)}<br><b>Correo:</b> ${escapeHtml(email)}<br><b>Idioma del sitio:</b> ${lang}${context ? `<br><b>Artículo:</b> ${escapeHtml(context)}` : ''}</p><p style="white-space:pre-wrap">${escapeHtml(message)}</p>`,
     }),
   }).catch(() => null);
   if (!res || !res.ok) return json({ ok: false, error: 'send_failed' }, 502);

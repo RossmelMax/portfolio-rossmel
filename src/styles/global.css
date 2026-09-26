@@ -1,4 +1,5 @@
 @import 'tailwindcss';
+@plugin '@tailwindcss/typography';
 @import '@fontsource-variable/inter';
 @import '@fontsource-variable/space-grotesk';
 @import '@fontsource/jetbrains-mono/400.css';
@@ -90,6 +91,45 @@ html.lenis body {
   80% { transform: translate(4%, 5%); }
 }
 
+/* Artículos del blog: la tipografía de @tailwindcss/typography con los tokens del sitio */
+.prose {
+  --tw-prose-body: color-mix(in oklab, var(--fg) 86%, transparent);
+  --tw-prose-headings: var(--fg);
+  --tw-prose-lead: var(--muted);
+  --tw-prose-links: var(--accent);
+  --tw-prose-bold: var(--fg);
+  --tw-prose-counters: var(--muted);
+  --tw-prose-bullets: var(--accent);
+  --tw-prose-hr: var(--line);
+  --tw-prose-quotes: var(--fg);
+  --tw-prose-quote-borders: var(--accent);
+  --tw-prose-captions: var(--muted);
+  --tw-prose-code: var(--fg);
+  --tw-prose-pre-code: #e6e6e3;
+  --tw-prose-pre-bg: #121214;
+  --tw-prose-th-borders: var(--line);
+  --tw-prose-td-borders: var(--line);
+}
+.prose :where(h2, h3) {
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
+}
+.prose :where(code):not(:where(pre *)) {
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  border-radius: 0.4em;
+  padding: 0.1em 0.35em;
+  font-weight: 400;
+}
+.prose :where(code):not(:where(pre *))::before,
+.prose :where(code):not(:where(pre *))::after {
+  content: none;
+}
+.prose :where(pre) {
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+}
+
 /* Utilidades de tipografía */
 .display {
   font-family: var(--font-display);
@@ -136,6 +176,33 @@ html.lenis body {
 }
 @media (pointer: coarse) {
   .cursor { display: none; }
+}
+
+/* Hero: respaldo sin WebGL (solo visible si el shader no pudo montarse) */
+.hero-fallback {
+  display: none;
+  overflow: hidden;
+  background: var(--bg);
+}
+[data-fallback] .hero-fallback {
+  display: block;
+}
+.hero-fallback span {
+  position: absolute;
+  width: 55vmax;
+  height: 55vmax;
+  border-radius: 50%;
+  background: radial-gradient(circle, color-mix(in oklab, var(--accent) 45%, transparent), transparent 65%);
+  filter: blur(40px);
+  animation: blob 22s ease-in-out infinite alternate;
+}
+.hero-fallback span:nth-child(1) { top: -20%; right: -10%; }
+.hero-fallback span:nth-child(2) { bottom: -30%; left: -15%; opacity: 0.6; animation-duration: 28s; animation-delay: -6s; }
+.hero-fallback span:nth-child(3) { top: 30%; left: 40%; width: 30vmax; height: 30vmax; opacity: 0.45; animation-duration: 18s; animation-delay: -3s; }
+@keyframes blob {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-8vw, 6vh) scale(1.15); }
+  100% { transform: translate(6vw, -4vh) scale(0.9); }
 }
 
 /* Terminal de arranque */

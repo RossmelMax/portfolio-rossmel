@@ -103,6 +103,7 @@ CLAUDE.md             ← instrucciones para Claude Code (local o nube)
 | `/` · `/en/` | Portafolio |
 | `/proyectos/<slug>/` · `/en/projects/<slug>/` | Caso de estudio de cada proyecto |
 | `/cv/` · `/en/cv/` | CV en HTML (imprimible) |
+| `/blog/` · `/blog/<slug>/` · `/blog/rss.xml` | Blog |
 | `/404.html` | Página de error propia (ES+EN) |
 | `/api/contact` | Formulario de contacto (Pages Function) |
 | `/cv/Rossmel-Abasto-CV-ES.pdf` · `…-EN.pdf` | CV en PDF |
@@ -264,6 +265,18 @@ de contacto muestra solo los botones de correo/CV. Configuración (una vez):
 
 Respuestas de la API: `200 {ok:true}`, `400 invalid|captcha`, `502 send_failed`, `503 not_configured`.
 
+### Blog
+
+- Artículos en `src/content/blog/<slug>.md` (Markdown). La URL es `/blog/<slug>/`.
+- Frontmatter: `title`, `description` (1–2 frases, sale en Google y al compartir), `date`,
+  `tags`, `lang` (`es`/`en`, por defecto `es`), `draft: true` para no publicar.
+- Cada artículo termina con el formulario de contacto (`ContactForm` con `context` = título):
+  el correo llega con el asunto "Blog: comentario de … sobre …".
+- RSS en `/blog/rss.xml`; aparece en el sitemap; la home muestra los 3 últimos ("Del blog").
+- `blog.rossmel.top` → Redirect Rule 301 a `https://portfolio.rossmel.top/blog/` (mismo dominio =
+  mejor posicionamiento que un subdominio aparte).
+- Código con resaltado (Shiki, tema `vitesse-dark`); estilos del texto en `.prose` (global.css).
+
 ### SEO
 - `@astrojs/sitemap` genera `sitemap-index.xml` (ES/EN con hreflang); `robots.txt` lo declara.
 - Dar de alta `https://portfolio.rossmel.top` en **Google Search Console** (verificación por DNS,
@@ -301,6 +314,8 @@ Flujo diario: push a `main` = producción; push a otra rama / PR = URL de vista 
 - [x] Menú móvil, sitemap, 404 propia, auditoría Lighthouse (local: perf 87–94, a11y 95–96, BP/SEO 100; CV 100 en todo)
 - [x] Google Search Console verificado (propiedad de dominio `rossmel.top`) y sitemap enviado
 - [ ] Video corto de AdvAI + capturas (Rossmel)
+- [ ] Revisión exhaustiva con Claude local (`docs/REVISION.md`)
+- [ ] README del perfil de GitHub (`docs/github-profile/README.md`) y LinkedIn (`docs/LINKEDIN.md`)
 - [ ] Probar Lighthouse (meta ≥95) y accesibilidad con teclado
 
 ---
@@ -331,6 +346,8 @@ Ramas:
 | 2026-09 | Estética dark + acento lima aprobada por Rossmel ("me encanta"). |
 | 2026-09 | Proyectos de clientes de WANT sin código ni enlaces (`confidential`); métricas de commits como evidencia. |
 | 2026-09 | CV limitado a 2 páginas: SGPG y Link'u solo en la experiencia "Independiente"; diseño gráfico solo en el portafolio. |
+| 2026-09 | Blog en `/blog` (no subdominio aparte, por SEO); `blog.rossmel.top` redirige. Primer artículo: AdvAI. |
+| 2026-09 | Hero: fondo CSS de respaldo si el navegador no tiene WebGL; botones Ver proyectos / Descargar CV. |
 | 2026-09 | Identidad: monograma de Rossmel (`src/assets/logo.svg`, componente `Logo.astro`) en nav, footer, favicon, íconos PWA y og.png. |
 | 2026-09 | Contador del preloader → terminal de arranque; envío del formulario mostrado como script (idea de Rossmel). |
 | 2026-09 | Formulario: Pages Function + Resend + Turnstile (gratis, sin backend propio). |

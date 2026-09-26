@@ -1,0 +1,103 @@
+---
+/**
+ * Formulario de contacto → /api/contact (Resend + Turnstile). Se usa en la home y al final de
+ * cada artículo del blog (con `context` = título del artículo, que llega en el asunto del correo).
+ * Solo se renderiza si existe PUBLIC_TURNSTILE_SITE_KEY (ver README → Formulario de contacto).
+ */
+import type { Lang } from '../data/profile';
+import { profile } from '../data/profile';
+import { t } from '../data/i18n';
+interface Props { lang: Lang; title: string; context?: string; class?: string }
+const { lang, title, context, class: cls } = Astro.props;
+const s = t(lang);
+const turnstileKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
+const field = 'w-full rounded-2xl border border-line bg-bg-2 px-5 py-4 text-fg placeholder:text-muted focus:border-accent focus:outline-none';
+---
+  {turnstileKey && (
+    <form data-contact-form action="/api/contact" method="post" class:list={["grid max-w-3xl gap-4", cls]} data-reveal
+      data-msg-sending={s.contact.sending} data-msg-ok={s.contact.ok} data-msg-invalid={s.contact.invalid}
+      data-msg-captcha={s.contact.captcha} data-msg-error={`${s.contact.error} ${profile.email}.`}>
+      <h3 class="display text-3xl font-semibold md:text-4xl">{title}</h3>
+      <input type="hidden" name="lang" value={lang} />
+      {context && <input type="hidden" name="context" value={context} />}
+      <div aria-hidden="true" class="hidden"><label>Company<input type="text" name="company" tabindex="-1" autocomplete="off" /></label></div>
+      <div class="grid gap-4 md:grid-cols-2">
+        <label class="grid gap-2"><span class="kicker">{s.contact.name}</span><input class={field} name="name" required maxlength="100" autocomplete="name" /></label>
+        <label class="grid gap-2"><span class="kicker">{s.contact.email}</span><input class={field} type="email" name="email" required maxlength="200" autocomplete="email" /></label>
+      </div>
+      <label class="grid gap-2"><span class="kicker">{s.contact.message}</span><textarea class={field} name="message" required maxlength="5000" rows="5"></textarea></label>
+      <div class="cf-turnstile" data-sitekey={turnstileKey} data-theme="auto" data-language={lang}></div>
+      <div class="flex flex-wrap items-center gap-5">
+        <button data-magnetic type="submit" class="rounded-full bg-fg px-8 py-4 font-medium text-bg disabled:opacity-60">{s.contact.send}</button>
+        <p data-form-status role="status" aria-live="polite" class="text-sm text-muted"></p>
+      </div>
+    </form>
+  )}
+  {turnstileKey && <script is:inline async defer src="https://challenges.cloudflare.com/turnstile/v0/api.js"></script>}
+  {turnstileKey && (
+    <dialog data-term-dialog aria-labelledby="term-title" class="m-auto w-[min(40rem,calc(100vw-2rem))] overflow-hidden rounded-2xl border border-line bg-bg-2 p-0 text-fg shadow-2xl backdrop:bg-black/70 backdrop:backdrop-blur-sm"
+      data-t={JSON.stringify({ ...s.contact.term, invalid: s.contact.invalid, captcha: s.contact.captcha, error: `${s.contact.error} ${profile.email}` })}>
+      <div class="flex items-center gap-2 border-b border-line px-4 py-3">
+        <span class="h-3 w-3 rounded-full bg-[#ff5f57]"></span>
+        <span class="h-3 w-3 rounded-full bg-[#febc2e]"></span>
+        <span class="h-3 w-3 rounded-full bg-[#28c840]"></span>
+        <span id="term-title" class="ml-3 font-mono text-xs text-muted">{s.contact.term.title}</span>
+        <button type="button" data-term-close class="ml-auto rounded-full border border-line px-3 py-1 font-mono text-xs hover:border-fg">{s.contact.term.close}</button>
+      </div>
+      <pre data-term-log aria-live="polite" class="min-h-[12rem] whitespace-pre-wrap p-5 font-mono text-sm leading-relaxed"></pre>
+    </dialog>
+  )}
+<script>
+  // Formulario de contacto → /api/contact (Cloudflare Pages Function).
+  // El envío se muestra como un script en una terminal; cada línea refleja un paso real.
+  const dialog = document.querySelector<HTMLDialogElement>('[data-term-dialog]');
+  dialog?.querySelector('[data-term-close]')?.addEventListener('click', () => dialog.close());
+  const esc = (x: string) => x.replace(/[&<>]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' })[c]!);
+  const sleep = (ms: number) => new Promise((r) => setTimeout(r, matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : ms));
+
+  document.querySelectorAll<HTMLFormElement>('[data-contact-form]').forEach((form) => {
+    const status = form.querySelector<HTMLElement>('[data-form-status]')!;
+    const button = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
+    const msg = (k: string) => form.dataset[`msg${k}`] ?? '';
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const t = JSON.parse(dialog?.dataset.t ?? '{}');
+      const log = dialog?.querySelector<HTMLElement>('[data-term-log]');
+      let out = '';
+      const print = (line: string) => { out += line + '\n'; if (log) log.innerHTML = out + '<span class="boot-caret">█</span>'; };
+      const email = String(new FormData(form).get('email') ?? '');
+      button.disabled = true;
+      status.textContent = msg('Sending');
+      if (dialog && !dialog.open) dialog.showModal();
+      print(`<span class="text-accent">${esc(t.prompt)}</span> ./${esc(t.title)} --to rossmel --from ${esc(email)}`);
+      await sleep(350);
+      print(`<span class="text-muted">→</span> ${esc(t.validate)}… <span class="text-accent">ok</span>`);
+      await sleep(250);
+      print(`<span class="text-muted">→</span> ${esc(t.send)}…`);
+      let text = msg('Error');
+      try {
+        const res = await fetch(form.action, { method: 'POST', body: new FormData(form) });
+        const data = await res.json().catch(() => ({}));
+        if (data.ok) {
+          form.reset();
+          text = msg('Ok');
+          print(`<span class="text-muted">←</span> HTTP ${res.status} OK`);
+          await sleep(200);
+          print(`\n<span class="text-accent">✓</span> ${esc(t.ok)}`);
+          status.className = 'text-sm text-accent';
+        } else {
+          text = data.error === 'invalid' ? t.invalid : data.error === 'captcha' ? t.captcha : t.error;
+          print(`<span class="text-muted">←</span> HTTP ${res.status} ${esc(data.error ?? '')}`);
+          print(`\n<span style="color:#ff5f57">✗ ${esc(t.fail)}:</span> ${esc(text)}`);
+        }
+      } catch {
+        print(`\n<span style="color:#ff5f57">✗ ${esc(t.fail)}:</span> ${esc(t.error)}`);
+      } finally {
+        status.textContent = text;
+        button.disabled = false;
+        // Turnstile: cada token sirve una sola vez
+        (window as any).turnstile?.reset(form.querySelector('.cf-turnstile'));
+      }
+    });
+  });
+</script>

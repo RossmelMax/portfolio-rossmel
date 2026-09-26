@@ -3,8 +3,8 @@ import type { Lang } from './profile';
 /** Textos de interfaz (no de contenido). */
 export const ui = {
   es: {
-    nav: { about: 'Sobre mí', work: 'Proyectos', experience: 'Experiencia', stack: 'Stack', contact: 'Contacto', cv: 'CV', menu: 'Menú', close: 'Cerrar', theme: 'Cambiar tema' },
-    hero: { hello: 'Hola, soy', scroll: 'Desliza', available: 'Disponible para nuevos proyectos' },
+    nav: { about: 'Sobre mí', work: 'Proyectos', experience: 'Experiencia', stack: 'Stack', contact: 'Contacto', cv: 'CV', blog: 'Blog', menu: 'Menú', close: 'Cerrar', theme: 'Cambiar tema' },
+    hero: { hello: 'Hola, soy', scroll: 'Desliza', available: 'Disponible para nuevos proyectos', ctaWork: 'Ver proyectos', ctaCv: 'Descargar CV' },
     boot: {
       command: './portfolio --start',
       steps: ['cargando fuentes', 'compilando shaders', 'montando /proyectos ({n})', 'iniciando smooth-scroll'],
@@ -42,14 +42,26 @@ export const ui = {
         close: 'Cerrar',
       },
     },
-    project: { problem: 'El problema', role: 'Mi rol', highlights: 'Lo destacado', stack: 'Stack', back: 'Volver', next: 'Siguiente proyecto' },
+    project: { problem: 'El problema', role: 'Mi rol', highlights: 'Lo destacado', learned: 'Lo que aprendí', stack: 'Stack', back: 'Volver', next: 'Siguiente proyecto' },
     footer: 'Hecho con Astro, GSAP y mucho café.',
+    blog: {
+      kicker: 'Blog',
+      title: 'Notas de lo que construyo',
+      intro: 'Documento en público lo que hago: decisiones técnicas, errores y lo que aprendo en el camino.',
+      latest: 'Del blog',
+      all: 'Ver todos los artículos',
+      read: 'min de lectura',
+      back: 'Volver al blog',
+      commentTitle: '¿Dudas o comentarios sobre este artículo?',
+      commentIntro: 'Escríbeme: leo todo y respondo por correo.',
+      rss: 'RSS',
+    },
     notFound: { title: 'Esta página no existe', body: 'Quizá el enlace cambió o se escribió mal.', home: 'Volver al inicio' },
     langSwitch: 'EN',
   },
   en: {
-    nav: { about: 'About', work: 'Work', experience: 'Experience', stack: 'Stack', contact: 'Contact', cv: 'Resume', menu: 'Menu', close: 'Close', theme: 'Toggle theme' },
-    hero: { hello: "Hi, I'm", scroll: 'Scroll', available: 'Available for new projects' },
+    nav: { about: 'About', work: 'Work', experience: 'Experience', stack: 'Stack', contact: 'Contact', cv: 'Resume', blog: 'Blog', menu: 'Menu', close: 'Close', theme: 'Toggle theme' },
+    hero: { hello: "Hi, I'm", scroll: 'Scroll', available: 'Available for new projects', ctaWork: 'See my work', ctaCv: 'Download resume' },
     boot: {
       command: './portfolio --start',
       steps: ['loading fonts', 'compiling shaders', 'mounting /projects ({n})', 'starting smooth-scroll'],
@@ -87,8 +99,20 @@ export const ui = {
         close: 'Close',
       },
     },
-    project: { problem: 'The problem', role: 'My role', highlights: 'Highlights', stack: 'Stack', back: 'Back', next: 'Next project' },
+    project: { problem: 'The problem', role: 'My role', highlights: 'Highlights', learned: 'What I learned', stack: 'Stack', back: 'Back', next: 'Next project' },
     footer: 'Built with Astro, GSAP and lots of coffee.',
+    blog: {
+      kicker: 'Blog',
+      title: 'Notes on what I build',
+      intro: 'I document my work in public: technical decisions, mistakes and what I learn along the way. Posts are mostly in Spanish.',
+      latest: 'From the blog',
+      all: 'See all posts',
+      read: 'min read',
+      back: 'Back to blog',
+      commentTitle: 'Questions or comments about this post?',
+      commentIntro: 'Write to me: I read everything and reply by email.',
+      rss: 'RSS',
+    },
     notFound: { title: 'This page doesn\'t exist', body: 'The link may have changed or been mistyped.', home: 'Back home' },
     langSwitch: 'ES',
   },
@@ -102,6 +126,8 @@ export const paths = {
   project: (lang: Lang, slug: string) => (lang === 'es' ? `/proyectos/${slug}/` : `/en/projects/${slug}/`),
   cv: (lang: Lang) => (lang === 'es' ? '/cv/' : '/en/cv/'),
   cvPdf: (lang: Lang) => `/cv/Rossmel-Abasto-CV-${lang.toUpperCase()}.pdf`,
+  blog: () => '/blog/',
+  post: (slug: string) => `/blog/${slug}/`,
 };
 
 const MONTHS = {

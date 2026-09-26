@@ -254,6 +254,7 @@ export type Project = {
   problem: L;
   role: L;
   highlights: Record<Lang, string[]>;
+  learned: Record<Lang, string[]>; // "Lo que aprendí"
   stack: string[];
   links?: { label: string; href: string }[];
   accent: string; // color del caso de estudio
@@ -296,6 +297,10 @@ export const projects: Project[] = [
         'Backend with 69 tests and ≥90% coverage enforced in CI; Next.js 16 + React 19 frontend with a PDF viewer and risk-highlighted clauses.',
       ],
     },
+    learned: {
+      es: ["Medir antes de optimizar: sin un set de evaluación habría seguido \"ajustando prompts\" a ciegas. Con métricas, cada cambio se volvió una decisión.", "Un LLM no es una base de datos: la solución a las citas inventadas no fue un mejor prompt, fue una arquitectura donde el modelo no puede escribir la cita.", "Privacidad por diseño: anonimizar antes de enviar texto a la nube cambió desde el esquema de datos hasta los prompts.", "Diseñar para que falle bien: proveedores con respaldo y un trabajador que se reanuda tras un reinicio."],
+      en: ["Measure before optimizing: without an eval set I would have kept tweaking prompts blindly. With metrics, every change became a decision.", "An LLM is not a database: the fix for hallucinated citations wasn’t a better prompt, it was an architecture where the model can’t write the citation.", "Privacy by design: anonymizing before sending text to the cloud shaped everything from the data schema to the prompts.", "Design for graceful failure: providers with failover and a worker that resumes after a restart."],
+    },
     stack: ['Next.js 16', 'React 19', 'TypeScript', 'Python', 'FastAPI', 'SQLite FTS5', 'Ollama', 'RAG', 'SSE', 'pytest'],
     accent: '#c8ff2e',
     featured: true,
@@ -333,6 +338,10 @@ export const projects: Project[] = [
         'Mechanics app in React Native/Expo with push notifications, SecureStore and a service timer.',
       ],
     },
+    learned: {
+      es: ["Sostener un producto grande por años: la mayor parte del trabajo no es crear pantallas nuevas sino mantener, refactorizar y no romper lo que ya usa el cliente.", "Multi-tenant desde el frontend: cada decisión (rutas, sesiones, tema, datos) tiene que contemplar varios talleres a la vez.", "Hablar el idioma del negocio: entender cómo trabaja un taller real hizo que las pantallas se usen, no solo que funcionen."],
+      en: ["Sustaining a large product for years: most of the work isn’t new screens but maintaining, refactoring and not breaking what the client already uses.", "Multi-tenancy from the frontend: every decision (routes, sessions, theme, data) has to account for many shops at once.", "Speaking the business’s language: understanding how a real shop works made the screens get used, not just work."],
+    },
     stack: ['Next.js', 'TypeScript', 'MUI', 'Redux Toolkit', 'NextAuth', 'React Native', 'Expo'],
     accent: '#ff6a3d',
     featured: true,
@@ -367,6 +376,10 @@ export const projects: Project[] = [
         'Continuous deployment on Vercel.',
       ],
     },
+    learned: {
+      es: ["Un prototipo generado con IA es un punto de partida, no un producto: lo difícil vino después (rendimiento, permisos, versionado).", "Los PDFs grandes castigan la memoria: aprendí a renderizar solo lo visible y a liberar recursos a tiempo.", "Construir para un usuario real (la jefatura de carrera) te obliga a priorizar lo que de verdad se usa."],
+      en: ["An AI-generated prototype is a starting point, not a product: the hard part came afterwards (performance, permissions, versioning).", "Large PDFs punish memory: I learned to render only what’s visible and release resources on time.", "Building for a real user (the head of the program) forces you to prioritize what actually gets used."],
+    },
     stack: ['Next.js 16', 'Firebase', 'Groq', 'pdf.js', 'shadcn/ui', 'Tailwind', 'Vercel'],
     links: [{ label: 'GitHub', href: 'https://github.com/RossmelMax/v0-university-project-manager' }],
     accent: '#ffb23d',
@@ -400,6 +413,10 @@ export const projects: Project[] = [
         'Auto-updates, late fees, PDF bills and photo login for operators (client request).',
         '47 tests (Vitest) and GitHub Actions CI producing a Windows installer, portable build and AppImage.',
       ],
+    },
+    learned: {
+      es: ["Offline-first de verdad: si no hay internet la app tiene que funcionar igual, y la nube es solo respaldo.", "El dinero nunca en decimales flotantes: guardar centavos enteros evita errores de redondeo en las boletas.", "Escuchar al cliente aunque la idea no sea la que uno elegiría (como el login con foto): el software es para ellos.", "Migraciones con respaldo previo: en una app que corre en la compu de otra persona no hay segunda oportunidad."],
+      en: ["True offline-first: with no internet the app must work the same, and the cloud is only a backup.", "Never store money as floats: integer cents avoid rounding errors on bills.", "Listen to the client even when the idea isn’t the one you’d pick (like photo login): the software is for them.", "Migrations with a prior backup: in an app running on someone else’s computer there’s no second chance."],
     },
     stack: ['Electron', 'React', 'Vite', 'SQLite', 'Firebase Storage', 'Vitest', 'GitHub Actions'],
     accent: '#3db8ff',
@@ -437,6 +454,10 @@ export const projects: Project[] = [
         'KVM virtualization: Rocky Linux with LVM and an unattended Windows Server 2022 install.',
       ],
     },
+    learned: {
+      es: ["Las restricciones enseñan: sin IP pública ni puertos abiertos aprendí túneles, DNS y cómo exponer servicios de forma segura.", "Automatizar lo que se repite: backups, alertas y reportes con timers de systemd en lugar de acordarme.", "Un agente de IA con memoria y procedimientos escritos es mucho más útil que un chat: documentar es lo que lo hace confiable."],
+      en: ["Constraints teach: with no public IP or open ports I learned tunnels, DNS and how to expose services securely.", "Automate what repeats: backups, alerts and reports with systemd timers instead of relying on memory.", "An AI agent with memory and written procedures is far more useful than a chat: documentation is what makes it reliable."],
+    },
     stack: ['Arch Linux', 'Docker', 'systemd', 'Cloudflare Tunnel', 'Tailscale', 'OpenClaw', 'KVM'],
     accent: '#5dffb0',
     featured: true,
@@ -467,6 +488,10 @@ export const projects: Project[] = [
         'GPU utilities: image upscaling (waifu2x) and automatic subtitles (faster-whisper).',
       ],
     },
+    learned: {
+      es: ["Todo cambio al sistema tiene que ser reversible: snapshots antes de actualizar y scripts idempotentes.", "Entender el arranque de punta a punta (UEFI, bootloader, initramfs, greeter) quita el miedo a romper el sistema.", "Diseño también es sistema: la identidad visual de rOS salió del mismo cuidado que pongo en una interfaz web."],
+      en: ["Every system change must be reversible: snapshots before updating and idempotent scripts.", "Understanding boot end to end (UEFI, bootloader, initramfs, greeter) removes the fear of breaking the system.", "Design is also a system: rOS’s visual identity came from the same care I put into a web interface."],
+    },
     stack: ['Arch Linux', 'niri', 'DankMaterialShell', 'Limine', 'Shell', 'systemd'],
     accent: '#8ab4ff',
     featured: true,
@@ -487,6 +512,10 @@ export const projects: Project[] = [
       es: ['Perfiles de empresa, posts y highlights, eventos', 'Cupones con estadísticas de uso', 'Contratación de influencers para campañas', 'Cámara y video, listas de alto rendimiento (FlashList), i18n'],
       en: ['Business profiles, posts and highlights, events', 'Coupons with usage stats', 'Hiring influencers for campaigns', 'Camera and video, high-performance lists (FlashList), i18n'],
     },
+    learned: {
+      es: ["Los requisitos cambian a mitad de camino: una app de anuncios pasó a ser también un marketplace de influencers, y la arquitectura tenía que aguantarlo.", "Rendimiento en móvil: listas largas con imágenes y video exigen virtualización y cuidado con cada render.", "Trabajar para un mercado en otro país e idioma: i18n desde el inicio, no como parche."],
+      en: ["Requirements change midway: an ads app also became an influencer marketplace, and the architecture had to hold up.", "Mobile performance: long lists with images and video demand virtualization and care with every render.", "Building for a market in another country and language: i18n from day one, not as a patch."],
+    },
     stack: ['React Native', 'Expo', 'TypeScript'],
     accent: '#ff3d8b',
     featured: false,
@@ -505,8 +534,12 @@ export const projects: Project[] = [
     },
     role: { es: 'Desarrollo frontend (260 de 277 commits).', en: 'Frontend development (260 of 277 commits).' },
     highlights: {
-      es: ['Pedido a mesa por QR y checkout', 'Cupones, banners, sucursales y planes', 'Google Maps y modo de alto contraste'],
-      en: ['QR table ordering and checkout', 'Coupons, banners, branches and plans', 'Google Maps and high-contrast mode'],
+      es: ["Menú digital por sucursal, pensado para el celular del comensal", "Pedido a mesa escaneando un QR y checkout", "Cupones, banners promocionales, planes y gestión de sucursales", "Integración con Google Maps y modo de alto contraste para accesibilidad"],
+      en: ["Per-branch digital menu, designed for the diner’s phone", "Table ordering by scanning a QR code, plus checkout", "Coupons, promo banners, plans and branch management", "Google Maps integration and a high-contrast mode for accessibility"],
+    },
+    learned: {
+      es: ["Next.js App Router en un producto real: separar bien lo que corre en el servidor y en el cliente.", "El usuario final está con hambre y apurado: cada paso extra en el pedido es un pedido perdido.", "La accesibilidad (alto contraste) no es un extra: un menú se lee en lugares con poca luz."],
+      en: ["Next.js App Router on a real product: cleanly separating what runs on the server and on the client.", "The end user is hungry and in a hurry: every extra step in the order is a lost order.", "Accessibility (high contrast) isn’t an extra: menus get read in dim places."],
     },
     stack: ['Next.js (App Router)', 'TypeScript'],
     accent: '#ffd23d',
@@ -520,12 +553,19 @@ export const projects: Project[] = [
     year: '2023 – 2025', // empezó en 2023, se pausó y se retomó en 2025
     kind: WANT,
     tagline: { es: 'App móvil para los socios de un gimnasio.', en: 'Mobile app for gym members.' },
-    problem: {
-      es: 'Un gimnasio con sedes en Cochabamba y La Paz necesitaba una app propia para sus socios.',
-      en: 'A gym with locations in Cochabamba and La Paz needed its own app for members.',
-    },
     role: { es: 'Todo el frontend de la app en React Native.', en: 'The entire React Native app frontend.' },
-    highlights: { es: ['App completa para socios del gimnasio.'], en: ['Complete app for gym members.'] },
+    problem: {
+      es: "Un gimnasio con sedes en Cochabamba y La Paz necesitaba una app propia para que sus socios tuvieran la información del gimnasio y de su membresía en el celular. El proyecto empezó en 2023, se pausó y lo retomamos en 2025.",
+      en: "A gym with locations in Cochabamba and La Paz needed its own app so members could have gym and membership information on their phones. The project started in 2023, was paused and resumed in 2025.",
+    },
+    highlights: {
+      es: ["Todo el frontend de la app en React Native, de las primeras pantallas a la versión retomada", "Flujos típicos de una app de gimnasio para socios", "Retomar un código dos años después: actualizar dependencias y ponerlo al día sin romperlo"],
+      en: ["The entire React Native frontend, from the first screens to the resumed version", "Typical member-facing gym app flows", "Picking up a codebase two years later: updating dependencies and modernizing it without breaking it"],
+    },
+    learned: {
+      es: ["Escribir código pensando en quien lo retome (aunque sea uno mismo en dos años).", "Actualizar React Native y sus librerías es un proyecto en sí: hay que planificarlo, no improvisarlo."],
+      en: ["Write code for whoever picks it up next, even if it’s yourself two years later.", "Upgrading React Native and its libraries is a project in itself: plan it, don’t improvise it."],
+    },
     stack: ['React Native'],
     accent: '#ff8a3d',
     featured: false,
@@ -538,12 +578,19 @@ export const projects: Project[] = [
     year: '2023',
     kind: WANT,
     tagline: { es: 'Gestión de citas para un centro de fisioterapia.', en: 'Appointment management for a physiotherapy center.' },
-    problem: {
-      es: 'Un centro de fisioterapia necesitaba ordenar sus citas y pacientes desde el celular.',
-      en: 'A physiotherapy center needed to manage appointments and patients from a phone.',
-    },
     role: { es: 'Todo el frontend de la app en React Native.', en: 'The entire React Native app frontend.' },
-    highlights: { es: ['Agenda y gestión de citas.'], en: ['Scheduling and appointment management.'] },
+    problem: {
+      es: "Un centro de fisioterapia llevaba sus citas a mano. La app permite organizar la agenda y a los pacientes desde el celular, en un proyecto que se hizo y terminó en 2023.",
+      en: "A physiotherapy center managed appointments by hand. The app lets them organize the schedule and patients from a phone, in a project built and finished in 2023.",
+    },
+    highlights: {
+      es: ["Todo el frontend de la app en React Native", "Agenda de citas y gestión de pacientes", "Proyecto completo de principio a fin dentro del mismo año"],
+      en: ["The entire React Native app frontend", "Appointment scheduling and patient management", "A complete project from start to finish within the same year"],
+    },
+    learned: {
+      es: ["Una agenda parece simple hasta que aparecen los casos reales: cancelaciones, reprogramaciones y horarios que se cruzan.", "Terminar y entregar: cerrar un proyecto completo enseña tanto como construirlo."],
+      en: ["A scheduler looks simple until real cases show up: cancellations, rescheduling and overlapping slots.", "Finish and ship: closing out a complete project teaches as much as building it."],
+    },
     stack: ['React Native'],
     accent: '#b58cff',
     featured: false,
@@ -556,12 +603,19 @@ export const projects: Project[] = [
     year: '2022', // de los primeros proyectos completados
     kind: WANT,
     tagline: { es: 'Sitio web de una tienda de electrónica y electrodomésticos.', en: 'Website for an electronics and home appliance retailer.' },
-    problem: {
-      es: 'Presencia web y tienda en línea para una cadena de electrónica de Cochabamba con envíos a toda Bolivia.',
-      en: 'Web presence and online store for a Cochabamba electronics chain shipping across Bolivia.',
-    },
     role: { es: 'Desarrollo del sitio en WordPress.', en: 'WordPress site development.' },
-    highlights: { es: ['Sitio corporativo y tienda.'], en: ['Corporate site and store.'] },
+    problem: {
+      es: "LYNX Bolivia vende electrónica y electrodomésticos de marcas líderes, con tienda en Cochabamba y envíos a todo el país. Necesitaba un sitio corporativo y tienda en línea que pudieran administrar ellos mismos. Fue de los primeros proyectos que completé en la agencia.",
+      en: "LYNX Bolivia sells electronics and home appliances from leading brands, with a store in Cochabamba and nationwide shipping. They needed a corporate site and online store they could manage themselves. It was one of the first projects I completed at the agency.",
+    },
+    highlights: {
+      es: ["Sitio corporativo y tienda en línea en WordPress", "Contenido administrable por el propio cliente", "Uno de los primeros proyectos completados y entregados en la agencia"],
+      en: ["Corporate site and online store on WordPress", "Content the client can manage on their own", "One of the first projects completed and delivered at the agency"],
+    },
+    learned: {
+      es: ["No todo requiere código a medida: elegir la herramienta que el cliente puede mantener es parte del trabajo.", "Mi primera experiencia entregando a un cliente real: plazos, cambios y revisiones."],
+      en: ["Not everything needs custom code: picking a tool the client can maintain is part of the job.", "My first experience delivering to a real client: deadlines, changes and reviews."],
+    },
     stack: ['WordPress'],
     links: [{ label: 'lynx.com.bo', href: 'https://lynx.com.bo/' }],
     accent: '#e8e8e8',
@@ -574,12 +628,19 @@ export const projects: Project[] = [
     year: '2022',
     kind: WANT,
     tagline: { es: 'Red social para iglesias.', en: 'Social network for churches.' },
-    problem: {
-      es: 'Red social para comunidades de iglesias. El producto no llegó a lanzarse.',
-      en: 'Social network for church communities. The product was never launched.',
-    },
     role: { es: 'Desarrollo frontend.', en: 'Frontend development.' },
-    highlights: { es: ['Mi primer proyecto en la agencia.'], en: ['My first project at the agency.'] },
+    problem: {
+      es: "Una red social pensada para comunidades de iglesias: publicaciones, comunidad y contenido compartido entre miembros. Fue mi primer proyecto en la agencia y, aunque el producto no llegó a lanzarse, ahí aprendí a trabajar en equipo sobre un código real.",
+      en: "A social network designed for church communities: posts, community and shared content among members. It was my first project at the agency and, although the product never launched, it’s where I learned to work as a team on a real codebase.",
+    },
+    highlights: {
+      es: ["Mi primer proyecto profesional, como pasante", "Interfaces móviles en React Native", "Primer contacto con revisiones de código y trabajo con un backend real"],
+      en: ["My first professional project, as an intern", "Mobile interfaces in React Native", "First exposure to code reviews and working against a real backend"],
+    },
+    learned: {
+      es: ["Que un producto no se lance no significa que el trabajo no valga: fue mi escuela.", "Leer y entender código ajeno antes de escribir el propio."],
+      en: ["A product not launching doesn’t mean the work wasn’t worth it: it was my school.", "Read and understand someone else’s code before writing your own."],
+    },
     stack: ['React Native'],
     accent: '#ffffff',
     featured: false,
@@ -604,6 +665,10 @@ export const projects: Project[] = [
       es: ['Dos tipos de usuario: quien reporta y quien se apunta como voluntario', 'Mapa interactivo de reportes con Leaflet', 'Registro e inicio de sesión'],
       en: ['Two user types: reporters and volunteers', 'Interactive report map with Leaflet', 'Sign-up and login'],
     },
+    learned: {
+      es: ["En una hackatón gana quien recorta: definir el mínimo que demuestra la idea es la habilidad clave.", "Trabajar con alguien que acabas de conocer, contra reloj, dividiendo tareas desde el minuto uno."],
+      en: ["At a hackathon, whoever cuts scope wins: defining the minimum that proves the idea is the key skill.", "Working with someone you just met, against the clock, splitting tasks from minute one."],
+    },
     stack: ['React', 'Leaflet', 'Tailwind'],
     links: [{ label: 'GitHub', href: 'https://github.com/RossmelMax/hackacom2023' }],
     accent: '#3dffe0',
@@ -622,8 +687,12 @@ export const projects: Project[] = [
     },
     role: { es: 'Desarrollo fullstack.', en: 'Fullstack development.' },
     highlights: {
-      es: ['Arquitectura por features', 'Estado global con Redux Toolkit', 'Supabase como backend'],
-      en: ['Feature-based architecture', 'Global state with Redux Toolkit', 'Supabase backend'],
+      es: ["Catálogo de productos con búsqueda difusa (encuentra aunque escribas con errores)", "Carrito, cupones y órdenes", "Panel de administración para cargar y editar productos", "Arquitectura por features y estado global con Redux Toolkit, Supabase como backend"],
+      en: ["Product catalog with fuzzy search (finds results even with typos)", "Cart, coupons and orders", "Admin panel to add and edit products", "Feature-based architecture and global state with Redux Toolkit, Supabase backend"],
+    },
+    learned: {
+      es: ["Organizar el código por funcionalidad (features) escala mejor que por tipo de archivo.", "Un panel de administración simple vale más para un emprendimiento que diez funciones que nadie usa."],
+      en: ["Organizing code by feature scales better than by file type.", "A simple admin panel is worth more to a small business than ten features nobody uses."],
     },
     stack: ['React', 'TypeScript', 'Redux Toolkit', 'Supabase', 'MUI'],
     links: [{ label: 'eko-store.vercel.app', href: 'https://eko-store.vercel.app/' }],

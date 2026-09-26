@@ -9,7 +9,11 @@ void main() { gl_Position = vec4(p, 0.0, 1.0); }
 `;
 
 const FRAG = `
+#ifdef GL_FRAGMENT_PRECISION_HIGH
 precision highp float;
+#else
+precision mediump float;
+#endif
 uniform vec2 uRes;
 uniform float uTime;
 uniform vec2 uMouse;
@@ -68,9 +72,16 @@ function hexToRgb(hex: string): [number, number, number] {
   return [((n >> 16) & 255) / 255, ((n >> 8) & 255) / 255, (n & 255) / 255];
 }
 
-export function mountShader(canvas: HTMLCanvasElement) {
-  const gl = canvas.getContext('webgl', { antialias: false, alpha: false });
-  if (!gl) return;
+/**
+ * Monta el shader. Devuelve false si el navegador no puede (WebGL desactivado o bloqueado por
+ * el driver, algo común en Linux/Wayland con NVIDIA): en ese caso el Hero muestra un fondo CSS.
+ */
+export function mountShader(canvas: HTMLCanvasElement): boolean {
+  const gl = canvas.getContext('webgl', { antialias: false, alpha: false }) as WebGLRenderingContext | null;
+  if (!gl) {
+    console.info('[hero] WebGL no disponible: se usa el fondo CSS de respaldo.');
+    return false;
+  }
 
   const compile = (type: number, src: string) => {
     const s = gl.createShader(type)!;
@@ -82,7 +93,10 @@ export function mountShader(canvas: HTMLCanvasElement) {
   gl.attachShader(prog, compile(gl.VERTEX_SHADER, VERT));
   gl.attachShader(prog, compile(gl.FRAGMENT_SHADER, FRAG));
   gl.linkProgram(prog);
-  if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) return;
+  if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) {
+    console.warn('[hero] el shader no compiló:', gl.getProgramInfoLog(prog));
+    return false;
+  }
   gl.useProgram(prog);
 
   const buf = gl.createBuffer();
@@ -142,4 +156,5 @@ export function mountShader(canvas: HTMLCanvasElement) {
     if (!reduced) requestAnimationFrame(frame);
   };
   requestAnimationFrame(frame);
+  return true;
 }

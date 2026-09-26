@@ -10,6 +10,7 @@ import Projects from './Projects.astro';
 import Stack from './Stack.astro';
 import Workflow from './Workflow.astro';
 import Contact from './Contact.astro';
+import BlogTeaser from './BlogTeaser.astro';
 import { paths } from '../data/i18n';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
@@ -25,6 +26,7 @@ const altPath = paths.home(lang === 'es' ? 'en' : 'es');
     <Projects lang={lang} />
     <Stack lang={lang} />
     <Workflow lang={lang} />
+    <BlogTeaser lang={lang} />
     <Contact lang={lang} />
   </main>
 </Base>

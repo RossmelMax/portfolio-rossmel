@@ -13,6 +13,9 @@ export default defineConfig({
       i18n: { defaultLocale: 'es', locales: { es: 'es', en: 'en' } },
     }),
   ],
+  markdown: {
+    shikiConfig: { theme: 'vitesse-dark' },
+  },
   vite: {
     plugins: [tailwindcss()],
   },

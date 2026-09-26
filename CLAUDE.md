@@ -32,7 +32,8 @@ Antes de dar algo por terminado: `npm run build` sin errores, y si cambió conte
 - v3.4: foto, menú móvil, sitemap, 404, formulario (/api/contact con Resend + Turnstile).
 - v3.5: terminal de arranque, terminal de envío del formulario, arreglos de foto/título/inglés.
 - Formulario de contacto y Search Console: configurados y funcionando (sept. 2026).
-- Siguiente: capturas y video de AdvAI (Rossmel) → reemplazar degradados de las tarjetas.
+- v3.6: blog (/blog, Markdown en src/content/blog), 'Lo que aprendí' por proyecto, CTAs y fondo de respaldo en el hero.
+- Siguiente: capturas y video de AdvAI (Rossmel); revisión (docs/REVISION.md); GitHub/LinkedIn (docs/).
 - Analítica: inyección automática de Cloudflare, sin token.
 - Preguntas abiertas para Rossmel y decisiones por proyecto: `docs/PROYECTOS-CANDIDATOS.md`.
 - Despliegue: Cloudflare Pages, proyecto `rossmel-portfolio` conectado a este repo (rama `main`). Ver README → Despliegue.
