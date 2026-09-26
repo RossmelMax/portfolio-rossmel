@@ -12,6 +12,7 @@
  *  data-magnetic       botón que "atrae" el cursor
  *  data-count="42"     contador numérico
  *  data-hover          agranda el cursor personalizado
+ *  data-draw           dibujo fine line (<Sketch>) que se traza solo al entrar en pantalla
  *  data-layers         foto en capas: parallax por profundidad al hacer scroll + inclinación con el mouse
  *    └ data-layer="0.5"   profundidad de cada capa (0 = quieta, 1 = la que más se mueve)
  *    └ data-layer-outline la capa del contorno: aparece y crece para sobresalir
@@ -155,6 +156,15 @@ function revealTasks(): (() => void)[] {
         stagger: 0.1,
         scrollTrigger: { trigger: el, start: 'top 80%', end: 'bottom 45%', scrub: true },
       },
+    );
+  }));
+
+  document.querySelectorAll<SVGSVGElement>('[data-draw]').forEach((svg) => tasks.push(() => {
+    // Los <path> traen pathLength="1": el trazo va de 0 a 1 sin medir nada
+    gsap.fromTo(
+      svg.querySelectorAll('path'),
+      { strokeDasharray: 1, strokeDashoffset: 1 },
+      { strokeDashoffset: 0, duration: 1.2, ease: 'power2.inOut', stagger: 0.12, scrollTrigger: { trigger: svg, start: 'top 88%' } },
     );
   }));
 

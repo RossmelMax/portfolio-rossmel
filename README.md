@@ -153,6 +153,7 @@ Prepararlas todas juntas congelaba el hero ~300–400 ms en celulares (se veía 
 |---|---|
 | `data-split` | Título que entra línea por línea (SplitText + máscara) |
 | `data-reveal` (+ `data-reveal-delay="0.2"`) | Sube y aparece al entrar en pantalla |
+| `data-draw` (lo pone `<Sketch>`) | Dibujo fine line a mano que se traza solo al entrar en pantalla |
 | `data-layers` (+ hijos `data-layer="0.5"`, `data-layer-outline`) | Foto en capas: parallax por profundidad al hacer scroll, el contorno aparece y crece, inclinación con el mouse |
 | `data-words` | Párrafo cuyas palabras se "encienden" según el scroll |
 | `data-horizontal` + `data-track` | Sección fijada con scroll horizontal (solo ≥768px) |
@@ -324,6 +325,16 @@ El formulario de contacto al final de cada artículo sigue funcionando igual.
   *Inspección de URLs* → pedir indexación de páginas nuevas (los artículos EN, por ejemplo).
 - No se usa Google Analytics a propósito: pesa más, usa cookies y pediría banner de consentimiento.
 
+### Dibujos a mano (fine line)
+- `src/data/sketches.ts`: cada dibujo es un viewBox + formas de **rough.js**, generadas **en el build**
+  (al navegador solo llegan `<path>`; semilla fija = mismo trazo siempre). Se usan con
+  `<Sketch name="…" />` y heredan el color del texto (lima/violeta con `text-accent`).
+- Anotaciones en textos de `profile.ts`: `==texto==` subrayado a mano, `((texto))` círculo a mano
+  (componente `Marked`; marcas cortas, no se parten en dos líneas).
+- Dónde están: flecha "yo" a la foto, círculo en "días programando", subrayado/círculo en el Sobre mí,
+  íconos de "Cómo trabajo" y un dibujo por capítulo en `/sobre-mi/`. No usar en hero, CV ni stack.
+- Letra manuscrita solo para etiquetas (`font-hand`, Caveat).
+
 ### Foto en capas ("Sobre mí")
 La foto se arma con 3 capas: fondo negro (CSS), contorno (`src/assets/rossmel-outline.png` usado como
 máscara y pintado con `--accent`: lima en oscuro, violeta en claro) y la persona recortada
@@ -437,6 +448,7 @@ Ramas:
 | 2026-09 | v3.8: "programador primero". Sobre mí, CV y la sección Cómo trabajo cuentan que programó años sin IA (en WANT la IA llegó recién el último año) y qué herramientas usa hoy. |
 | 2026-09 | Blog "en condiciones": buscador de texto completo sin dependencias (índice JSON bajo demanda), etiquetas, índice por artículo, relacionados y enlaces artículo ↔ caso de estudio. Artículos en español. |
 | 2026-09 | Sección "En vivo": notebook, rubik y selflix. Fuera: music, mcu, waitlist, stream, chat, admin, admin-music, ssh, ori, class, s, test (y los del propio portafolio). |
+| 2026-09 | Dibujos fine line a mano (rough.js en el build): anotaciones, íconos de Cómo trabajo y dibujos de la historia. Pocos y con significado; nada en hero/CV/stack. |
 | 2026-09 | "Sobre mí" corto en la home + página `/sobre-mi/` (`/en/about/`) con la historia completa (`story`, `journey` en profile.ts); cifra "días programando" desde `codingSince` (mediados de 2020); "Cómo trabajo" = flujo completo (5 pasos + entorno), la IA como una parte. Empezó a programar en 2020 (no 2019). |
 | 2026-09 | Foto del "Sobre mí" en 3 capas (fondo, contorno, persona) con parallax y tilt; capas generadas por script desde la foto original. |
 | 2026-09 | Blog bilingüe (artículos EN en `src/content/blog/en/`, pareados con `translationOf`), orden en la portada, fechas repartidas, compartir, giscus opcional, SEO (JSON-LD Person/WebSite/BlogPosting/Breadcrumb, og:locale, x-default, lastmod). Stack traducible (`SkillItem`). "La agencia" → WANT. |

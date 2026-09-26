@@ -2,6 +2,9 @@
 import type { Lang } from '../data/profile';
 import { workflow, setup } from '../data/profile';
 import { t } from '../data/i18n';
+import Sketch from './Sketch.astro';
+import type { SketchName } from '../data/sketches';
+const icons: SketchName[] = ['understand', 'design', 'build', 'measure', 'ship'];
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 const s = t(lang);
@@ -13,7 +16,8 @@ const s = t(lang);
     {workflow.map((w, i) => (
       <li class="group bg-bg p-8 transition-colors hover:bg-accent hover:text-accent-ink" data-reveal data-reveal-delay={i * 0.06}>
         <span class="font-mono text-xs opacity-60">0{i + 1}</span>
-        <h3 class="display mt-12 text-3xl font-semibold lg:mt-16">{w.title[lang]}</h3>
+        <Sketch name={icons[i]} seed={i + 2} class="mt-6 h-14 w-14 text-accent transition-colors group-hover:text-accent-ink" />
+        <h3 class="display mt-6 text-3xl font-semibold">{w.title[lang]}</h3>
         <p class="mt-4 text-muted group-hover:text-accent-ink/80">{w.body[lang]}</p>
       </li>
     ))}

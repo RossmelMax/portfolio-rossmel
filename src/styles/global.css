@@ -3,6 +3,7 @@
 @import '@fontsource-variable/inter';
 @import '@fontsource-variable/space-grotesk';
 @import '@fontsource-variable/jetbrains-mono';
+@import '@fontsource/caveat/latin-400.css';
 
 /* ---------------------------------------------------------------
    TOKENS DE DISEÑO
@@ -35,6 +36,7 @@
   --font-reading: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
   --font-display: 'Space Grotesk Variable', ui-sans-serif, system-ui, sans-serif;
   --font-mono: 'JetBrains Mono Variable', ui-monospace, monospace;
+  --font-hand: 'Caveat', 'Comic Sans MS', cursive; /* solo etiquetas a mano ("yo") */
   --color-bg: var(--bg);
   --color-bg-2: var(--bg-2);
   --color-fg: var(--fg);
