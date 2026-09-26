@@ -23,6 +23,12 @@ const posts = await postsForProject(p.slug);
         <p class="kicker mb-6" data-reveal>{p.kind[lang]} · {p.year}{p.confidential ? ` · ${s.work.private}` : ''}</p>
         <h1 data-split class="display text-[18vw] font-bold md:text-[12vw]">{p.name}</h1>
         <p data-reveal class="mt-8 max-w-3xl text-2xl md:text-4xl">{p.tagline[lang]}</p>
+        {p.live && (
+          <a data-reveal href={`https://${p.live}`} target="_blank" rel="noopener" class="mt-10 inline-flex items-center gap-3 rounded-full px-6 py-3 font-medium text-[#0a0a0b]" style={`background:${p.accent}`}>
+            <span class="relative flex h-2 w-2"><span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#0a0a0b] opacity-50"></span><span class="relative inline-flex h-2 w-2 rounded-full bg-[#0a0a0b]"></span></span>
+            {s.live.view}<span class="hidden sm:inline"> · {p.live}</span> ↗
+          </a>
+        )}
       </div>
     </section>
 
@@ -62,7 +68,7 @@ const posts = await postsForProject(p.slug);
       </div>
     </section>
 
-    <LiveSites lang={lang} project={p.slug} />
+    {(p.slug === 'homelab' || p.live) && <LiveSites lang={lang} exclude={p.slug} />}
 
     {posts.length > 0 && (
       <section class="border-t border-line px-5 py-24 md:px-10">

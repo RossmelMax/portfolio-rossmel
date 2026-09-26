@@ -3,7 +3,7 @@ title: 'Tu propio Netflix en casa: un media center con Jellyfin, Docker y acceso
 description: 'Cómo armé Selflix, mi media center con Jellyfin en un servidor casero modesto: Docker, la estructura de carpetas que Jellyfin espera, acceso desde fuera sin abrir puertos, cuentas por persona y las trampas que me costaron horas.'
 date: 2026-09-26
 tags: ['homelab', 'linux', 'docker']
-project: 'homelab'
+project: 'selflix'
 lang: 'es'
 ---
 

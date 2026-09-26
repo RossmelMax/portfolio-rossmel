@@ -259,6 +259,7 @@ export type Project = {
   learned: Record<Lang, string[]>; // "Lo que aprendí"
   stack: string[];
   links?: { label: string; href: string }[];
+  live?: string; // host público (p. ej. 'rubik.rossmel.top'): botón "Ver en vivo" y sección En vivo
   accent: string; // color del caso de estudio
   featured: boolean;
   cv: boolean;
@@ -267,6 +268,8 @@ export type Project = {
 };
 
 const WANT: L = { es: 'Cliente · WANT Digital Agency', en: 'Client · WANT Digital Agency' };
+
+const SELF_HOSTED: L = { es: 'Proyecto personal · En mi servidor', en: 'Personal project · On my server' };
 
 export const projects: Project[] = [
   {
@@ -463,6 +466,153 @@ export const projects: Project[] = [
     stack: ['Arch Linux', 'Docker', 'systemd', 'Cloudflare Tunnel', 'Tailscale', 'OpenClaw', 'KVM'],
     accent: '#5dffb0',
     featured: true,
+    cv: false,
+  },
+  {
+    slug: 'notebook',
+    name: 'Notebook',
+    year: '2026',
+    kind: SELF_HOSTED,
+    tagline: {
+      es: 'Apuntes de estudio con un chat que responde citando tus propias notas.',
+      en: 'Study notes with a chat that answers by citing your own notes.',
+    },
+    problem: {
+      es: 'Los apuntes de la universidad terminan repartidos entre cuadernos, fotos del pizarrón y chats. Notebook los junta por materia y permite preguntarles en lenguaje natural: responde con fuentes numeradas y, al tocar una, salta al apunte y resalta la frase exacta.',
+      en: 'University notes end up scattered across notebooks, whiteboard photos and chats. Notebook groups them by subject and lets you ask them questions in natural language: it answers with numbered sources and, when you tap one, jumps to the note and highlights the exact sentence.',
+    },
+    role: {
+      es: 'Idea, arquitectura y desarrollo, con mi agente de IA como pareja de programación.',
+      en: 'Idea, architecture and development, with my AI agent as a pair programmer.',
+    },
+    highlights: {
+      es: [
+        'RAG propio: los apuntes se dividen en fragmentos, se convierten en embeddings y se buscan por similitud con sqlite-vec dentro de SQLite. Sin base vectorial aparte.',
+        'Respuestas con fuentes: solo se muestran las que superan un umbral calibrado con datos reales, y cada cita lleva al texto exacto dentro del apunte.',
+        'Imágenes que se pueden buscar: fotos del pizarrón o capturas (subidas, pegadas o arrastradas) se transcriben y describen solas, y entran al índice.',
+        'Importador de chats exportados de WhatsApp: cada mensaje como burbuja con su hora original, y todo queda buscable.',
+        'Liviano a propósito: Node.js + Express, frontend sin framework y servicio de systemd en vez de Docker, porque el servidor tiene muy poca RAM. Cuentas propias y respaldo diario automático.',
+      ],
+      en: [
+        'Custom RAG: notes are split into chunks, embedded and searched by similarity with sqlite-vec inside SQLite. No separate vector database.',
+        'Answers with sources: only those above a threshold calibrated on real data are shown, and each citation links to the exact text in the note.',
+        'Searchable images: whiteboard photos or screenshots (uploaded, pasted or dragged) are transcribed and described automatically and added to the index.',
+        'WhatsApp chat importer: each message becomes a bubble with its original time, and everything is searchable.',
+        'Lightweight on purpose: Node.js + Express, a framework-free frontend and a systemd service instead of Docker, because the server has very little RAM. Built-in accounts and automatic daily backups.',
+      ],
+    },
+    learned: {
+      es: [
+        'Los umbrales se calibran con datos, no se copian: el valor "recomendado" no servía; medí distancias de resultados relevantes e irrelevantes y elegí el corte con eso.',
+        'Las extensiones nativas tienen sus reglas: sqlite-vec exige enteros reales como ID y sus tablas no se pueden renombrar, así que las migraciones se hacen recreando y reindexando.',
+        'Elegir el stack según el hardware: descartar Next.js y Docker por RAM hizo que la app entre en un servidor chico sin sacrificar funciones.',
+      ],
+      en: [
+        'Thresholds are calibrated with data, not copied: the "recommended" value was useless; I measured distances of relevant and irrelevant results and chose the cutoff from that.',
+        'Native extensions have their own rules: sqlite-vec requires true integer IDs and its tables can\'t be renamed, so migrations are done by recreating and reindexing.',
+        'Pick the stack for the hardware: dropping Next.js and Docker for RAM reasons let the app fit on a tiny server without losing features.',
+      ],
+    },
+    stack: ['Node.js', 'Express', 'SQLite', 'sqlite-vec', 'RAG', 'Embeddings', 'DeepSeek', 'JavaScript', 'systemd'],
+    live: 'notebook.rossmel.top',
+    accent: '#ffd166',
+    featured: false,
+    cv: false,
+  },
+  {
+    slug: 'rubik',
+    name: 'Rubik',
+    year: '2026',
+    kind: SELF_HOSTED,
+    tagline: {
+      es: 'Para practicar cubo de Rubik y otros puzzles, con mezclas oficiales y visor 3D.',
+      en: 'Practice the Rubik\'s cube and other puzzles, with official scrambles and a 3D viewer.',
+    },
+    problem: {
+      es: 'Practicar speedcubing necesita mezclas válidas y una forma de ver cada puzzle. Rubik genera mezclas oficiales (formato WCA) y muestra el puzzle en 3D, del cubo clásico a dodecaedros como el megaminx y el gigaminx.',
+      en: 'Speedcubing practice needs valid scrambles and a way to see each puzzle. Rubik generates official scrambles (WCA format) and shows the puzzle in 3D, from the classic cube to dodecahedra like the megaminx and gigaminx.',
+    },
+    role: { es: 'Todo: diseño, desarrollo y despliegue.', en: 'Everything: design, development and deployment.' },
+    highlights: {
+      es: [
+        'Mezclas oficiales y visor 3D con cubing.js, la librería de la comunidad cubera, incluido su generador de mezclas en WebAssembly.',
+        'Sin depender de CDNs: la librería va incluida en el propio sitio, así que funciona aunque un servicio externo falle.',
+        'Modo práctica con el puzzle en 3D y modo para ver cada puzzle, en muchos tipos distintos.',
+        'HTML, CSS y JavaScript sin framework, servido desde mi homelab.',
+      ],
+      en: [
+        'Official scrambles and a 3D viewer with cubing.js, the cubing community\'s library, including its WebAssembly scramble generator.',
+        'No CDN dependency: the library ships with the site itself, so it keeps working if an external service goes down.',
+        'Practice mode with the 3D puzzle and a mode to view each puzzle, across many puzzle types.',
+        'Framework-free HTML, CSS and JavaScript, served from my homelab.',
+      ],
+    },
+    learned: {
+      es: [
+        'Incluir una librería completa no es solo copiar archivos: el generador de mezclas carga un módulo WebAssembly de forma dinámica, y si ese archivo falta, todo falla en silencio.',
+        'Probar en más de un navegador: un estilo que en Chromium no hacía nada rompía el 3D en Firefox.',
+        'Cuando el componente es una caja cerrada (shadow DOM cerrado), las capturas de pantalla automáticas son la mejor forma de verificar que de verdad se dibuja.',
+        'Cada puzzle tiene su notación: algunos movimientos de dodecaedros no se animaban y hubo que traducirlos a su forma equivalente.',
+      ],
+      en: [
+        'Bundling a full library isn\'t just copying files: the scramble generator loads a WebAssembly module dynamically, and if that file is missing everything fails silently.',
+        'Test in more than one browser: a style that did nothing in Chromium broke the 3D in Firefox.',
+        'When the component is a black box (closed shadow DOM), automated screenshots are the best way to verify it actually renders.',
+        'Each puzzle has its own notation: some dodecahedron moves didn\'t animate and had to be translated to their equivalent form.',
+      ],
+    },
+    stack: ['JavaScript', 'cubing.js', 'WebAssembly', 'HTML', 'CSS'],
+    live: 'rubik.rossmel.top',
+    accent: '#ff5f5f',
+    featured: false,
+    cv: false,
+  },
+  {
+    slug: 'selflix',
+    name: 'Selflix',
+    year: '2026',
+    kind: SELF_HOSTED,
+    tagline: {
+      es: 'Mi propio "Netflix": un media center con Jellyfin en mi servidor casero.',
+      en: 'My own "Netflix": a Jellyfin media center on my home server.',
+    },
+    problem: {
+      es: 'Películas y series repartidas en carpetas y discos, sin saber cuál era el capítulo siguiente. Selflix las ordena en una biblioteca con pósters y sinopsis, recuerda por dónde ibas y se ve desde el celular o el navegador, desde cualquier lugar, con cuentas propias.',
+      en: 'Movies and shows scattered across folders and drives, never knowing which episode was next. Selflix organizes them into a library with posters and synopses, remembers where you left off and plays on a phone or browser, from anywhere, with personal accounts.',
+    },
+    role: { es: 'Todo: instalación, configuración, acceso seguro y mantenimiento.', en: 'Everything: setup, configuration, secure access and maintenance.' },
+    highlights: {
+      es: [
+        'Jellyfin en Docker, con la biblioteca montada en solo lectura y el servicio accesible solo desde el propio servidor.',
+        'Acceso desde fuera sin abrir puertos (el servidor está detrás de CGNAT), mediante un túnel de Cloudflare con HTTPS.',
+        'Una cuenta por persona, creadas y administradas también por la API de Jellyfin.',
+        'Orden de capítulos corregido comparando con la API pública de TVMaze, y pósters restaurados con archivos locales.',
+        'Disco externo NTFS montado de forma permanente y segura en Linux.',
+      ],
+      en: [
+        'Jellyfin in Docker, with the library mounted read-only and the service reachable only from the server itself.',
+        'Access from outside without opening ports (the server sits behind CGNAT), through a Cloudflare tunnel with HTTPS.',
+        'One account per person, also created and managed through the Jellyfin API.',
+        'Episode order fixed by comparing against the public TVMaze API, and posters restored with local files.',
+        'External NTFS drive mounted permanently and safely on Linux.',
+      ],
+    },
+    learned: {
+      es: [
+        'La estructura de carpetas es la mitad del trabajo: Jellyfin es tan bueno como el orden de tus archivos.',
+        'Los atajos elegantes pueden duplicarlo todo: los enlaces simbólicos hacían que cada capítulo apareciera dos veces.',
+        'Nunca exponer un servicio de casa directo a internet: un túnel da acceso desde cualquier lado sin abrir la red.',
+      ],
+      en: [
+        'Folder structure is half the work: Jellyfin is only as good as the order of your files.',
+        'Elegant shortcuts can duplicate everything: symlinks made every episode show up twice.',
+        'Never expose a home service straight to the internet: a tunnel gives access from anywhere without opening the network.',
+      ],
+    },
+    stack: ['Jellyfin', 'Docker', 'Cloudflare Tunnel', 'Linux', 'REST API'],
+    live: 'selflix.rossmel.top',
+    accent: '#a78bfa',
+    featured: false,
     cv: false,
   },
   {
@@ -782,44 +932,5 @@ export const aiJourney: { period: L; title: L; body: L; tools?: string[] }[] = [
   },
 ];
 
-/* ------------------------------------------------------------------ */
-/* EN VIVO: subdominios públicos de rossmel.top                        */
-/* ------------------------------------------------------------------ */
-
-/**
- * Sitios que corren en mi dominio. Solo se muestran los que NO son `draft`.
- * Nunca listar paneles de administración, SSH, chats privados ni servicios personales.
- * `project` = slug del caso de estudio donde también aparece (p. ej. 'homelab').
- */
-export const liveSites: { host: string; name: L; body: L; project?: string; post?: string; draft?: boolean }[] = [
-  {
-    host: 'notebook.rossmel.top',
-    name: { es: 'Notebook RAG', en: 'RAG Notebook' },
-    body: {
-      es: 'Mis apuntes con búsqueda inteligente (RAG): les puedo hacer preguntas en lenguaje natural.',
-      en: 'My notes with smart search (RAG): I can ask them questions in natural language.',
-    },
-    project: 'homelab',
-  },
-  {
-    host: 'rubik.rossmel.top',
-    name: { es: 'Rubik', en: 'Rubik' },
-    body: {
-      es: 'Para practicar cubo de Rubik y otros puzzles: mezclas oficiales WCA y visor 3D (cubing.js), sin depender de CDNs.',
-      en: 'Practice the Rubik\'s cube and other puzzles: official WCA scrambles and a 3D viewer (cubing.js), with no CDN dependency.',
-    },
-    project: 'homelab',
-  },
-  {
-    host: 'selflix.rossmel.top',
-    name: { es: 'Selflix', en: 'Selflix' },
-    body: {
-      es: 'Mi propio media center con Jellyfin: biblioteca ordenada, "seguir viendo" y app en el celular. Acceso solo con cuenta.',
-      en: 'My own Jellyfin media center: organized library, "continue watching" and a phone app. Account-only access.',
-    },
-    project: 'homelab',
-    post: 'media-center-propio-con-jellyfin', // artículo del blog: "Cómo lo hice"
-  },
-];
-
-export const visibleLiveSites = liveSites.filter((x) => !x.draft);
+/** Proyectos que corren en vivo en mi dominio (sección "En vivo"). */
+export const liveProjects = visibleProjects.filter((p) => p.live);
