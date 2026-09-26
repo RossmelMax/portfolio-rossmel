@@ -327,10 +327,20 @@ El formulario de contacto al final de cada artículo sigue funcionando igual.
 ### Foto en capas ("Sobre mí")
 La foto se arma con 3 capas: fondo negro (CSS), contorno (`src/assets/rossmel-outline.png` usado como
 máscara y pintado con `--accent`: lima en oscuro, violeta en claro) y la persona recortada
-(`src/assets/rossmel-person.png`). Se generan desde `src/assets/rossmel.jpg` con
-`python3 scripts/build-photo-layers.py` (requiere `pip install pillow numpy scipy`). La animación está
-en `animations.ts` → `initLayers()`; sin JS o con reduced-motion las capas quedan alineadas y se ve la
-foto original. `rossmel.jpg` sigue siendo la imagen de los datos estructurados (JSON-LD).
+(`src/assets/rossmel-person.png`, 28 % más alta que el cuadro: debajo va la polera real de la foto
+original, así el parallax nunca muestra un corte). Se generan con:
+
+```bash
+pip install pillow numpy scipy
+python3 scripts/build-photo-layers.py --white foto-fondo-blanco.jpg --original foto-original.jpg
+```
+
+- `--white`: la foto editada con fondo blanco (recorte fino del pelo). `--original`: la foto del celular
+  (aporta la polera). Las fuentes **no se suben al repo** (la original muestra la casa): las tiene Rossmel.
+- El script alinea solo la original con la editada (tarda ~5 min) e imprime `--align "a,tx,ty"`; pasarlo
+  en las siguientes corridas las hace instantáneas. Último valor: `--align "3.064896,-2.350,214.282"`.
+- La animación está en `animations.ts` → `initLayers()`; sin JS o con reduced-motion las capas quedan
+  alineadas. `rossmel.jpg` (la versión con contorno) sigue siendo la imagen del JSON-LD.
 
 ### SEO
 - `@astrojs/sitemap` genera `sitemap-index.xml` (ES/EN con hreflang); `robots.txt` lo declara.

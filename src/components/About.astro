@@ -18,12 +18,12 @@ const [lead, ...rest] = profile.about[lang];
       <!--
         Foto en 3 capas (fondo, contorno y persona) con parallax al hacer scroll e inclinación con el mouse.
         Capas generadas desde rossmel.jpg: ver README → "Foto en capas". La persona y el contorno
-        son 30 % más altos (la polera sigue hacia abajo) para que nunca se vea un corte al moverse. Sin JS / reduced-motion quedan
+        son 28 % más altos (con la polera real de la foto original) para que nunca se vea un corte al moverse. Sin JS / reduced-motion quedan
         alineadas y se ve igual que la foto original.
       -->
       <div data-layers class="relative aspect-square" style="clip-path: inset(-40% 0 0 0 round 0 0 1.5rem 1.5rem)">
         <div class="absolute inset-0 rounded-3xl border border-line bg-black"></div>
-        <div data-layer="0.5" data-layer-outline class="photo-outline absolute inset-x-0 top-0 h-[130%] origin-[50%_35%]" style={`--outline:url(${outline})`} aria-hidden="true"></div>
+        <div data-layer="0.5" data-layer-outline class="photo-outline absolute inset-x-0 top-0 h-[128%] origin-[50%_35%]" style={`--outline:url(${outline})`} aria-hidden="true"></div>
         <Image data-layer="1" src={person} alt={profile.photoAlt[lang]} widths={[360, 540, 720, 900]} sizes="(min-width: 768px) 26rem, 22rem" format="webp" class="absolute inset-x-0 top-0 block h-auto w-full" loading="lazy" />
       </div>
       <figcaption class="kicker mt-4 flex items-center gap-2"><span class="h-2 w-2 rounded-full bg-accent"></span>{profile.location[lang]}</figcaption>
