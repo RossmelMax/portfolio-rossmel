@@ -64,7 +64,7 @@ La interacción para reportar era simple y funcionaba bien en el celular:
 </Marker>
 ```
 
-Los reportes se clasificaban en **cuatro categorías** (medio ambiente, abandono animal, revitalización urbana y controversia social), cada una con su color y su pin. Filtrar por categoría cambiaba los marcadores visibles.
+Los reportes se clasificaban en **((cuatro categorías))** (medio ambiente, abandono animal, revitalización urbana y controversia social), cada una con su color y su pin. Filtrar por categoría cambiaba los marcadores visibles.
 
 ## La revisión honesta: lo que cambiaría hoy
 
@@ -82,7 +82,7 @@ iconUrl: selectedCategory === 'medioambiente' ? require('../assets/pin-green.png
        : /* … */
 ```
 
-Hoy lo resolvería con **un objeto de configuración**: un solo lugar para agregar una categoría, y el color y el ícono nunca se desincronizan.
+Hoy lo resolvería con **==un objeto de configuración==**: un solo lugar para agregar una categoría, y el color y el ícono nunca se desincronizan.
 
 ```js
 // Después

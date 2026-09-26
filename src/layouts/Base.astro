@@ -2,6 +2,8 @@
 import '../styles/global.css';
 import type { Lang } from '../data/profile';
 import { profile, education } from '../data/profile';
+import { stripMarks } from '../data/sketches';
+import ToTop from '../components/ToTop.astro';
 import { getImage } from 'astro:assets';
 import photo from '../assets/rossmel.jpg';
 import fontDisplay from '@fontsource-variable/space-grotesk/files/space-grotesk-latin-wght-normal.woff2?url';
@@ -28,7 +30,7 @@ const { lang, title, description, altPath, plain = false, ogType = 'website', no
 // Cloudflare Web Analytics: token público, se define en Pages → Settings → Variables (build).
 const cfBeacon = import.meta.env.PUBLIC_CF_BEACON_TOKEN;
 const pageTitle = title ? `${title} — ${profile.name}` : `${profile.name} — ${profile.role[lang]}`;
-const desc = description ?? profile.headline[lang];
+const desc = stripMarks(description ?? profile.headline[lang]);
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const alt = new URL(altPath, Astro.site);
 const photoUrl = new URL((await getImage({ src: photo, width: 512, format: 'jpg' })).src, Astro.site).href;
@@ -42,7 +44,7 @@ const personLd = {
   givenName: 'Rossmel',
   familyName: 'Abasto',
   jobTitle: profile.role[lang],
-  description: profile.headline[lang],
+  description: stripMarks(profile.headline[lang]),
   image: photoUrl,
   email: `mailto:${profile.email}`,
   url: profile.portfolioUrl,
@@ -128,6 +130,7 @@ const siteLd = {
     <slot />
     {!plain && <div class="grain" aria-hidden="true"></div>}
     {!plain && <div class="cursor" data-cursor aria-hidden="true"></div>}
+    {!plain && <ToTop lang={lang} />}
     {!plain && (
       <script>
         import { initAnimations } from '../scripts/animations';

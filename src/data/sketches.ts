@@ -206,6 +206,41 @@ export const sketches = {
     shapes: (g, o) => [g.curve([[92, 8], [60, 10], [30, 30], [14, 66]], o), g.linearPath([[4, 50], [14, 70], [32, 60]], o)],
   },
 
+  /* ---------- Detalles varios ---------- */
+  star: {
+    viewBox: '0 0 100 100',
+    shapes: (g, o) => [g.path('M50 8 L61 38 L94 40 L68 60 L77 92 L50 74 L23 92 L32 60 L6 40 L39 38 Z', o)],
+  },
+  bulb: {
+    viewBox: '0 0 100 100',
+    shapes: (g, o) => [
+      g.path('M36 64 C22 54 20 30 36 18 C48 9 66 12 72 26 C80 42 72 56 64 64 L64 74 L36 74 Z', o),
+      g.line(38, 82, 62, 82, o),
+      g.line(42, 90, 58, 90, o),
+      g.linearPath([[44, 64], [44, 46], [50, 52], [56, 46], [56, 64]], o),
+    ],
+  },
+  pencil: {
+    viewBox: '0 0 100 100',
+    shapes: (g, o) => [
+      g.polygon([[22, 70], [70, 22], [82, 34], [34, 82]], o),
+      g.linearPath([[22, 70], [14, 88], [34, 82]], o),
+      g.line(62, 30, 74, 42, o),
+    ],
+  },
+  question: {
+    viewBox: '0 0 100 120',
+    shapes: (g, o) => [g.path('M28 36 C28 14 72 10 74 34 C76 52 50 54 50 76', o), g.circle(50, 98, 8, o)],
+  },
+  up: {
+    viewBox: '0 0 60 60',
+    shapes: (g, o) => [g.line(30, 46, 30, 14, o), g.linearPath([[18, 26], [30, 13], [42, 26]], o)],
+  },
+  ring: {
+    viewBox: '0 0 100 100',
+    shapes: (g, o) => [g.circle(50, 50, 88, { ...o, roughness: 0.9 })],
+  },
+
   /* ---------- Anotaciones ---------- */
   circle: {
     viewBox: '0 0 200 100',
@@ -231,4 +266,21 @@ export function sketchPaths(name: SketchName, seed = 1) {
   const g = rough.generator();
   const o: Opts = { roughness: 1.1, bowing: 1.2, stroke: 'currentColor', strokeWidth: 1.4, seed, disableMultiStroke: false };
   return { viewBox: def.viewBox, stretch: !!def.stretch, paths: def.shapes(g, o).flatMap((d) => g.toPaths(d)).map((p) => p.d) };
+}
+
+/** Marcas de anotación en textos: ==subrayado== y ((círculo)). */
+export const MARK_RE = /(==[^=]+==|\(\([^)]+\)\))/;
+
+/** Texto sin marcas (para CV, meta descripciones, JSON-LD, búsqueda). */
+export const stripMarks = (t: string) => t.replace(/==([^=]+)==/g, '$1').replace(/\(\(([^)]+)\)\)/g, '$1');
+
+/** HTML de una anotación (lo usa el plugin de Markdown del blog; el mismo markup que <Marked>). */
+export function markHtml(kind: 'underline' | 'circle', text: string, seed: number) {
+  const { viewBox, paths } = sketchPaths(kind, seed);
+  const svgCls = kind === 'underline'
+    ? 'pointer-events-none absolute -bottom-2 left-0 h-3 w-full text-accent'
+    : 'pointer-events-none absolute -left-3 -top-2 h-[calc(100%+1rem)] w-[calc(100%+1.5rem)] text-accent';
+  const esc = (x: string) => x.replace(/&/g, '&amp;').replace(/</g, '&lt;');
+  const d = paths.map((p) => `<path d="${p}" pathLength="1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>`).join('');
+  return `<span class="relative inline-block whitespace-nowrap text-fg${kind === 'circle' ? ' mx-2' : ''}">${esc(text)}<svg viewBox="${viewBox}" fill="none" aria-hidden="true" class="${svgCls}" data-draw preserveAspectRatio="none">${d}</svg></span>`;
 }

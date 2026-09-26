@@ -3,6 +3,7 @@ import type { Lang } from '../data/profile';
 import { experience } from '../data/profile';
 import { t, fmtMonth } from '../data/i18n';
 import Sketch from './Sketch.astro';
+import Marked from './Marked.astro';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 const s = t(lang);
@@ -28,7 +29,7 @@ const s = t(lang);
         <div class="md:col-span-3 md:pl-12">
           <h3 data-split class="display text-4xl font-semibold md:text-6xl">{job.company[lang]}</h3>
           <p class="mt-3 text-accent" data-reveal>{job.role[lang]}</p>
-          <p class="mt-6 max-w-2xl text-lg text-fg/85" data-reveal>{job.summary[lang]}</p>
+          <p class="mt-6 max-w-2xl text-lg text-fg/85" data-reveal><Marked text={job.summary[lang]} /></p>
           <ul class="mt-8 max-w-2xl space-y-3 text-muted">
             {job.bullets[lang].map((b) => <li class="flex gap-3" data-reveal><span class="text-accent">→</span><span>{b}</span></li>)}
           </ul>

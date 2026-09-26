@@ -12,7 +12,7 @@ At home I have a modest server: a 4-thread Pentium with less than 4 GB of RAM, b
 
 Most of the time, the one maintaining it isn't me: it's an **AI agent** based on OpenClaw that runs 24/7 and that I talk to through a web chat or Telegram. It updates packages, checks services, runs backups and reports back.
 
-An agent like that, out of the box, is "a chat with terminal access": useful, but unpredictable. Every session starts from scratch, it can repeat a mistake it already made and sign off on something that isn't right. What makes it reliable isn't the model. It's **writing things down**.
+An agent like that, out of the box, is "a chat with terminal access": useful, but unpredictable. Every session starts from scratch, it can repeat a mistake it already made and sign off on something that isn't right. What makes it reliable isn't the model. It's **==writing things down==**.
 
 ## 1. Memory lives in files
 
@@ -87,7 +87,7 @@ Three things make this format work:
 With the procedures written down, scheduled tasks no longer need the most expensive model. **Weekly maintenance** runs on its own, in an isolated session, with a fast and cheap model following the skill to the letter:
 
 1. Update packages.
-2. If the kernel was updated, note that a reboot is pending. **Never reboot on its own**: services keep running on the old kernel in memory, and I pick when to reboot.
+2. If the kernel was updated, note that a reboot is pending. **((Never reboot on its own))**: services keep running on the old kernel in memory, and I pick when to reboot.
 3. Check each service with the right method for it (an HTTP 401 from a service with authentication means it's **up**, not that it failed).
 4. Back up the agent's databases and prune backups older than three weeks.
 5. Short report: packages updated, reboot pending or not, backups created and free disk space.

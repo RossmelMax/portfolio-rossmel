@@ -18,7 +18,7 @@ Dos problemas se llevaron la mayor parte del trabajo, y los dos tienen que ver c
 
 Cuando la jefatura sube un PDF (o una carpeta entera con la carga masiva), el formulario tiene que llenarse solo: título, autor, carrera, año, resumen y palabras clave.
 
-La tentación era mandar el PDF completo a un LLM y pedirle todo. No lo hice, por tres razones: los documentos son largos (tokens = tiempo y cuota), el modelo a veces inventa, y hay campos que se resuelven mejor con reglas. El resultado es un **pipeline híbrido** que corre en el navegador:
+La tentación era mandar el PDF completo a un LLM y pedirle todo. No lo hice, por tres razones: los documentos son largos (tokens = tiempo y cuota), el modelo a veces inventa, y hay campos que se resuelven mejor con reglas. El resultado es un **((pipeline híbrido))** que corre en el navegador:
 
 ```ts
 export async function extractPdfData(file: File): Promise<PdfExtraction> {
@@ -85,7 +85,7 @@ La primera versión del visor usaba pdf.js y **renderizaba todas las páginas al
 
 La solución tiene dos caminos, según el navegador:
 
-- **Chrome, Edge y Safari** tienen un visor de PDF nativo que ya carga las páginas a demanda. Descargo el archivo, creo una URL `blob:` y lo muestro en un `<iframe>`. Lo importante: **revocar la URL** al desmontar el componente con `URL.revokeObjectURL`, o el PDF queda en memoria.
+- **Chrome, Edge y Safari** tienen un visor de PDF nativo que ya carga las páginas a demanda. Descargo el archivo, creo una URL `blob:` y lo muestro en un `<iframe>`. Lo importante: **==revocar la URL==** al desmontar el componente con `URL.revokeObjectURL`, o el PDF queda en memoria.
 - **Firefox** usa pdf.js, pero con **renderizado perezoso**: solo se dibujan las páginas visibles y se liberan las que salen de la pantalla.
 
 El corazón del renderizado perezoso es un `IntersectionObserver`:

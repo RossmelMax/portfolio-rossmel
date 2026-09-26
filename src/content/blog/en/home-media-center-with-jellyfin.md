@@ -97,7 +97,7 @@ Refresh the item and it appears. No API keys and no fighting with providers.
 
 ## 4. Watching from outside home, without opening ports
 
-My server sits behind **CGNAT**: I don't have a public IP, so opening ports on the router isn't even an option. And even if it were, exposing a home service directly to the internet isn't a good idea.
+My server sits behind **((CGNAT))**: I don't have a public IP, so opening ports on the router isn't even an option. And even if it were, exposing a home service directly to the internet isn't a good idea.
 
 The solution is a **tunnel**. With **Cloudflare Tunnel**, a small program (`cloudflared`) runs on the server and opens an **outbound** connection to Cloudflare. Visitors reach Cloudflare, which sends them through that tunnel to the local Jellyfin. On my home's side, no port is open.
 
@@ -122,7 +122,7 @@ In return you get automatic HTTPS and your own domain. One detail: restarting `c
 
 ## 5. One account per person
 
-Each person gets **their own account**: that way everyone has their own history, their own "continue watching" and, if you want, only certain libraries visible. New accounts are created without admin permissions.
+Each person gets **==their own account==**: that way everyone has their own history, their own "continue watching" and, if you want, only certain libraries visible. New accounts are created without admin permissions.
 
 You can do it from the dashboard, but also through the API, which is handy for automating it. A gotcha in version 10.11: **the `X-Emby-Authorization` header is required even to log in**. Without it, the response is a cryptic `Error processing request.`
 

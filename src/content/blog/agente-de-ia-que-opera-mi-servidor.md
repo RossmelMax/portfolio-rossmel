@@ -11,7 +11,7 @@ En casa tengo un servidor modesto: un Pentium de 4 hilos con menos de 4 GB de RA
 
 Quien lo mantiene la mayor parte del tiempo no soy yo: es un **agente de IA** basado en OpenClaw que corre 24/7 y con el que hablo por chat web o por Telegram. Actualiza paquetes, revisa servicios, hace backups y me reporta.
 
-Un agente así, sin más, es "un chat con acceso a la terminal": útil, pero impredecible. Cada sesión empieza de cero, puede repetir un error que ya cometió y dar por bueno algo que no lo está. Lo que lo vuelve confiable no es el modelo. Es **escribir las cosas**.
+Un agente así, sin más, es "un chat con acceso a la terminal": útil, pero impredecible. Cada sesión empieza de cero, puede repetir un error que ya cometió y dar por bueno algo que no lo está. Lo que lo vuelve confiable no es el modelo. Es **==escribir las cosas==**.
 
 ## 1. La memoria vive en archivos
 
@@ -86,7 +86,7 @@ Tres cosas hacen que este formato funcione:
 Con los procedimientos escritos, las tareas programadas ya no necesitan el modelo más caro. El **mantenimiento semanal** corre solo, en una sesión aislada, con un modelo rápido y económico siguiendo la skill al pie de la letra:
 
 1. Actualizar paquetes.
-2. Si se actualizó el kernel, anotar que hay un reinicio pendiente. **Nunca reiniciar solo**: los servicios siguen funcionando con el kernel viejo en memoria y el momento del reinicio lo coordino yo.
+2. Si se actualizó el kernel, anotar que hay un reinicio pendiente. **((Nunca reiniciar solo))**: los servicios siguen funcionando con el kernel viejo en memoria y el momento del reinicio lo coordino yo.
 3. Verificar cada servicio con el método correcto para cada uno (una respuesta HTTP 401 de un servicio con autenticación significa que **está arriba**, no que falló).
 4. Backups de las bases de datos del agente y limpieza de los más viejos que tres semanas.
 5. Reporte corto: paquetes actualizados, reinicio pendiente o no, backups creados y espacio libre.

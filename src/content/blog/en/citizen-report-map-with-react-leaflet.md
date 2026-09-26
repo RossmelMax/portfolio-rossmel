@@ -65,7 +65,7 @@ The reporting interaction was simple and worked well on phones:
 </Marker>
 ```
 
-Reports were classified into **four categories** (environment, animal abandonment, urban revitalization and social issues), each with its own color and pin. Filtering by category changed the visible markers.
+Reports were classified into **((four categories))** (environment, animal abandonment, urban revitalization and social issues), each with its own color and pin. Filtering by category changed the visible markers.
 
 ## The honest review: what I'd change today
 
@@ -83,7 +83,7 @@ iconUrl: selectedCategory === 'medioambiente' ? require('../assets/pin-green.png
        : /* … */
 ```
 
-Today I'd solve it with **a configuration object**: a single place to add a category, and the color and icon can never get out of sync.
+Today I'd solve it with **==a configuration object==**: a single place to add a category, and the color and icon can never get out of sync.
 
 ```js
 // After

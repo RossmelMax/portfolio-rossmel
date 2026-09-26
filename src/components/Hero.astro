@@ -2,6 +2,7 @@
 import type { Lang } from '../data/profile';
 import { profile } from '../data/profile';
 import { t, paths } from '../data/i18n';
+import Marked from './Marked.astro';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 const s = t(lang);
@@ -20,7 +21,7 @@ const s = t(lang);
     </h1>
     <div class="mt-8 grid gap-6 border-t border-line pt-6 md:grid-cols-12">
       <div class="md:col-span-6">
-        <p data-hero-fade class="text-lg text-fg/90 md:text-2xl">{profile.headline[lang]}</p>
+        <p data-hero-fade class="text-lg text-fg/90 md:text-2xl"><Marked text={profile.headline[lang]} /></p>
         <div data-hero-fade class="mt-6 flex flex-wrap gap-3">
           <a data-magnetic href="#work" class="rounded-full bg-accent px-6 py-3 font-medium text-accent-ink">{s.hero.ctaWork} ↘</a>
           <a data-magnetic href={paths.cvPdf(lang)} download class="rounded-full border border-line bg-bg/40 px-6 py-3 font-medium backdrop-blur hover:border-fg">{s.hero.ctaCv} ↓</a>

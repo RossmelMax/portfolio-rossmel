@@ -17,9 +17,9 @@ In **AdvAI**, my capstone project, the rule is simple: **only anonymized text re
 The first thing anyone thinks of is asking a model: "replace the personal data in this text". It has two problems:
 
 1. **To anonymize with a cloud model, you first have to send it the data.** Exactly what you wanted to avoid.
-2. **It's not deterministic.** Today it replaces the name, tomorrow one slips through. And you can't test it with a test that always passes.
+2. **==It's not deterministic.==** Today it replaces the name, tomorrow one slips through. And you can't test it with a test that always passes.
 
-So AdvAI's anonymizer is **plain code**: regular expressions and rules designed for Bolivian contracts. No external services, fast, and with results you can test.
+So AdvAI's anonymizer is **((plain code))**: regular expressions and rules designed for Bolivian contracts. No external services, fast, and with results you can test.
 
 ## Stable placeholders, not asterisks
 

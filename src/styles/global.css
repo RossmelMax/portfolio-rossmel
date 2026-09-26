@@ -155,6 +155,11 @@ html.lenis body {
 }
 [data-layer] { will-change: transform; }
 
+/* Botón "volver arriba": oculto hasta bajar; el anillo muestra el avance del scroll */
+.totop { opacity: 0; pointer-events: none; transform: translateY(1rem); }
+.totop.is-visible { opacity: 1; pointer-events: auto; transform: none; }
+.totop-ring path { stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 0.15s linear; }
+
 /* Blog: etiquetas filtrables */
 .tag-chip {
   border: 1px solid var(--line);

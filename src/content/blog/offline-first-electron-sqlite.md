@@ -55,9 +55,9 @@ total   = tarifa_básica + consumo × costo_m3 + otros_cargos
 
 El problema aparece cuando **cambian las tarifas**. Si la boleta guarda solo el consumo y calcula el total con la tarifa vigente, un aumento de precio en junio cambiaría el monto de las boletas de marzo. Y eso, en una comunidad donde el cobro es un tema sensible, es un conflicto asegurado.
 
-La solución: cada boleta guarda una **foto de las tarifas** del momento en que se emitió (`tarifa_basica_snapshot`, `costo_m3_snapshot`, `otros_snapshot`), además del total y el **monto en letras** que se imprime. Lo emitido queda congelado.
+La solución: cada boleta guarda una **==foto de las tarifas==** del momento en que se emitió (`tarifa_basica_snapshot`, `costo_m3_snapshot`, `otros_snapshot`), además del total y el **monto en letras** que se imprime. Lo emitido queda congelado.
 
-Y el dinero nunca en decimales flotantes: `0.1 + 0.2` no es `0.3` en JavaScript. Los montos se manejan en **centavos enteros** y se formatean solo al mostrarlos.
+Y el dinero nunca en decimales flotantes: `0.1 + 0.2` no es `0.3` en JavaScript. Los montos se manejan en **((centavos enteros))** y se formatean solo al mostrarlos.
 
 ## Regla 3: todo deja rastro
 

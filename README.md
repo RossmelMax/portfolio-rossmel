@@ -337,7 +337,16 @@ El formulario de contacto al final de cada artículo sigue funcionando igual.
 - Dónde están: flecha "yo" a la foto, círculo en "días programando", subrayado/círculo en el Sobre mí,
   "hoy" en Experiencia, garabato + "sigue bajando" en Proyectos, íconos de Stack y Cómo trabajo, ondas
   en "En vivo", avión de papel y "¡escríbeme!" en Contacto, tacita en el footer y un dibujo por capítulo
-  en `/sobre-mi/`. No usar en el hero ni en el CV. Criterio: acompañar el texto, no decorar.
+  en `/sobre-mi/`, estrella/foco en "Lo destacado"/"Lo que aprendí" de cada proyecto, lápiz y garabato
+  en el blog, garabato bajo el título de cada artículo. En el CV no (el CV quita las marcas con
+  `stripMarks`; también la meta description, el JSON-LD y el índice del buscador).
+  Criterio: acompañar palabras clave, no decorar.
+- **Marcas en el blog:** los `.md` también aceptan `==texto==` y `((texto))` (plugin
+  `src/lib/remark-marks.ts`, registrado en `astro.config.mjs`). Ojo: en Astro 7 `remarkPlugins`
+  necesita el paquete `@astrojs/markdown-remark` (el procesador por defecto es Sätteri). No usar marcas
+  dentro de títulos (`##`) ni bloques de código; 1–2 por artículo, frases cortas.
+- **Botón "volver arriba"** (`ToTop.astro`): aparece tras bajar ~una pantalla, con un anillo dibujado a
+  mano que se completa según el progreso del scroll; usa Lenis (`window.__lenis`) si está activo.
 - Letra manuscrita solo para etiquetas (`font-hand`, Caveat).
 
 ### Foto en capas ("Sobre mí")
@@ -460,4 +469,5 @@ Ramas:
 | 2026-09 | Los servicios en vivo pasan a ser proyectos con página de detalle (qué es, cómo funciona, lo que aprendí) en vez de enlaces directos; se elimina `liveSites`. Pedido de Rossmel. |
 | 2026-09 | Entrada del nombre fluida en móvil: las demás animaciones se preparan después del intro y en pedazos (antes, un bloqueo de ~380 ms con CPU de gama media). |
 | 2026-09 | Tono: transmitir que entiende lo que genera la IA, sin frases absolutas ni "no soy vibe coder" (pedido de Rossmel). |
+| 2026-09 | v3.13: botón "volver arriba" con anillo de progreso y más dibujos a mano (subrayados/círculos en hero, experiencia, proyectos, historia y los 22 artículos). Pedido de Rossmel. |
 | 2026-09 | Fuera del sitio: watcher-backend, prototipos v0 (salvo SGPG), proyectos descartados, proyectos personales/regalos. |

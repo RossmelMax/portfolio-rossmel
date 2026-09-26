@@ -1,6 +1,7 @@
 import { getCollection, type CollectionEntry } from 'astro:content';
 import type { Lang } from './profile';
 import { paths } from './i18n';
+import { stripMarks } from './sketches';
 
 export type Post = CollectionEntry<'blog'>;
 
@@ -52,7 +53,7 @@ export function normalize(text: string): string {
 
 /** Texto plano del Markdown para el índice de búsqueda (sin sintaxis, con el código incluido). */
 export function plainText(markdown = ''): string {
-  return markdown
+  return stripMarks(markdown)
     .replace(/```[a-z]*\n/gi, ' ')
     .replace(/!\[[^\]]*\]\([^)]*\)/g, ' ')
     .replace(/\[([^\]]*)\]\([^)]*\)/g, '$1')

@@ -1,0 +1,37 @@
+---
+import type { Lang } from '../data/profile';
+import { t } from '../data/i18n';
+import Sketch from './Sketch.astro';
+/**
+ * Botón "volver arriba": aparece al bajar y el círculo a mano se completa según el avance del scroll.
+ * Usa Lenis (window.__lenis) si está activo para que el viaje sea suave.
+ */
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const s = t(lang);
+---
+<button type="button" data-totop aria-label={s.toTop} title={s.toTop}
+  class="totop fixed bottom-5 right-5 z-50 grid h-14 w-14 place-items-center rounded-full bg-bg/80 text-accent backdrop-blur transition hover:scale-105 md:bottom-8 md:right-8">
+  <Sketch name="ring" seed={3} draw={false} class="totop-ring absolute inset-0 h-full w-full" />
+  <Sketch name="up" seed={5} draw={false} class="h-6 w-6 text-fg" />
+</button>
+<script>
+  const btn = document.querySelector<HTMLButtonElement>('[data-totop]');
+  if (btn) {
+    const ring = btn.querySelectorAll<SVGPathElement>('.totop-ring path');
+    const update = () => {
+      const max = document.documentElement.scrollHeight - innerHeight;
+      const p = max > 0 ? Math.min(1, scrollY / max) : 0;
+      btn.classList.toggle('is-visible', scrollY > innerHeight * 0.8);
+      ring.forEach((r) => (r.style.strokeDashoffset = String(1 - p)));
+    };
+    addEventListener('scroll', update, { passive: true });
+    addEventListener('resize', update);
+    update();
+    btn.addEventListener('click', () => {
+      const lenis = (window as unknown as { __lenis?: { scrollTo: (t: number, o?: object) => void } }).__lenis;
+      if (lenis) lenis.scrollTo(0, { duration: 1.4 });
+      else scrollTo({ top: 0, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+    });
+  }
+</script>
