@@ -329,7 +329,7 @@ Flujo diario: push a `main` = producción; push a otra rama / PR = URL de vista 
 - [ ] Perfil de GitHub (`docs/github-profile/`, ver INSTRUCCIONES.md) y LinkedIn (`docs/LINKEDIN.md`)
 - [ ] Probar Lighthouse (meta ≥95) y accesibilidad con teclado
 - [x] v3.8: énfasis en programar sin IA (sobre mí, CV, línea de tiempo "antes y después de la IA"),
-  etiquetas/índice/relacionados y 10 artículos/etiquetas/índice/relacionados y 11 artículos (uno o más por proyecto con código visible, más Jellyfin)
+  blog con buscador/etiquetas/índice/relacionados y 11 artículos (uno o más por proyecto con código visible, más Jellyfin)
 - [x] Subdominios en "En vivo" (`liveSites` en profile.ts): notebook, rubik y selflix (confirmados por Rossmel)
 
 ---
