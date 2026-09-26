@@ -249,10 +249,9 @@ Flujo diario: push a `main` = producción; push a otra rama / PR = URL de vista 
   Link'u, homelab, rOS); campo `draft` para ocultar lo no confirmado
 
 ⏳ Pendiente
-- [ ] Confirmar datos marcados `TODO(confirmar)` y decidir los `draft` (ver `docs/PROYECTOS-CANDIDATOS.md`)
+- [ ] Confirmar los pocos `TODO(confirmar)` que quedan (años de One Life/OneHand/Lynx, rol en Hackacom)
 - [ ] Capturas/imágenes reales de proyectos + imagen OG (`public/og.png`, 1200×630)
 - [ ] Crear el proyecto de Cloudflare Pages y los dominios (ver "Despliegue")
-- [ ] Datos que faltan: LinkedIn, nivel de inglés, fecha de egreso, año de Solaning, fechas de diseño gráfico
 - [ ] Formulario de contacto real (hoy: mailto + copiar correo). Opción: endpoint propio en el
       servidor o servicio tipo Formspree/Resend
 - [ ] Foto profesional (opcional)
@@ -285,5 +284,6 @@ Ramas:
 | 2026-09 | Dominio propio `rossmel.top` en vez de Vercel. |
 | 2026-09 | Estética dark + acento lima aprobada por Rossmel ("me encanta"). |
 | 2026-09 | Proyectos de clientes de WANT sin código ni enlaces (`confidential`); métricas de commits como evidencia. |
+| 2026-09 | CV limitado a 2 páginas: SGPG y Link'u solo en la experiencia "Independiente"; diseño gráfico solo en el portafolio. |
 | 2026-09 | Despliegue en Cloudflare Pages (un proyecto, dos dominios, middleware para `cv.`). |
-| 2026-09 | Fuera del sitio: watcher-backend, prototipos v0 (salvo SGPG), Condominio Capadocia, proyectos personales/regalos. |
+| 2026-09 | Fuera del sitio: watcher-backend, prototipos v0 (salvo SGPG), proyectos descartados, proyectos personales/regalos. |

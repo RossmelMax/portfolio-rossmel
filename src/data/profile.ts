@@ -25,7 +25,7 @@ export const profile = {
   email: 'abastorossmel@gmail.com',
   links: {
     github: 'https://github.com/RossmelMax',
-    linkedin: '', // TODO(confirmar): URL de LinkedIn
+    linkedin: 'https://www.linkedin.com/in/rossmel/',
     gitlab: 'https://gitlab.com/RossmelAbasto',
   },
   portfolioUrl: 'https://portfolio.rossmel.top',
@@ -73,7 +73,7 @@ export const profile = {
 
   languages: [
     { name: { es: 'Español', en: 'Spanish' } as L, level: { es: 'Nativo', en: 'Native' } as L },
-    { name: { es: 'Inglés', en: 'English' } as L, level: { es: 'Avanzado', en: 'Advanced' } as L }, // TODO(confirmar) nivel (B2/C1…)
+    { name: { es: 'Inglés', en: 'English' } as L, level: { es: 'Avanzado (C1)', en: 'Advanced (C1)' } as L },
   ],
 };
 
@@ -160,27 +160,26 @@ export const experience: Experience[] = [
   {
     company: 'Freelance',
     role: { es: 'Diseñador Gráfico — Identidad de marca', en: 'Graphic Designer — Brand Identity' },
-    type: { es: 'Proyecto freelance (~5 meses)', en: 'Freelance project (~5 months)' },
-    start: '2023-01', // TODO(confirmar) fechas reales
-    end: '2023-05',
+    type: { es: 'Freelance esporádico', en: 'Part-time freelance' },
+    start: '2025-03',
+    end: '2025-11',
     location: { es: 'Remoto', en: 'Remote' },
     summary: {
-      es: 'Identidad visual completa para un emprendimiento: logo, paleta, portafolio digital y contenido para redes.',
-      en: 'Full visual identity for a small business: logo, color palette, digital portfolio and social media content.',
+      es: 'Identidad visual para la marca personal de una profesional de la salud: logo, paleta, portafolio digital y contenido para redes.',
+      en: 'Visual identity for a healthcare professional\'s personal brand: logo, color palette, digital portfolio and social media content.',
     },
     bullets: {
       es: [
         'Diseñé la identidad de marca (logo, paleta de colores y tipografía) y un portafolio digital.',
-        'Produje piezas gráficas para redes sociales de forma recurrente durante ~5 meses.',
+        'Produje piezas gráficas para redes sociales de forma esporádica durante 2025.',
       ],
       en: [
         'Designed the brand identity (logo, color palette and typography) and a digital portfolio.',
-        'Produced recurring social media graphics over ~5 months.',
+        'Produced social media graphics on an as-needed basis during 2025.',
       ],
     },
     stack: ['Figma', 'Branding', 'UI'],
-    cv: true,
-    draft: true, // oculto hasta confirmar fechas
+    cv: false, // esporádico y poco relevante para el perfil: solo en el portafolio
   },
 ];
 
@@ -192,8 +191,7 @@ export const education: { title: L; school: string; period: L; note: L; draft?: 
   {
     title: { es: 'Ingeniería de Sistemas', en: 'B.S. Systems Engineering' },
     school: 'Universidad de Aquino Bolivia (UDABOL)',
-    // TODO(confirmar) fecha estimada de egreso / defensa
-    period: { es: '2021 – presente · Último semestre (8.º de 8)', en: '2021 – present · Final semester (8th of 8)' },
+    period: { es: '2021 – 2027 (previsto) · Último semestre; defensa interna dic. 2026, externa mar. 2027', en: '2021 – 2027 (expected) · Final semester; internal defense Dec 2026, external Mar 2027' },
     note: {
       es: 'Proyecto de grado: AdvAI — auditoría legal de contratos con IA (RAG híbrido + LLMs).',
       en: 'Capstone: AdvAI — AI-powered legal contract auditing (hybrid RAG + LLMs).',
@@ -208,7 +206,7 @@ export const education: { title: L; school: string; period: L; note: L; draft?: 
   {
     title: { es: 'Desarrollo de Aplicaciones Web', en: 'Web Application Development' },
     school: 'Solaning',
-    period: { es: '2022 · Completado', en: '2022 · Completed' }, // TODO(confirmar) año
+    period: { es: '2022 · Completado', en: '2022 · Completed' },
     note: { es: '', en: '' },
   },
 ];
@@ -371,7 +369,7 @@ export const projects: Project[] = [
     links: [{ label: 'GitHub', href: 'https://github.com/RossmelMax/v0-university-project-manager' }],
     accent: '#ffb23d',
     featured: true,
-    cv: true,
+    cv: false, // ya está en la experiencia "Independiente" del CV
   },
   {
     slug: 'agua-potable',
@@ -404,7 +402,7 @@ export const projects: Project[] = [
     stack: ['Electron', 'React', 'Vite', 'SQLite', 'Firebase Storage', 'Vitest', 'GitHub Actions'],
     accent: '#3db8ff',
     featured: true,
-    cv: true,
+    cv: false, // ya está en la experiencia "Independiente" del CV
     confidential: true,
   },
   {
