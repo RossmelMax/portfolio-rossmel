@@ -1,0 +1,11 @@
+---
+/** Monograma de Rossmel Abasto (src/assets/logo.svg). Hereda el color del texto (currentColor). */
+interface Props { class?: string; title?: string }
+const { class: cls = 'h-6 w-6', title } = Astro.props;
+---
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1080" fill="currentColor" fill-rule="evenodd" class={cls}
+  role={title ? 'img' : undefined} aria-hidden={title ? undefined : 'true'} aria-label={title}>
+  <path d="M40 1040 520 80v520H360v440h-60V640L100 1040ZM460 320v220H350Z" />
+  <path d="M560 80l260 520H560ZM620 320v220h110Z" />
+  <path d="M560 640h280l30 60H620v100h300l120 240H560v-60h390l-60-120H560Z" />
+</svg>

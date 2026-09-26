@@ -9,7 +9,8 @@
     "preview": "astro preview",
     "check": "astro check",
     "cv:pdf": "node scripts/build-cv-pdf.mjs",
-    "og": "node scripts/build-og.mjs"
+    "og": "node scripts/build-og.mjs",
+    "icons": "node scripts/build-icons.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",

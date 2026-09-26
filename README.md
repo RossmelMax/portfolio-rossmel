@@ -36,6 +36,7 @@ npm run build        # genera el sitio estático en dist/
 npm run cv:pdf       # genera los PDF del CV (requiere build previo)
 npm run check        # verificación de tipos de Astro/TS
 npm run og           # regenera public/og.png (imagen al compartir el link)
+npm run icons        # regenera los íconos PNG desde public/favicon.svg
 ```
 
 Flujo típico para publicar: `npm run build && npm run cv:pdf` → subir `dist/`.
@@ -330,6 +331,7 @@ Ramas:
 | 2026-09 | Estética dark + acento lima aprobada por Rossmel ("me encanta"). |
 | 2026-09 | Proyectos de clientes de WANT sin código ni enlaces (`confidential`); métricas de commits como evidencia. |
 | 2026-09 | CV limitado a 2 páginas: SGPG y Link'u solo en la experiencia "Independiente"; diseño gráfico solo en el portafolio. |
+| 2026-09 | Identidad: monograma de Rossmel (`src/assets/logo.svg`, componente `Logo.astro`) en nav, footer, favicon, íconos PWA y og.png. |
 | 2026-09 | Contador del preloader → terminal de arranque; envío del formulario mostrado como script (idea de Rossmel). |
 | 2026-09 | Formulario: Pages Function + Resend + Turnstile (gratis, sin backend propio). |
 | 2026-09 | Fondo WebGL limitado a 30 fps y menor resolución en móvil (rendimiento). |

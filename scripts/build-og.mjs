@@ -37,7 +37,8 @@ h1 { font-size: 150px; line-height: .88; letter-spacing: -.045em; font-weight: 7
 .row { display: flex; justify-content: space-between; align-items: flex-end; border-top: 1px solid rgba(237,237,234,.15); padding-top: 24px; }
 .role { font-size: 34px; } .role b { color: #c8ff2e; font-weight: 600; }
 .url { font-family: JB; font-size: 22px; color: #8a8a86; }
-</style></head><body><div class="glow"></div><div class="wrap">
+.logo { position: absolute; top: 64px; right: 64px; width: 150px; height: 150px; color: #c8ff2e; }
+</style></head><body><div class="glow"></div>${readFileSync('src/assets/logo.svg', 'utf8').replace('<svg ', '<svg class="logo" ')}<div class="wrap">
 <div class="k"><span class="dot"></span>Portfolio · Cochabamba, Bolivia</div>
 <h1>Rossmel<br>Abasto</h1>
 <div class="row"><div class="role">Frontend <b>→</b> Fullstack · IA</div><div class="url">portfolio.rossmel.top</div></div>

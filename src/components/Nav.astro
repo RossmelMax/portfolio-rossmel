@@ -1,6 +1,7 @@
 ---
 import type { Lang } from '../data/profile';
 import { t, paths } from '../data/i18n';
+import Logo from './Logo.astro';
 interface Props { lang: Lang; altPath: string; onHome?: boolean }
 const { lang, altPath, onHome = true } = Astro.props;
 const s = t(lang);
@@ -14,7 +15,7 @@ const items = [
 ---
 <header data-nav class="fixed inset-x-0 top-0 z-50 px-5 py-4 md:px-10">
   <nav class="flex items-center justify-between gap-6 rounded-full border border-line bg-bg/60 px-5 py-3 backdrop-blur-xl">
-    <a href={paths.home(lang)} class="display text-lg font-semibold tracking-tight">rossmel<span class="text-accent">.</span></a>
+    <a href={paths.home(lang)} class="display flex items-center gap-2.5 text-lg font-semibold tracking-tight" aria-label="Rossmel Abasto"><Logo class="h-6 w-6 text-accent" /><span>rossmel<span class="text-accent">.</span></span></a>
     <ul class="hidden items-center gap-7 text-sm text-muted md:flex">
       {items.map(([href, label]) => (
         <li><a href={base + href} class="transition-colors hover:text-fg">{label}</a></li>
