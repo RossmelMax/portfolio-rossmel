@@ -25,11 +25,11 @@ El paso 3 es donde los LLMs fallan si los dejas solos.
 
 ## La idea clave: el modelo no escribe la cita
 
-La primera versión hacía lo obvio: le pasaba al modelo la cláusula y los artículos recuperados, y le pedía un análisis con citas. Las citas salían bien redactadas, pero de vez en cuando mezclaban artículos, cambiaban palabras o citaban uno que no estaba entre las fuentes.
+Lo obvio sería pasarle al modelo la cláusula y los artículos recuperados, y pedirle un análisis con citas. El problema es que, aunque las fuentes estén en el prompt, un LLM puede mezclar artículos, cambiar palabras o citar uno que no estaba entre ellas: genera texto, no lo copia.
 
-Ningún ajuste de prompt lo resolvía del todo. Lo que funcionó fue **cambiar quién escribe la cita**:
+Ningún prompt garantiza que eso no pase. Lo que sí lo garantiza es **cambiar quién escribe la cita**:
 
-- El sistema recupera las fuentes candidatas y le muestra cada una al modelo con una **clave** (`CC-519`, `AS-123/2019`…).
+- El sistema recupera las fuentes candidatas y le muestra cada una al modelo con una **clave** corta (por ejemplo, `AS/0039/2018#1` en el caso de la jurisprudencia).
 - El modelo responde en JSON con un esquema fijo: su análisis y **solo las claves** de las fuentes que respaldan cada punto.
 - El sistema descarta cualquier clave que no esté entre las que se mostraron y **pega el texto literal** de cada fuente desde la base de datos.
 
@@ -62,7 +62,7 @@ El corpus tiene 3.267 artículos y 971 entradas de jurisprudencia.
 
 ## Medir antes de optimizar
 
-Durante semanas "sentía" que los resultados mejoraban, hasta que armé un set de evaluación con cláusulas y las fuentes que deberían aparecer. Con eso cada cambio dejó de ser una intuición:
+Es muy fácil "sentir" que los resultados mejoran. Por eso armé un set de evaluación con cláusulas y las fuentes que deberían aparecer para cada una. Con eso, cada cambio dejó de ser una intuición:
 
 - La recuperación (acierto@8: la fuente correcta entre las 8 primeras) pasó de **42,9 % a 80 %**.
 - Sobre 40 cláusulas evaluadas: **82,9 %** de citas correctas y **94,6 %** de cláusulas sin un error grave de riesgo.

@@ -178,6 +178,11 @@ html.lenis body {
   .cursor { display: none; }
 }
 
+/* Botón de tema: muestra el ícono del modo actual */
+.theme-sun { display: none; }
+:root[data-theme='light'] .theme-sun { display: block; }
+:root[data-theme='light'] .theme-moon { display: none; }
+
 /* Hero: respaldo sin WebGL (solo visible si el shader no pudo montarse) */
 .hero-fallback {
   display: none;

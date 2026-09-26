@@ -91,7 +91,6 @@ scripts/
   build-cv-pdf.mjs    ← genera los PDF
   serve-dist.mjs      ← servidor estático mínimo que usa el script anterior
 docs/
-  PROMPTS-CLAUDE-LOCAL.md   ← prompts para sacar info de la laptop/servidor
   PROYECTOS-CANDIDATOS.md   ← lista filtrada de repos para decidir qué mostrar
 CLAUDE.md             ← instrucciones para Claude Code (local o nube)
 ```

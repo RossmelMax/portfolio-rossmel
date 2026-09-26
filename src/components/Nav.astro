@@ -26,7 +26,11 @@ const blogHref = paths.blog();
     <div class="flex items-center gap-2 font-mono text-xs">
       <a href={paths.cv(lang)} class="rounded-full bg-accent px-4 py-2 font-medium text-accent-ink">{s.nav.cv}</a>
       <a href={altPath} class="rounded-full border border-line px-3 py-2 hover:border-fg" hreflang={lang === 'es' ? 'en' : 'es'}>{s.langSwitch}</a>
-      <button type="button" data-theme-toggle class="rounded-full border border-line px-3 py-2 hover:border-fg" aria-label={s.nav.theme}>◐</button>
+      <button type="button" data-theme-toggle class="grid h-9 w-9 place-items-center rounded-full border border-line hover:border-fg" aria-label={s.nav.theme} title={s.nav.theme}>
+        <!-- Luna en modo oscuro, sol en modo claro (se alterna por CSS según data-theme) -->
+        <svg class="theme-moon h-[18px] w-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 14.5A8.5 8.5 0 1 1 9.5 3.5a7 7 0 0 0 11 11Z" /></svg>
+        <svg class="theme-sun h-[18px] w-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2" /><path d="M12 2.5v2.2M12 19.3v2.2M4.6 4.6l1.6 1.6M17.8 17.8l1.6 1.6M2.5 12h2.2M19.3 12h2.2M4.6 19.4l1.6-1.6M17.8 6.2l1.6-1.6" /></svg>
+      </button>
       <button type="button" data-menu-toggle aria-expanded="false" aria-controls="mobile-menu" class="rounded-full border border-line px-3 py-2 md:hidden" data-open={s.nav.menu} data-close={s.nav.close}>{s.nav.menu}</button>
     </div>
   </nav>
