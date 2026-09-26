@@ -93,9 +93,9 @@ function initPreloader(): Promise<void> {
 }
 
 /* ---------------- Hero intro ---------------- */
-function heroIntro() {
+function heroIntro(): gsap.core.Timeline | null {
   const hero = document.querySelector('[data-hero]');
-  if (!hero) return;
+  if (!hero) return null;
   const title = hero.querySelector<HTMLElement>('[data-hero-title]');
   const tl = gsap.timeline({ defaults: { ease: 'expo.out' } });
   if (title) {
@@ -111,11 +111,14 @@ function heroIntro() {
     ease: 'none',
     scrollTrigger: { trigger: hero, start: 'top top', end: 'bottom top', scrub: true },
   });
+  return tl;
 }
 
 /* ---------------- Reveals ---------------- */
-function initReveals() {
-  document.querySelectorAll<HTMLElement>('[data-split]').forEach((el) => {
+/** Una tarea por elemento: se ejecutan en pedazos (runChunked) para no congelar el hero. */
+function revealTasks(): (() => void)[] {
+  const tasks: (() => void)[] = [];
+  document.querySelectorAll<HTMLElement>('[data-split]').forEach((el) => tasks.push(() => {
     const split = SplitText.create(el, { type: 'lines', mask: 'lines', linesClass: 'split-line' });
     gsap.from(split.lines, {
       yPercent: 105,
@@ -124,9 +127,9 @@ function initReveals() {
       stagger: 0.08,
       scrollTrigger: { trigger: el, start: 'top 85%' },
     });
-  });
+  }));
 
-  document.querySelectorAll<HTMLElement>('[data-reveal]').forEach((el) => {
+  document.querySelectorAll<HTMLElement>('[data-reveal]').forEach((el) => tasks.push(() => {
     gsap.from(el, {
       y: 48,
       opacity: 0,
@@ -135,9 +138,9 @@ function initReveals() {
       delay: Number(el.dataset.revealDelay ?? 0),
       scrollTrigger: { trigger: el, start: 'top 88%' },
     });
-  });
+  }));
 
-  document.querySelectorAll<HTMLElement>('[data-words]').forEach((el) => {
+  document.querySelectorAll<HTMLElement>('[data-words]').forEach((el) => tasks.push(() => {
     // aria 'hidden': el lector de pantalla lee una copia limpia del párrafo (no se permite aria-label en <p>)
     const split = SplitText.create(el, { type: 'words', aria: 'hidden' });
     gsap.fromTo(
@@ -150,11 +153,11 @@ function initReveals() {
         scrollTrigger: { trigger: el, start: 'top 80%', end: 'bottom 45%', scrub: true },
       },
     );
-  });
+  }));
 
-  document.querySelectorAll<HTMLElement>('[data-count]').forEach((el) => {
+  document.querySelectorAll<HTMLElement>('[data-count]').forEach((el) => tasks.push(() => {
     const target = Number(el.dataset.count);
-    if (Number.isNaN(target)) return;
+    if (!el.dataset.count || Number.isNaN(target)) return; // data-count vacío no es un contador
     const obj = { v: 0 };
     gsap.to(obj, {
       v: target,
@@ -163,16 +166,17 @@ function initReveals() {
       scrollTrigger: { trigger: el, start: 'top 90%' },
       onUpdate: () => (el.textContent = Math.round(obj.v).toLocaleString(document.documentElement.lang) + (el.dataset.suffix ?? '')),
     });
-  });
+  }));
 
-  document.querySelectorAll<HTMLElement>('[data-parallax]').forEach((el) => {
+  document.querySelectorAll<HTMLElement>('[data-parallax]').forEach((el) => tasks.push(() => {
     const amt = Number(el.dataset.parallax || 0.2);
     gsap.to(el, {
       yPercent: -100 * amt,
       ease: 'none',
       scrollTrigger: { trigger: el, start: 'top bottom', end: 'bottom top', scrub: true },
     });
-  });
+  }));
+  return tasks;
 }
 
 /* ---------------- Scroll horizontal (proyectos) ---------------- */
@@ -263,6 +267,40 @@ function initNav() {
   });
 }
 
+/* ---------------- Trabajo en pedazos ---------------- */
+const nextFrame = () => new Promise<void>((r) => requestAnimationFrame(() => r()));
+
+/** Ejecuta tareas en tandas de ~8 ms, cediendo un frame entre tandas: el navegador sigue animando. */
+async function runChunked(tasks: (() => void)[], budget = 8) {
+  let start = performance.now();
+  for (const task of tasks) {
+    task();
+    if (performance.now() - start > budget) {
+      await nextFrame();
+      start = performance.now();
+    }
+  }
+}
+
+/**
+ * Espera a que la entrada del nombre termine (o a que el usuario interactúe, o 1,6 s como máximo).
+ * Preparar el resto de animaciones durante la entrada congelaba el hero ~300 ms en celulares.
+ */
+function introSettled(tl: gsap.core.Timeline | null): Promise<void> {
+  if (!tl) return Promise.resolve();
+  return new Promise((resolve) => {
+    let done = false;
+    const finish = () => {
+      if (done) return;
+      done = true;
+      ['wheel', 'touchstart', 'keydown'].forEach((e) => window.removeEventListener(e, finish));
+      resolve();
+    };
+    ['wheel', 'touchstart', 'keydown'].forEach((e) => window.addEventListener(e, finish, { passive: true, once: true }));
+    setTimeout(finish, 1600);
+  });
+}
+
 /* ---------------- Arranque ---------------- */
 export async function initAnimations() {
   // Si hay reduced-motion, se muestra todo sin animar
@@ -274,10 +312,14 @@ export async function initAnimations() {
   }
   await document.fonts.ready; // SplitText necesita las fuentes cargadas para medir líneas
   await initPreloader();
-  heroIntro();
-  initReveals();
+  const intro = heroIntro();
+  initNav();
+  await introSettled(intro);
+  // El resto de la página se prepara después, en pedazos, sin trabar la entrada del nombre
+  await nextFrame();
   initHorizontal();
   initTimeline();
-  initNav();
+  await nextFrame();
+  await runChunked(revealTasks());
   ScrollTrigger.refresh();
 }

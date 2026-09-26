@@ -143,7 +143,11 @@ está aplicado a ese elemento).
 
 `src/scripts/animations.ts` se carga en todas las páginas (salvo el CV) y activa efectos según
 atributos HTML. Para animar algo nuevo, basta con añadir el atributo (ojo: estos nombres están
-reservados; `data-count` sin valor anima a 0, por eso el contador del blog usa `data-results`):
+reservados; `data-count` sin valor anima a 0, por eso el contador del blog usa `data-results`).
+
+Orden de arranque: primero la entrada del nombre (hero); el resto de animaciones se prepara **después**
+(al terminar la entrada, al primer scroll/toque o a los 1,6 s) y **en pedazos de ~8 ms** (`runChunked`).
+Prepararlas todas juntas congelaba el hero ~300–400 ms en celulares (se veía "a trompicones"):
 
 | Atributo | Efecto |
 |---|---|
@@ -372,5 +376,6 @@ Ramas:
 | 2026-09 | v3.8: "programador primero". Sobre mí, CV y la sección Cómo trabajo cuentan que programó años sin IA (en WANT la IA llegó recién el último año) y qué herramientas usa hoy. |
 | 2026-09 | Blog "en condiciones": buscador de texto completo sin dependencias (índice JSON bajo demanda), etiquetas, índice por artículo, relacionados y enlaces artículo ↔ caso de estudio. Artículos en español. |
 | 2026-09 | Sección "En vivo": notebook, rubik y selflix. Fuera: music, mcu, waitlist, stream, chat, admin, admin-music, ssh, ori, class, s, test (y los del propio portafolio). |
+| 2026-09 | Entrada del nombre fluida en móvil: las demás animaciones se preparan después del intro y en pedazos (antes, un bloqueo de ~380 ms con CPU de gama media). |
 | 2026-09 | Tono: transmitir que entiende lo que genera la IA, sin frases absolutas ni "no soy vibe coder" (pedido de Rossmel). |
 | 2026-09 | Fuera del sitio: watcher-backend, prototipos v0 (salvo SGPG), proyectos descartados, proyectos personales/regalos. |
