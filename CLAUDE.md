@@ -33,7 +33,9 @@ Antes de dar algo por terminado: `npm run build` sin errores, y si cambió conte
 - v3.5: terminal de arranque, terminal de envío del formulario, arreglos de foto/título/inglés.
 - Formulario de contacto y Search Console: configurados y funcionando (sept. 2026).
 - v3.6: blog (/blog, Markdown en src/content/blog), 'Lo que aprendí' por proyecto, CTAs y fondo de respaldo en el hero.
-- Siguiente: capturas y video de AdvAI (Rossmel); revisión (docs/REVISION.md); GitHub/LinkedIn (docs/).
+- v3.7: correcciones de la revisión de Claude local (móvil 360 px, LCP, blog EN, contraste, validación).
+- Flujo de publicación: Claude web sube a su rama y abre un PR a main; Rossmel lo aprueba en GitHub → Cloudflare publica.
+- Siguiente: capturas y video de AdvAI (Rossmel); GitHub/LinkedIn (docs/).
 - Analítica: inyección automática de Cloudflare, sin token.
 - Preguntas abiertas para Rossmel y decisiones por proyecto: `docs/PROYECTOS-CANDIDATOS.md`.
 - Despliegue: Cloudflare Pages, proyecto `rossmel-portfolio` conectado a este repo (rama `main`). Ver README → Despliegue.

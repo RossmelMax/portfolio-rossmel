@@ -120,8 +120,10 @@ export function mountShader(canvas: HTMLCanvasElement): boolean {
   readColors();
   new MutationObserver(readColors).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
 
-  // Resolución reducida: el efecto es suave, no necesita píxeles nativos (menos aún en móvil).
-  const scale = matchMedia('(max-width: 768px)').matches ? 0.3 : 0.5;
+  // Resolución: ~0,5 píxeles de render por píxel CSS en escritorio y ~1 en móvil (pantallas densas
+  // con canvas chico se veían pixeladas). Se tope a 2x de densidad para no castigar la GPU.
+  const dpr = Math.min(window.devicePixelRatio || 1, 2);
+  const scale = matchMedia('(max-width: 768px)').matches ? dpr * 0.5 : Math.max(0.5, dpr * 0.4);
   const resize = () => {
     canvas.width = Math.max(1, Math.floor(canvas.clientWidth * scale));
     canvas.height = Math.max(1, Math.floor(canvas.clientHeight * scale));

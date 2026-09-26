@@ -1,0 +1,16 @@
+# Actualiza la lista "Últimos artículos" del README desde el RSS del blog.
+name: blog-posts
+on:
+  schedule: [{ cron: '0 12 * * *' }]
+  workflow_dispatch:
+permissions: { contents: write }
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: gautamkrishnar/blog-post-workflow@v1
+        with:
+          feed_list: 'https://portfolio.rossmel.top/blog/rss.xml'
+          max_post_count: 5
+          commit_message: 'Actualizar últimos artículos'

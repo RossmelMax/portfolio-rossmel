@@ -23,6 +23,8 @@ export const ui = {
       copied: '¡Copiado!',
       cv: 'Descargar CV',
       formTitle: 'O déjame un mensaje',
+      required: 'Completa este campo.',
+      badEmail: 'Escribe un correo válido, por ejemplo nombre@dominio.com.',
       name: 'Nombre',
       email: 'Tu correo',
       message: 'Mensaje',
@@ -80,6 +82,8 @@ export const ui = {
       copied: 'Copied!',
       cv: 'Download resume',
       formTitle: 'Or leave me a message',
+      required: 'Please fill in this field.',
+      badEmail: 'Enter a valid email, e.g. name@domain.com.',
       name: 'Name',
       email: 'Your email',
       message: 'Message',
@@ -126,7 +130,7 @@ export const paths = {
   project: (lang: Lang, slug: string) => (lang === 'es' ? `/proyectos/${slug}/` : `/en/projects/${slug}/`),
   cv: (lang: Lang) => (lang === 'es' ? '/cv/' : '/en/cv/'),
   cvPdf: (lang: Lang) => `/cv/Rossmel-Abasto-CV-${lang.toUpperCase()}.pdf`,
-  blog: () => '/blog/',
+  blog: (lang: Lang = 'es') => (lang === 'es' ? '/blog/' : '/en/blog/'),
   post: (slug: string) => `/blog/${slug}/`,
 };
 

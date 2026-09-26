@@ -102,7 +102,7 @@ CLAUDE.md             ← instrucciones para Claude Code (local o nube)
 | `/` · `/en/` | Portafolio |
 | `/proyectos/<slug>/` · `/en/projects/<slug>/` | Caso de estudio de cada proyecto |
 | `/cv/` · `/en/cv/` | CV en HTML (imprimible) |
-| `/blog/` · `/blog/<slug>/` · `/blog/rss.xml` | Blog |
+| `/blog/` · `/en/blog/` · `/blog/<slug>/` · `/blog/rss.xml` | Blog (portada ES/EN; artículos en su idioma) |
 | `/404.html` | Página de error propia (ES+EN) |
 | `/api/contact` | Formulario de contacto (Pages Function) |
 | `/cv/Rossmel-Abasto-CV-ES.pdf` · `…-EN.pdf` | CV en PDF |
@@ -220,7 +220,7 @@ aparte `rossmel-web`, que duplicaba el sitio.)
 | Ajuste | Valor |
 |---|---|
 | Proyecto | `rossmel-portfolio` (Workers & Pages → Create → Pages → **Connect to Git**; nunca "Direct Upload": no se puede pasar a Git después) |
-| Repo / rama de producción | `RossmelMax/portfolio-rossmel` · `main` |
+| Repo / rama de producción | `rossmelabasto/portfolio-rossmel` · `main` |
 | Framework preset | Astro (o None) |
 | Build command | `npm run build` |
 | Output directory | `dist` |
@@ -313,15 +313,15 @@ Flujo diario: push a `main` = producción; push a otra rama / PR = URL de vista 
 - [x] Menú móvil, sitemap, 404 propia, auditoría Lighthouse (local: perf 87–94, a11y 95–96, BP/SEO 100; CV 100 en todo)
 - [x] Google Search Console verificado (propiedad de dominio `rossmel.top`) y sitemap enviado
 - [ ] Video corto de AdvAI + capturas (Rossmel)
-- [ ] Revisión exhaustiva con Claude local (`docs/REVISION.md`)
-- [ ] README del perfil de GitHub (`docs/github-profile/README.md`) y LinkedIn (`docs/LINKEDIN.md`)
+- [x] Revisión exhaustiva con Claude local (`docs/REVISION.md`) — correcciones aplicadas en v3.7
+- [ ] Perfil de GitHub (`docs/github-profile/`, ver INSTRUCCIONES.md) y LinkedIn (`docs/LINKEDIN.md`)
 - [ ] Probar Lighthouse (meta ≥95) y accesibilidad con teclado
 
 ---
 
 ## Continuar con Claude Code local
 
-1. `git clone git@github.com:RossmelMax/portfolio-rossmel.git && cd portfolio-rossmel`
+1. `git clone git@github.com:rossmelabasto/portfolio-rossmel.git && cd portfolio-rossmel`
 2. `git checkout <rama de trabajo>` (ver sección siguiente) y `npm install`
 3. Abrir `claude` en la carpeta: lee `CLAUDE.md` automáticamente, que resume convenciones y estado.
 4. Pedirle algo como: *"Lee README.md y docs/, y sigue con los pendientes."*
@@ -345,6 +345,8 @@ Ramas:
 | 2026-09 | Estética dark + acento lima aprobada por Rossmel ("me encanta"). |
 | 2026-09 | Proyectos de clientes de WANT sin código ni enlaces (`confidential`); métricas de commits como evidencia. |
 | 2026-09 | CV limitado a 2 páginas: SGPG y Link'u solo en la experiencia "Independiente"; diseño gráfico solo en el portafolio. |
+| 2026-09 | v3.7 tras la revisión: header a 360 px, CSS en línea + precarga de fuentes (LCP), blog con portada EN, og:type article, validación del formulario en el idioma de la página, contraste en modo claro y en el código. |
+| 2026-09 | Texto en JetBrains Mono (Space Grotesk en titulares; Inter solo en artículos largos). Pedido de Rossmel. |
 | 2026-09 | Blog en `/blog` (no subdominio aparte, por SEO); `blog.rossmel.top` redirige. Primer artículo: AdvAI. |
 | 2026-09 | Hero: fondo CSS de respaldo si el navegador no tiene WebGL; botones Ver proyectos / Descargar CV. |
 | 2026-09 | Identidad: monograma de Rossmel (`src/assets/logo.svg`, componente `Logo.astro`) en nav, footer, favicon, íconos PWA y og.png. |

@@ -14,13 +14,13 @@ const posts = (await getPosts()).slice(0, 3);
       {posts.map((p) => (
         <li class="border-b border-line" data-reveal>
           <a href={paths.post(p.id)} data-hover class="group grid gap-3 py-8 md:grid-cols-12 md:items-baseline md:gap-8">
-            <span class="kicker md:col-span-3">{fmtDate(p.data.date, lang)} · {readingTime(p.body)} {s.blog.read}</span>
+            <span class="kicker md:col-span-3">{fmtDate(p.data.date, lang)} · {readingTime(p.body)} {s.blog.read}{p.data.lang !== lang && ` · ${p.data.lang.toUpperCase()}`}</span>
             <span class="display text-3xl font-semibold transition-colors group-hover:text-accent md:col-span-8 md:text-5xl">{p.data.title}</span>
             <span class="hidden text-right text-2xl md:col-span-1 md:block">↗</span>
           </a>
         </li>
       ))}
     </ul>
-    <a href={paths.blog()} class="kicker mt-8 inline-block hover:text-fg">{s.blog.all} →</a>
+    <a href={paths.blog(lang)} class="kicker mt-8 inline-block hover:text-fg">{s.blog.all} →</a>
   </section>
 )}

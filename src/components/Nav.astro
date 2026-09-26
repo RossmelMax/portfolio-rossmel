@@ -12,19 +12,19 @@ const items = [
   ['#work', s.nav.work],
   ['#contact', s.nav.contact],
 ] as const;
-const blogHref = paths.blog();
+const blogHref = paths.blog(lang);
 ---
-<header data-nav class="fixed inset-x-0 top-0 z-50 px-5 py-4 md:px-10">
-  <nav class="flex items-center justify-between gap-6 rounded-full border border-line bg-bg/60 px-5 py-3 backdrop-blur-xl">
-    <a href={paths.home(lang)} class="display flex items-center gap-2.5 text-lg font-semibold tracking-tight" aria-label="Rossmel Abasto"><Logo class="h-6 w-6 text-accent" /><span>rossmel<span class="text-accent">.</span></span></a>
+<header data-nav class="fixed inset-x-0 top-0 z-50 px-3 py-3 sm:px-5 sm:py-4 md:px-10">
+  <nav class="flex items-center justify-between gap-3 rounded-full border border-line bg-bg/60 py-2.5 pl-4 pr-2.5 backdrop-blur-xl sm:gap-6 sm:px-5 sm:py-3">
+    <a href={paths.home(lang)} class="display flex items-center gap-2.5 text-lg font-semibold tracking-tight" aria-label="Rossmel Abasto"><Logo class="h-6 w-6 text-accent" /><span class="hidden min-[380px]:inline">rossmel<span class="text-accent">.</span></span></a>
     <ul class="hidden items-center gap-7 text-sm text-muted md:flex">
       {items.map(([href, label]) => (
         <li><a href={base + href} class="transition-colors hover:text-fg">{label}</a></li>
       ))}
       <li><a href={blogHref} class="transition-colors hover:text-fg">{s.nav.blog}</a></li>
     </ul>
-    <div class="flex items-center gap-2 font-mono text-xs">
-      <a href={paths.cv(lang)} class="rounded-full bg-accent px-4 py-2 font-medium text-accent-ink">{s.nav.cv}</a>
+    <div class="flex items-center gap-1.5 font-mono text-xs sm:gap-2">
+      <a href={paths.cv(lang)} class="hidden rounded-full bg-accent px-4 py-2 font-medium text-accent-ink sm:inline-block">{s.nav.cv}</a>
       <a href={altPath} class="rounded-full border border-line px-3 py-2 hover:border-fg" hreflang={lang === 'es' ? 'en' : 'es'}>{s.langSwitch}</a>
       <button type="button" data-theme-toggle class="grid h-9 w-9 place-items-center rounded-full border border-line hover:border-fg" aria-label={s.nav.theme} title={s.nav.theme}>
         <!-- Luna en modo oscuro, sol en modo claro (se alterna por CSS según data-theme) -->
@@ -39,11 +39,11 @@ const blogHref = paths.blog();
   <ul class="space-y-2">
     {items.map(([href, label], i) => (
       <li class="overflow-hidden">
-        <a href={base + href} data-menu-link class="display block text-6xl font-bold" style={`--i:${i}`}>{label}</a>
+        <a href={base + href} data-menu-link class="display block pb-[0.12em] text-[clamp(2.5rem,11vw,3.75rem)] leading-[1.05] font-bold" style={`--i:${i}`}>{label}</a>
       </li>
     ))}
-    <li class="overflow-hidden"><a href={blogHref} data-menu-link class="display block text-6xl font-bold" style={`--i:${items.length}`}>{s.nav.blog}</a></li>
-    <li class="overflow-hidden"><a href={paths.cv(lang)} data-menu-link class="display block text-6xl font-bold text-accent" style={`--i:${items.length + 1}`}>{s.nav.cv}</a></li>
+    <li class="overflow-hidden"><a href={blogHref} data-menu-link class="display block pb-[0.12em] text-[clamp(2.5rem,11vw,3.75rem)] leading-[1.05] font-bold" style={`--i:${items.length}`}>{s.nav.blog}</a></li>
+    <li class="overflow-hidden"><a href={paths.cv(lang)} data-menu-link class="display block pb-[0.12em] text-[clamp(2.5rem,11vw,3.75rem)] leading-[1.05] font-bold text-accent" style={`--i:${items.length + 1}`}>{s.nav.cv}</a></li>
   </ul>
 </div>
 <style>

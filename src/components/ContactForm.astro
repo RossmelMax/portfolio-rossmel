@@ -16,7 +16,7 @@ const field = 'w-full rounded-2xl border border-line bg-bg-2 px-5 py-4 text-fg p
   {turnstileKey && (
     <form data-contact-form action="/api/contact" method="post" class:list={["grid max-w-3xl gap-4", cls]} data-reveal
       data-msg-sending={s.contact.sending} data-msg-ok={s.contact.ok} data-msg-invalid={s.contact.invalid}
-      data-msg-captcha={s.contact.captcha} data-msg-error={`${s.contact.error} ${profile.email}.`}>
+      data-msg-captcha={s.contact.captcha} data-msg-required={s.contact.required} data-msg-bad-email={s.contact.badEmail} data-msg-error={`${s.contact.error} ${profile.email}.`}>
       <h3 class="display text-3xl font-semibold md:text-4xl">{title}</h3>
       <input type="hidden" name="lang" value={lang} />
       {context && <input type="hidden" name="context" value={context} />}
@@ -59,6 +59,14 @@ const field = 'w-full rounded-2xl border border-line bg-bg-2 px-5 py-4 text-fg p
     const status = form.querySelector<HTMLElement>('[data-form-status]')!;
     const button = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
     const msg = (k: string) => form.dataset[`msg${k}`] ?? '';
+    // Mensajes de validación en el idioma de la página (los nativos salen en el idioma del navegador)
+    form.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>('input[required], textarea[required]').forEach((field) => {
+      field.addEventListener('invalid', () => {
+        const v = field.validity;
+        field.setCustomValidity(v.valueMissing ? msg('Required') : v.typeMismatch ? msg('BadEmail') : '');
+      });
+      field.addEventListener('input', () => field.setCustomValidity(''));
+    });
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       const t = JSON.parse(dialog?.dataset.t ?? '{}');
