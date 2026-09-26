@@ -515,7 +515,7 @@ export const projects: Project[] = [
   {
     slug: 'onelife',
     name: 'One Life Fitness',
-    year: '2023', // TODO(confirmar)
+    year: '2023 – 2025', // empezó en 2023, se pausó y se retomó en 2025
     kind: WANT,
     tagline: { es: 'App móvil para los socios de un gimnasio.', en: 'Mobile app for gym members.' },
     problem: {
@@ -533,7 +533,7 @@ export const projects: Project[] = [
   {
     slug: 'onehand',
     name: 'OneHand',
-    year: '2024', // TODO(confirmar)
+    year: '2023',
     kind: WANT,
     tagline: { es: 'Gestión de citas para un centro de fisioterapia.', en: 'Appointment management for a physiotherapy center.' },
     problem: {
@@ -551,7 +551,7 @@ export const projects: Project[] = [
   {
     slug: 'lynx',
     name: 'LYNX Bolivia',
-    year: '2022', // TODO(confirmar)
+    year: '2022', // de los primeros proyectos completados
     kind: WANT,
     tagline: { es: 'Sitio web de una tienda de electrónica y electrodomésticos.', en: 'Website for an electronics and home appliance retailer.' },
     problem: {
@@ -585,18 +585,23 @@ export const projects: Project[] = [
     confidential: true,
   },
   {
-    slug: 'hackacom-2023',
-    name: 'Hackacom 2023',
+    slug: 'canasta',
+    name: 'Canasta',
     year: '2023',
-    kind: { es: 'Hackatón · Participante', en: 'Hackathon · Participant' },
-    tagline: { es: 'App con mapas construida en un fin de semana.', en: 'Map-based app built over a weekend.' },
-    // TODO(confirmar): qué problema atacaba y cuál fue tu rol en el equipo.
-    problem: {
-      es: 'Proyecto en equipo para la hackatón Hackacom 2023: una app web con mapas interactivos. No ganamos, pero fue una gran experiencia de trabajo contra reloj.',
-      en: 'Team project for the Hackacom 2023 hackathon: a web app with interactive maps. We didn\'t win, but it was great practice working against the clock.',
+    kind: { es: 'Hackatón Hackacom 2023 · Participante', en: 'Hackacom 2023 hackathon · Participant' },
+    tagline: {
+      es: 'Reportes ciudadanos y voluntarios para arreglar la ciudad.',
+      en: 'Citizen reports and volunteers to fix the city.',
     },
-    role: { es: 'Desarrollo frontend.', en: 'Frontend development.' }, // TODO(confirmar)
-    highlights: { es: ['Mapas interactivos con Leaflet.'], en: ['Interactive maps with Leaflet.'] },
+    problem: {
+      es: 'En Cochabamba hay muchos problemas pequeños que los propios vecinos pueden resolver: basura acumulada, árboles caídos, espacios descuidados. Canasta permite reportarlos en un mapa y que otras personas se apunten como voluntarias para ir a solucionarlos. No ganamos, pero fue una gran experiencia de trabajo contra reloj.',
+      en: 'Cochabamba has lots of small problems neighbors can fix themselves: piled-up trash, fallen trees, neglected spaces. Canasta lets people report them on a map and others sign up as volunteers to go fix them. We didn\'t win, but it was great practice working against the clock.',
+    },
+    role: { es: 'Desarrollo frontend.', en: 'Frontend development.' },
+    highlights: {
+      es: ['Dos tipos de usuario: quien reporta y quien se apunta como voluntario', 'Mapa interactivo de reportes con Leaflet', 'Registro e inicio de sesión'],
+      en: ['Two user types: reporters and volunteers', 'Interactive report map with Leaflet', 'Sign-up and login'],
+    },
     stack: ['React', 'Leaflet', 'Tailwind'],
     links: [{ label: 'GitHub', href: 'https://github.com/RossmelMax/hackacom2023' }],
     accent: '#3dffe0',

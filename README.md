@@ -249,7 +249,7 @@ Flujo diario: push a `main` = producción; push a otra rama / PR = URL de vista 
   Link'u, homelab, rOS); campo `draft` para ocultar lo no confirmado
 
 ⏳ Pendiente
-- [ ] Confirmar los pocos `TODO(confirmar)` que quedan (años de One Life/OneHand/Lynx, rol en Hackacom)
+- [x] Todos los datos confirmados (sin `TODO(confirmar)` pendientes)
 - [ ] Capturas/imágenes reales de proyectos + imagen OG (`public/og.png`, 1200×630)
 - [ ] Crear el proyecto de Cloudflare Pages y los dominios (ver "Despliegue")
 - [ ] Formulario de contacto real (hoy: mailto + copiar correo). Opción: endpoint propio en el

@@ -15,11 +15,11 @@ Actualizado: sept. 2026 (tras las respuestas de Rossmel y el informe de Claude C
 | rOS | galería | ❌ | capturas lindas (escritorio, fastfetch, arranque) |
 | Adsie · WANT | lista | en experiencia | — |
 | Bite · WANT | lista | en experiencia | — |
-| One Life Fitness · WANT | lista | en experiencia | año |
-| OneHand · WANT | lista | en experiencia | año |
-| LYNX Bolivia (WordPress) · WANT | lista | en experiencia | año; ¿sitio + tienda WooCommerce? |
+| One Life Fitness · WANT (2023–2025) | lista | en experiencia | — |
+| OneHand · WANT (2023) | lista | en experiencia | — |
+| LYNX Bolivia (WordPress) · WANT (2022) | lista | en experiencia | — |
 | Blessd · WANT | lista | ❌ | — |
-| Hackacom 2023 | lista | ❌ | tu rol y qué hacía la app |
+| Canasta (Hackacom 2023) | lista | ❌ | — |
 | EKO (tienda para un emprendimiento) | lista | ❌ | — |
 
 ## Datos confirmados (sept. 2026)
