@@ -7,6 +7,7 @@ import sitemap from '@astrojs/sitemap';
 export default defineConfig({
   site: 'https://portfolio.rossmel.top',
   trailingSlash: 'ignore',
+  build: { inlineStylesheets: 'always' },
   integrations: [
     sitemap({
       filter: (page) => !page.includes('/404'),
@@ -14,7 +15,7 @@ export default defineConfig({
     }),
   ],
   markdown: {
-    shikiConfig: { theme: 'vitesse-dark' },
+    shikiConfig: { theme: 'github-dark' },
   },
   vite: {
     plugins: [tailwindcss()],

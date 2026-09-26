@@ -2,6 +2,8 @@
 import '../styles/global.css';
 import type { Lang } from '../data/profile';
 import { profile } from '../data/profile';
+import fontDisplay from '@fontsource-variable/space-grotesk/files/space-grotesk-latin-wght-normal.woff2?url';
+import fontText from '@fontsource-variable/jetbrains-mono/files/jetbrains-mono-latin-wght-normal.woff2?url';
 
 interface Props {
   lang: Lang;
@@ -11,8 +13,12 @@ interface Props {
   altPath: string;
   /** Páginas "limpias" (CV) no cargan animaciones ni cursor. */
   plain?: boolean;
+  /** 'article' en los artículos del blog. */
+  ogType?: 'website' | 'article';
+  /** Sin versión en el otro idioma (artículos): no se emite hreflang alternativo. */
+  noAlt?: boolean;
 }
-const { lang, title, description, altPath, plain = false } = Astro.props;
+const { lang, title, description, altPath, plain = false, ogType = 'website', noAlt = false } = Astro.props;
 // Cloudflare Web Analytics: token público, se define en Pages → Settings → Variables (build).
 const cfBeacon = import.meta.env.PUBLIC_CF_BEACON_TOKEN;
 const pageTitle = title ? `${title} — ${profile.name}` : `${profile.name} — ${profile.role[lang]}`;
@@ -38,14 +44,16 @@ const personLd = {
     <title>{pageTitle}</title>
     <meta name="description" content={desc} />
     <link rel="canonical" href={canonical} />
-    <link rel="alternate" hreflang={lang} href={canonical} />
-    <link rel="alternate" hreflang={lang === 'es' ? 'en' : 'es'} href={alt} />
+    <link rel="preload" href={fontDisplay} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={fontText} as="font" type="font/woff2" crossorigin />
+    {!noAlt && <link rel="alternate" hreflang={lang} href={canonical} />}
+    {!noAlt && <link rel="alternate" hreflang={lang === 'es' ? 'en' : 'es'} href={alt} />}
     <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=2" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png?v=2" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2" />
     <link rel="manifest" href="/site.webmanifest?v=2" />
     <meta name="theme-color" content="#0a0a0b" />
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={ogType} />
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={desc} />
     <meta property="og:url" content={canonical} />

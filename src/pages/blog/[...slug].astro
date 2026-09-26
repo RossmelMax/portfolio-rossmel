@@ -32,12 +32,12 @@ const ld = {
   keywords: post.data.tags.join(', '),
 };
 ---
-<Base lang={lang} altPath="/en/" title={post.data.title} description={post.data.description}>
+<Base lang={lang} altPath={paths.blog(lang === 'es' ? 'en' : 'es')} title={post.data.title} description={post.data.description} ogType="article" noAlt>
   <script slot="head" type="application/ld+json" set:html={JSON.stringify(ld)} />
-  <Nav lang={lang} altPath="/en/" onHome={false} />
+  <Nav lang={lang} altPath={paths.blog(lang === 'es' ? 'en' : 'es')} onHome={false} />
   <main class="px-5 pb-16 pt-40 md:px-10">
     <article class="mx-auto max-w-3xl">
-      <a href={paths.blog()} class="kicker hover:text-fg">← {s.blog.back}</a>
+      <a href={paths.blog(lang)} class="kicker hover:text-fg">← {s.blog.back}</a>
       <p class="kicker mt-10">{fmtDate(post.data.date, lang)} · {readingTime(post.body)} {s.blog.read}</p>
       <h1 data-split class="display mt-6 text-5xl font-bold md:text-7xl">{post.data.title}</h1>
       <p data-reveal class="mt-8 text-xl text-muted">{post.data.description}</p>

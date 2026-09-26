@@ -142,7 +142,7 @@ function initReveals() {
     const split = SplitText.create(el, { type: 'words', aria: 'hidden' });
     gsap.fromTo(
       split.words,
-      { opacity: 0.12 },
+      { opacity: 0.18 },
       {
         opacity: 1,
         ease: 'none',

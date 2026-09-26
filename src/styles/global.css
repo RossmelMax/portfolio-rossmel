@@ -24,7 +24,7 @@
   --bg-2: #e9e8e3;
   --fg: #111112;
   --muted: #5d5d59;
-  --line: rgb(17 17 18 / 0.12);
+  --line: rgb(17 17 18 / 0.18);
   --accent: #5b3dff;
   --accent-ink: #f4f3ef;
   color-scheme: light;
@@ -118,6 +118,11 @@ html.lenis body {
   font-family: var(--font-reading);
   font-size: 1.0667rem;
   letter-spacing: 0;
+}
+.prose :where(a) {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
 }
 .prose :where(h2, h3) {
   font-family: var(--font-display);
