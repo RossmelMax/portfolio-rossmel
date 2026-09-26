@@ -31,6 +31,8 @@ export const profile = {
   portfolioUrl: 'https://portfolio.rossmel.top',
   cvUrl: 'https://cv.rossmel.top',
 
+  photoAlt: { es: 'Foto de Rossmel Abasto', en: 'Photo of Rossmel Abasto' } as L,
+
   headline: {
     es: 'Construyo interfaces rápidas, cuidadas y listas para producción — y uso IA para llegar más lejos, más rápido.',
     en: 'I build fast, polished, production-ready interfaces — and use AI to go further, faster.',

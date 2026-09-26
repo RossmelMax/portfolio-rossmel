@@ -2,16 +2,26 @@
 import type { Lang } from '../data/profile';
 import { profile } from '../data/profile';
 import { t } from '../data/i18n';
+import { Image } from 'astro:assets';
+import photo from '../assets/rossmel.jpg';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 const s = t(lang);
 const [lead, ...rest] = profile.about[lang];
 ---
 <section id="about" class="px-5 py-32 md:px-10 md:py-48">
-  <p class="kicker mb-10">{s.about.kicker}</p>
+  <h2 class="kicker mb-10">{s.about.kicker}</h2>
   <p data-words class="display max-w-6xl text-4xl font-medium md:text-7xl">{lead}</p>
-  <div class="mt-20 grid gap-10 md:grid-cols-12">
-    <div class="space-y-6 text-lg text-muted md:col-span-6 md:col-start-7">
+  <div class="mt-20 grid items-start gap-12 md:grid-cols-12">
+    <figure class="relative mx-auto w-full max-w-sm md:col-span-5 md:max-w-none" data-reveal>
+      <div class="overflow-hidden rounded-3xl border border-line bg-bg-2">
+        <div data-parallax="0.08">
+          <Image src={photo} alt={profile.photoAlt[lang]} widths={[400, 720, 1080]} sizes="(min-width: 768px) 40vw, 90vw" class="aspect-square h-full w-full scale-110 object-cover" loading="lazy" />
+        </div>
+      </div>
+      <figcaption class="kicker mt-4 flex items-center gap-2"><span class="h-2 w-2 rounded-full bg-accent"></span>{profile.location[lang]}</figcaption>
+    </figure>
+    <div class="space-y-6 text-lg text-muted md:col-span-6 md:col-start-7 md:pt-10">
       {rest.map((p, i) => <p data-reveal data-reveal-delay={i * 0.08}>{p}</p>)}
     </div>
   </div>

@@ -7,7 +7,7 @@ const { lang } = Astro.props;
 const s = t(lang);
 ---
 <section id="stack" class="py-32">
-  <p class="kicker mb-10 px-5 md:px-10">{s.stack.kicker}</p>
+  <h2 class="kicker mb-10 px-5 md:px-10">{s.stack.kicker}</h2>
   <div class="overflow-hidden border-y border-line py-6" aria-hidden="true">
     <div class="marquee-track">
       {[...marquee, ...marquee].map((m) => (

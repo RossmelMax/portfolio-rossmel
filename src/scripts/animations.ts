@@ -118,7 +118,8 @@ function initReveals() {
   });
 
   document.querySelectorAll<HTMLElement>('[data-words]').forEach((el) => {
-    const split = SplitText.create(el, { type: 'words' });
+    // aria 'hidden': el lector de pantalla lee una copia limpia del párrafo (no se permite aria-label en <p>)
+    const split = SplitText.create(el, { type: 'words', aria: 'hidden' });
     gsap.fromTo(
       split.words,
       { opacity: 0.12 },

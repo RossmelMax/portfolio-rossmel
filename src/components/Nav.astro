@@ -23,11 +23,45 @@ const items = [
     <div class="flex items-center gap-2 font-mono text-xs">
       <a href={paths.cv(lang)} class="rounded-full bg-accent px-4 py-2 font-medium text-accent-ink">{s.nav.cv}</a>
       <a href={altPath} class="rounded-full border border-line px-3 py-2 hover:border-fg" hreflang={lang === 'es' ? 'en' : 'es'}>{s.langSwitch}</a>
-      <button type="button" data-theme-toggle class="rounded-full border border-line px-3 py-2 hover:border-fg" aria-label="Cambiar tema / Toggle theme">◐</button>
+      <button type="button" data-theme-toggle class="rounded-full border border-line px-3 py-2 hover:border-fg" aria-label={s.nav.theme}>◐</button>
+      <button type="button" data-menu-toggle aria-expanded="false" aria-controls="mobile-menu" class="rounded-full border border-line px-3 py-2 md:hidden" data-open={s.nav.menu} data-close={s.nav.close}>{s.nav.menu}</button>
     </div>
   </nav>
 </header>
+<div id="mobile-menu" data-menu hidden class="fixed inset-0 z-[45] flex flex-col justify-end bg-bg px-5 pb-10 pt-28 md:hidden">
+  <ul class="space-y-2">
+    {items.map(([href, label], i) => (
+      <li class="overflow-hidden">
+        <a href={base + href} data-menu-link class="display block text-6xl font-bold" style={`--i:${i}`}>{label}</a>
+      </li>
+    ))}
+    <li class="overflow-hidden"><a href={paths.cv(lang)} data-menu-link class="display block text-6xl font-bold text-accent" style={`--i:${items.length}`}>{s.nav.cv}</a></li>
+  </ul>
+</div>
+<style>
+  [data-menu]:not([hidden]) [data-menu-link] {
+    animation: menu-in 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation-delay: calc(var(--i) * 60ms);
+  }
+  @keyframes menu-in {
+    from { transform: translateY(110%); }
+  }
+</style>
 <script>
+  // Menú móvil
+  const menu = document.querySelector<HTMLElement>('[data-menu]');
+  const toggle = document.querySelector<HTMLButtonElement>('[data-menu-toggle]');
+  const setMenu = (open: boolean) => {
+    if (!menu || !toggle) return;
+    menu.hidden = !open;
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.textContent = open ? toggle.dataset.close! : toggle.dataset.open!;
+    document.body.style.overflow = open ? 'hidden' : '';
+  };
+  toggle?.addEventListener('click', () => setMenu(Boolean(menu?.hidden)));
+  menu?.querySelectorAll('[data-menu-link]').forEach((a) => a.addEventListener('click', () => setMenu(false)));
+  window.addEventListener('keydown', (e) => e.key === 'Escape' && setMenu(false));
+
   document.querySelectorAll('[data-theme-toggle]').forEach((b) =>
     b.addEventListener('click', () => {
       const root = document.documentElement;

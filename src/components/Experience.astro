@@ -7,7 +7,7 @@ const { lang } = Astro.props;
 const s = t(lang);
 ---
 <section id="experience" class="px-5 py-32 md:px-10">
-  <p class="kicker mb-10">{s.experience.kicker}</p>
+  <h2 class="kicker mb-10">{s.experience.kicker}</h2>
   <div data-timeline class="relative">
     <div class="absolute left-0 top-0 h-full w-px bg-line md:left-[25%]"></div>
     <div data-progress class="absolute left-0 top-0 h-full w-px origin-top bg-accent md:left-[25%]"></div>

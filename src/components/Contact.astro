@@ -10,6 +10,9 @@ const socials = [
   ['LinkedIn', profile.links.linkedin],
   ['GitLab', profile.links.gitlab],
 ].filter(([, href]) => href);
+// El formulario solo aparece si está configurado Turnstile (ver README → Formulario de contacto).
+const turnstileKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
+const field = 'w-full rounded-2xl border border-line bg-bg-2 px-5 py-4 text-fg placeholder:text-muted focus:border-accent focus:outline-none';
 ---
 <section id="contact" class="relative overflow-hidden px-5 pb-10 pt-32 md:px-10">
   <p class="kicker mb-10">{s.contact.kicker}</p>
@@ -19,6 +22,26 @@ const socials = [
     <button data-magnetic data-copy={profile.email} data-copied={s.contact.copied} type="button" class="rounded-full border border-line px-6 py-4 font-mono text-sm hover:border-fg">{s.contact.copy}</button>
     <a data-magnetic href={paths.cvPdf(lang)} download class="rounded-full border border-line px-6 py-4 font-mono text-sm hover:border-fg">{s.contact.cv} ↓</a>
   </div>
+  {turnstileKey && (
+    <form data-contact-form action="/api/contact" method="post" class="mt-20 grid max-w-3xl gap-4" data-reveal
+      data-msg-sending={s.contact.sending} data-msg-ok={s.contact.ok} data-msg-invalid={s.contact.invalid}
+      data-msg-captcha={s.contact.captcha} data-msg-error={`${s.contact.error} ${profile.email}.`}>
+      <h3 class="display text-3xl font-semibold md:text-4xl">{s.contact.formTitle}</h3>
+      <input type="hidden" name="lang" value={lang} />
+      <div aria-hidden="true" class="hidden"><label>Company<input type="text" name="company" tabindex="-1" autocomplete="off" /></label></div>
+      <div class="grid gap-4 md:grid-cols-2">
+        <label class="grid gap-2"><span class="kicker">{s.contact.name}</span><input class={field} name="name" required maxlength="100" autocomplete="name" /></label>
+        <label class="grid gap-2"><span class="kicker">{s.contact.email}</span><input class={field} type="email" name="email" required maxlength="200" autocomplete="email" /></label>
+      </div>
+      <label class="grid gap-2"><span class="kicker">{s.contact.message}</span><textarea class={field} name="message" required maxlength="5000" rows="5"></textarea></label>
+      <div class="cf-turnstile" data-sitekey={turnstileKey} data-theme="auto" data-language={lang}></div>
+      <div class="flex flex-wrap items-center gap-5">
+        <button data-magnetic type="submit" class="rounded-full bg-fg px-8 py-4 font-medium text-bg disabled:opacity-60">{s.contact.send}</button>
+        <p data-form-status role="status" aria-live="polite" class="text-sm text-muted"></p>
+      </div>
+    </form>
+  )}
+  {turnstileKey && <script is:inline async defer src="https://challenges.cloudflare.com/turnstile/v0/api.js"></script>}
   <footer class="mt-40 flex flex-col justify-between gap-6 border-t border-line pt-6 font-mono text-xs text-muted md:flex-row">
     <span>© {new Date().getFullYear()} {profile.name}. {s.footer}</span>
     <ul class="flex gap-6">
@@ -35,6 +58,35 @@ const socials = [
         b.textContent = b.dataset.copied!;
         setTimeout(() => (b.textContent = original), 1800);
       } catch { /* sin permiso de portapapeles */ }
+    });
+  });
+
+  // Formulario de contacto → /api/contact (Cloudflare Pages Function)
+  document.querySelectorAll<HTMLFormElement>('[data-contact-form]').forEach((form) => {
+    const status = form.querySelector<HTMLElement>('[data-form-status]')!;
+    const button = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
+    const msg = (k: string) => form.dataset[`msg${k}`] ?? '';
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      button.disabled = true;
+      status.textContent = msg('Sending');
+      try {
+        const res = await fetch(form.action, { method: 'POST', body: new FormData(form) });
+        const data = await res.json().catch(() => ({}));
+        if (data.ok) {
+          form.reset();
+          status.textContent = msg('Ok');
+          status.className = 'text-sm text-accent';
+        } else {
+          status.textContent = data.error === 'invalid' ? msg('Invalid') : data.error === 'captcha' ? msg('Captcha') : msg('Error');
+        }
+      } catch {
+        status.textContent = msg('Error');
+      } finally {
+        button.disabled = false;
+        // Turnstile: cada token sirve una sola vez
+        (window as any).turnstile?.reset(form.querySelector('.cf-turnstile'));
+      }
     });
   });
 </script>

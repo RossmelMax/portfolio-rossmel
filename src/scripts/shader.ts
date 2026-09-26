@@ -106,8 +106,8 @@ export function mountShader(canvas: HTMLCanvasElement) {
   readColors();
   new MutationObserver(readColors).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
 
-  // Resolución reducida: el efecto es suave, no necesita píxeles nativos.
-  const scale = 0.5;
+  // Resolución reducida: el efecto es suave, no necesita píxeles nativos (menos aún en móvil).
+  const scale = matchMedia('(max-width: 768px)').matches ? 0.3 : 0.5;
   const resize = () => {
     canvas.width = Math.max(1, Math.floor(canvas.clientWidth * scale));
     canvas.height = Math.max(1, Math.floor(canvas.clientHeight * scale));
@@ -128,8 +128,11 @@ export function mountShader(canvas: HTMLCanvasElement) {
   new IntersectionObserver(([e]) => (visible = e.isIntersecting)).observe(canvas);
 
   const start = performance.now();
+  let last = 0;
   const frame = (now: number) => {
-    if (visible) {
+    // Máximo ~30 fps: el movimiento es lento y así cuida la batería.
+    if (visible && now - last >= 33) {
+      last = now;
       mouse.x += (mouse.tx - mouse.x) * 0.05;
       mouse.y += (mouse.ty - mouse.y) * 0.05;
       gl.uniform1f(uTime, reduced ? 10 : (now - start) / 1000);

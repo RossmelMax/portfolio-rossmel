@@ -102,6 +102,8 @@ CLAUDE.md             ← instrucciones para Claude Code (local o nube)
 | `/` · `/en/` | Portafolio |
 | `/proyectos/<slug>/` · `/en/projects/<slug>/` | Caso de estudio de cada proyecto |
 | `/cv/` · `/en/cv/` | CV en HTML (imprimible) |
+| `/404.html` | Página de error propia (ES+EN) |
+| `/api/contact` | Formulario de contacto (Pages Function) |
 | `/cv/Rossmel-Abasto-CV-ES.pdf` · `…-EN.pdf` | CV en PDF |
 
 ---
@@ -234,6 +236,35 @@ en portfolio. y cv. (Cloudflare solo inyecta el script a navegadores reales, no 
 Respaldo: si algún día se apaga la inyección automática, definir la variable de build
 `PUBLIC_CF_BEACON_TOKEN` y `Base.astro` añade el script. **No** usar ambas a la vez (contaría doble).
 
+### Formulario de contacto
+
+`functions/api/contact.js` (Pages Function en `/api/contact`) envía el mensaje con **Resend** y usa
+**Turnstile** (antispam de Cloudflare, sin captchas molestos) + un campo trampa (honeypot).
+El formulario **solo aparece** si en el build existe `PUBLIC_TURNSTILE_SITE_KEY`; sin eso, la sección
+de contacto muestra solo los botones de correo/CV. Configuración (una vez):
+
+1. **Turnstile**: Cloudflare → Turnstile → Add widget → dominios `portfolio.rossmel.top`
+   (y `rossmel-portfolio.pages.dev` para las vistas previas), modo *Managed*.
+   Copia la *site key* (pública) y la *secret key*.
+2. **Resend** (gratis hasta 3.000 correos/mes): crear cuenta → Domains → añadir `rossmel.top` →
+   copiar sus registros DNS (SPF/DKIM) en Cloudflare DNS → esperar "Verified" → API Keys → crear
+   una con permiso *Sending access*.
+3. **Pages → rossmel-portfolio → Settings → Variables and Secrets** (Production y Preview):
+   - `PUBLIC_TURNSTILE_SITE_KEY` = site key (texto normal; se usa en el build)
+   - `TURNSTILE_SECRET_KEY` = secret key (**Secret**)
+   - `RESEND_API_KEY` = API key de Resend (**Secret**)
+   - opcionales: `CONTACT_TO` (destino, por defecto abastorossmel@gmail.com),
+     `CONTACT_FROM` (por defecto `Portafolio <contacto@rossmel.top>`)
+4. Redesplegar (Deployments → Retry) y probar el formulario en producción.
+
+Respuestas de la API: `200 {ok:true}`, `400 invalid|captcha`, `502 send_failed`, `503 not_configured`.
+
+### SEO
+- `@astrojs/sitemap` genera `sitemap-index.xml` (ES/EN con hreflang); `robots.txt` lo declara.
+- Dar de alta `https://portfolio.rossmel.top` en **Google Search Console** (verificación por DNS,
+  que ya está en Cloudflare) y enviar `sitemap-index.xml`.
+- `404.html` propia (bilingüe).
+
 Extras en Cloudflare (Rules → Redirect Rules):
 - `rossmel.top` y `www.rossmel.top` → 301 a `https://portfolio.rossmel.top` (preservar ruta).
 
@@ -259,9 +290,11 @@ Flujo diario: push a `main` = producción; push a otra rama / PR = URL de vista 
 - [x] Imagen para compartir (`public/og.png`, 1200×630, `npm run og`)
 - [ ] Capturas reales de proyectos (las sube Rossmel más adelante; ver "Imágenes de proyectos")
 - [x] Publicado en Cloudflare Pages: portfolio.rossmel.top y cv.rossmel.top (sept. 2026)
-- [ ] Formulario de contacto real (hoy: mailto + copiar correo). Opción: endpoint propio en el
-      servidor o servicio tipo Formspree/Resend
-- [ ] Foto profesional (opcional)
+- [x] Formulario de contacto (código listo) — [ ] falta configurar Turnstile + Resend en Cloudflare (ver "Formulario de contacto")
+- [x] Foto en "Sobre mí" (`src/assets/rossmel.jpg`, optimizada a WebP por Astro)
+- [x] Menú móvil, sitemap, 404 propia, auditoría Lighthouse (local: perf 87–94, a11y 95–96, BP/SEO 100; CV 100 en todo)
+- [ ] Alta en Google Search Console
+- [ ] Video corto de AdvAI + capturas (Rossmel)
 - [ ] Probar Lighthouse (meta ≥95) y accesibilidad con teclado
 
 ---
@@ -292,5 +325,7 @@ Ramas:
 | 2026-09 | Estética dark + acento lima aprobada por Rossmel ("me encanta"). |
 | 2026-09 | Proyectos de clientes de WANT sin código ni enlaces (`confidential`); métricas de commits como evidencia. |
 | 2026-09 | CV limitado a 2 páginas: SGPG y Link'u solo en la experiencia "Independiente"; diseño gráfico solo en el portafolio. |
+| 2026-09 | Formulario: Pages Function + Resend + Turnstile (gratis, sin backend propio). |
+| 2026-09 | Fondo WebGL limitado a 30 fps y menor resolución en móvil (rendimiento). |
 | 2026-09 | Despliegue en Cloudflare Pages (un proyecto, dos dominios, middleware para `cv.`). |
 | 2026-09 | Fuera del sitio: watcher-backend, prototipos v0 (salvo SGPG), proyectos descartados, proyectos personales/regalos. |
