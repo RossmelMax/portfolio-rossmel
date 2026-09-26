@@ -1,0 +1,24 @@
+# Genera la serpiente que recorre el gráfico de contribuciones (colores del portafolio)
+# y la publica en la rama "output". Corre cada 12 h y a mano desde la pestaña Actions.
+name: snake
+on:
+  schedule: [{ cron: '0 */12 * * *' }]
+  workflow_dispatch:
+  push: { branches: [main] }
+permissions: { contents: write }
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: Platane/snk@v3
+        with:
+          github_user_name: ${{ github.repository_owner }}
+          outputs: |
+            dist/snake-dark.svg?palette=github-dark&color_snake=#c8ff2e&color_dots=#161b22,#2b3a10,#4d6b12,#88b81d,#c8ff2e
+            dist/snake-light.svg?color_snake=#5b3dff&color_dots=#ebedf0,#d9d2ff,#b3a4ff,#8c75ff,#5b3dff
+      - uses: crazy-max/ghaction-github-pages@v4
+        with:
+          target_branch: output
+          build_dir: dist
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

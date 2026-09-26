@@ -314,7 +314,7 @@ Flujo diario: push a `main` = producción; push a otra rama / PR = URL de vista 
 - [x] Google Search Console verificado (propiedad de dominio `rossmel.top`) y sitemap enviado
 - [ ] Video corto de AdvAI + capturas (Rossmel)
 - [ ] Revisión exhaustiva con Claude local (`docs/REVISION.md`)
-- [ ] README del perfil de GitHub (`docs/github-profile/README.md`) y LinkedIn (`docs/LINKEDIN.md`)
+- [ ] Perfil de GitHub (`docs/github-profile/`, ver INSTRUCCIONES.md) y LinkedIn (`docs/LINKEDIN.md`)
 - [ ] Probar Lighthouse (meta ≥95) y accesibilidad con teclado
 
 ---
@@ -345,6 +345,7 @@ Ramas:
 | 2026-09 | Estética dark + acento lima aprobada por Rossmel ("me encanta"). |
 | 2026-09 | Proyectos de clientes de WANT sin código ni enlaces (`confidential`); métricas de commits como evidencia. |
 | 2026-09 | CV limitado a 2 páginas: SGPG y Link'u solo en la experiencia "Independiente"; diseño gráfico solo en el portafolio. |
+| 2026-09 | Texto en JetBrains Mono (Space Grotesk en titulares; Inter solo en artículos largos). Pedido de Rossmel. |
 | 2026-09 | Blog en `/blog` (no subdominio aparte, por SEO); `blog.rossmel.top` redirige. Primer artículo: AdvAI. |
 | 2026-09 | Hero: fondo CSS de respaldo si el navegador no tiene WebGL; botones Ver proyectos / Descargar CV. |
 | 2026-09 | Identidad: monograma de Rossmel (`src/assets/logo.svg`, componente `Logo.astro`) en nav, footer, favicon, íconos PWA y og.png. |

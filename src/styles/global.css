@@ -2,7 +2,7 @@
 @plugin '@tailwindcss/typography';
 @import '@fontsource-variable/inter';
 @import '@fontsource-variable/space-grotesk';
-@import '@fontsource/jetbrains-mono/400.css';
+@import '@fontsource-variable/jetbrains-mono';
 
 /* ---------------------------------------------------------------
    TOKENS DE DISEÑO
@@ -31,9 +31,10 @@
 }
 
 @theme {
-  --font-sans: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-sans: 'JetBrains Mono Variable', ui-monospace, monospace;
+  --font-reading: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
   --font-display: 'Space Grotesk Variable', ui-sans-serif, system-ui, sans-serif;
-  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+  --font-mono: 'JetBrains Mono Variable', ui-monospace, monospace;
   --color-bg: var(--bg);
   --color-bg-2: var(--bg-2);
   --color-fg: var(--fg);
@@ -47,6 +48,8 @@ html {
   background: var(--bg);
   color: var(--fg);
   font-family: var(--font-sans);
+  /* JetBrains Mono es más ancha que una sans: un poco más compacta queda mejor */
+  letter-spacing: -0.02em;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
@@ -110,6 +113,12 @@ html.lenis body {
   --tw-prose-th-borders: var(--line);
   --tw-prose-td-borders: var(--line);
 }
+.prose {
+  /* Artículos largos: Inter se lee mejor en párrafos extensos; el código sigue en JetBrains Mono */
+  font-family: var(--font-reading);
+  font-size: 1.0667rem;
+  letter-spacing: 0;
+}
 .prose :where(h2, h3) {
   font-family: var(--font-display);
   letter-spacing: -0.02em;
@@ -139,6 +148,7 @@ html.lenis body {
 .kicker {
   font-family: var(--font-mono);
   font-size: 0.75rem;
+  font-variant-ligatures: none;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--muted);
