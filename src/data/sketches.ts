@@ -127,6 +127,85 @@ export const sketches = {
     ],
   },
 
+  /* ---------- Stack ---------- */
+  browser: {
+    viewBox: '0 0 100 100',
+    shapes: (g, o) => [
+      g.rectangle(8, 16, 84, 68, o),
+      g.line(8, 32, 92, 32, o),
+      g.circle(17, 24, 5, o),
+      g.circle(27, 24, 5, o),
+      g.linearPath([[22, 48], [44, 48]], o),
+      g.linearPath([[22, 58], [70, 58]], o),
+      g.linearPath([[22, 68], [58, 68]], o),
+    ],
+  },
+  database: {
+    viewBox: '0 0 100 100',
+    shapes: (g, o) => [
+      g.ellipse(50, 20, 64, 18, o),
+      g.line(18, 20, 18, 80, o),
+      g.line(82, 20, 82, 80, o),
+      g.arc(50, 40, 64, 18, 0, P, false, o),
+      g.arc(50, 60, 64, 18, 0, P, false, o),
+      g.arc(50, 80, 64, 18, 0, P, false, o),
+    ],
+  },
+  terminal: {
+    viewBox: '0 0 100 100',
+    shapes: (g, o) => [
+      g.rectangle(8, 18, 84, 64, o),
+      g.linearPath([[22, 40], [34, 50], [22, 60]], o),
+      g.line(40, 62, 60, 62, o),
+    ],
+  },
+
+  /* ---------- Home: acompañar el scroll ---------- */
+  waves: {
+    viewBox: '0 0 100 60',
+    shapes: (g, o) => [
+      g.circle(50, 30, 8, o),
+      g.arc(50, 30, 30, 30, -P * 0.3, P * 0.3, false, o),
+      g.arc(50, 30, 30, 30, P * 0.7, P * 1.3, false, o),
+      g.arc(50, 30, 54, 50, -P * 0.3, P * 0.3, false, o),
+      g.arc(50, 30, 54, 50, P * 0.7, P * 1.3, false, o),
+    ],
+  },
+  swipe: {
+    viewBox: '0 0 160 60',
+    shapes: (g, o) => [g.curve([[6, 40], [50, 52], [100, 44], [148, 22]], o), g.linearPath([[128, 16], [150, 20], [140, 40]], o)],
+  },
+  scribble: {
+    viewBox: '0 0 400 30',
+    stretch: true,
+    shapes: (g, o) => [g.curve([[4, 18], [80, 10], [160, 20], [240, 9], [320, 18], [396, 8]], o)],
+  },
+  flight: {
+    viewBox: '0 0 400 260',
+    shapes: (g, o) => [
+      // estela punteada del avión (tramos cortos para que parezca discontinua)
+      ...[[[10, 250], [40, 222]], [[52, 212], [84, 190]], [[98, 182], [134, 168]], [[150, 162], [186, 158]], [[202, 156], [236, 150]], [[250, 144], [280, 128]], [[292, 118], [312, 96]]]
+        .map((seg, i) => g.linearPath(seg as [number, number][], { ...o, seed: 40 + i })),
+      // avión de papel
+      g.polygon([[318, 88], [394, 20], [340, 96]], o),
+      g.polygon([[318, 88], [394, 20], [352, 70]], { ...o, seed: 51 }),
+      g.line(340, 96, 352, 70, o),
+    ],
+  },
+  cup: {
+    viewBox: '0 0 60 60',
+    shapes: (g, o) => [
+      g.path('M10 22 L14 52 L38 52 L42 22 Z', o),
+      g.arc(42, 34, 14, 16, -P / 2, P / 2, false, o),
+      g.curve([[20, 16], [17, 10], [22, 4]], o),
+      g.curve([[31, 16], [28, 10], [33, 4]], { ...o, seed: 8 }),
+    ],
+  },
+  hook: {
+    viewBox: '0 0 100 80',
+    shapes: (g, o) => [g.curve([[92, 8], [60, 10], [30, 30], [14, 66]], o), g.linearPath([[4, 50], [14, 70], [32, 60]], o)],
+  },
+
   /* ---------- Anotaciones ---------- */
   circle: {
     viewBox: '0 0 200 100',

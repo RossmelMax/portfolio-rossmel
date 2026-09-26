@@ -331,8 +331,13 @@ El formulario de contacto al final de cada artículo sigue funcionando igual.
   `<Sketch name="…" />` y heredan el color del texto (lima/violeta con `text-accent`).
 - Anotaciones en textos de `profile.ts`: `==texto==` subrayado a mano, `((texto))` círculo a mano
   (componente `Marked`; marcas cortas, no se parten en dos líneas).
+- Modos de `<Sketch draw=…>`: `true` se traza al entrar en pantalla, `"scrub"` se traza al ritmo del
+  scroll (estela del avión, subrayado de "Cómo trabajo"); un ancestro con `data-draw-host` hace que se
+  vuelva a trazar al pasar el mouse (tarjetas de Stack y Cómo trabajo).
 - Dónde están: flecha "yo" a la foto, círculo en "días programando", subrayado/círculo en el Sobre mí,
-  íconos de "Cómo trabajo" y un dibujo por capítulo en `/sobre-mi/`. No usar en hero, CV ni stack.
+  "hoy" en Experiencia, garabato + "sigue bajando" en Proyectos, íconos de Stack y Cómo trabajo, ondas
+  en "En vivo", avión de papel y "¡escríbeme!" en Contacto, tacita en el footer y un dibujo por capítulo
+  en `/sobre-mi/`. No usar en el hero ni en el CV. Criterio: acompañar el texto, no decorar.
 - Letra manuscrita solo para etiquetas (`font-hand`, Caveat).
 
 ### Foto en capas ("Sobre mí")

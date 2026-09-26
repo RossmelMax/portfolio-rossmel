@@ -2,6 +2,7 @@
 import type { Lang } from '../data/profile';
 import { visibleProjects as projects } from '../data/profile';
 import { t, paths } from '../data/i18n';
+import Sketch from './Sketch.astro';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 const s = t(lang);
@@ -13,7 +14,12 @@ const others = projects.filter((p) => !p.featured);
     <div class="shrink-0 md:w-[38vw] md:pr-[3vw]">
       <p class="kicker mb-6">{s.work.kicker}</p>
       <h2 class="display text-6xl font-bold md:text-[4.8vw]">{s.work.title}</h2>
+      <Sketch name="scribble" seed={6} class="mt-2 h-4 w-3/4 text-accent" />
       <p class="mt-6 font-mono text-sm text-muted">({String(featured.length).padStart(2, '0')}) →</p>
+      <div class="mt-8 hidden items-center gap-2 text-accent md:flex" aria-hidden="true">
+        <span class="font-hand text-3xl">{s.work.swipe}</span>
+        <Sketch name="swipe" seed={8} class="h-10 w-28" />
+      </div>
     </div>
     {featured.map((p, i) => (
       <a data-card data-hover href={paths.project(lang, p.slug)} class="group relative block shrink-0 no-underline md:w-[42vw]" style={`--c:${p.accent}`}>

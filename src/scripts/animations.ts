@@ -161,11 +161,26 @@ function revealTasks(): (() => void)[] {
 
   document.querySelectorAll<SVGSVGElement>('[data-draw]').forEach((svg) => tasks.push(() => {
     // Los <path> traen pathLength="1": el trazo va de 0 a 1 sin medir nada
-    gsap.fromTo(
-      svg.querySelectorAll('path'),
+    const paths = svg.querySelectorAll('path');
+    if (svg.dataset.draw === 'scrub') {
+      gsap.fromTo(paths, { strokeDasharray: 1, strokeDashoffset: 1 }, {
+        strokeDashoffset: 0, ease: 'none', stagger: 0.1,
+        scrollTrigger: { trigger: svg, start: 'top 92%', end: 'bottom 45%', scrub: 0.6 },
+      });
+      return;
+    }
+    const tween = gsap.fromTo(
+      paths,
       { strokeDasharray: 1, strokeDashoffset: 1 },
-      { strokeDashoffset: 0, duration: 1.2, ease: 'power2.inOut', stagger: 0.12, scrollTrigger: { trigger: svg, start: 'top 88%' } },
+      // 'top 97%': los que están al final de la página (footer) también llegan a dibujarse
+      { strokeDashoffset: 0, duration: 1.2, ease: 'power2.inOut', stagger: 0.12, scrollTrigger: { trigger: svg, start: 'top 97%' } },
     );
+    // Volver a dibujar al pasar el mouse por la tarjeta que lo contiene
+    const host = finePointer ? svg.closest<HTMLElement>('[data-draw-host]') : null;
+    host?.addEventListener('pointerenter', () => {
+      if (tween.isActive()) return;
+      gsap.fromTo(paths, { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 0.9, ease: 'power2.inOut', stagger: 0.08, overwrite: true });
+    });
   }));
 
   document.querySelectorAll<HTMLElement>('[data-count]').forEach((el) => tasks.push(() => {
