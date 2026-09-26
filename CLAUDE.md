@@ -28,7 +28,8 @@ Antes de dar algo por terminado: `npm run build` sin errores, y si cambió conte
 - Mantener README.md al día (sección "Estado actual y pendientes" e "Historial de decisiones").
 
 ## Estado (actualizar al terminar cada sesión)
-- v3.1 (sept. 2026): contenido real cargado; lo no confirmado está en `draft: true` o `// TODO(confirmar)`.
+- v3.2 (sept. 2026): contenido real cargado; lo no confirmado está en `draft: true` o `// TODO(confirmar)`.
 - Preguntas abiertas para Rossmel y decisiones por proyecto: `docs/PROYECTOS-CANDIDATOS.md`.
-- Despliegue: falta que Rossmel elija opción A (Cloudflare Pages) o B (servidor casero) → README.
+- Despliegue: Cloudflare Pages, proyecto `rossmel-portfolio` conectado a este repo (rama `main`). Ver README → Despliegue.
+- Los PDF del CV se commitean (Cloudflare no los genera): tras cambiar contenido, `npm run build && npm run cv:pdf`.
 - Este repo es PÚBLICO: no commitear detalles de la infraestructura (hosts, puertos, IPs, túneles).

@@ -8,31 +8,31 @@ Actualizado: sept. 2026 (tras las respuestas de Rossmel y el informe de Claude C
 | Proyecto | Dónde | CV | Pendiente |
 |---|---|---|---|
 | AdvAI (proyecto de grado) | galería | ✅ | capturas / demo grabada |
-| CarX (Vulcano) · WANT | galería | en experiencia | ¿el módulo LangChain lo hiciste tú? |
-| SGPG (gestor de proyectos de grado, UDABOL) | galería | ✅ | ¿ya está en uso o "en proceso de adopción"? URL de Vercel |
-| Link'u (agua potable, Sipe Sipe) | galería | ✅ | ¿ya lo usa la comunidad? ¿cobraste? nombre: "Link'u" o "Linku" |
+| CarX (Vulcano) · GeekLabs vía WANT | galería | en experiencia | — (IA: hecha por el jefe, tú la integraste) |
+| SGPG (gestor de proyectos de grado, UDABOL) | galería | ✅ | URL de Vercel (¿se puede mostrar?) |
+| Link'u (agua potable, Sipe Sipe) | galería | ✅ (proyecto pagado) | capturas |
 | Homelab + OpenClaw | galería | ❌ | capturas (sin mostrar URLs de admin/ssh) |
 | rOS | galería | ❌ | capturas lindas (escritorio, fastfetch, arranque) |
-| Adsie · WANT | lista | en experiencia | ver contradicción abajo |
+| Adsie · WANT | lista | en experiencia | — |
 | Bite · WANT | lista | en experiencia | — |
-| One Life Fitness · WANT | lista | en experiencia | año; ¿app publicada? |
+| One Life Fitness · WANT | lista | en experiencia | año |
 | OneHand · WANT | lista | en experiencia | año |
 | LYNX Bolivia (WordPress) · WANT | lista | en experiencia | año; ¿sitio + tienda WooCommerce? |
 | Blessd · WANT | lista | ❌ | — |
 | Hackacom 2023 | lista | ❌ | tu rol y qué hacía la app |
+| EKO (tienda para un emprendimiento) | lista | ❌ | — |
 
 ## Ocultos (`draft: true`) hasta confirmar
 
 | Qué | Duda |
 |---|---|
-| Experiencia "Desarrollador Fullstack Independiente (ene 2026 – hoy)" | Para que el CV no muestre un hueco desde que saliste de WANT. Incluye Link'u y SGPG. ¿Lo activamos? |
 | Diseño gráfico freelance | Fechas reales (mes/año) y si va en el CV |
-| Diplomado en Desarrollo de Software | Lo mencionó el informe local: institución, fechas |
-| Condominio Capadocia | ¿Cliente real? (la mitad de commits son del bot Jules) |
-| EKO | ¿Fue para un negocio real? ¿Se muestra? |
+
+## Datos que faltan
+LinkedIn, nivel de inglés (B1/B2/C1), fecha estimada de egreso/defensa, año de Solaning.
 
 ## No se muestran
-watcher-backend, prototipos v0 (taller mecánico, BizConnect, JuridAI, simulador), portfolio-v2,
+Condominio Capadocia, watcher-backend, prototipos v0 (taller mecánico, BizConnect, JuridAI, simulador), portfolio-v2,
 proyectos personales/regalos, sanctuary.
 
 Candidatos nuevos del informe local (sin decidir): **Guía UDABOL** (bot de Telegram con grafo del

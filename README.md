@@ -205,42 +205,33 @@ Spaceship) y el certificado comodín `*.rossmel.top` ya lo emite Cloudflare. El 
 detrás de **CGNAT** (no se pueden abrir puertos) y publica servicios con un **Cloudflare Tunnel**.
 (Detalles de la infraestructura: NO se documentan aquí porque este repo es público.)
 
-⚠️ **Pendiente: Rossmel elige A o B.**
+✅ **Decisión: Cloudflare Pages** (sept. 2026). Un **solo** proyecto de Pages conectado a este repo,
+con los dos dominios. (Se descartaron el servidor casero —CGNAT, poca RAM, cortes de luz— y el repo
+aparte `rossmel-web`, que duplicaba el sitio.)
 
-**A. Cloudflare Pages (recomendada)** — gratis, no depende de la luz/internet de casa, HTTPS automático.
-1. Cloudflare → Workers & Pages → Create → Pages → conectar el repo `RossmelMax/portfolio-rossmel`.
-2. Build: `npm run build` · salida: `dist` · variable `NODE_VERSION=22`.
-   (Los PDF del CV ya van versionados en `public/cv/`, así que el build de Cloudflare no necesita Chromium.)
-3. Custom domains: `portfolio.rossmel.top` y `cv.rossmel.top` (Cloudflare crea los CNAME solo).
-4. `cv.rossmel.top` → mostrar el CV en la raíz: una Pages Function `functions/_middleware.js` que
-   reescriba `/` → `/cv/` cuando el host empieza por `cv.` (o una Redirect Rule a `portfolio.rossmel.top/cv/`).
-5. Apex `rossmel.top` → Redirect Rule 301 a `https://portfolio.rossmel.top`.
+| Ajuste | Valor |
+|---|---|
+| Proyecto | `rossmel-portfolio` (Workers & Pages → Create → Pages → **Connect to Git**; nunca "Direct Upload": no se puede pasar a Git después) |
+| Repo / rama de producción | `RossmelMax/portfolio-rossmel` · `main` |
+| Framework preset | Astro (o None) |
+| Build command | `npm run build` |
+| Output directory | `dist` |
+| Root directory | *(vacío)* |
+| Variable de entorno | `NODE_VERSION=22` (también hay `.nvmrc`; Astro 7 pide ≥ 22.12) |
+| Custom domains | `portfolio.rossmel.top` y `cv.rossmel.top` (añadirlos desde Pages; **no** crear CNAME a mano) |
 
-**B. Self-hosted en el servidor casero** — un contenedor `caddy:alpine` sirviendo `dist/`, publicado
-solo en `127.0.0.1`, más dos reglas de ingress en el túnel existente. Deploy: `npm run build` en la
-laptop y `rsync -a --delete dist/ servidor:~/sites/portfolio/` por Tailscale. Caddyfile de referencia:
+Piezas del repo que lo hacen funcionar:
+- `functions/_middleware.js` — en `cv.rossmel.top/` sirve `/cv/` sin redirigir.
+- `public/_routes.json` — la función solo corre en `/` (no gasta invocaciones en assets).
+- `public/_headers` — cabeceras de seguridad y caché larga para `/_astro/*`.
+- `public/cv/*.pdf` — los PDF del CV van versionados (el build de Cloudflare no tiene Chromium):
+  **siempre** correr `npm run cv:pdf` y commitear los PDF cuando cambie el contenido del CV.
+- El enlace "Ver portafolio" del CV es absoluto (`portfolio.rossmel.top`) porque en `cv.` la raíz es el CV.
 
-```caddyfile
-portfolio.rossmel.top {
-  root * /srv/portfolio/dist
-  encode zstd gzip
-  file_server
-  header /_astro/* Cache-Control "public, max-age=31536000, immutable"
-}
+Extras en Cloudflare (Rules → Redirect Rules):
+- `rossmel.top` y `www.rossmel.top` → 301 a `https://portfolio.rossmel.top` (preservar ruta).
 
-cv.rossmel.top {
-  root * /srv/portfolio/dist
-  encode zstd gzip
-  rewrite / /cv/
-  file_server
-}
-```
-
-(con el túnel, TLS lo termina Cloudflare: en Caddy usar `http://portfolio.rossmel.top` y `auto_https off`.)
-
-Nota: `cv.rossmel.top/` reescribe a `/cv/`; por eso el enlace "Ver portafolio" del CV
-es absoluto (`portfolio.rossmel.top`). Los PDF (`/cv/*.pdf`) y assets (`/_astro/*`) se resuelven igual
-en ambos subdominios porque comparten la misma carpeta `dist/`.
+Flujo diario: push a `main` = producción; push a otra rama / PR = URL de vista previa `*.pages.dev`.
 
 `site` en `astro.config.mjs` define el dominio canónico (SEO, OG, sitemap). Cambiarlo si cambia el dominio.
 
@@ -260,7 +251,8 @@ en ambos subdominios porque comparten la misma carpeta `dist/`.
 ⏳ Pendiente
 - [ ] Confirmar datos marcados `TODO(confirmar)` y decidir los `draft` (ver `docs/PROYECTOS-CANDIDATOS.md`)
 - [ ] Capturas/imágenes reales de proyectos + imagen OG (`public/og.png`, 1200×630)
-- [ ] Despliegue en `portfolio.rossmel.top` y `cv.rossmel.top` (elegir opción A o B)
+- [ ] Crear el proyecto de Cloudflare Pages y los dominios (ver "Despliegue")
+- [ ] Datos que faltan: LinkedIn, nivel de inglés, fecha de egreso, año de Solaning, fechas de diseño gráfico
 - [ ] Formulario de contacto real (hoy: mailto + copiar correo). Opción: endpoint propio en el
       servidor o servicio tipo Formspree/Resend
 - [ ] Foto profesional (opcional)
@@ -293,4 +285,5 @@ Ramas:
 | 2026-09 | Dominio propio `rossmel.top` en vez de Vercel. |
 | 2026-09 | Estética dark + acento lima aprobada por Rossmel ("me encanta"). |
 | 2026-09 | Proyectos de clientes de WANT sin código ni enlaces (`confidential`); métricas de commits como evidencia. |
-| 2026-09 | Fuera del sitio: watcher-backend, prototipos v0 (salvo SGPG), proyectos personales/regalos. |
+| 2026-09 | Despliegue en Cloudflare Pages (un proyecto, dos dominios, middleware para `cv.`). |
+| 2026-09 | Fuera del sitio: watcher-backend, prototipos v0 (salvo SGPG), Condominio Capadocia, proyectos personales/regalos. |

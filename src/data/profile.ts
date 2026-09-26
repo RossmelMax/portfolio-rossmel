@@ -48,13 +48,13 @@ export const profile = {
       'Empecé a programar solo, en 2019, con mi primera computadora propia. Desde entonces no paré: cursos, documentación, prueba y error, y muchas noches de “¿por qué no funciona esto?”.',
       'Pasé más de tres años en WANT Digital Agency, donde éramos dos en desarrollo: mi jefe en el backend y yo en el frontend. Ahí aprendí a hacer de todo — investigar, resolver, trabajar bajo presión y entregar.',
       'Hoy la IA es parte de cómo trabajo: agentes, LLMs locales y automatizaciones me permiten dedicar el tiempo a lo que importa — el diseño, la arquitectura y el detalle.',
-      'Fuera del trabajo, vivo en Linux: uso a diario rOS, mi propio sabor de Arch, y mantengo un homelab con una docena de servicios y un agente de IA que lo cuida 24/7.',
+      'Fuera del trabajo, vivo en Linux: uso a diario rOS, mi propio flavor de Arch que quiero convertir en una distro real, y mantengo un homelab con una docena de servicios y un agente de IA que lo cuida 24/7.',
     ],
     en: [
       'I started coding on my own in 2019, with my first personal computer. I haven\'t stopped since: courses, docs, trial and error, and many “why isn\'t this working?” nights.',
       'I spent 3+ years at WANT Digital Agency, where the dev team was two people: my boss on the backend and me on the frontend. That\'s where I learned to do a bit of everything — research, solve, work under pressure and ship.',
       'Today AI is part of how I work: agents, local LLMs and automations let me spend my time on what matters — design, architecture and detail.',
-      'Outside work I live in Linux: I daily-drive rOS, my own flavor of Arch, and run a homelab with a dozen services and an AI agent that looks after it 24/7.',
+      'Outside work I live in Linux: I daily-drive rOS, my own flavor of Arch that I\'m growing into a real distro, and run a homelab with a dozen services and an AI agent that looks after it 24/7.',
     ],
   } as Record<Lang, string[]>,
 
@@ -97,7 +97,6 @@ export type Experience = {
 
 export const experience: Experience[] = [
   {
-    // TODO(confirmar): ¿se agrega? Evita que el CV muestre un hueco desde ene 2026.
     company: 'Independiente',
     role: { es: 'Desarrollador Fullstack', en: 'Fullstack Developer' },
     type: { es: 'Freelance', en: 'Freelance' },
@@ -105,31 +104,30 @@ export const experience: Experience[] = [
     end: null,
     location: { es: 'Cochabamba, Bolivia', en: 'Cochabamba, Bolivia' },
     summary: {
-      es: 'Proyectos propios y para clientes, de punta a punta: análisis, diseño, desarrollo, pruebas y entrega.',
-      en: 'End-to-end projects for clients: analysis, design, development, testing and delivery.',
+      es: 'Último año de la carrera, combinado con proyectos pagados y para la universidad, de punta a punta: análisis, diseño, desarrollo, pruebas y entrega.',
+      en: 'Final year of university, combined with paid and university projects, end to end: analysis, design, development, testing and delivery.',
     },
     bullets: {
       es: [
-        "Link'u: app de escritorio offline-first para el cobro de agua potable de una comunidad rural (Electron, React, SQLite), con respaldos cifrados AES-256-GCM, actualizaciones automáticas, 47 tests y CI multiplataforma.",
-        'SGPG: sistema de gestión de proyectos de grado para la UDABOL (Next.js 16, Firebase), con extracción de resumen y etiquetas desde PDF mediante IA (Groq), versionado de documentos y auditoría.',
+        "Link'u (proyecto pagado): app de escritorio offline-first para el cobro de agua potable de una comunidad rural en expansión (Electron, React, SQLite), con respaldos cifrados AES-256-GCM, actualizaciones automáticas, 47 tests y CI multiplataforma.",
+        'SGPG: sistema de gestión de proyectos de grado para la UDABOL, en uso por la jefatura de carrera (Next.js 16, Firebase), con extracción de resumen y etiquetas desde PDF mediante IA (Groq), versionado de documentos y auditoría.',
       ],
       en: [
-        "Link'u: offline-first desktop app for a rural community's water billing (Electron, React, SQLite), with AES-256-GCM encrypted backups, auto-updates, 47 tests and cross-platform CI.",
-        'SGPG: thesis project management system for UDABOL (Next.js 16, Firebase), with AI-powered PDF summary and tag extraction (Groq), document versioning and audit trail.',
+        "Link'u (paid project): offline-first desktop app for a growing rural community's water billing (Electron, React, SQLite), with AES-256-GCM encrypted backups, auto-updates, 47 tests and cross-platform CI.",
+        'SGPG: thesis project management system for UDABOL, used by the head of the Systems Engineering program (Next.js 16, Firebase), with AI-powered PDF summary and tag extraction (Groq), document versioning and audit trail.',
       ],
     },
     stack: ['Electron', 'React', 'Next.js', 'SQLite', 'Firebase', 'Groq', 'GitHub Actions'],
     cv: true,
-    draft: true,
   },
   {
-    company: 'WANT Digital Agency',
+    company: 'WANT Digital Agency / GeekLabs',
     role: { es: 'Desarrollador Frontend (Web y Móvil)', en: 'Frontend Developer (Web & Mobile)' },
     type: {
-      es: 'Pasantía → Freelance → Contrato',
-      en: 'Internship → Contractor → Employee',
+      es: 'Pasantía → Freelance → Contrato (2025–2026)',
+      en: 'Internship → Contractor → Employee (2025–2026)',
     },
-    start: '2022-06', // TODO(confirmar) mes exacto (primer commit: ago 2022)
+    start: '2022-08', // según primer commit
     end: '2026-01',
     location: { es: 'Cochabamba, Bolivia', en: 'Cochabamba, Bolivia' },
     summary: {
@@ -138,25 +136,25 @@ export const experience: Experience[] = [
     },
     bullets: {
       es: [
-        'Principal desarrollador de Vulcano (hoy CarX), SaaS multi-tenant para talleres mecánicos (944 de 1.131 commits): órdenes, cotizaciones, vehículos, reportes de ingresos, calendario, importación CSV, dashboards por rol e i18n ES/EN con Next.js, TypeScript, MUI, Redux Toolkit y NextAuth.',
-        'Integré en Vulcano un módulo de IA con LangChain (OpenAI / Gemini) que genera automáticamente los servicios de una orden de trabajo.', // TODO(confirmar) que lo hiciste tú
-        'Desarrollé apps móviles en React Native/Expo: Adsie, red social de anuncios y cupones para negocios locales de Florida (434 de 497 commits); la app de mecánicos de Vulcano (notificaciones push, temporizador de servicio); One Life Fitness (gimnasio) y OneHand (citas de fisioterapia).',
+        'Principal desarrollador frontend de Vulcano (hoy CarX), SaaS multi-tenant para talleres mecánicos de GeekLabs, piloteado en un taller real (944 de 1.131 commits): órdenes, cotizaciones, vehículos, reportes de ingresos, calendario, importación CSV, dashboards por rol e i18n ES/EN con Next.js, TypeScript, MUI, Redux Toolkit y NextAuth.',
+        'Conecté el frontend con el módulo de IA de Vulcano (desarrollado por el líder técnico), que genera automáticamente los servicios de una orden de trabajo.',
+        'Desarrollé apps móviles en React Native/Expo: Adsie, red de anuncios para Florida que conecta negocios locales, clientes e influencers (434 de 497 commits); la app de mecánicos de Vulcano (notificaciones push, temporizador de servicio); One Life Fitness (gimnasio de Cochabamba y La Paz) y OneHand (citas de fisioterapia).',
         'Construí el frontend de Bite, SaaS multi-tenant de menú digital y pedidos para restaurantes (Next.js App Router): pedidos a mesa por QR, checkout, cupones, sucursales, planes y Google Maps.',
         'Desarrollé el sitio web en WordPress de LYNX Bolivia, tienda de electrónica y electrodomésticos.',
         'Trabajé junto al líder técnico (backend) integrando APIs REST, con revisiones de código y entregas en ciclos cortos bajo presión de fechas.',
-        'Comencé como pasante (3 meses), continué como desarrollador freelance con pago mensual y fui contratado formalmente en 2025.',
+        'Comencé como pasante (3 meses), continué como desarrollador freelance con pago mensual y fui contratado formalmente de 2025 a 2026.',
       ],
       en: [
-        'Lead developer of Vulcano (now CarX), a multi-tenant SaaS for auto repair shops (944 of 1,131 commits): work orders, quotes, vehicles, revenue reports, calendar, CSV import, role-based dashboards and ES/EN i18n with Next.js, TypeScript, MUI, Redux Toolkit and NextAuth.',
-        'Integrated an AI module into Vulcano using LangChain (OpenAI / Gemini) that auto-generates the services of a work order.',
-        'Built React Native/Expo mobile apps: Adsie, a local-business ads and coupons social app for Florida (434 of 497 commits); Vulcano\'s mechanic app (push notifications, service timer); One Life Fitness (gym) and OneHand (physiotherapy appointments).',
+        'Lead frontend developer of Vulcano (now CarX), GeekLabs\' multi-tenant SaaS for auto repair shops, piloted at a real shop (944 of 1,131 commits): work orders, quotes, vehicles, revenue reports, calendar, CSV import, role-based dashboards and ES/EN i18n with Next.js, TypeScript, MUI, Redux Toolkit and NextAuth.',
+        'Wired the frontend to Vulcano\'s AI module (built by the tech lead) that auto-generates the services of a work order.',
+        'Built React Native/Expo mobile apps: Adsie, an ads network for Florida connecting local businesses, customers and influencers (434 of 497 commits); Vulcano\'s mechanic app (push notifications, service timer); One Life Fitness (a gym in Cochabamba and La Paz) and OneHand (physiotherapy appointments).',
         'Built the frontend of Bite, a multi-tenant digital menu and ordering SaaS for restaurants (Next.js App Router): QR table ordering, checkout, coupons, branches, plans and Google Maps.',
         'Built the WordPress website for LYNX Bolivia, an electronics and home appliance retailer.',
         'Worked alongside the tech lead (backend) integrating REST APIs, with code reviews and short delivery cycles under tight deadlines.',
-        'Started as an intern (3 months), continued as a monthly-paid contractor and was formally hired in 2025.',
+        'Started as an intern (3 months), continued as a monthly-paid contractor and was formally employed from 2025 to 2026.',
       ],
     },
-    stack: ['Next.js', 'React', 'React Native', 'Expo', 'TypeScript', 'MUI', 'Redux Toolkit', 'NextAuth', 'LangChain', 'WordPress', 'GitLab'],
+    stack: ['Next.js', 'React', 'React Native', 'Expo', 'TypeScript', 'MUI', 'Redux Toolkit', 'NextAuth', 'WordPress', 'GitLab'],
     cv: true,
   },
   {
@@ -202,12 +200,10 @@ export const education: { title: L; school: string; period: L; note: L; draft?: 
     },
   },
   {
-    // TODO(confirmar): institución y fechas del diplomado (lo mencionó el informe local)
-    title: { es: 'Diplomado en Desarrollo de Software', en: 'Software Development Diploma' },
-    school: '',
-    period: { es: 'En curso', en: 'In progress' },
+    title: { es: 'Diplomado en Desarrollo de Software (posgrado)', en: 'Postgraduate Diploma in Software Development' },
+    school: 'Universidad de Aquino Bolivia (UDABOL)',
+    period: { es: '2026 – en curso · 4 módulos', en: '2026 – in progress · 4 modules' },
     note: { es: '', en: '' },
-    draft: true,
   },
   {
     title: { es: 'Desarrollo de Aplicaciones Web', en: 'Web Application Development' },
@@ -234,7 +230,7 @@ export const skills: { group: L; items: string[] }[] = [
   },
   {
     group: { es: 'IA aplicada', en: 'Applied AI' },
-    items: ['RAG', 'Búsqueda híbrida (BM25 + embeddings)', 'Evaluación de LLMs', 'LangChain', 'Ollama', 'Groq', 'Gemini', 'OpenAI API', 'sqlite-vec', 'Claude Code', 'Agentes'],
+    items: ['RAG', 'Búsqueda híbrida (BM25 + embeddings)', 'Evaluación de LLMs', 'Ollama', 'Groq', 'Gemini', 'OpenAI API', 'sqlite-vec', 'Claude Code', 'Agentes'],
   },
   {
     group: { es: 'DevOps, calidad y herramientas', en: 'DevOps, Quality & Tools' },
@@ -243,7 +239,7 @@ export const skills: { group: L; items: string[] }[] = [
 ];
 
 /** Marquee del portafolio (solo nombres). */
-export const marquee = ['React', 'Next.js', 'TypeScript', 'React Native', 'Expo', 'Tailwind', 'Node.js', 'Python', 'FastAPI', 'SQLite', 'Supabase', 'Firebase', 'Electron', 'LangChain', 'Ollama', 'Docker', 'Linux', 'Claude Code'];
+export const marquee = ['React', 'Next.js', 'TypeScript', 'React Native', 'Expo', 'Tailwind', 'Node.js', 'Python', 'FastAPI', 'SQLite', 'Supabase', 'Firebase', 'Electron', 'Ollama', 'Docker', 'Linux', 'Claude Code'];
 
 /* ------------------------------------------------------------------ */
 /* PROYECTOS                                                           */
@@ -310,14 +306,14 @@ export const projects: Project[] = [
     slug: 'carx',
     name: 'CarX',
     year: '2023 – 2025',
-    kind: WANT,
+    kind: { es: 'GeekLabs · vía WANT Digital Agency', en: 'GeekLabs · via WANT Digital Agency' },
     tagline: {
       es: 'SaaS multi-tenant para talleres mecánicos (antes Vulcano).',
       en: 'Multi-tenant SaaS for auto repair shops (formerly Vulcano).',
     },
     problem: {
-      es: 'Los talleres llevan órdenes, cotizaciones y vehículos en cuadernos y chats. CarX centraliza la operación: recepción, órdenes de servicio, cotizaciones, calendario, reportes y una app para los mecánicos.',
-      en: 'Repair shops track orders, quotes and vehicles in notebooks and chats. CarX centralizes operations: intake, service orders, quotes, calendar, reports and an app for mechanics.',
+      es: 'Los talleres llevan órdenes, cotizaciones y vehículos en cuadernos y chats. CarX centraliza la operación: recepción, órdenes de servicio, cotizaciones, calendario, reportes y una app para los mecánicos. Se piloteó con un taller real.',
+      en: 'Repair shops track orders, quotes and vehicles in notebooks and chats. CarX centralizes operations: intake, service orders, quotes, calendar, reports and an app for mechanics. It was piloted at a real shop.',
     },
     role: {
       es: 'Principal desarrollador frontend: 944 de 1.131 commits en la web, más la app móvil de mecánicos.',
@@ -327,17 +323,17 @@ export const projects: Project[] = [
       es: [
         'Multi-tenant por dominio, dashboards por rol (administrador, jefe de taller) y landing con i18n ES/EN.',
         'Órdenes, cotizaciones, servicios por cliente, vehículos, calendario, reportes de ingresos (ApexCharts) e importador CSV.',
-        'Módulo de IA con LangChain (OpenAI / Gemini) que autogenera los servicios de una orden y un chat asistente.',
+        'Integración del frontend con el módulo de IA (LangChain, hecho por el líder técnico) que autogenera los servicios de una orden y un chat asistente.',
         'App de mecánicos en React Native/Expo con notificaciones push, SecureStore y temporizador de servicio.',
       ],
       en: [
         'Domain-based multi-tenancy, role dashboards (admin, shop manager) and an ES/EN landing page.',
         'Orders, quotes, per-client services, vehicles, calendar, revenue reports (ApexCharts) and CSV import.',
-        'AI module with LangChain (OpenAI / Gemini) that auto-generates a work order\'s services, plus an assistant chat.',
+        'Frontend integration with the AI module (LangChain, built by the tech lead) that auto-generates a work order\'s services, plus an assistant chat.',
         'Mechanics app in React Native/Expo with push notifications, SecureStore and a service timer.',
       ],
     },
-    stack: ['Next.js', 'TypeScript', 'MUI', 'Redux Toolkit', 'NextAuth', 'LangChain', 'React Native', 'Expo'],
+    stack: ['Next.js', 'TypeScript', 'MUI', 'Redux Toolkit', 'NextAuth', 'React Native', 'Expo'],
     accent: '#ff6a3d',
     featured: true,
     cv: false, // ya está en la experiencia de WANT
@@ -353,9 +349,8 @@ export const projects: Project[] = [
       en: 'Thesis project management system for my university.',
     },
     problem: {
-      // TODO(confirmar): ¿ya está en uso o "en proceso de adopción"?
-      es: 'La carrera gestionaba los proyectos de grado con archivos sueltos. SGPG centraliza los documentos, sus versiones y su revisión, y usa IA para resumir y etiquetar cada proyecto.',
-      en: 'The department managed thesis projects with scattered files. SGPG centralizes documents, versions and reviews, and uses AI to summarize and tag each project.',
+      es: 'La carrera gestionaba los proyectos de grado con archivos sueltos. SGPG centraliza los documentos, sus versiones y su revisión, y usa IA para resumir y etiquetar cada proyecto. Hoy lo usa la jefatura de carrera y está en evaluación para integrarse a la plataforma de la universidad.',
+      en: 'The department managed thesis projects with scattered files. SGPG centralizes documents, versions and reviews, and uses AI to summarize and tag each project. It is already used by the head of the program and is being evaluated for integration into the university platform.',
     },
     role: { es: 'Desarrollo fullstack (prototipo inicial con v0, extendido por mí).', en: 'Fullstack development (initial v0 prototype, extended by me).' },
     highlights: {
@@ -382,14 +377,14 @@ export const projects: Project[] = [
     slug: 'agua-potable',
     name: "Link'u",
     year: '2026',
-    kind: { es: 'Cliente · Comunidad rural', en: 'Client · Rural community' },
+    kind: { es: 'Cliente · Proyecto pagado', en: 'Client · Paid project' },
     tagline: {
       es: 'App de escritorio offline-first para el cobro de agua potable de una comunidad.',
       en: 'Offline-first desktop app for a rural community\'s water billing.',
     },
     problem: {
-      es: "La comunidad Link'u (Sipe Sipe, Cochabamba) registraba lecturas de medidores a mano y sin respaldo. La app funciona 100 % sin internet, emite boletas y respalda los datos cifrados.",
-      en: "The Link'u community (Sipe Sipe, Cochabamba) logged water meter readings by hand with no backups. The app works 100% offline, prints bills and keeps encrypted backups.",
+      es: "La comunidad Link'u (Sipe Sipe, Cochabamba) registraba lecturas de medidores a mano y sin respaldo. Como es una comunidad en expansión, necesitaban algo que crezca con ellos: la app funciona 100 % sin internet, emite boletas y respalda los datos cifrados.",
+      en: "The Link'u community (Sipe Sipe, Cochabamba) logged water meter readings by hand with no backups. As a growing community, they needed something that scales with them: the app works 100% offline, prints bills and keeps encrypted backups.",
     },
     role: { es: 'Análisis con el cliente, diseño y desarrollo completo.', en: 'Client analysis, design and full development.' },
     highlights: {
@@ -452,10 +447,10 @@ export const projects: Project[] = [
     name: 'rOS',
     year: '2026',
     kind: { es: 'Proyecto personal · Linux', en: 'Personal project · Linux' },
-    tagline: { es: 'Mi propio sabor de Linux sobre Arch, en uso diario.', en: 'My own flavor of Linux on top of Arch, daily-driven.' },
+    tagline: { es: 'Mi propio flavor de Arch, en uso diario y en camino a ser una distro.', en: 'My own flavor of Arch, daily-driven and on its way to becoming a distro.' },
     problem: {
-      es: 'No es una ISO: es una capa de escritorio propia, versionada y reversible sobre Archcraft/Arch que convierte una instalación en rOS — con identidad, arranque, escritorio y herramientas propias.',
-      en: 'Not an ISO: a custom, versioned and reversible desktop layer on top of Archcraft/Arch that turns an install into rOS — with its own identity, boot, desktop and tools.',
+      es: 'No es una ISO: es una capa de escritorio propia, versionada y reversible sobre Archcraft/Arch que convierte una instalación en rOS — con identidad, arranque, escritorio y herramientas propias. La meta: que sea una distro real, instalable.',
+      en: 'Not an ISO: a custom, versioned and reversible desktop layer on top of Archcraft/Arch that turns an install into rOS — with its own identity, boot, desktop and tools. The goal: a real, installable distro.',
     },
     role: { es: 'Todo.', en: 'Everything.' },
     highlights: {
@@ -482,15 +477,15 @@ export const projects: Project[] = [
     name: 'Adsie',
     year: '2023 – 2025',
     kind: WANT,
-    tagline: { es: 'Red social de anuncios y cupones para negocios locales de Florida.', en: 'Ads and coupons social app for local businesses in Florida.' },
+    tagline: { es: 'Red de anuncios que conecta negocios locales, clientes e influencers en Florida.', en: 'Ads network connecting local businesses, customers and influencers in Florida.' },
     problem: {
-      es: 'Los negocios locales necesitaban un canal propio para publicar novedades, eventos y cupones, y medir su efecto.',
-      en: 'Local businesses needed their own channel to publish news, events and coupons — and measure the results.',
+      es: 'Empezó como una app donde los dueños de negocios publican anuncios, eventos y cupones para sus clientes. A mitad de camino sumó un marketplace para que los negocios contraten influencers.',
+      en: 'It started as an app where business owners publish ads, events and coupons for their customers. Midway it added a marketplace for businesses to hire influencers.',
     },
     role: { es: 'Desarrollo de la app móvil (434 de 497 commits).', en: 'Mobile app development (434 of 497 commits).' },
     highlights: {
-      es: ['Perfiles de empresa, posts y highlights, eventos', 'Cupones con estadísticas de uso', 'Cámara y video, listas de alto rendimiento (FlashList), i18n'],
-      en: ['Business profiles, posts and highlights, events', 'Coupons with usage stats', 'Camera and video, high-performance lists (FlashList), i18n'],
+      es: ['Perfiles de empresa, posts y highlights, eventos', 'Cupones con estadísticas de uso', 'Contratación de influencers para campañas', 'Cámara y video, listas de alto rendimiento (FlashList), i18n'],
+      en: ['Business profiles, posts and highlights, events', 'Coupons with usage stats', 'Hiring influencers for campaigns', 'Camera and video, high-performance lists (FlashList), i18n'],
     },
     stack: ['React Native', 'Expo', 'TypeScript'],
     accent: '#ff3d8b',
@@ -526,8 +521,8 @@ export const projects: Project[] = [
     kind: WANT,
     tagline: { es: 'App móvil para los socios de un gimnasio.', en: 'Mobile app for gym members.' },
     problem: {
-      es: 'Un gimnasio de Cochabamba necesitaba una app propia para sus socios.',
-      en: 'A gym in Cochabamba needed its own app for members.',
+      es: 'Un gimnasio con sedes en Cochabamba y La Paz necesitaba una app propia para sus socios.',
+      en: 'A gym with locations in Cochabamba and La Paz needed its own app for members.',
     },
     role: { es: 'Todo el frontend de la app en React Native.', en: 'The entire React Native app frontend.' },
     highlights: { es: ['App completa para socios del gimnasio.'], en: ['Complete app for gym members.'] },
@@ -611,34 +606,11 @@ export const projects: Project[] = [
     cv: false,
   },
   {
-    // TODO(confirmar): ¿cliente real? (el informe local lo marcó como dudoso)
-    slug: 'capadocia',
-    name: 'Condominio Capadocia',
-    year: '2025',
-    kind: { es: 'Freelance', en: 'Freelance' },
-    tagline: { es: 'Reservas de áreas comunes para un condominio.', en: 'Common-area booking for a condominium.' },
-    problem: {
-      es: 'Inquilinos, administradores y guardias reservando áreas comunes por WhatsApp. Plataforma con calendario y tres roles.',
-      en: 'Tenants, admins and guards booking common areas over WhatsApp. A platform with a calendar and three roles.',
-    },
-    role: { es: 'Desarrollo fullstack.', en: 'Fullstack development.' },
-    highlights: {
-      es: ['Roles: inquilino, administrador, guardia', 'Calendario interactivo (FullCalendar)', 'Sistema de diseño propio sin librerías de UI', 'Exportación a Excel'],
-      en: ['Roles: tenant, admin, guard', 'Interactive calendar (FullCalendar)', 'Custom design system, no UI libraries', 'Excel export'],
-    },
-    stack: ['React', 'TypeScript', 'Vite', 'Firebase', 'Cloud Functions'],
-    accent: '#e8c39e',
-    featured: false,
-    cv: false,
-    draft: true,
-  },
-  {
-    // TODO(confirmar): ¿fue para un negocio real? ¿se muestra?
     slug: 'eko',
     name: 'EKO',
     year: '2025',
-    kind: { es: 'Proyecto propio', en: 'Personal project' },
-    tagline: { es: 'E-commerce con panel de administración.', en: 'E-commerce with admin panel.' },
+    kind: { es: 'Freelance · Emprendimiento', en: 'Freelance · Small business' },
+    tagline: { es: 'Tienda en línea y catálogo de productos para un emprendimiento.', en: 'Online store and product catalog for a small business.' },
     problem: {
       es: 'Tienda en línea completa: catálogo, búsqueda difusa, carrito, cupones, órdenes y panel de administración.',
       en: 'Full online store: catalog, fuzzy search, cart, coupons, orders and admin panel.',
@@ -649,10 +621,10 @@ export const projects: Project[] = [
       en: ['Feature-based architecture', 'Global state with Redux Toolkit', 'Supabase backend'],
     },
     stack: ['React', 'TypeScript', 'Redux Toolkit', 'Supabase', 'MUI'],
-    accent: '#5dffb0',
+    links: [{ label: 'eko-store.vercel.app', href: 'https://eko-store.vercel.app/' }],
+    accent: '#7dffc4',
     featured: false,
     cv: false,
-    draft: true,
   },
 ];
 
