@@ -2,6 +2,7 @@
 import type { Lang } from '../data/profile';
 import { liveProjects } from '../data/profile';
 import { t, paths } from '../data/i18n';
+import Sketch from './Sketch.astro';
 /**
  * "En vivo": proyectos con `live` en profile.ts. Cada tarjeta abre el caso de estudio
  * (ahí está el botón al sitio real). `exclude` = slug a omitir (la página actual).
@@ -13,7 +14,7 @@ const items = liveProjects.filter((p) => p.slug !== exclude);
 ---
 {items.length > 0 && (
   <section id="live" class="border-t border-line px-5 py-24 md:px-10">
-    <p class="kicker mb-6">{s.live.kicker}</p>
+    <p class="kicker mb-6 flex items-center gap-2"><Sketch name="waves" seed={9} class="h-6 w-10 text-accent" />{s.live.kicker}</p>
     <h2 data-split class="display max-w-4xl text-4xl font-bold md:text-6xl">{s.live.title}</h2>
     <p data-reveal class="mt-6 max-w-2xl text-muted">{s.live.body}</p>
     <ul class="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3">

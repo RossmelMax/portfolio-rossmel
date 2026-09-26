@@ -2,6 +2,7 @@
 import type { Lang } from '../data/profile';
 import { experience } from '../data/profile';
 import { t, fmtMonth } from '../data/i18n';
+import Sketch from './Sketch.astro';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 const s = t(lang);
@@ -17,6 +18,12 @@ const s = t(lang);
         <div class="kicker md:pr-10 md:text-right" data-reveal>
           {fmtMonth(job.start, lang)} — {fmtMonth(job.end, lang)}
           <br /><span class="normal-case tracking-normal">{job.type[lang]}</span>
+          {!job.end && (
+            <span class="mt-4 flex items-center gap-1 text-accent md:justify-end" aria-hidden="true">
+              <span class="font-hand text-3xl normal-case tracking-normal">{s.experience.now}</span>
+              <Sketch name="hook" seed={3} class="h-10 w-12 -scale-x-100" />
+            </span>
+          )}
         </div>
         <div class="md:col-span-3 md:pl-12">
           <h3 data-split class="display text-4xl font-semibold md:text-6xl">{job.company[lang]}</h3>
