@@ -34,14 +34,14 @@ export const profile = {
   photoAlt: { es: 'Foto de Rossmel Abasto', en: 'Photo of Rossmel Abasto' } as L,
 
   headline: {
-    es: 'Construyo interfaces rápidas, cuidadas y listas para producción — y uso IA para llegar más lejos, más rápido.',
-    en: 'I build fast, polished, production-ready interfaces — and use AI to go further, faster.',
+    es: 'Programador de base: construyo interfaces rápidas, cuidadas y listas para producción — y la IA multiplica lo que ya sé hacer.',
+    en: 'A programmer first: I build fast, polished, production-ready interfaces — and AI multiplies what I already know how to do.',
   } as L,
 
   /** Resumen profesional (CV). 3–4 líneas, con palabras clave para ATS. */
   summary: {
-    es: 'Desarrollador Frontend con más de 3 años de experiencia en agencia construyendo SaaS multi-tenant, apps móviles y sitios web con React, Next.js, React Native y TypeScript (~1.800 commits en productos para clientes de Bolivia y EE. UU.). Evolucionando a Fullstack con FastAPI, Node.js, SQLite/PostgreSQL, Firebase y Supabase. Integro IA tanto en productos (RAG híbrido, LLMs locales y en la nube) como en mi flujo diario (Claude Code, agentes), lo que me permite entregar más rápido sin sacrificar calidad.',
-    en: 'Frontend Developer with 3+ years of agency experience building multi-tenant SaaS, mobile apps and websites with React, Next.js, React Native and TypeScript (~1,800 commits across client products in Bolivia and the US). Growing into Fullstack with FastAPI, Node.js, SQLite/PostgreSQL, Firebase and Supabase. I integrate AI both into products (hybrid RAG, local and cloud LLMs) and into my daily workflow (Claude Code, agents), which lets me ship faster without sacrificing quality.',
+    es: 'Desarrollador Frontend con más de 3 años de experiencia en agencia construyendo SaaS multi-tenant, apps móviles y sitios web con React, Next.js, React Native y TypeScript (~1.800 commits en productos para clientes de Bolivia y EE. UU.). Base sólida de programación: autodidacta desde 2019 y años escribiendo código de producción sin asistentes de IA. Evolucionando a Fullstack con FastAPI, Node.js, SQLite/PostgreSQL, Firebase y Supabase. Desde 2025 integro IA en productos (RAG híbrido, LLMs locales y en la nube) y en mi flujo diario, para entregar más rápido sin sacrificar calidad.',
+    en: 'Frontend Developer with 3+ years of agency experience building multi-tenant SaaS, mobile apps and websites with React, Next.js, React Native and TypeScript (~1,800 commits across client products in Bolivia and the US). Solid programming foundation: self-taught since 2019, with years of writing production code without AI assistants. Growing into Fullstack with FastAPI, Node.js, SQLite/PostgreSQL, Firebase and Supabase. Since 2025 I integrate AI into products (hybrid RAG, local and cloud LLMs) and into my daily workflow, to ship faster without sacrificing quality.',
   } as L,
 
   /** "Sobre mí" del portafolio: más humano que el resumen del CV. */
@@ -49,13 +49,15 @@ export const profile = {
     es: [
       'Empecé a programar solo, en 2019, con mi primera computadora propia. Desde entonces no paré: cursos, documentación, prueba y error, y muchas noches de “¿por qué no funciona esto?”.',
       'Pasé más de tres años en WANT Digital Agency, donde éramos dos en desarrollo: mi jefe en el backend y yo en el frontend. Ahí aprendí a hacer de todo — investigar, resolver, trabajar bajo presión y entregar.',
-      'Hoy la IA es parte de cómo trabajo: agentes, LLMs locales y automatizaciones me permiten dedicar el tiempo a lo que importa — el diseño, la arquitectura y el detalle.',
+      'Aprendí a la vieja escuela: en la agencia, casi todo ese tiempo programamos a mano — documentación, foros, depurar línea por línea. Recién en el último año incorporamos IA al trabajo.',
+      'Con el boom de la IA fui probando de todo: GitHub Copilot, ChatGPT, Gemini, DeepSeek, Groq, modelos locales y, últimamente, Claude. Me potenció muchísimo, pero no reemplaza entender el código: la IA propone, yo reviso, decido y respondo por cada línea. Y me dio más ganas de seguir aprendiendo y entender toda tecnología que llegue a mis manos.',
       'Fuera del trabajo, vivo en Linux: uso a diario rOS, mi propio flavor de Arch que quiero convertir en una distro real, y mantengo un homelab con una docena de servicios y un agente de IA que lo cuida 24/7.',
     ],
     en: [
       'I started coding on my own in 2019, with my first personal computer. I haven\'t stopped since: courses, docs, trial and error, and many “why isn\'t this working?” nights.',
       'I spent 3+ years at WANT Digital Agency, where the dev team was two people: my boss on the backend and me on the frontend. That\'s where I learned to do a bit of everything — research, solve, work under pressure and ship.',
-      'Today AI is part of how I work: agents, local LLMs and automations let me spend my time on what matters — design, architecture and detail.',
+      'I learned the old-school way: at the agency, for almost all of that time we coded by hand — docs, forums, debugging line by line. We only brought AI into our work in the last year.',
+      'When the AI boom hit I tried everything: GitHub Copilot, ChatGPT, Gemini, DeepSeek, Groq, local models and, lately, Claude. It has boosted me a lot, but it doesn\'t replace understanding the code: AI proposes, I review, decide and own every line. And it made me even more eager to keep learning and understand every technology that comes my way.',
       'Outside work I live in Linux: I daily-drive rOS, my own flavor of Arch that I\'m growing into a real distro, and run a homelab with a dozen services and an AI agent that looks after it 24/7.',
     ],
   } as Record<Lang, string[]>,
@@ -230,7 +232,7 @@ export const skills: { group: L; items: string[] }[] = [
   },
   {
     group: { es: 'IA aplicada', en: 'Applied AI' },
-    items: ['RAG', 'Búsqueda híbrida (BM25 + embeddings)', 'Evaluación de LLMs', 'Ollama', 'Groq', 'Gemini', 'OpenAI API', 'sqlite-vec', 'Claude Code', 'Agentes'],
+    items: ['RAG', 'Búsqueda híbrida (BM25 + embeddings)', 'Evaluación de LLMs', 'Ollama', 'Groq', 'Gemini', 'OpenAI API', 'DeepSeek', 'sqlite-vec', 'GitHub Copilot', 'Claude Code', 'Agentes'],
   },
   {
     group: { es: 'DevOps, calidad y herramientas', en: 'DevOps, Quality & Tools' },
@@ -727,8 +729,8 @@ export const workflow: { title: L; body: L }[] = [
   {
     title: { es: 'Construir y medir', en: 'Build & measure' },
     body: {
-      es: 'Código tipado, tests y métricas: en AdvAI, evaluar la búsqueda me llevó del 43 % al 80 % de acierto.',
-      en: 'Typed code, tests and metrics: in AdvAI, evaluating retrieval took me from 43% to 80% hit rate.',
+      es: 'Leo y entiendo cada línea que entra al repo, venga de donde venga. Código tipado, tests y métricas: en AdvAI, evaluar la búsqueda me llevó del 43 % al 80 % de acierto.',
+      en: 'I read and understand every line that lands in the repo, wherever it came from. Typed code, tests and metrics: in AdvAI, evaluating retrieval took me from 43% to 80% hit rate.',
     },
   },
   {
@@ -739,3 +741,77 @@ export const workflow: { title: L; body: L }[] = [
     },
   },
 ];
+
+/* ------------------------------------------------------------------ */
+/* PROGRAMADOR PRIMERO: antes y después de la IA (sección "Cómo trabajo") */
+/* ------------------------------------------------------------------ */
+
+export const aiJourney: { period: L; title: L; body: L; tools?: string[] }[] = [
+  {
+    period: { es: '2019', en: '2019' },
+    title: { es: 'Aprender sin atajos', en: 'Learning with no shortcuts' },
+    body: {
+      es: 'Autodidacta con mi primera computadora: cursos, documentación y mucho prueba y error.',
+      en: 'Self-taught on my first computer: courses, docs and lots of trial and error.',
+    },
+  },
+  {
+    period: { es: '2022 – 2024', en: '2022 – 2024' },
+    title: { es: 'A mano, a la vieja escuela', en: 'By hand, old-school' },
+    body: {
+      es: 'Productos reales para clientes en React, Next.js y React Native, escritos y depurados sin asistentes de IA.',
+      en: 'Real client products in React, Next.js and React Native, written and debugged without AI assistants.',
+    },
+  },
+  {
+    period: { es: '2025', en: '2025' },
+    title: { es: 'La IA llega al trabajo', en: 'AI arrives at work' },
+    body: {
+      es: 'En el último año en la agencia incorporamos IA al flujo de desarrollo y a los productos.',
+      en: 'In my last year at the agency we brought AI into our development workflow and our products.',
+    },
+  },
+  {
+    period: { es: 'Hoy', en: 'Today' },
+    title: { es: 'IA como multiplicador', en: 'AI as a multiplier' },
+    body: {
+      es: 'Uso cada herramienta para lo que hace mejor, pero el criterio y la responsabilidad del código siguen siendo míos.',
+      en: 'I use each tool for what it does best, but the judgment and ownership of the code are still mine.',
+    },
+    tools: ['GitHub Copilot', 'ChatGPT', 'Gemini', 'DeepSeek', 'Groq', 'Ollama', 'Claude'],
+  },
+];
+
+/* ------------------------------------------------------------------ */
+/* EN VIVO: subdominios públicos de rossmel.top                        */
+/* ------------------------------------------------------------------ */
+
+/**
+ * Sitios que corren en mi dominio. Solo se muestran los que NO son `draft`.
+ * Nunca listar paneles de administración, SSH, chats privados ni servicios personales.
+ * `project` = slug del caso de estudio donde también aparece (p. ej. 'homelab').
+ */
+export const liveSites: { host: string; name: L; body: L; project?: string; draft?: boolean }[] = [
+  {
+    host: 'notebook.rossmel.top',
+    name: { es: 'Notebook RAG', en: 'RAG Notebook' },
+    body: {
+      es: 'Mis apuntes con búsqueda y preguntas en lenguaje natural sobre ellos.', // TODO(confirmar) descripción
+      en: 'My notes, searchable and answerable in natural language.',
+    },
+    project: 'homelab',
+    draft: true, // TODO(confirmar) ¿va en el portafolio?
+  },
+  {
+    host: 'rubik.rossmel.top',
+    name: { es: 'Rubik', en: 'Rubik' },
+    body: {
+      es: 'Sitio del cubo de Rubik con visor 3D y mezclas.', // TODO(confirmar) descripción
+      en: 'Rubik\'s cube site with a 3D viewer and scrambles.',
+    },
+    project: 'homelab',
+    draft: true, // TODO(confirmar) ¿va en el portafolio?
+  },
+];
+
+export const visibleLiveSites = liveSites.filter((x) => !x.draft);

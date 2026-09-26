@@ -2,14 +2,21 @@
 import type { Lang } from '../data/profile';
 import Base from '../layouts/Base.astro';
 import Nav from './Nav.astro';
-import { getPosts, readingTime, fmtDate } from '../data/blog';
+import { getPosts, readingTime, fmtDate, normalize, tagCounts } from '../data/blog';
 import { t, paths } from '../data/i18n';
-/** Portada del blog (ES en /blog/, EN en /en/blog/). Los artículos pueden estar en otro idioma. */
+/**
+ * Portada del blog (ES en /blog/, EN en /en/blog/). Los artículos pueden estar en otro idioma.
+ * Sin JS se ve la lista completa; con JS se suman el buscador (texto completo, se descarga
+ * /blog/search.json al empezar a buscar) y el filtro por etiqueta. Ambos quedan en la URL (?q=&tag=).
+ */
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 const altPath = paths.blog(lang === 'es' ? 'en' : 'es');
 const s = t(lang);
 const posts = await getPosts();
+const tags = tagCounts(posts);
+// Las etiquetas con un solo artículo se esconden detrás de "+N más" para no saturar (sobre todo en móvil)
+const extra = tags.filter(([, n]) => n < 2).length;
 ---
 <Base lang={lang} altPath={altPath} title={s.blog.kicker} description={s.blog.intro}>
   <link slot="head" rel="alternate" type="application/rss+xml" title="Blog de Rossmel Abasto" href="/blog/rss.xml" />
@@ -18,9 +25,28 @@ const posts = await getPosts();
     <p class="kicker mb-6">{s.blog.kicker} · <a href="/blog/rss.xml" class="hover:text-fg">{s.blog.rss}</a></p>
     <h1 data-split class="display max-w-5xl text-6xl font-bold md:text-8xl">{s.blog.title}</h1>
     <p data-reveal class="mt-8 max-w-2xl text-lg text-muted md:text-xl">{s.blog.intro}</p>
-    <ul class="mt-20 border-t border-line">
+
+    <div data-blog-search data-one={s.blog.resultsOne} data-many={s.blog.resultsMany} class="mt-16">
+      <form role="search" class="relative max-w-3xl" onsubmit="return false">
+        <label for="blog-q" class="sr-only">{s.blog.searchLabel}</label>
+        <svg class="pointer-events-none absolute left-5 top-1/2 h-5 w-5 -translate-y-1/2 text-muted" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>
+        <input id="blog-q" type="search" name="q" autocomplete="off" placeholder={s.blog.search}
+          class="w-full rounded-full border border-line bg-bg-2 py-4 pl-14 pr-24 text-lg outline-none transition-colors placeholder:text-muted focus:border-accent" />
+        <kbd class="pointer-events-none absolute right-5 top-1/2 hidden -translate-y-1/2 rounded border border-line px-2 py-0.5 font-mono text-xs text-muted md:block" title={s.blog.searchHint}>/</kbd>
+      </form>
+      <div class="mt-6 flex flex-wrap gap-2" role="group" aria-label="Tags">
+        <button type="button" data-tag="" aria-pressed="true" class="tag-chip">{s.blog.allTags} <span class="opacity-60">{posts.length}</span></button>
+        {tags.map(([tag, n]) => (
+          <button type="button" data-tag={tag} data-extra={n < 2 ? '' : undefined} hidden={n < 2 && extra > 0} aria-pressed="false" class="tag-chip">#{tag} <span class="opacity-60">{n}</span></button>
+        ))}
+        {extra > 0 && <button type="button" data-more class="tag-chip border-dashed">+{extra} {s.blog.moreTags}</button>}
+      </div>
+      <p class="kicker mt-10" aria-live="polite" data-results>{posts.length === 1 ? s.blog.resultsOne : s.blog.resultsMany.replace('{n}', String(posts.length))}</p>
+    </div>
+
+    <ul class="mt-6 border-t border-line" data-post-list>
       {posts.map((p) => (
-        <li class="border-b border-line" data-reveal>
+        <li class="border-b border-line" data-post={p.id} data-title={normalize(p.data.title)} data-desc={normalize(p.data.description)} data-tags={p.data.tags.join(' ')}>
           <a href={paths.post(p.id)} data-hover class="group grid gap-3 py-10 md:grid-cols-12 md:gap-8">
             <span class="kicker md:col-span-3">{fmtDate(p.data.date, lang)} · {readingTime(p.body)} {s.blog.read}{p.data.lang !== lang && ` · ${p.data.lang.toUpperCase()}`}</span>
             <span class="md:col-span-9">
@@ -32,5 +58,99 @@ const posts = await getPosts();
         </li>
       ))}
     </ul>
+    <div data-empty hidden class="mt-10 max-w-2xl">
+      <p class="text-lg text-muted">{s.blog.empty}</p>
+      <button type="button" data-clear class="kicker mt-6 hover:text-fg">× {s.blog.clear}</button>
+    </div>
   </main>
 </Base>
+
+<script>
+  const root = document.querySelector<HTMLElement>('[data-blog-search]');
+  const input = document.querySelector<HTMLInputElement>('#blog-q');
+  const items = [...document.querySelectorAll<HTMLElement>('[data-post]')];
+  const chips = [...document.querySelectorAll<HTMLButtonElement>('[data-tag]')];
+  const count = document.querySelector<HTMLElement>('[data-results]');
+  const empty = document.querySelector<HTMLElement>('[data-empty]');
+  const list = document.querySelector<HTMLElement>('[data-post-list]');
+
+  if (root && input && list) {
+    // Igual que normalize() en src/data/blog.ts
+    const norm = (t: string) => t.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+    const params = new URLSearchParams(location.search);
+    let tag = params.get('tag') ?? '';
+    let body: Record<string, string> | null = null;
+    let loading: Promise<void> | null = null;
+
+    // El texto completo se descarga solo si alguien busca
+    const loadBody = () =>
+      (loading ??= fetch('/blog/search.json')
+        .then((r) => r.json())
+        .then((rows: { id: string; text: string }[]) => { body = Object.fromEntries(rows.map((r) => [r.id, r.text])); })
+        .catch(() => { body = {}; }));
+
+    const apply = () => {
+      const terms = norm(input.value).split(/\s+/).filter(Boolean);
+      const scored = items.map((el, order) => {
+        const d = el.dataset;
+        const tags = (d.tags ?? '').split(' ');
+        if (tag && !tags.includes(tag)) return { el, order, score: -1 };
+        if (!terms.length) return { el, order, score: 0 };
+        let score = 0;
+        for (const term of terms) {
+          const s =
+            (d.title!.includes(term) ? 6 : 0) +
+            (tags.some((x) => x.includes(term)) ? 4 : 0) +
+            (d.desc!.includes(term) ? 3 : 0) +
+            (body?.[d.post!]?.includes(term) ? 1 : 0);
+          if (!s) return { el, order, score: -1 }; // todas las palabras tienen que aparecer
+          score += s;
+        }
+        return { el, order, score };
+      });
+      // Más relevantes primero; a igual relevancia, el orden original (más nuevo primero)
+      scored.sort((a, b) => b.score - a.score || a.order - b.order).forEach(({ el }) => list.appendChild(el));
+      const visible = scored.filter((x) => x.score >= 0);
+      scored.forEach(({ el, score }) => (el.hidden = score < 0));
+      const n = visible.length;
+      if (count) count.textContent = n === 1 ? root.dataset.one! : root.dataset.many!.replace('{n}', String(n));
+      if (empty) empty.hidden = n > 0;
+      chips.forEach((c) => c.setAttribute('aria-pressed', String(c.dataset.tag === tag)));
+
+      const url = new URL(location.href);
+      input.value ? url.searchParams.set('q', input.value) : url.searchParams.delete('q');
+      tag ? url.searchParams.set('tag', tag) : url.searchParams.delete('tag');
+      history.replaceState(null, '', url);
+      window.dispatchEvent(new Event('resize')); // ScrollTrigger recalcula posiciones
+    };
+
+    const more = document.querySelector<HTMLButtonElement>('[data-more]');
+    const showAllTags = () => {
+      document.querySelectorAll<HTMLElement>('[data-extra]').forEach((el) => (el.hidden = false));
+      more?.remove();
+    };
+    more?.addEventListener('click', showAllTags);
+    if (tag && chips.find((c) => c.dataset.tag === tag)?.hidden) showAllTags();
+
+    input.value = params.get('q') ?? '';
+    input.addEventListener('input', () => {
+      apply();
+      if (!body) loadBody().then(apply);
+    });
+    input.addEventListener('focus', () => void loadBody(), { once: true });
+    chips.forEach((c) => c.addEventListener('click', () => { tag = c.dataset.tag === tag ? '' : c.dataset.tag ?? ''; apply(); }));
+    document.querySelector('[data-clear]')?.addEventListener('click', () => { input.value = ''; tag = ''; apply(); input.focus(); });
+    // "/" enfoca el buscador (como en GitHub o MDN)
+    window.addEventListener('keydown', (e) => {
+      const el = document.activeElement;
+      if (e.key === '/' && !(el instanceof HTMLInputElement || el instanceof HTMLTextAreaElement)) {
+        e.preventDefault();
+        input.focus();
+      }
+    });
+    if (input.value || tag) {
+      apply();
+      if (input.value) loadBody().then(apply);
+    }
+  }
+</script>

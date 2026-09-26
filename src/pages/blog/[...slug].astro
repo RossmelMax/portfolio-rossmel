@@ -4,8 +4,8 @@ import Base from '../../layouts/Base.astro';
 import Nav from '../../components/Nav.astro';
 import ContactForm from '../../components/ContactForm.astro';
 import Logo from '../../components/Logo.astro';
-import { getPosts, readingTime, fmtDate, type Post } from '../../data/blog';
-import { profile } from '../../data/profile';
+import { getPosts, readingTime, fmtDate, relatedPosts, type Post } from '../../data/blog';
+import { profile, visibleProjects } from '../../data/profile';
 import { t, paths } from '../../data/i18n';
 
 export async function getStaticPaths() {
@@ -14,7 +14,10 @@ export async function getStaticPaths() {
 }
 interface Props { post: Post }
 const { post } = Astro.props;
-const { Content } = await render(post);
+const { Content, headings } = await render(post);
+const toc = headings.filter((h) => h.depth === 2);
+const related = relatedPosts(post, await getPosts());
+const project = visibleProjects.find((p) => p.slug === post.data.project);
 const lang = post.data.lang;
 const s = t(lang);
 const url = new URL(paths.post(post.id), Astro.site);
@@ -36,23 +39,93 @@ const ld = {
   <script slot="head" type="application/ld+json" set:html={JSON.stringify(ld)} />
   <Nav lang={lang} altPath={paths.blog(lang === 'es' ? 'en' : 'es')} onHome={false} />
   <main class="px-5 pb-16 pt-40 md:px-10">
-    <article class="mx-auto max-w-3xl">
+    <div class="xl:grid xl:grid-cols-[1fr_minmax(0,48rem)_1fr] xl:gap-12">
+    <article class="mx-auto max-w-3xl xl:col-start-2 xl:w-full">
       <a href={paths.blog(lang)} class="kicker hover:text-fg">← {s.blog.back}</a>
       <p class="kicker mt-10">{fmtDate(post.data.date, lang)} · {readingTime(post.body)} {s.blog.read}</p>
       <h1 data-split class="display mt-6 text-5xl font-bold md:text-7xl">{post.data.title}</h1>
       <p data-reveal class="mt-8 text-xl text-muted">{post.data.description}</p>
-      <div class="mt-6 flex flex-wrap gap-2">{post.data.tags.map((tag) => <span class="rounded-full border border-line px-3 py-1 font-mono text-xs text-muted">#{tag}</span>)}</div>
+      <div class="mt-6 flex flex-wrap items-center gap-2">
+        {post.data.tags.map((tag) => <a href={`${paths.blog(lang)}?tag=${encodeURIComponent(tag)}`} class="rounded-full border border-line px-3 py-1 font-mono text-xs text-muted transition-colors hover:border-fg hover:text-fg">#{tag}</a>)}
+        {project && <a href={paths.project(lang, project.slug)} class="rounded-full border border-accent px-3 py-1 font-mono text-xs text-accent">{project.name} ↗</a>}
+      </div>
+      {toc.length > 2 && (
+        <details class="toc mt-12 rounded-2xl border border-line p-5 xl:hidden">
+          <summary class="kicker cursor-pointer">{s.blog.toc}</summary>
+          <ol class="mt-4 space-y-2 text-sm">{toc.map((h) => <li><a href={`#${h.slug}`} class="text-muted hover:text-fg">{h.text}</a></li>)}</ol>
+        </details>
+      )}
       <div class="prose prose-lg mt-16 max-w-none">
         <Content />
       </div>
-      <div class="mt-20 flex items-center gap-4 border-t border-line pt-8">
+      <div class="mt-20 flex flex-wrap items-center gap-4 border-t border-line pt-8">
         <Logo class="h-10 w-10 text-accent" />
-        <p class="text-muted"><span class="text-fg">{profile.name}</span> — {profile.role[lang]}. <a href={profile.portfolioUrl} class="text-accent hover:underline">{profile.portfolioUrl.replace('https://', '')}</a></p>
+        <p class="flex-1 text-muted"><span class="text-fg">{profile.name}</span> — {profile.role[lang]}. <a href={profile.portfolioUrl} class="text-accent hover:underline">{profile.portfolioUrl.replace('https://', '')}</a></p>
+        <button type="button" data-copy-link data-done={s.blog.copied} class="kicker rounded-full border border-line px-4 py-2 hover:text-fg">{s.blog.copyLink}</button>
       </div>
+      {project && (
+        <a href={paths.project(lang, project.slug)} data-hover class="group mt-10 block rounded-3xl border border-line p-8 transition-colors hover:border-accent" style={`--accent:${project.accent}`}>
+          <span class="kicker">{s.blog.caseStudy}</span>
+          <span class="display mt-3 block text-4xl font-bold transition-colors group-hover:text-accent">{project.name} →</span>
+          <span class="mt-2 block text-muted">{project.tagline[lang]}</span>
+        </a>
+      )}
     </article>
+    {toc.length > 2 && (
+      <aside class="toc hidden xl:block">
+        <nav class="sticky top-32" aria-label={s.blog.toc}>
+          <p class="kicker mb-4">{s.blog.toc}</p>
+          <ol class="space-y-3 border-l border-line pl-4 text-sm">{toc.map((h) => <li><a href={`#${h.slug}`} data-toc={h.slug} class="text-muted transition-colors hover:text-fg">{h.text}</a></li>)}</ol>
+        </nav>
+      </aside>
+    )}
+    </div>
+    {related.length > 0 && (
+      <section class="mx-auto mt-24 max-w-3xl">
+        <p class="kicker mb-4">{s.blog.related}</p>
+        <ul class="border-t border-line">
+          {related.map((r) => (
+            <li class="border-b border-line">
+              <a href={paths.post(r.id)} data-hover class="group block py-6">
+                <span class="kicker">{fmtDate(r.data.date, lang)} · {readingTime(r.body)} {s.blog.read}</span>
+                <span class="display mt-2 block text-2xl font-semibold transition-colors group-hover:text-accent md:text-3xl">{r.data.title}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )}
     <section class="mx-auto mt-24 max-w-3xl">
       <p class="kicker mb-4">{s.blog.commentIntro}</p>
       <ContactForm lang={lang} title={s.blog.commentTitle} context={post.data.title} />
     </section>
   </main>
 </Base>
+
+<script>
+  // Índice lateral: resalta la sección que se está leyendo
+  const links = new Map([...document.querySelectorAll<HTMLAnchorElement>('[data-toc]')].map((a) => [a.dataset.toc!, a]));
+  if (links.size) {
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (!e.isIntersecting) continue;
+          links.forEach((a) => a.removeAttribute('aria-current'));
+          links.get(e.target.id)?.setAttribute('aria-current', 'true');
+        }
+      },
+      { rootMargin: '-20% 0px -70% 0px' },
+    );
+    links.forEach((_, id) => { const h = document.getElementById(id); if (h) io.observe(h); });
+  }
+  // Copiar enlace del artículo
+  document.querySelector<HTMLButtonElement>('[data-copy-link]')?.addEventListener('click', async (e) => {
+    const btn = e.currentTarget as HTMLButtonElement;
+    try {
+      await navigator.clipboard.writeText(location.origin + location.pathname);
+      const prev = btn.textContent;
+      btn.textContent = btn.dataset.done!;
+      setTimeout(() => (btn.textContent = prev), 2000);
+    } catch { /* sin portapapeles */ }
+  });
+</script>

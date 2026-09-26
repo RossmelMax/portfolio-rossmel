@@ -2,7 +2,8 @@
 title: 'Cómo evité que un LLM invente artículos del Código Civil'
 description: 'En AdvAI, mi proyecto de grado, el modelo no escribe las citas legales: solo elige entre fuentes reales y el sistema pone el texto literal. Así pasé de "suena bien" a citas verificables.'
 date: 2026-09-26
-tags: ['ia', 'rag', 'llm', 'advai']
+tags: ['ia', 'llm', 'rag', 'python']
+project: 'advai'
 lang: 'es'
 ---
 

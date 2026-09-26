@@ -15,7 +15,9 @@ const blog = defineCollection({
     updated: z.coerce.date().optional(),
     tags: z.array(z.string()).default([]),
     lang: z.enum(['es', 'en']).default('es'),
+    project: z.string().optional(), // slug del proyecto en src/data/profile.ts (enlaza artículo ↔ caso de estudio)
     draft: z.boolean().default(false), // true = no se publica
+    pinned: z.boolean().default(false), // true = aparece primero en el blog y en la portada
   }),
 });
 

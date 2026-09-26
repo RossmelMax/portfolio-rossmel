@@ -1,0 +1,28 @@
+---
+import type { Lang } from '../data/profile';
+import { visibleLiveSites } from '../data/profile';
+import { t } from '../data/i18n';
+/** Subdominios públicos (profile.ts → liveSites). No se muestra nada si no hay ninguno confirmado. */
+interface Props { lang: Lang; project?: string }
+const { lang, project } = Astro.props;
+const s = t(lang);
+const sites = project ? visibleLiveSites.filter((x) => x.project === project) : visibleLiveSites;
+---
+{sites.length > 0 && (
+  <section id="live" class="border-t border-line px-5 py-24 md:px-10">
+    <p class="kicker mb-6">{s.live.kicker}</p>
+    <h2 data-split class="display max-w-4xl text-4xl font-bold md:text-6xl">{s.live.title}</h2>
+    <p data-reveal class="mt-6 max-w-2xl text-muted">{s.live.body}</p>
+    <ul class="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+      {sites.map((x, i) => (
+        <li data-reveal data-reveal-delay={i * 0.06}>
+          <a href={`https://${x.host}`} target="_blank" rel="noopener" data-hover class="group block h-full rounded-2xl border border-line bg-bg-2 p-6 transition-colors hover:border-accent">
+            <span class="flex items-center gap-2 font-mono text-xs text-muted"><span class="h-2 w-2 rounded-full bg-accent"></span>{x.host}</span>
+            <span class="display mt-4 block text-2xl font-semibold transition-colors group-hover:text-accent">{x.name[lang]} ↗</span>
+            <span class="mt-2 block text-muted">{x.body[lang]}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </section>
+)}

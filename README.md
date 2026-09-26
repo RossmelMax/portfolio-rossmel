@@ -142,7 +142,8 @@ está aplicado a ese elemento).
 ## Animaciones: cómo funcionan
 
 `src/scripts/animations.ts` se carga en todas las páginas (salvo el CV) y activa efectos según
-atributos HTML. Para animar algo nuevo, basta con añadir el atributo:
+atributos HTML. Para animar algo nuevo, basta con añadir el atributo (ojo: estos nombres están
+reservados; `data-count` sin valor anima a 0, por eso el contador del blog usa `data-results`):
 
 | Atributo | Efecto |
 |---|---|
@@ -268,7 +269,18 @@ Respuestas de la API: `200 {ok:true}`, `400 invalid|captcha`, `502 send_failed`,
 
 - Artículos en `src/content/blog/<slug>.md` (Markdown). La URL es `/blog/<slug>/`.
 - Frontmatter: `title`, `description` (1–2 frases, sale en Google y al compartir), `date`,
-  `tags`, `lang` (`es`/`en`, por defecto `es`), `draft: true` para no publicar.
+  `tags`, `lang` (`es`/`en`, por defecto `es`), `draft: true` para no publicar,
+  `project: '<slug>'` para enlazarlo con su caso de estudio (el caso lista sus artículos y el
+  artículo muestra una tarjeta al proyecto) y `pinned: true` para que salga primero.
+- Etiquetas: reusar las existentes (`ia`, `llm`, `python`, `frontend`, `react`, `linux`,
+  `rendimiento`…). Las que tienen un solo artículo se agrupan tras el botón "+N más".
+- Portada con **buscador** (texto completo: el índice `/blog/search.json` se descarga solo al
+  empezar a buscar; tecla `/` para enfocar) y **filtro por etiqueta**; ambos quedan en la URL
+  (`/blog/?q=sqlite&tag=llm`), así se pueden compartir. Sin JS se ve la lista completa.
+- Cada artículo: índice lateral con la sección actual resaltada (en móvil, desplegable),
+  botón "Copiar enlace", tarjeta al caso de estudio y "Sigue leyendo" (mismo proyecto o etiquetas).
+- Estilo de los artículos: problema real → decisión clave → código simplificado del repo →
+  "Lo que aprendí". Nada de datos de clientes ni detalles de infraestructura (hosts, puertos, IPs).
 - Cada artículo termina con el formulario de contacto (`ContactForm` con `context` = título):
   el correo llega con el asunto "Blog: comentario de … sobre …".
 - RSS en `/blog/rss.xml`; aparece en el sitemap; la home muestra los 3 últimos ("Del blog").
@@ -316,6 +328,9 @@ Flujo diario: push a `main` = producción; push a otra rama / PR = URL de vista 
 - [x] Revisión exhaustiva con Claude local (`docs/REVISION.md`) — correcciones aplicadas en v3.7
 - [ ] Perfil de GitHub (`docs/github-profile/`, ver INSTRUCCIONES.md) y LinkedIn (`docs/LINKEDIN.md`)
 - [ ] Probar Lighthouse (meta ≥95) y accesibilidad con teclado
+- [x] v3.8: énfasis en programar sin IA (sobre mí, CV, línea de tiempo "antes y después de la IA"),
+  blog con buscador/etiquetas/índice/relacionados y 10 artículos (uno o más por proyecto con código visible)
+- [ ] Subdominios en "En vivo" (`liveSites` en profile.ts): Rossmel confirma cuáles se muestran (hoy todos `draft`)
 
 ---
 
@@ -354,4 +369,7 @@ Ramas:
 | 2026-09 | Formulario: Pages Function + Resend + Turnstile (gratis, sin backend propio). |
 | 2026-09 | Fondo WebGL limitado a 30 fps y menor resolución en móvil (rendimiento). |
 | 2026-09 | Despliegue en Cloudflare Pages (un proyecto, dos dominios, middleware para `cv.`). |
+| 2026-09 | v3.8: "programador primero". Sobre mí, CV y la sección Cómo trabajo cuentan que programó años sin IA (en WANT la IA llegó recién el último año) y qué herramientas usa hoy. |
+| 2026-09 | Blog "en condiciones": buscador de texto completo sin dependencias (índice JSON bajo demanda), etiquetas, índice por artículo, relacionados y enlaces artículo ↔ caso de estudio. Artículos en español. |
+| 2026-09 | Sección "En vivo" para subdominios: solo servicios públicos presentables; nunca paneles, SSH, chats ni servicios personales. |
 | 2026-09 | Fuera del sitio: watcher-backend, prototipos v0 (salvo SGPG), proyectos descartados, proyectos personales/regalos. |
