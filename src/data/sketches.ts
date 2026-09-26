@@ -241,6 +241,146 @@ export const sketches = {
     shapes: (g, o) => [g.circle(50, 50, 88, { ...o, roughness: 0.9 })],
   },
 
+  /* ---------- Un dibujo por proyecto (campo `doodle` en profile.ts) ---------- */
+  cube: {
+    viewBox: '0 0 100 100',
+    shapes: (g, o) => {
+      // cubo de Rubik isométrico: 3 caras con su grilla de 3×3
+      const L = (a: number[], b: number[], t: number) => [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t];
+      const face = (a: number[], b: number[], c: number[], d: number[], s: number) => {
+        const out = [g.polygon([a, b, c, d] as [number, number][], { ...o, seed: s })];
+        for (const t of [1 / 3, 2 / 3]) {
+          const [p, q] = [L(a, b, t), L(d, c, t)];
+          const [r, u] = [L(a, d, t), L(b, c, t)];
+          out.push(g.line(p[0], p[1], q[0], q[1], { ...o, seed: s + 1 }), g.line(r[0], r[1], u[0], u[1], { ...o, seed: s + 2 }));
+        }
+        return out;
+      };
+      return [
+        ...face([50, 8], [88, 28], [50, 48], [12, 28], 3),
+        ...face([12, 28], [50, 48], [50, 92], [12, 72], 7),
+        ...face([50, 48], [88, 28], [88, 72], [50, 92], 11),
+      ];
+    },
+  },
+  notebook: {
+    viewBox: '0 0 100 100',
+    shapes: (g, o) => [
+      g.rectangle(26, 8, 60, 84, o),
+      ...[18, 32, 46, 60, 74].map((y, i) => g.ellipse(26, y, 14, 8, { ...o, seed: 20 + i })),
+      ...[26, 38, 50, 62].map((y, i) => g.line(38, y, 76, y, { ...o, seed: 30 + i })),
+      g.line(38, 74, 60, 74, o),
+    ],
+  },
+  tv: {
+    viewBox: '0 0 100 100',
+    shapes: (g, o) => [
+      g.rectangle(8, 28, 84, 56, o),
+      g.line(42, 28, 28, 8, o),
+      g.line(58, 28, 72, 8, o),
+      g.polygon([[42, 44], [42, 70], [64, 57]], o),
+      g.line(24, 84, 18, 94, o),
+      g.line(76, 84, 82, 94, o),
+    ],
+  },
+  scales: {
+    viewBox: '0 0 100 100',
+    shapes: (g, o) => [
+      g.line(50, 18, 50, 88, o),
+      g.line(30, 90, 70, 90, o),
+      g.circle(50, 14, 8, o),
+      g.line(12, 26, 88, 26, o),
+      g.linearPath([[4, 56], [12, 26], [20, 56]], o),
+      g.path('M2 56 Q12 70 22 56 Z', o),
+      g.linearPath([[80, 56], [88, 26], [96, 56]], o),
+      g.path('M78 56 Q88 70 98 56 Z', o),
+    ],
+  },
+  car: {
+    viewBox: '0 0 100 100',
+    shapes: (g, o) => [
+      g.path('M6 70 L6 56 L20 50 L32 32 L68 32 L80 50 L94 56 L94 70 Z', o),
+      g.path('M36 37 L28 50 L48 50 L48 37 Z', o),
+      g.path('M54 37 L54 50 L74 50 L66 37 Z', o),
+      g.circle(28, 72, 18, o),
+      g.circle(72, 72, 18, o),
+    ],
+  },
+  gradcap: {
+    viewBox: '0 0 100 100',
+    shapes: (g, o) => [
+      g.polygon([[50, 16], [94, 36], [50, 56], [6, 36]], o),
+      g.path('M24 46 L24 66 Q50 82 76 66 L76 46', o),
+      g.line(94, 36, 94, 64, o),
+      g.circle(94, 68, 7, o),
+    ],
+  },
+  drop: {
+    viewBox: '0 0 100 100',
+    shapes: (g, o) => [
+      g.path('M50 6 C44 18 18 44 18 64 C18 82 32 94 50 94 C68 94 82 82 82 64 C82 44 56 18 50 6 Z', o),
+      g.curve([[32, 62], [33, 74], [44, 82]], o),
+    ],
+  },
+  megaphone: {
+    viewBox: '0 0 100 100',
+    shapes: (g, o) => [
+      g.path('M10 40 L10 62 L28 62 L70 84 L70 18 L28 40 Z', o),
+      g.line(28, 40, 28, 62, o),
+      g.path('M32 64 L38 88 L48 88 L44 68', o),
+      g.curve([[80, 38], [86, 51], [80, 64]], o),
+      g.curve([[88, 28], [96, 51], [88, 74]], { ...o, seed: 9 }),
+    ],
+  },
+  plate: {
+    viewBox: '0 0 100 100',
+    shapes: (g, o) => [
+      g.circle(52, 52, 58, o),
+      g.circle(52, 52, 38, { ...o, seed: 6 }),
+      g.line(10, 36, 10, 90, o),
+      g.path('M4 12 L4 28 Q10 38 16 28 L16 12', o),
+      g.line(10, 12, 10, 28, o),
+      g.path('M94 90 L94 12 Q84 28 86 52 L94 52', o),
+    ],
+  },
+  dumbbell: {
+    viewBox: '0 0 100 100',
+    shapes: (g, o) => [
+      g.line(24, 50, 76, 50, o),
+      g.rectangle(6, 30, 10, 40, o),
+      g.rectangle(16, 37, 8, 26, o),
+      g.rectangle(84, 30, 10, 40, o),
+      g.rectangle(76, 37, 8, 26, o),
+    ],
+  },
+  calendar: {
+    viewBox: '0 0 100 100',
+    shapes: (g, o) => [
+      g.rectangle(12, 20, 76, 70, o),
+      g.line(12, 38, 88, 38, o),
+      g.line(32, 12, 32, 28, o),
+      g.line(68, 12, 68, 28, o),
+      g.linearPath([[34, 64], [46, 76], [68, 50]], o),
+    ],
+  },
+  bag: {
+    viewBox: '0 0 100 100',
+    shapes: (g, o) => [g.path('M14 34 L86 34 L80 92 L20 92 Z', o), g.path('M36 44 L36 30 C36 10 64 10 64 30 L64 44', o)],
+  },
+  heart: {
+    viewBox: '0 0 100 100',
+    shapes: (g, o) => [
+      g.path('M50 88 C20 66 8 50 8 34 C8 20 18 12 30 12 C40 12 46 18 50 26 C54 18 60 12 70 12 C82 12 92 20 92 34 C92 50 80 66 50 88 Z', o),
+    ],
+  },
+  pin: {
+    viewBox: '0 0 100 100',
+    shapes: (g, o) => [
+      g.path('M50 94 C44 82 20 58 20 38 C20 20 34 8 50 8 C66 8 80 20 80 38 C80 58 56 82 50 94 Z', o),
+      g.circle(50, 38, 20, o),
+    ],
+  },
+
   /* ---------- Anotaciones ---------- */
   circle: {
     viewBox: '0 0 200 100',
@@ -283,4 +423,30 @@ export function markHtml(kind: 'underline' | 'circle', text: string, seed: numbe
   const esc = (x: string) => x.replace(/&/g, '&amp;').replace(/</g, '&lt;');
   const d = paths.map((p) => `<path d="${p}" pathLength="1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>`).join('');
   return `<span class="relative inline-block whitespace-nowrap text-fg${kind === 'circle' ? ' mx-2' : ''}">${esc(text)}<svg viewBox="${viewBox}" fill="none" aria-hidden="true" class="${svgCls}" data-draw preserveAspectRatio="none">${d}</svg></span>`;
+}
+
+/**
+ * Estela punteada para los dibujos "en vuelo" (<SketchFlight>): una curva de 400×260 cortada en
+ * tramos. `variant` cambia la forma (0 = curva suave, 1 = con rulo, 2 = salto).
+ */
+export function trailPaths(seed = 1, variant = 0) {
+  const curves: [number, number][][] = [
+    [[10, 250], [120, 160], [220, 196], [292, 112]],
+    [[10, 244], [300, 200], [70, 60], [288, 110]],
+    [[10, 200], [70, 20], [200, 270], [290, 112]],
+  ];
+  const [a, b, c, d] = curves[variant % curves.length];
+  const at = (t: number): [number, number] => {
+    const m = 1 - t;
+    return [0, 1].map((k) => m * m * m * a[k] + 3 * m * m * t * b[k] + 3 * m * t * t * c[k] + t * t * t * d[k]) as [number, number];
+  };
+  const g = rough.generator();
+  const o: Opts = { roughness: 0.8, bowing: 1, stroke: 'currentColor', strokeWidth: 1.4, seed, disableMultiStroke: true };
+  const N = 42;
+  const out: string[] = [];
+  for (let i = 0; i < N; i += 3) {
+    const pts = [at(i / N), at((i + 1) / N), at((i + 2) / N)];
+    out.push(...g.toPaths(g.curve(pts, { ...o, seed: seed + i })).map((p) => p.d));
+  }
+  return out;
 }

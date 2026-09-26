@@ -4,11 +4,13 @@ import { experience } from '../data/profile';
 import { t, fmtMonth } from '../data/i18n';
 import Sketch from './Sketch.astro';
 import Marked from './Marked.astro';
+import SketchFlight from './SketchFlight.astro';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 const s = t(lang);
 ---
-<section id="experience" class="px-5 py-32 md:px-10">
+<section id="experience" class="relative overflow-hidden px-5 py-32 md:px-10">
+  <SketchFlight icon="laptop" seed={101} variant={2} class="pointer-events-none absolute right-4 h-auto w-[48vw] max-w-[26rem] text-accent opacity-80 md:right-10 top-16" />
   <h2 class="kicker mb-10">{s.experience.kicker}</h2>
   <div data-timeline class="relative">
     <div class="absolute left-0 top-0 h-full w-px bg-line md:left-[25%]"></div>

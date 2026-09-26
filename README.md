@@ -345,6 +345,13 @@ El formulario de contacto al final de cada artículo sigue funcionando igual.
   `src/lib/remark-marks.ts`, registrado en `astro.config.mjs`). Ojo: en Astro 7 `remarkPlugins`
   necesita el paquete `@astrojs/markdown-remark` (el procesador por defecto es Sätteri). No usar marcas
   dentro de títulos (`##`) ni bloques de código; 1–2 por artículo, frases cortas.
+- **Un dibujo por proyecto:** campo `doodle` en `profile.ts` (balanza, auto, birrete, gota, cuaderno,
+  cubo de Rubik, tele, megáfono…). Aparece en la tarjeta de la galería, en la lista de otros proyectos,
+  en las tarjetas de "En vivo" y grande en el hero de cada caso de estudio.
+- **Dibujos "en vuelo"** (`SketchFlight.astro`): estela punteada que cruza el texto y termina en un
+  dibujo, trazada con el scroll (como el avión de Contacto). Están en Experiencia (laptop), En vivo
+  (servidor), Cómo trabajo (cohete), Del blog (lápiz), /sobre-mi/ (laptop), /blog/ (foco) y el hero de
+  cada proyecto. `variant` 0–2 cambia la forma de la estela.
 - **Botón "volver arriba"** (`ToTop.astro`): aparece tras bajar ~una pantalla, con un anillo dibujado a
   mano que se completa según el progreso del scroll; usa Lenis (`window.__lenis`) si está activo.
 - Letra manuscrita solo para etiquetas (`font-hand`, Caveat).
@@ -470,4 +477,5 @@ Ramas:
 | 2026-09 | Entrada del nombre fluida en móvil: las demás animaciones se preparan después del intro y en pedazos (antes, un bloqueo de ~380 ms con CPU de gama media). |
 | 2026-09 | Tono: transmitir que entiende lo que genera la IA, sin frases absolutas ni "no soy vibe coder" (pedido de Rossmel). |
 | 2026-09 | v3.13: botón "volver arriba" con anillo de progreso y más dibujos a mano (subrayados/círculos en hero, experiencia, proyectos, historia y los 22 artículos). Pedido de Rossmel. |
+| 2026-09 | v3.14: dibujo por proyecto y dibujos "en vuelo" en más secciones; CV con "WANT Digital Agency" completo y más proyectos (Homelab, Notebook, Rubik, rOS). Pedido de Rossmel. |
 | 2026-09 | Fuera del sitio: watcher-backend, prototipos v0 (salvo SGPG), proyectos descartados, proyectos personales/regalos. |
