@@ -791,7 +791,7 @@ export const aiJourney: { period: L; title: L; body: L; tools?: string[] }[] = [
  * Nunca listar paneles de administración, SSH, chats privados ni servicios personales.
  * `project` = slug del caso de estudio donde también aparece (p. ej. 'homelab').
  */
-export const liveSites: { host: string; name: L; body: L; project?: string; draft?: boolean }[] = [
+export const liveSites: { host: string; name: L; body: L; project?: string; post?: string; draft?: boolean }[] = [
   {
     host: 'notebook.rossmel.top',
     name: { es: 'Notebook RAG', en: 'RAG Notebook' },
@@ -814,10 +814,11 @@ export const liveSites: { host: string; name: L; body: L; project?: string; draf
     host: 'selflix.rossmel.top',
     name: { es: 'Selflix', en: 'Selflix' },
     body: {
-      es: 'Mi servidor multimedia propio (Jellyfin), con apps en el celular y la tele. Acceso solo con cuenta.',
-      en: 'My own media server (Jellyfin), with phone and TV apps. Account-only access.',
+      es: 'Mi propio media center con Jellyfin: biblioteca ordenada, "seguir viendo" y app en el celular. Acceso solo con cuenta.',
+      en: 'My own Jellyfin media center: organized library, "continue watching" and a phone app. Account-only access.',
     },
     project: 'homelab',
+    post: 'media-center-propio-con-jellyfin', // artículo del blog: "Cómo lo hice"
   },
 ];
 

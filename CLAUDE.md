@@ -34,7 +34,7 @@ Antes de dar algo por terminado: `npm run build` sin errores, y si cambió conte
 - Formulario de contacto y Search Console: configurados y funcionando (sept. 2026).
 - v3.6: blog (/blog, Markdown en src/content/blog), 'Lo que aprendí' por proyecto, CTAs y fondo de respaldo en el hero.
 - v3.7: correcciones de la revisión de Claude local (móvil 360 px, LCP, blog EN, contraste, validación).
-- v3.8: énfasis en programar sin IA (sobre mí, CV, línea de tiempo en Cómo trabajo); blog con buscador, etiquetas, índice, relacionados y 10 artículos; sección "En vivo" (`liveSites`: notebook, rubik, selflix; el resto de subdominios NO va).
+- v3.8: énfasis en programar sin IA (sobre mí, CV, línea de tiempo en Cómo trabajo); blog con buscador, etiquetas, índice, relacionados y 11 artículos (incluye cómo montar un media center con Jellyfin, enlazado desde la tarjeta de Selflix); sección "En vivo" (`liveSites`: notebook, rubik, selflix; el resto de subdominios NO va).
 - Flujo de publicación: Claude web sube a su rama y abre un PR a main; Rossmel lo aprueba en GitHub → Cloudflare publica.
 - Siguiente: capturas y video de AdvAI (Rossmel); GitHub/LinkedIn (docs/).
 - Analítica: inyección automática de Cloudflare, sin token.
