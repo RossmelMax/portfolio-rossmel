@@ -3,7 +3,8 @@ import type { Lang } from '../data/profile';
 import { profile } from '../data/profile';
 import { t } from '../data/i18n';
 import { Image } from 'astro:assets';
-import photo from '../assets/rossmel.jpg';
+import person from '../assets/rossmel-person.png';
+import outline from '../assets/rossmel-outline.png?url';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 const s = t(lang);
@@ -13,9 +14,17 @@ const [lead, ...rest] = profile.about[lang];
   <h2 class="kicker mb-10">{s.about.kicker}</h2>
   <p data-words class="display max-w-6xl text-4xl font-medium md:text-7xl">{lead}</p>
   <div class="mt-20 grid items-center gap-12 md:grid-cols-12">
-    <figure class="mx-auto w-full max-w-[22rem] md:col-span-4 md:mx-0 md:max-w-[26rem]" data-reveal>
-      <div class="overflow-hidden rounded-3xl border border-line bg-black">
-        <Image src={photo} alt={profile.photoAlt[lang]} widths={[360, 540, 720]} sizes="(min-width: 768px) 26rem, 22rem" class="block aspect-square h-auto w-full object-cover" loading="lazy" />
+    <figure class="mx-auto w-full max-w-[22rem] md:col-span-4 md:mx-0 md:max-w-[26rem]">
+      <!--
+        Foto en 3 capas (fondo, contorno y persona) con parallax al hacer scroll e inclinación con el mouse.
+        Capas generadas desde rossmel.jpg: ver README → "Foto en capas". La persona y el contorno
+        son 30 % más altos (la polera sigue hacia abajo) para que nunca se vea un corte al moverse. Sin JS / reduced-motion quedan
+        alineadas y se ve igual que la foto original.
+      -->
+      <div data-layers class="relative aspect-square" style="clip-path: inset(-40% 0 0 0 round 0 0 1.5rem 1.5rem)">
+        <div class="absolute inset-0 rounded-3xl border border-line bg-black"></div>
+        <div data-layer="0.5" data-layer-outline class="photo-outline absolute inset-x-0 top-0 h-[130%] origin-[50%_35%]" style={`--outline:url(${outline})`} aria-hidden="true"></div>
+        <Image data-layer="1" src={person} alt={profile.photoAlt[lang]} widths={[360, 540, 720, 900]} sizes="(min-width: 768px) 26rem, 22rem" format="webp" class="absolute inset-x-0 top-0 block h-auto w-full" loading="lazy" />
       </div>
       <figcaption class="kicker mt-4 flex items-center gap-2"><span class="h-2 w-2 rounded-full bg-accent"></span>{profile.location[lang]}</figcaption>
     </figure>

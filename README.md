@@ -153,6 +153,7 @@ Prepararlas todas juntas congelaba el hero ~300–400 ms en celulares (se veía 
 |---|---|
 | `data-split` | Título que entra línea por línea (SplitText + máscara) |
 | `data-reveal` (+ `data-reveal-delay="0.2"`) | Sube y aparece al entrar en pantalla |
+| `data-layers` (+ hijos `data-layer="0.5"`, `data-layer-outline`) | Foto en capas: parallax por profundidad al hacer scroll, el contorno aparece y crece, inclinación con el mouse |
 | `data-words` | Párrafo cuyas palabras se "encienden" según el scroll |
 | `data-horizontal` + `data-track` | Sección fijada con scroll horizontal (solo ≥768px) |
 | `data-card` + `data-card-media` | Zoom del fondo de la tarjeta dentro del scroll horizontal |
@@ -323,6 +324,14 @@ El formulario de contacto al final de cada artículo sigue funcionando igual.
   *Inspección de URLs* → pedir indexación de páginas nuevas (los artículos EN, por ejemplo).
 - No se usa Google Analytics a propósito: pesa más, usa cookies y pediría banner de consentimiento.
 
+### Foto en capas ("Sobre mí")
+La foto se arma con 3 capas: fondo negro (CSS), contorno (`src/assets/rossmel-outline.png` usado como
+máscara y pintado con `--accent`: lima en oscuro, violeta en claro) y la persona recortada
+(`src/assets/rossmel-person.png`). Se generan desde `src/assets/rossmel.jpg` con
+`python3 scripts/build-photo-layers.py` (requiere `pip install pillow numpy scipy`). La animación está
+en `animations.ts` → `initLayers()`; sin JS o con reduced-motion las capas quedan alineadas y se ve la
+foto original. `rossmel.jpg` sigue siendo la imagen de los datos estructurados (JSON-LD).
+
 ### SEO
 - `@astrojs/sitemap` genera `sitemap-index.xml` (ES/EN con hreflang); `robots.txt` lo declara.
 - Dar de alta `https://portfolio.rossmel.top` en **Google Search Console** (verificación por DNS,
@@ -418,6 +427,7 @@ Ramas:
 | 2026-09 | v3.8: "programador primero". Sobre mí, CV y la sección Cómo trabajo cuentan que programó años sin IA (en WANT la IA llegó recién el último año) y qué herramientas usa hoy. |
 | 2026-09 | Blog "en condiciones": buscador de texto completo sin dependencias (índice JSON bajo demanda), etiquetas, índice por artículo, relacionados y enlaces artículo ↔ caso de estudio. Artículos en español. |
 | 2026-09 | Sección "En vivo": notebook, rubik y selflix. Fuera: music, mcu, waitlist, stream, chat, admin, admin-music, ssh, ori, class, s, test (y los del propio portafolio). |
+| 2026-09 | Foto del "Sobre mí" en 3 capas (fondo, contorno, persona) con parallax y tilt; capas generadas por script desde la foto original. |
 | 2026-09 | Blog bilingüe (artículos EN en `src/content/blog/en/`, pareados con `translationOf`), orden en la portada, fechas repartidas, compartir, giscus opcional, SEO (JSON-LD Person/WebSite/BlogPosting/Breadcrumb, og:locale, x-default, lastmod). Stack traducible (`SkillItem`). "La agencia" → WANT. |
 | 2026-09 | Los servicios en vivo pasan a ser proyectos con página de detalle (qué es, cómo funciona, lo que aprendí) en vez de enlaces directos; se elimina `liveSites`. Pedido de Rossmel. |
 | 2026-09 | Entrada del nombre fluida en móvil: las demás animaciones se preparan después del intro y en pedazos (antes, un bloqueo de ~380 ms con CPU de gama media). |
