@@ -144,6 +144,15 @@ html.lenis body {
   border-radius: 1rem;
 }
 
+/* Foto en capas (About): el contorno toma el color de acento del tema */
+.photo-outline {
+  background: var(--accent);
+  -webkit-mask: var(--outline) center / 100% 100% no-repeat;
+  mask: var(--outline) center / 100% 100% no-repeat;
+  filter: drop-shadow(0 0 1.5rem color-mix(in oklab, var(--accent) 45%, transparent));
+}
+[data-layer] { will-change: transform; }
+
 /* Blog: etiquetas filtrables */
 .tag-chip {
   border: 1px solid var(--line);

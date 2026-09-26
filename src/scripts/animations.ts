@@ -12,6 +12,9 @@
  *  data-magnetic       botón que "atrae" el cursor
  *  data-count="42"     contador numérico
  *  data-hover          agranda el cursor personalizado
+ *  data-layers         foto en capas: parallax por profundidad al hacer scroll + inclinación con el mouse
+ *    └ data-layer="0.5"   profundidad de cada capa (0 = quieta, 1 = la que más se mueve)
+ *    └ data-layer-outline la capa del contorno: aparece y crece para sobresalir
  */
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -215,6 +218,38 @@ function initHorizontal() {
   });
 }
 
+/* ---------------- Foto en capas ---------------- */
+function initLayers() {
+  document.querySelectorAll<HTMLElement>('[data-layers]').forEach((box) => {
+    const layers = [...box.querySelectorAll<HTMLElement>('[data-layer]')];
+    const outline = box.querySelector<HTMLElement>('[data-layer-outline]');
+    // Scroll: cada capa se desplaza según su profundidad; en el centro de la pantalla quedan alineadas
+    const tl = gsap.timeline({ scrollTrigger: { trigger: box, start: 'top bottom', end: 'bottom top', scrub: 0.8 } });
+    layers.forEach((l) => {
+      const d = Number(l.dataset.layer) || 0;
+      tl.fromTo(l, { yPercent: 10 * d }, { yPercent: -10 * d, ease: 'none', duration: 1 }, 0);
+    });
+    // El contorno aparece y crece un poco para sobresalir detrás de la persona
+    if (outline) {
+      tl.fromTo(outline, { opacity: 0, scale: 0.86 }, { opacity: 1, scale: 1.03, ease: 'power2.out', duration: 0.45 }, 0)
+        .to(outline, { scale: 1.07, ease: 'none', duration: 0.55 }, 0.45);
+    }
+    // Mouse: inclinación con profundidad (solo punteros finos)
+    if (!finePointer) return;
+    const movers = layers.map((l) => {
+      const d = Number(l.dataset.layer) || 0;
+      return { d, x: gsap.quickTo(l, 'x', { duration: 0.6, ease: 'power3' }), y: gsap.quickTo(l, 'y', { duration: 0.6, ease: 'power3' }) };
+    });
+    box.addEventListener('pointermove', (e) => {
+      const r = box.getBoundingClientRect();
+      const px = (e.clientX - r.left) / r.width - 0.5;
+      const py = (e.clientY - r.top) / r.height - 0.5;
+      movers.forEach((m) => { m.x(px * 28 * m.d); m.y(py * 20 * m.d); });
+    });
+    box.addEventListener('pointerleave', () => movers.forEach((m) => { m.x(0); m.y(0); }));
+  });
+}
+
 /* ---------------- Timeline ---------------- */
 function initTimeline() {
   document.querySelectorAll<HTMLElement>('[data-timeline]').forEach((tl) => {
@@ -319,6 +354,7 @@ export async function initAnimations() {
   await nextFrame();
   initHorizontal();
   initTimeline();
+  initLayers();
   await nextFrame();
   await runChunked(revealTasks());
   ScrollTrigger.refresh();
