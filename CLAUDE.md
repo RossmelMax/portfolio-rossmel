@@ -1,0 +1,32 @@
+# CLAUDE.md — portfolio-rossmel
+
+Portafolio + CV de Rossmel Abasto. Idioma de trabajo: **español** (el sitio es ES/EN).
+Lee `README.md` para el detalle completo; aquí va lo esencial.
+
+## Comandos
+- `npm run dev` — desarrollo (http://localhost:4321)
+- `npm run build` — build estático a `dist/`
+- `npm run cv:pdf` — PDFs del CV (después de `build`); usa Chromium del sistema o `$CHROMIUM_PATH`
+- `npm run check` — tipos
+
+Antes de dar algo por terminado: `npm run build` sin errores, y si cambió contenido del CV,
+`npm run cv:pdf` y commitear los PDF de `public/cv/`.
+
+## Reglas
+- **Contenido solo en `src/data/profile.ts`** (textos `{ es, en }`). Nunca hardcodear textos de
+  contenido en componentes. Textos de interfaz → `src/data/i18n.ts`.
+- Cualquier dato no confirmado por Rossmel va con `// TODO(confirmar)`. No inventar métricas,
+  fechas ni logros: preguntar.
+- Nunca poner en el sitio información personal/familiar ni secretos (ver repos privados con cuidado:
+  los proyectos de clientes se marcan `confidential: true` y no se enlaza código).
+- Animaciones: usar los atributos `data-*` de `src/scripts/animations.ts`; respetar
+  `prefers-reduced-motion`. Nuevos efectos → añadirlos allí y documentarlos en README.
+- El CV (`Resume.astro`) debe seguir siendo ATS-friendly: una columna, sin tablas/íconos/imágenes,
+  encabezados estándar, fuente estándar.
+- Estilo: tokens de color en `src/styles/global.css` (`--bg`, `--fg`, `--accent`…) → clases
+  Tailwind `bg-bg`, `text-fg`, `text-accent`, etc.
+- Mantener README.md al día (sección "Estado actual y pendientes" e "Historial de decisiones").
+
+## Estado (actualizar al terminar cada sesión)
+- v3.0 inicial construida (sept. 2026). Pendientes en README → "Estado actual y pendientes".
+- Info pendiente de Rossmel: ver `docs/PROMPTS-CLAUDE-LOCAL.md` y `docs/PROYECTOS-CANDIDATOS.md`.

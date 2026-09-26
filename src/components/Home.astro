@@ -1,0 +1,30 @@
+---
+import type { Lang } from '../data/profile';
+import Base from '../layouts/Base.astro';
+import Nav from './Nav.astro';
+import Preloader from './Preloader.astro';
+import Hero from './Hero.astro';
+import About from './About.astro';
+import Experience from './Experience.astro';
+import Projects from './Projects.astro';
+import Stack from './Stack.astro';
+import Workflow from './Workflow.astro';
+import Contact from './Contact.astro';
+import { paths } from '../data/i18n';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const altPath = paths.home(lang === 'es' ? 'en' : 'es');
+---
+<Base lang={lang} altPath={altPath}>
+  <Preloader />
+  <Nav lang={lang} altPath={altPath} />
+  <main>
+    <Hero lang={lang} />
+    <About lang={lang} />
+    <Experience lang={lang} />
+    <Projects lang={lang} />
+    <Stack lang={lang} />
+    <Workflow lang={lang} />
+    <Contact lang={lang} />
+  </main>
+</Base>

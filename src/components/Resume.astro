@@ -1,0 +1,121 @@
+---
+/**
+ * CV optimizado para ATS (Applicant Tracking Systems):
+ *  - una sola columna, orden de lectura lineal
+ *  - encabezados estándar (Resumen / Experiencia / Educación / Habilidades…)
+ *  - sin tablas, íconos, imágenes ni texto en gráficos
+ *  - fuentes estándar del sistema; todo es texto seleccionable
+ *  - fechas en formato "mes año – mes año"
+ * El PDF se genera desde esta misma página: `npm run cv:pdf`.
+ */
+import type { Lang } from '../data/profile';
+import { profile, experience, education, skills, projects, learning } from '../data/profile';
+import { fmtMonth, paths } from '../data/i18n';
+import Base from '../layouts/Base.astro';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const H = lang === 'es'
+  ? { summary: 'Resumen profesional', exp: 'Experiencia laboral', edu: 'Educación', skills: 'Habilidades técnicas', projects: 'Proyectos', langs: 'Idiomas', courses: 'Formación complementaria', soft: 'Habilidades blandas', download: 'Descargar PDF', back: 'Ver portafolio' }
+  : { summary: 'Professional Summary', exp: 'Work Experience', edu: 'Education', skills: 'Technical Skills', projects: 'Projects', langs: 'Languages', courses: 'Additional Training', soft: 'Soft Skills', download: 'Download PDF', back: 'View portfolio' };
+const altPath = paths.cv(lang === 'es' ? 'en' : 'es');
+const contact = [
+  profile.location[lang].split(' · ')[0],
+  profile.email,
+  profile.links.linkedin?.replace(/^https?:\/\/(www\.)?/, ''),
+  profile.links.github.replace(/^https?:\/\//, ''),
+  profile.portfolioUrl.replace(/^https?:\/\//, ''),
+].filter(Boolean);
+// Limpia TODOs y símbolos que algunos ATS leen mal; asegura punto final.
+const clean = (s: string) => s.replace(/TODO\S*[^.]*\.?/g, '').replace(/\s*→\s*/g, ' — ').trim();
+const sentence = (s: string) => { const c = clean(s); return c && !/[.!?]$/.test(c) ? c + '.' : c; };
+---
+<Base lang={lang} altPath={altPath} title={lang === 'es' ? 'CV' : 'Resume'} description={profile.summary[lang]} plain>
+  <div class="cv-toolbar">
+    <a href={new URL(paths.home(lang), profile.portfolioUrl).href}>← {H.back}</a>
+    <span>
+      <a href={altPath}>{lang === 'es' ? 'English' : 'Español'}</a>
+      <a href={paths.cvPdf(lang)} download>{H.download}</a>
+    </span>
+  </div>
+  <main class="cv">
+    <header>
+      <h1>{profile.name}</h1>
+      <p class="cv-title">{clean(profile.role[lang]).replace(' — ', ' | ')}</p>
+      <p class="cv-contact">{contact.join(' | ')}</p>
+    </header>
+
+    <section>
+      <h2>{H.summary}</h2>
+      <p>{profile.summary[lang]}</p>
+    </section>
+
+    <section>
+      <h2>{H.skills}</h2>
+      {skills.map((g) => <p><strong>{g.group[lang]}:</strong> {g.items.join(', ')}</p>)}
+    </section>
+
+    <section>
+      <h2>{H.exp}</h2>
+      {experience.filter((e) => e.cv).map((e) => (
+        <article>
+          <h3>{e.role[lang]} — {e.company}</h3>
+          <p class="cv-meta">{fmtMonth(e.start, lang)} – {fmtMonth(e.end, lang)} | {e.location[lang]} | {clean(e.type[lang])}</p>
+          <ul>{e.bullets[lang].map((b) => <li>{clean(b)}</li>)}</ul>
+        </article>
+      ))}
+    </section>
+
+    <section>
+      <h2>{H.projects}</h2>
+      {projects.filter((p) => p.cv).map((p) => (
+        <article>
+          <h3>{p.name} — {p.kind[lang]} ({p.year})</h3>
+          <p>{[p.tagline[lang], ...p.highlights[lang].slice(0, 2)].map(sentence).filter(Boolean).join(' ')}</p>
+          <p class="cv-meta">{lang === 'es' ? 'Tecnologías' : 'Technologies'}: {p.stack.join(', ')}</p>
+        </article>
+      ))}
+    </section>
+
+    <section>
+      <h2>{H.edu}</h2>
+      {education.map((ed) => (
+        <article>
+          <h3>{ed.title[lang]} — {ed.school}</h3>
+          <p class="cv-meta">{ed.period[lang]}</p>
+          {ed.note[lang] && <p>{ed.note[lang]}</p>}
+        </article>
+      ))}
+      <p><strong>{H.courses}:</strong> {learning.join(', ')}</p>
+    </section>
+
+    <section>
+      <h2>{H.langs}</h2>
+      <p>{profile.languages.map((l) => `${l.name[lang]} (${l.level[lang]})`).join(', ')}</p>
+      <h2>{H.soft}</h2>
+      <p>{profile.softSkills[lang].join(', ')}</p>
+    </section>
+  </main>
+</Base>
+
+<style is:global>
+  /* El CV ignora el tema del sitio: siempre blanco y negro, fuentes estándar. */
+  html:has(.cv), html:has(.cv) body { background: #fff !important; color: #111 !important; color-scheme: light; }
+  .cv-toolbar { max-width: 800px; margin: 0 auto; padding: 16px 24px; display: flex; justify-content: space-between; font: 13px/1.4 Arial, Helvetica, sans-serif; }
+  .cv-toolbar a { color: #111; margin-left: 16px; }
+  .cv { max-width: 800px; margin: 0 auto 64px; padding: 0 24px; font: 10.5pt/1.45 Arial, Helvetica, sans-serif; color: #111; }
+  .cv h1 { font-size: 22pt; font-weight: 700; margin: 0; letter-spacing: 0; }
+  .cv .cv-title { font-size: 12pt; margin: 2px 0 4px; }
+  .cv .cv-contact { font-size: 9.5pt; color: #333; }
+  .cv h2 { font-size: 11.5pt; font-weight: 700; text-transform: uppercase; border-bottom: 1px solid #111; padding-bottom: 2px; margin: 16px 0 6px; }
+  .cv h3 { font-size: 10.5pt; font-weight: 700; margin: 8px 0 0; }
+  .cv .cv-meta { font-size: 9.5pt; color: #333; margin: 0 0 3px; }
+  .cv ul { list-style: disc; padding-left: 18px; margin: 3px 0 6px; }
+  .cv li { margin: 1px 0; }
+  .cv p { margin: 2px 0; }
+  .cv article { break-inside: avoid; }
+  @page { size: A4; margin: 14mm 14mm; }
+  @media print {
+    .cv-toolbar { display: none; }
+    .cv { margin: 0; padding: 0; max-width: none; }
+  }
+</style>

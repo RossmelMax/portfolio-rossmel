@@ -1,0 +1,7 @@
+---
+import { profile } from '../data/profile';
+---
+<div data-preloader class="fixed inset-0 z-[80] flex flex-col justify-between bg-accent p-6 text-accent-ink md:p-10" aria-hidden="true">
+  <span class="font-mono text-xs uppercase tracking-widest">{profile.name} — Portfolio ©{new Date().getFullYear()}</span>
+  <span data-preloader-count class="display self-end text-[22vw] font-bold leading-none md:text-[16vw]">000</span>
+</div>

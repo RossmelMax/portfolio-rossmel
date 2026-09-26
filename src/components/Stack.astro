@@ -1,0 +1,28 @@
+---
+import type { Lang } from '../data/profile';
+import { skills, marquee } from '../data/profile';
+import { t } from '../data/i18n';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const s = t(lang);
+---
+<section id="stack" class="py-32">
+  <p class="kicker mb-10 px-5 md:px-10">{s.stack.kicker}</p>
+  <div class="overflow-hidden border-y border-line py-6" aria-hidden="true">
+    <div class="marquee-track">
+      {[...marquee, ...marquee].map((m) => (
+        <span class="display flex items-center px-6 text-5xl font-semibold md:text-8xl">{m}<span class="ml-12 text-accent">✦</span></span>
+      ))}
+    </div>
+  </div>
+  <div class="mt-16 grid gap-4 px-5 md:grid-cols-2 md:px-10 lg:grid-cols-4">
+    {skills.map((g, i) => (
+      <div class="rounded-3xl border border-line bg-bg-2 p-7" data-reveal data-reveal-delay={i * 0.06}>
+        <h3 class="display text-2xl font-semibold">{g.group[lang]}</h3>
+        <ul class="mt-6 flex flex-wrap gap-2">
+          {g.items.map((it) => <li class="rounded-full border border-line px-3 py-1 text-sm text-muted">{it}</li>)}
+        </ul>
+      </div>
+    ))}
+  </div>
+</section>

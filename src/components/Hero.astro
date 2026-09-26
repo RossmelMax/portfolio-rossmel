@@ -1,0 +1,30 @@
+---
+import type { Lang } from '../data/profile';
+import { profile } from '../data/profile';
+import { t } from '../data/i18n';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const s = t(lang);
+---
+<section data-hero class="relative h-[100svh] min-h-[600px] overflow-hidden">
+  <canvas data-shader class="absolute inset-0 h-full w-full" aria-hidden="true"></canvas>
+  <div data-hero-inner class="relative z-10 flex h-full flex-col justify-end px-5 pb-10 md:px-10 md:pb-14">
+    <p data-hero-fade class="kicker mb-6 flex items-center gap-3">
+      <span class="relative flex h-2 w-2"><span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-75"></span><span class="relative inline-flex h-2 w-2 rounded-full bg-accent"></span></span>
+      {s.hero.available}
+    </p>
+    <h1 data-hero-title class="display text-[17vw] font-bold uppercase md:text-[13.5vw]">
+      Rossmel<br />Abasto
+    </h1>
+    <div class="mt-8 grid gap-6 border-t border-line pt-6 md:grid-cols-12">
+      <p data-hero-fade class="text-lg text-fg/90 md:col-span-6 md:text-2xl">{profile.headline[lang]}</p>
+      <p data-hero-fade class="kicker md:col-span-3 md:col-start-8">{profile.role[lang]}<br />{profile.location[lang]}</p>
+      <a data-hero-fade href="#about" class="kicker flex items-end justify-end gap-2 md:col-span-2 md:col-start-11">{s.hero.scroll} <span class="inline-block animate-bounce">↓</span></a>
+    </div>
+  </div>
+</section>
+<script>
+  import { mountShader } from '../scripts/shader';
+  const c = document.querySelector<HTMLCanvasElement>('[data-shader]');
+  if (c) mountShader(c);
+</script>

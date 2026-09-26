@@ -1,0 +1,77 @@
+---
+import '../styles/global.css';
+import type { Lang } from '../data/profile';
+import { profile } from '../data/profile';
+
+interface Props {
+  lang: Lang;
+  title?: string;
+  description?: string;
+  /** Ruta equivalente en el otro idioma (para hreflang y el switch ES/EN). */
+  altPath: string;
+  /** Páginas "limpias" (CV) no cargan animaciones ni cursor. */
+  plain?: boolean;
+}
+const { lang, title, description, altPath, plain = false } = Astro.props;
+const pageTitle = title ? `${title} — ${profile.name}` : `${profile.name} — ${profile.role[lang]}`;
+const desc = description ?? profile.headline[lang];
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const alt = new URL(altPath, Astro.site);
+const personLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: profile.name,
+  jobTitle: profile.role.en,
+  email: `mailto:${profile.email}`,
+  url: profile.portfolioUrl,
+  sameAs: Object.values(profile.links).filter(Boolean),
+  address: { '@type': 'PostalAddress', addressLocality: 'Cochabamba', addressCountry: 'BO' },
+};
+---
+<!doctype html>
+<html lang={lang} data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={desc} />
+    <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang={lang} href={canonical} />
+    <link rel="alternate" hreflang={lang === 'es' ? 'en' : 'es'} href={alt} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="theme-color" content="#0a0a0b" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={desc} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={new URL('/og.png', Astro.site)} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <script type="application/ld+json" set:html={JSON.stringify(personLd)} />
+    <!-- Tema antes de pintar: evita parpadeo -->
+    <script is:inline>
+      (function () {
+        try {
+          var t = localStorage.getItem('theme');
+          // Oscuro por defecto (el diseño está pensado dark-first); respeta la elección guardada.
+          if (t !== 'light') t = 'dark';
+          document.documentElement.dataset.theme = t;
+        } catch (e) {}
+      })();
+    </script>
+    <noscript><style>[data-preloader]{display:none!important}</style></noscript>
+    <style is:global>
+      @view-transition { navigation: auto; }
+    </style>
+  </head>
+  <body class={plain ? '' : 'cursor-none-fine'}>
+    <slot />
+    {!plain && <div class="grain" aria-hidden="true"></div>}
+    {!plain && <div class="cursor" data-cursor aria-hidden="true"></div>}
+    {!plain && (
+      <script>
+        import { initAnimations } from '../scripts/animations';
+        initAnimations();
+      </script>
+    )}
+  </body>
+</html>

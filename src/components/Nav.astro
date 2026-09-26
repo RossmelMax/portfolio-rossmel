@@ -1,0 +1,39 @@
+---
+import type { Lang } from '../data/profile';
+import { t, paths } from '../data/i18n';
+interface Props { lang: Lang; altPath: string; onHome?: boolean }
+const { lang, altPath, onHome = true } = Astro.props;
+const s = t(lang);
+const base = onHome ? '' : paths.home(lang);
+const items = [
+  ['#about', s.nav.about],
+  ['#experience', s.nav.experience],
+  ['#work', s.nav.work],
+  ['#contact', s.nav.contact],
+] as const;
+---
+<header data-nav class="fixed inset-x-0 top-0 z-50 px-5 py-4 md:px-10">
+  <nav class="flex items-center justify-between gap-6 rounded-full border border-line bg-bg/60 px-5 py-3 backdrop-blur-xl">
+    <a href={paths.home(lang)} class="display text-lg font-semibold tracking-tight">rossmel<span class="text-accent">.</span></a>
+    <ul class="hidden items-center gap-7 text-sm text-muted md:flex">
+      {items.map(([href, label]) => (
+        <li><a href={base + href} class="transition-colors hover:text-fg">{label}</a></li>
+      ))}
+    </ul>
+    <div class="flex items-center gap-2 font-mono text-xs">
+      <a href={paths.cv(lang)} class="rounded-full bg-accent px-4 py-2 font-medium text-accent-ink">{s.nav.cv}</a>
+      <a href={altPath} class="rounded-full border border-line px-3 py-2 hover:border-fg" hreflang={lang === 'es' ? 'en' : 'es'}>{s.langSwitch}</a>
+      <button type="button" data-theme-toggle class="rounded-full border border-line px-3 py-2 hover:border-fg" aria-label="Cambiar tema / Toggle theme">◐</button>
+    </div>
+  </nav>
+</header>
+<script>
+  document.querySelectorAll('[data-theme-toggle]').forEach((b) =>
+    b.addEventListener('click', () => {
+      const root = document.documentElement;
+      const next = root.dataset.theme === 'light' ? 'dark' : 'light';
+      root.dataset.theme = next;
+      try { localStorage.setItem('theme', next); } catch {}
+    }),
+  );
+</script>

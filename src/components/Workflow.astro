@@ -1,0 +1,21 @@
+---
+import type { Lang } from '../data/profile';
+import { workflow } from '../data/profile';
+import { t } from '../data/i18n';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const s = t(lang);
+---
+<section id="workflow" class="px-5 py-32 md:px-10">
+  <p class="kicker mb-10">{s.workflow.kicker}</p>
+  <h2 data-split class="display max-w-5xl text-5xl font-bold md:text-8xl">{s.workflow.title}</h2>
+  <ol class="mt-20 grid gap-px overflow-hidden rounded-3xl border border-line bg-line md:grid-cols-4">
+    {workflow.map((w, i) => (
+      <li class="group bg-bg p-8 transition-colors hover:bg-accent hover:text-accent-ink" data-reveal data-reveal-delay={i * 0.08}>
+        <span class="font-mono text-xs opacity-60">0{i + 1}</span>
+        <h3 class="display mt-16 text-3xl font-semibold">{w.title[lang]}</h3>
+        <p class="mt-4 text-muted group-hover:text-accent-ink/80">{w.body[lang]}</p>
+      </li>
+    ))}
+  </ol>
+</section>

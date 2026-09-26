@@ -1,0 +1,40 @@
+---
+import type { Lang } from '../data/profile';
+import { profile } from '../data/profile';
+import { t, paths } from '../data/i18n';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const s = t(lang);
+const socials = [
+  ['GitHub', profile.links.github],
+  ['LinkedIn', profile.links.linkedin],
+  ['GitLab', profile.links.gitlab],
+].filter(([, href]) => href);
+---
+<section id="contact" class="relative overflow-hidden px-5 pb-10 pt-32 md:px-10">
+  <p class="kicker mb-10">{s.contact.kicker}</p>
+  <h2 data-split class="display text-[13vw] font-bold uppercase md:text-[10vw]">{s.contact.title}</h2>
+  <div class="mt-16 flex flex-wrap items-center gap-4">
+    <a data-magnetic href={`mailto:${profile.email}`} class="display inline-flex items-center rounded-full bg-accent px-8 py-6 text-xl font-semibold text-accent-ink md:text-3xl">{profile.email}</a>
+    <button data-magnetic data-copy={profile.email} data-copied={s.contact.copied} type="button" class="rounded-full border border-line px-6 py-4 font-mono text-sm hover:border-fg">{s.contact.copy}</button>
+    <a data-magnetic href={paths.cvPdf(lang)} download class="rounded-full border border-line px-6 py-4 font-mono text-sm hover:border-fg">{s.contact.cv} ↓</a>
+  </div>
+  <footer class="mt-40 flex flex-col justify-between gap-6 border-t border-line pt-6 font-mono text-xs text-muted md:flex-row">
+    <span>© {new Date().getFullYear()} {profile.name}. {s.footer}</span>
+    <ul class="flex gap-6">
+      {socials.map(([name, href]) => <li><a href={href} target="_blank" rel="noopener" class="hover:text-fg">{name} ↗</a></li>)}
+    </ul>
+  </footer>
+</section>
+<script>
+  document.querySelectorAll<HTMLButtonElement>('[data-copy]').forEach((b) => {
+    const original = b.textContent;
+    b.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(b.dataset.copy!);
+        b.textContent = b.dataset.copied!;
+        setTimeout(() => (b.textContent = original), 1800);
+      } catch { /* sin permiso de portapapeles */ }
+    });
+  });
+</script>
