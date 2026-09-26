@@ -28,5 +28,7 @@ Antes de dar algo por terminado: `npm run build` sin errores, y si cambió conte
 - Mantener README.md al día (sección "Estado actual y pendientes" e "Historial de decisiones").
 
 ## Estado (actualizar al terminar cada sesión)
-- v3.0 inicial construida (sept. 2026). Pendientes en README → "Estado actual y pendientes".
-- Info pendiente de Rossmel: ver `docs/PROMPTS-CLAUDE-LOCAL.md` y `docs/PROYECTOS-CANDIDATOS.md`.
+- v3.1 (sept. 2026): contenido real cargado; lo no confirmado está en `draft: true` o `// TODO(confirmar)`.
+- Preguntas abiertas para Rossmel y decisiones por proyecto: `docs/PROYECTOS-CANDIDATOS.md`.
+- Despliegue: falta que Rossmel elija opción A (Cloudflare Pages) o B (servidor casero) → README.
+- Este repo es PÚBLICO: no commitear detalles de la infraestructura (hosts, puertos, IPs, túneles).

@@ -117,9 +117,12 @@ CLAUDE.md             ← instrucciones para Claude Code (local o nube)
   - `confidential: true` → muestra "Código privado".
   - `accent` → color del caso de estudio y de la tarjeta.
   - `links` → demo, repo, Play Store… (opcional).
+  - `draft: true` → oculto en todo el sitio y el CV (pendiente de confirmar). Vale también para
+    `experience` y `education`. En componentes usar `visibleProjects`, nunca `projects` directo.
 - **Habilidades** → `skills` (agrupadas; el CV las lista igual → buenas palabras clave para ATS).
 - `// TODO(confirmar)` marca datos que Rossmel aún debe confirmar. Buscar con:
-  `grep -rn "TODO" src/data`. El CV filtra automáticamente los textos que empiezan con `TODO`.
+  `grep -rn "TODO" src/data`. Regla: el TODO va en un **comentario**, nunca dentro del texto visible
+  (tras `npm run build`, `grep -rl TODO dist` debe salir vacío).
 
 Para agregar un proyecto: copia un objeto del array `projects`, cambia `slug` (único, en minúsculas,
 se usa en la URL) y los textos. La página del caso de estudio se genera sola.
@@ -197,10 +200,25 @@ El sitio es **100% estático** (`dist/`). Objetivo:
 | `portfolio.rossmel.top` | `dist/` completo |
 | `cv.rossmel.top` | la ruta `/cv/` (o redirección a `portfolio.rossmel.top/cv/`) |
 
-⚠️ **Pendiente**: definir la infraestructura con la info del servidor/Tailscale
-(ver `docs/PROMPTS-CLAUDE-LOCAL.md`, prompt 1). Opciones previstas:
+Contexto conocido (sept. 2026): el DNS de `rossmel.top` está en **Cloudflare** (registrador:
+Spaceship) y el certificado comodín `*.rossmel.top` ya lo emite Cloudflare. El servidor casero está
+detrás de **CGNAT** (no se pueden abrir puertos) y publica servicios con un **Cloudflare Tunnel**.
+(Detalles de la infraestructura: NO se documentan aquí porque este repo es público.)
 
-**A. Caddy en el servidor propio** (recomendado si ya hay Caddy/IP pública o Cloudflare Tunnel):
+⚠️ **Pendiente: Rossmel elige A o B.**
+
+**A. Cloudflare Pages (recomendada)** — gratis, no depende de la luz/internet de casa, HTTPS automático.
+1. Cloudflare → Workers & Pages → Create → Pages → conectar el repo `RossmelMax/portfolio-rossmel`.
+2. Build: `npm run build` · salida: `dist` · variable `NODE_VERSION=22`.
+   (Los PDF del CV ya van versionados en `public/cv/`, así que el build de Cloudflare no necesita Chromium.)
+3. Custom domains: `portfolio.rossmel.top` y `cv.rossmel.top` (Cloudflare crea los CNAME solo).
+4. `cv.rossmel.top` → mostrar el CV en la raíz: una Pages Function `functions/_middleware.js` que
+   reescriba `/` → `/cv/` cuando el host empieza por `cv.` (o una Redirect Rule a `portfolio.rossmel.top/cv/`).
+5. Apex `rossmel.top` → Redirect Rule 301 a `https://portfolio.rossmel.top`.
+
+**B. Self-hosted en el servidor casero** — un contenedor `caddy:alpine` sirviendo `dist/`, publicado
+solo en `127.0.0.1`, más dos reglas de ingress en el túnel existente. Deploy: `npm run build` en la
+laptop y `rsync -a --delete dist/ servidor:~/sites/portfolio/` por Tailscale. Caddyfile de referencia:
 
 ```caddyfile
 portfolio.rossmel.top {
@@ -218,13 +236,9 @@ cv.rossmel.top {
 }
 ```
 
-**B. Cloudflare Tunnel** (si el servidor no tiene IP pública): `cloudflared` apuntando a un
-servidor local (Caddy en `:8080`) con dos hostnames públicos.
+(con el túnel, TLS lo termina Cloudflare: en Caddy usar `http://portfolio.rossmel.top` y `auto_https off`.)
 
-**C. Hosting estático gestionado** (Cloudflare Pages / Vercel / Netlify) con dominio propio:
-build `npm run build`, salida `dist/`, y en el DNS un CNAME por subdominio.
-
-Nota: en la opción A, `cv.rossmel.top/` reescribe a `/cv/`; por eso el enlace "Ver portafolio" del CV
+Nota: `cv.rossmel.top/` reescribe a `/cv/`; por eso el enlace "Ver portafolio" del CV
 es absoluto (`portfolio.rossmel.top`). Los PDF (`/cv/*.pdf`) y assets (`/_astro/*`) se resuelven igual
 en ambos subdominios porque comparten la misma carpeta `dist/`.
 
@@ -240,14 +254,13 @@ en ambos subdominios porque comparten la misma carpeta `dist/`.
   proyectos, stack con marquee, "cómo trabajo" (IA), contacto
 - Casos de estudio por proyecto, ES/EN, modo claro/oscuro, SEO + JSON-LD
 - CV ATS en HTML + PDF (ES/EN) generado desde los mismos datos
+- v3.1: contenido real con el informe de Claude local (commits de WANT, métricas de AdvAI, SGPG,
+  Link'u, homelab, rOS); campo `draft` para ocultar lo no confirmado
 
 ⏳ Pendiente
-- [ ] Confirmar datos marcados `TODO(confirmar)` (fechas exactas, nivel de inglés, LinkedIn…)
-- [ ] Decidir la lista final de proyectos (`docs/PROYECTOS-CANDIDATOS.md`)
-- [ ] Info de rOS, homelab e historial de Claude Code (prompt 2)
+- [ ] Confirmar datos marcados `TODO(confirmar)` y decidir los `draft` (ver `docs/PROYECTOS-CANDIDATOS.md`)
 - [ ] Capturas/imágenes reales de proyectos + imagen OG (`public/og.png`, 1200×630)
-- [ ] Despliegue en `portfolio.rossmel.top` y `cv.rossmel.top` (prompt 1)
-- [ ] Referencias visuales de Rossmel → ajustar dirección de arte
+- [ ] Despliegue en `portfolio.rossmel.top` y `cv.rossmel.top` (elegir opción A o B)
 - [ ] Formulario de contacto real (hoy: mailto + copiar correo). Opción: endpoint propio en el
       servidor o servicio tipo Formspree/Resend
 - [ ] Foto profesional (opcional)
@@ -278,3 +291,6 @@ Ramas:
 | 2026-09 | Contenido centralizado en `profile.ts` para que portafolio y CV nunca se desincronicen. |
 | 2026-09 | Shader WebGL propio en vez de three.js (≈4 KB vs ≈600 KB). |
 | 2026-09 | Dominio propio `rossmel.top` en vez de Vercel. |
+| 2026-09 | Estética dark + acento lima aprobada por Rossmel ("me encanta"). |
+| 2026-09 | Proyectos de clientes de WANT sin código ni enlaces (`confidential`); métricas de commits como evidencia. |
+| 2026-09 | Fuera del sitio: watcher-backend, prototipos v0 (salvo SGPG), proyectos personales/regalos. |

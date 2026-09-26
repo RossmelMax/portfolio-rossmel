@@ -56,7 +56,7 @@ const sentence = (s: string) => { const c = clean(s); return c && !/[.!?]$/.test
 
     <section>
       <h2>{H.exp}</h2>
-      {experience.filter((e) => e.cv).map((e) => (
+      {experience.filter((e) => e.cv && !e.draft).map((e) => (
         <article>
           <h3>{e.role[lang]} — {e.company}</h3>
           <p class="cv-meta">{fmtMonth(e.start, lang)} – {fmtMonth(e.end, lang)} | {e.location[lang]} | {clean(e.type[lang])}</p>
@@ -67,7 +67,7 @@ const sentence = (s: string) => { const c = clean(s); return c && !/[.!?]$/.test
 
     <section>
       <h2>{H.projects}</h2>
-      {projects.filter((p) => p.cv).map((p) => (
+      {projects.filter((p) => p.cv && !p.draft).map((p) => (
         <article>
           <h3>{p.name} — {p.kind[lang]} ({p.year})</h3>
           <p>{[p.tagline[lang], ...p.highlights[lang].slice(0, 2)].map(sentence).filter(Boolean).join(' ')}</p>
@@ -78,9 +78,9 @@ const sentence = (s: string) => { const c = clean(s); return c && !/[.!?]$/.test
 
     <section>
       <h2>{H.edu}</h2>
-      {education.map((ed) => (
+      {education.filter((ed) => !ed.draft).map((ed) => (
         <article>
-          <h3>{ed.title[lang]} — {ed.school}</h3>
+          <h3>{ed.title[lang]}{ed.school && ` — ${ed.school}`}</h3>
           <p class="cv-meta">{ed.period[lang]}</p>
           {ed.note[lang] && <p>{ed.note[lang]}</p>}
         </article>

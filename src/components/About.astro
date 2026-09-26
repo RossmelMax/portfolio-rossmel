@@ -16,18 +16,13 @@ const [lead, ...rest] = profile.about[lang];
     </div>
   </div>
   <dl class="mt-24 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-line bg-line md:grid-cols-4">
-    {profile.stats.map((st) => {
-      const num = /^\d+/.exec(st.value);
-      return (
-        <div class="bg-bg p-6 md:p-8" data-reveal>
-          <dt class="kicker">{st.label[lang]}</dt>
-          <dd class="display mt-4 text-5xl font-bold md:text-7xl">
-            {num && st.value !== '2019'
-              ? <span data-count={num[0]} data-suffix={st.value.slice(num[0].length)}>{st.value}</span>
-              : st.value}
-          </dd>
-        </div>
-      );
-    })}
+    {profile.stats.map((st) => (
+      <div class="bg-bg p-6 md:p-8" data-reveal>
+        <dt class="kicker">{st.label[lang]}</dt>
+        <dd class="display mt-4 text-5xl font-bold md:text-7xl">
+          <span data-count={st.count} data-suffix={st.suffix}>{st.count.toLocaleString(lang)}{st.suffix}</span>
+        </dd>
+      </div>
+    ))}
   </dl>
 </section>

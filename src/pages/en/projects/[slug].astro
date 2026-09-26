@@ -1,6 +1,6 @@
 ---
 import ProjectPage from '../../../components/ProjectPage.astro';
-import { projects } from '../../../data/profile';
+import { visibleProjects as projects } from '../../../data/profile';
 export function getStaticPaths() {
   return projects.map((project) => ({ params: { slug: project.slug }, props: { project } }));
 }

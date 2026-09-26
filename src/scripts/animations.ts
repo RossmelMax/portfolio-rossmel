@@ -140,7 +140,7 @@ function initReveals() {
       duration: 1.6,
       ease: 'power3.out',
       scrollTrigger: { trigger: el, start: 'top 90%' },
-      onUpdate: () => (el.textContent = String(Math.round(obj.v)) + (el.dataset.suffix ?? '')),
+      onUpdate: () => (el.textContent = Math.round(obj.v).toLocaleString(document.documentElement.lang) + (el.dataset.suffix ?? '')),
     });
   });
 

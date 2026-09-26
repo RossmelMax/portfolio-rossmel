@@ -11,7 +11,7 @@ const s = t(lang);
   <div data-timeline class="relative">
     <div class="absolute left-0 top-0 h-full w-px bg-line md:left-[25%]"></div>
     <div data-progress class="absolute left-0 top-0 h-full w-px origin-top bg-accent md:left-[25%]"></div>
-    {experience.map((job) => (
+    {experience.filter((e) => !e.draft).map((job) => (
       <article class="relative grid gap-6 pb-24 pl-8 md:grid-cols-4 md:pl-0">
         <span class="absolute left-[-4px] top-2 h-2 w-2 rounded-full bg-accent md:left-[calc(25%-4px)]"></span>
         <div class="kicker md:pr-10 md:text-right" data-reveal>

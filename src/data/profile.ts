@@ -8,7 +8,11 @@
  *  - Cada texto traducible es { es, en }.
  *  - `featured: true` → aparece en la galería principal del portafolio.
  *  - `cv: true` → aparece en el CV (el CV debe ser corto: 1–2 páginas).
+ *  - `draft: true` → NO se muestra en ningún lado (dato pendiente de confirmar).
  *  - `// TODO(confirmar)` → dato que Rossmel todavía debe confirmar.
+ *
+ * Fuentes (sept. 2026): relato de Rossmel + informe de Claude Code local sobre sus repos
+ * (commits reales en GitLab de WANT, repos de GitHub, evaluación de AdvAI).
  */
 
 export type Lang = 'es' | 'en';
@@ -34,8 +38,8 @@ export const profile = {
 
   /** Resumen profesional (CV). 3–4 líneas, con palabras clave para ATS. */
   summary: {
-    es: 'Desarrollador Frontend con más de 3 años de experiencia construyendo aplicaciones web y móviles con React, React Native, Next.js y TypeScript en una agencia digital, de la maqueta a producción. Experiencia en integración con APIs REST, Firebase y Supabase, y creciendo hacia el desarrollo Fullstack (Node.js, Python/FastAPI, SQL). Uso herramientas de IA (Claude Code, LLMs locales, RAG) como parte diaria de mi flujo para investigar, prototipar y entregar más rápido sin sacrificar calidad.',
-    en: 'Frontend Developer with 3+ years of experience building web and mobile applications with React, React Native, Next.js and TypeScript at a digital agency, from mockup to production. Experienced integrating REST APIs, Firebase and Supabase, and growing into Fullstack development (Node.js, Python/FastAPI, SQL). I use AI tooling (Claude Code, local LLMs, RAG) daily to research, prototype and ship faster without sacrificing quality.',
+    es: 'Desarrollador Frontend con más de 3 años de experiencia en agencia construyendo SaaS multi-tenant, apps móviles y sitios web con React, Next.js, React Native y TypeScript (~1.800 commits en productos para clientes de Bolivia y EE. UU.). Evolucionando a Fullstack con FastAPI, Node.js, SQLite/PostgreSQL, Firebase y Supabase. Integro IA tanto en productos (RAG híbrido, LLMs locales y en la nube) como en mi flujo diario (Claude Code, agentes), lo que me permite entregar más rápido sin sacrificar calidad.',
+    en: 'Frontend Developer with 3+ years of agency experience building multi-tenant SaaS, mobile apps and websites with React, Next.js, React Native and TypeScript (~1,800 commits across client products in Bolivia and the US). Growing into Fullstack with FastAPI, Node.js, SQLite/PostgreSQL, Firebase and Supabase. I integrate AI both into products (hybrid RAG, local and cloud LLMs) and into my daily workflow (Claude Code, agents), which lets me ship faster without sacrificing quality.',
   } as L,
 
   /** "Sobre mí" del portafolio: más humano que el resumen del CV. */
@@ -44,31 +48,32 @@ export const profile = {
       'Empecé a programar solo, en 2019, con mi primera computadora propia. Desde entonces no paré: cursos, documentación, prueba y error, y muchas noches de “¿por qué no funciona esto?”.',
       'Pasé más de tres años en WANT Digital Agency, donde éramos dos en desarrollo: mi jefe en el backend y yo en el frontend. Ahí aprendí a hacer de todo — investigar, resolver, trabajar bajo presión y entregar.',
       'Hoy la IA es parte de cómo trabajo: agentes, LLMs locales y automatizaciones me permiten dedicar el tiempo a lo que importa — el diseño, la arquitectura y el detalle.',
-      'Fuera del trabajo, vivo en Linux: estoy armando mi propia distro, rOS, y un pequeño homelab en casa.',
+      'Fuera del trabajo, vivo en Linux: uso a diario rOS, mi propio sabor de Arch, y mantengo un homelab con una docena de servicios y un agente de IA que lo cuida 24/7.',
     ],
     en: [
       'I started coding on my own in 2019, with my first personal computer. I haven\'t stopped since: courses, docs, trial and error, and many “why isn\'t this working?” nights.',
       'I spent 3+ years at WANT Digital Agency, where the dev team was two people: my boss on the backend and me on the frontend. That\'s where I learned to do a bit of everything — research, solve, work under pressure and ship.',
       'Today AI is part of how I work: agents, local LLMs and automations let me spend my time on what matters — design, architecture and detail.',
-      'Outside work I live in Linux: I\'m building my own distro, rOS, and a small homelab at home.',
+      'Outside work I live in Linux: I daily-drive rOS, my own flavor of Arch, and run a homelab with a dozen services and an AI agent that looks after it 24/7.',
     ],
   } as Record<Lang, string[]>,
 
+  /** Cifras del "Sobre mí". `count` anima el número; `text` se muestra tal cual. */
   stats: [
-    { value: '3+', label: { es: 'años en producción', en: 'years shipping' } as L },
-    { value: '7+', label: { es: 'productos para clientes', en: 'client products' } as L },
-    { value: '2019', label: { es: 'escribiendo código', en: 'writing code' } as L },
-    { value: '∞', label: { es: 'ganas de aprender', en: 'curiosity' } as L },
+    { count: 3, suffix: '+', label: { es: 'años en producción', en: 'years shipping' } as L },
+    { count: 1800, suffix: '+', label: { es: 'commits en proyectos de clientes', en: 'commits on client projects' } as L },
+    { count: 8, suffix: '', label: { es: 'productos para clientes', en: 'client products' } as L },
+    { count: 12, suffix: '', label: { es: 'servicios en mi homelab', en: 'self-hosted services' } as L },
   ],
 
   softSkills: {
-    es: ['Resolución de problemas', 'Autonomía', 'Trabajo bajo presión', 'Aprendizaje rápido', 'Comunicación con clientes'],
-    en: ['Problem solving', 'Autonomy', 'Working under pressure', 'Fast learner', 'Client communication'],
+    es: ['Resolución de problemas', 'Autonomía', 'Trabajo bajo presión', 'Aprendizaje rápido', 'Comunicación con clientes', 'Documentación técnica'],
+    en: ['Problem solving', 'Autonomy', 'Working under pressure', 'Fast learner', 'Client communication', 'Technical writing'],
   } as Record<Lang, string[]>,
 
   languages: [
     { name: { es: 'Español', en: 'Spanish' } as L, level: { es: 'Nativo', en: 'Native' } as L },
-    { name: { es: 'Inglés', en: 'English' } as L, level: { es: 'Avanzado', en: 'Advanced' } as L }, // TODO(confirmar) nivel
+    { name: { es: 'Inglés', en: 'English' } as L, level: { es: 'Avanzado', en: 'Advanced' } as L }, // TODO(confirmar) nivel (B2/C1…)
   ],
 };
 
@@ -87,49 +92,78 @@ export type Experience = {
   bullets: Record<Lang, string[]>;
   stack: string[];
   cv: boolean;
+  draft?: boolean;
 };
 
 export const experience: Experience[] = [
   {
-    company: 'WANT Digital Agency',
-    role: { es: 'Desarrollador Frontend (Web y Móvil)', en: 'Frontend Developer (Web & Mobile)' },
-    type: {
-      es: 'Pasantía → Freelance → Tiempo completo',
-      en: 'Internship → Contractor → Full-time',
-    },
-    start: '2022-06', // TODO(confirmar) mes exacto
-    end: '2026-01',
+    // TODO(confirmar): ¿se agrega? Evita que el CV muestre un hueco desde ene 2026.
+    company: 'Independiente',
+    role: { es: 'Desarrollador Fullstack', en: 'Fullstack Developer' },
+    type: { es: 'Freelance', en: 'Freelance' },
+    start: '2026-01',
+    end: null,
     location: { es: 'Cochabamba, Bolivia', en: 'Cochabamba, Bolivia' },
     summary: {
-      es: 'Único desarrollador frontend en un equipo de desarrollo de dos personas. Responsable de las interfaces web y móviles de los productos de la agencia y de sus clientes.',
-      en: 'Sole frontend developer on a two-person dev team. Owned the web and mobile interfaces of the agency\'s products and client projects.',
+      es: 'Proyectos propios y para clientes, de punta a punta: análisis, diseño, desarrollo, pruebas y entrega.',
+      en: 'End-to-end projects for clients: analysis, design, development, testing and delivery.',
     },
     bullets: {
       es: [
-        'Desarrollé el frontend de 7+ productos para clientes (SaaS, apps móviles, marketplaces y sitios web) con React, React Native y TypeScript, desde la maqueta hasta producción.',
-        'Construí el panel web de CarX (antes Vulcano), un SaaS de gestión para talleres mecánicos: órdenes de trabajo, agenda de citas, inventario de vehículos y dashboards por rol.',
-        'Desarrollé apps móviles en React Native para One Life Fitness (gimnasio con sedes en Cochabamba y La Paz) y OneHand (gestión de citas para un centro de fisioterapia).',
-        'Integré APIs REST del backend (probadas y documentadas con Bruno), manejando autenticación, estados de carga/errores y flujos por rol.',
-        'Trabajé directamente con el líder técnico en tareas y revisiones de código, entregando funcionalidades en ciclos cortos y bajo presión de fechas.',
-        'Comencé como pasante (3 meses), continué como desarrollador freelance con pago mensual y fui contratado a tiempo completo en 2025.',
+        "Link'u: app de escritorio offline-first para el cobro de agua potable de una comunidad rural (Electron, React, SQLite), con respaldos cifrados AES-256-GCM, actualizaciones automáticas, 47 tests y CI multiplataforma.",
+        'SGPG: sistema de gestión de proyectos de grado para la UDABOL (Next.js 16, Firebase), con extracción de resumen y etiquetas desde PDF mediante IA (Groq), versionado de documentos y auditoría.',
       ],
       en: [
-        'Built the frontend of 7+ client products (SaaS, mobile apps, marketplaces and websites) with React, React Native and TypeScript, from mockup to production.',
-        'Built the web dashboard for CarX (formerly Vulcano), a management SaaS for auto repair shops: work orders, appointment scheduling, vehicle records and role-based dashboards.',
-        'Developed React Native mobile apps for One Life Fitness (a gym chain in Cochabamba and La Paz) and OneHand (appointment management for a physiotherapy center).',
-        'Integrated backend REST APIs (tested and documented with Bruno), handling authentication, loading/error states and role-based flows.',
-        'Worked directly with the tech lead on tasks and code reviews, shipping features in short cycles under tight deadlines.',
-        'Started as an intern (3 months), continued as a monthly-paid contractor and was hired full-time in 2025.',
+        "Link'u: offline-first desktop app for a rural community's water billing (Electron, React, SQLite), with AES-256-GCM encrypted backups, auto-updates, 47 tests and cross-platform CI.",
+        'SGPG: thesis project management system for UDABOL (Next.js 16, Firebase), with AI-powered PDF summary and tag extraction (Groq), document versioning and audit trail.',
       ],
     },
-    stack: ['React', 'React Native', 'TypeScript', 'JavaScript', 'Next.js', 'REST APIs', 'WordPress', 'Git'],
+    stack: ['Electron', 'React', 'Next.js', 'SQLite', 'Firebase', 'Groq', 'GitHub Actions'],
+    cv: true,
+    draft: true,
+  },
+  {
+    company: 'WANT Digital Agency',
+    role: { es: 'Desarrollador Frontend (Web y Móvil)', en: 'Frontend Developer (Web & Mobile)' },
+    type: {
+      es: 'Pasantía → Freelance → Contrato',
+      en: 'Internship → Contractor → Employee',
+    },
+    start: '2022-06', // TODO(confirmar) mes exacto (primer commit: ago 2022)
+    end: '2026-01',
+    location: { es: 'Cochabamba, Bolivia', en: 'Cochabamba, Bolivia' },
+    summary: {
+      es: 'Único desarrollador frontend en un equipo de desarrollo de dos personas. Responsable de las interfaces web y móviles de 8 productos para clientes de Bolivia y EE. UU.',
+      en: 'Sole frontend developer on a two-person dev team. Owned the web and mobile interfaces of 8 client products in Bolivia and the US.',
+    },
+    bullets: {
+      es: [
+        'Principal desarrollador de Vulcano (hoy CarX), SaaS multi-tenant para talleres mecánicos (944 de 1.131 commits): órdenes, cotizaciones, vehículos, reportes de ingresos, calendario, importación CSV, dashboards por rol e i18n ES/EN con Next.js, TypeScript, MUI, Redux Toolkit y NextAuth.',
+        'Integré en Vulcano un módulo de IA con LangChain (OpenAI / Gemini) que genera automáticamente los servicios de una orden de trabajo.', // TODO(confirmar) que lo hiciste tú
+        'Desarrollé apps móviles en React Native/Expo: Adsie, red social de anuncios y cupones para negocios locales de Florida (434 de 497 commits); la app de mecánicos de Vulcano (notificaciones push, temporizador de servicio); One Life Fitness (gimnasio) y OneHand (citas de fisioterapia).',
+        'Construí el frontend de Bite, SaaS multi-tenant de menú digital y pedidos para restaurantes (Next.js App Router): pedidos a mesa por QR, checkout, cupones, sucursales, planes y Google Maps.',
+        'Desarrollé el sitio web en WordPress de LYNX Bolivia, tienda de electrónica y electrodomésticos.',
+        'Trabajé junto al líder técnico (backend) integrando APIs REST, con revisiones de código y entregas en ciclos cortos bajo presión de fechas.',
+        'Comencé como pasante (3 meses), continué como desarrollador freelance con pago mensual y fui contratado formalmente en 2025.',
+      ],
+      en: [
+        'Lead developer of Vulcano (now CarX), a multi-tenant SaaS for auto repair shops (944 of 1,131 commits): work orders, quotes, vehicles, revenue reports, calendar, CSV import, role-based dashboards and ES/EN i18n with Next.js, TypeScript, MUI, Redux Toolkit and NextAuth.',
+        'Integrated an AI module into Vulcano using LangChain (OpenAI / Gemini) that auto-generates the services of a work order.',
+        'Built React Native/Expo mobile apps: Adsie, a local-business ads and coupons social app for Florida (434 of 497 commits); Vulcano\'s mechanic app (push notifications, service timer); One Life Fitness (gym) and OneHand (physiotherapy appointments).',
+        'Built the frontend of Bite, a multi-tenant digital menu and ordering SaaS for restaurants (Next.js App Router): QR table ordering, checkout, coupons, branches, plans and Google Maps.',
+        'Built the WordPress website for LYNX Bolivia, an electronics and home appliance retailer.',
+        'Worked alongside the tech lead (backend) integrating REST APIs, with code reviews and short delivery cycles under tight deadlines.',
+        'Started as an intern (3 months), continued as a monthly-paid contractor and was formally hired in 2025.',
+      ],
+    },
+    stack: ['Next.js', 'React', 'React Native', 'Expo', 'TypeScript', 'MUI', 'Redux Toolkit', 'NextAuth', 'LangChain', 'WordPress', 'GitLab'],
     cv: true,
   },
   {
     company: 'Freelance',
     role: { es: 'Diseñador Gráfico — Identidad de marca', en: 'Graphic Designer — Brand Identity' },
     type: { es: 'Proyecto freelance (~5 meses)', en: 'Freelance project (~5 months)' },
-    start: '2023-01', // TODO(confirmar) fechas
+    start: '2023-01', // TODO(confirmar) fechas reales
     end: '2023-05',
     location: { es: 'Remoto', en: 'Remote' },
     summary: {
@@ -148,6 +182,7 @@ export const experience: Experience[] = [
     },
     stack: ['Figma', 'Branding', 'UI'],
     cv: true,
+    draft: true, // oculto hasta confirmar fechas
   },
 ];
 
@@ -155,21 +190,30 @@ export const experience: Experience[] = [
 /* EDUCACIÓN                                                           */
 /* ------------------------------------------------------------------ */
 
-export const education = [
+export const education: { title: L; school: string; period: L; note: L; draft?: boolean }[] = [
   {
-    title: { es: 'Ingeniería de Sistemas', en: 'B.S. Systems Engineering' } as L,
+    title: { es: 'Ingeniería de Sistemas', en: 'B.S. Systems Engineering' },
     school: 'Universidad de Aquino Bolivia (UDABOL)',
-    period: { es: '2019 – 2026 · 8.º de 8 semestres', en: '2019 – 2026 · 8th of 8 semesters' } as L, // TODO(confirmar) año de inicio
+    // TODO(confirmar) fecha estimada de egreso / defensa
+    period: { es: '2021 – presente · Último semestre (8.º de 8)', en: '2021 – present · Final semester (8th of 8)' },
     note: {
       es: 'Proyecto de grado: AdvAI — auditoría legal de contratos con IA (RAG híbrido + LLMs).',
       en: 'Capstone: AdvAI — AI-powered legal contract auditing (hybrid RAG + LLMs).',
-    } as L,
+    },
   },
   {
-    title: { es: 'Desarrollo de Aplicaciones Web', en: 'Web Application Development' } as L,
+    // TODO(confirmar): institución y fechas del diplomado (lo mencionó el informe local)
+    title: { es: 'Diplomado en Desarrollo de Software', en: 'Software Development Diploma' },
+    school: '',
+    period: { es: 'En curso', en: 'In progress' },
+    note: { es: '', en: '' },
+    draft: true,
+  },
+  {
+    title: { es: 'Desarrollo de Aplicaciones Web', en: 'Web Application Development' },
     school: 'Solaning',
-    period: { es: '2022 · Completado', en: '2022 · Completed' } as L,
-    note: { es: '', en: '' } as L,
+    period: { es: '2022 · Completado', en: '2022 · Completed' }, // TODO(confirmar) año
+    note: { es: '', en: '' },
   },
 ];
 
@@ -181,25 +225,25 @@ export const learning = ['Platzi', 'Coursera', 'Udemy', 'freeCodeCamp', 'Google 
 
 export const skills: { group: L; items: string[] }[] = [
   {
-    group: { es: 'Frontend', en: 'Frontend' },
-    items: ['React', 'Next.js', 'React Native', 'TypeScript', 'JavaScript (ES2023)', 'HTML5', 'CSS3 / Sass', 'Tailwind CSS', 'Astro', 'Angular', 'Material UI', 'shadcn/ui', 'GSAP', 'Framer Motion'],
+    group: { es: 'Frontend y móvil', en: 'Frontend & Mobile' },
+    items: ['React', 'Next.js (Pages y App Router)', 'React Native', 'Expo', 'TypeScript', 'JavaScript', 'HTML5', 'CSS3 / Sass', 'Tailwind CSS', 'MUI', 'shadcn/ui', 'Redux Toolkit', 'i18n', 'PWA', 'Astro', 'GSAP', 'Motion'],
   },
   {
     group: { es: 'Backend y datos', en: 'Backend & Data' },
-    items: ['Node.js', 'Express', 'Python', 'FastAPI', 'REST APIs', 'SSE', 'PostgreSQL', 'SQLite', 'Prisma', 'Drizzle', 'Supabase', 'Firebase (Firestore, Auth, Storage, Functions)'],
+    items: ['Node.js', 'Express', 'Python', 'FastAPI', 'REST APIs', 'SSE', 'NextAuth', 'SQLite (FTS5, WAL)', 'PostgreSQL', 'Prisma', 'Drizzle', 'Supabase', 'Firebase', 'Electron'],
   },
   {
-    group: { es: 'IA', en: 'AI' },
-    items: ['Claude Code', 'LLM APIs (Groq, Gemini, DeepSeek)', 'Ollama (LLMs locales)', 'RAG', 'Búsqueda híbrida BM25 + embeddings', 'Prompt engineering', 'Agentes'],
+    group: { es: 'IA aplicada', en: 'Applied AI' },
+    items: ['RAG', 'Búsqueda híbrida (BM25 + embeddings)', 'Evaluación de LLMs', 'LangChain', 'Ollama', 'Groq', 'Gemini', 'OpenAI API', 'sqlite-vec', 'Claude Code', 'Agentes'],
   },
   {
-    group: { es: 'Herramientas', en: 'Tools' },
-    items: ['Git', 'GitHub', 'GitLab', 'Bruno / Postman', 'Electron', 'Vite', 'Docker', 'Linux (Arch)', 'Tailscale', 'Figma', 'v0', 'Vercel'],
+    group: { es: 'DevOps, calidad y herramientas', en: 'DevOps, Quality & Tools' },
+    items: ['Git', 'GitHub Actions', 'GitLab', 'Docker', 'Linux (Arch)', 'systemd', 'Cloudflare Tunnel', 'Tailscale', 'KVM / libvirt', 'pytest', 'Vitest', 'Vercel', 'Bruno', 'Figma'],
   },
 ];
 
 /** Marquee del portafolio (solo nombres). */
-export const marquee = ['React', 'Next.js', 'TypeScript', 'React Native', 'Astro', 'Tailwind', 'Node.js', 'Python', 'FastAPI', 'Supabase', 'Firebase', 'PostgreSQL', 'Electron', 'GSAP', 'Ollama', 'Claude Code', 'Linux', 'Git'];
+export const marquee = ['React', 'Next.js', 'TypeScript', 'React Native', 'Expo', 'Tailwind', 'Node.js', 'Python', 'FastAPI', 'SQLite', 'Supabase', 'Firebase', 'Electron', 'LangChain', 'Ollama', 'Docker', 'Linux', 'Claude Code'];
 
 /* ------------------------------------------------------------------ */
 /* PROYECTOS                                                           */
@@ -220,7 +264,10 @@ export type Project = {
   featured: boolean;
   cv: boolean;
   confidential?: boolean; // código privado / sin demo pública
+  draft?: boolean;
 };
+
+const WANT: L = { es: 'Cliente · WANT Digital Agency', en: 'Client · WANT Digital Agency' };
 
 export const projects: Project[] = [
   {
@@ -236,24 +283,24 @@ export const projects: Project[] = [
       es: 'Revisar un contrato frente al Código Civil, el Código de Comercio y la jurisprudencia boliviana toma horas, y los LLMs "inventan" artículos. AdvAI separa el contrato en cláusulas y, para cada una, devuelve riesgo, análisis y citas literales verificables.',
       en: 'Reviewing a contract against Bolivian civil and commercial codes and case law takes hours, and LLMs tend to hallucinate articles. AdvAI splits a contract into clauses and returns, for each one, a risk level, an analysis and verbatim, verifiable citations.',
     },
-    role: { es: 'Diseño, arquitectura y desarrollo fullstack (solo).', en: 'Design, architecture and fullstack development (solo).' },
+    role: { es: 'Diseño, arquitectura y desarrollo fullstack (individual).', en: 'Design, architecture and fullstack development (solo).' },
     highlights: {
       es: [
-        'Búsqueda híbrida BM25 (SQLite FTS5) + embeddings bge-m3 fusionados por RRF sobre 3.267 artículos y 971 autos supremos.',
-        'El modelo solo elige claves de las fuentes mostradas; el texto citado lo inserta el sistema → cero citas inventadas.',
-        'Anonimización de datos personales antes de enviar texto a cualquier LLM; proveedores locales (Ollama) y gratuitos con failover.',
-        'Progreso en vivo por SSE, comparación entre versiones del contrato e informe exportable a DOCX/PDF.',
-        'Frontend en Next.js 16 + React 19 con visor PDF y cláusulas resaltadas por nivel de riesgo.',
+        'Búsqueda híbrida BM25 (SQLite FTS5) + embeddings bge-m3 fusionados por RRF sobre 3.267 artículos y 971 autos supremos: el acierto de recuperación (acierto@8) subió de 42,9 % a 80 %.',
+        'El modelo solo elige claves de las fuentes mostradas y el texto citado lo inserta el sistema: 82,9 % de citas correctas y 94,6 % de cláusulas sin error grave en la evaluación interna.',
+        'Anonimización de datos personales antes de enviar texto a la nube; LLM local (Ollama, qwen3.5 9B) y proveedores gratuitos con respaldo automático.',
+        'Trabajador en segundo plano reanudable, progreso en vivo por SSE, comparación entre versiones e informe DOCX/PDF.',
+        'Backend con 69 tests y cobertura ≥ 90 % exigida en CI; frontend en Next.js 16 + React 19 con visor PDF y cláusulas resaltadas por riesgo.',
       ],
       en: [
-        'Hybrid search: BM25 (SQLite FTS5) + bge-m3 embeddings fused with RRF over 3,267 articles and 971 supreme court rulings.',
-        'The model only picks keys from the sources shown; the quoted text is inserted by the system → zero hallucinated citations.',
-        'Personal data is anonymized before any text reaches an LLM; local (Ollama) and free providers with automatic failover.',
-        'Live progress via SSE, contract version diffing and DOCX/PDF report export.',
-        'Next.js 16 + React 19 frontend with a PDF viewer and clauses highlighted by risk level.',
+        'Hybrid search: BM25 (SQLite FTS5) + bge-m3 embeddings fused with RRF over 3,267 articles and 971 supreme court rulings — retrieval hit@8 went from 42.9% to 80%.',
+        'The model only picks keys from the sources shown and the quoted text is inserted by the system: 82.9% correct citations and 94.6% of clauses with no severe error in internal evaluation.',
+        'Personal data is anonymized before any text reaches the cloud; local LLM (Ollama, qwen3.5 9B) plus free providers with automatic failover.',
+        'Resumable background worker, live progress via SSE, version diffing and DOCX/PDF reports.',
+        'Backend with 69 tests and ≥90% coverage enforced in CI; Next.js 16 + React 19 frontend with a PDF viewer and risk-highlighted clauses.',
       ],
     },
-    stack: ['Next.js 16', 'React 19', 'TypeScript', 'Python', 'FastAPI', 'SQLite FTS5', 'Ollama', 'RAG', 'SSE'],
+    stack: ['Next.js 16', 'React 19', 'TypeScript', 'Python', 'FastAPI', 'SQLite FTS5', 'Ollama', 'RAG', 'SSE', 'pytest'],
     accent: '#c8ff2e',
     featured: true,
     cv: true,
@@ -262,81 +309,231 @@ export const projects: Project[] = [
   {
     slug: 'carx',
     name: 'CarX',
-    year: '2023 – 2026',
-    kind: { es: 'Cliente · WANT Digital Agency', en: 'Client · WANT Digital Agency' },
+    year: '2023 – 2025',
+    kind: WANT,
     tagline: {
-      es: 'SaaS de gestión para talleres mecánicos (antes Vulcano).',
-      en: 'Management SaaS for auto repair shops (formerly Vulcano).',
+      es: 'SaaS multi-tenant para talleres mecánicos (antes Vulcano).',
+      en: 'Multi-tenant SaaS for auto repair shops (formerly Vulcano).',
     },
     problem: {
-      es: 'Los talleres llevan órdenes, citas y vehículos en cuadernos y chats. CarX centraliza la operación: recepción, órdenes de servicio, agenda, mecánicos y asesores, cada uno con su propio panel.',
-      en: 'Repair shops track orders, appointments and vehicles in notebooks and chats. CarX centralizes operations: intake, service orders, scheduling, mechanics and service advisors, each with their own dashboard.',
+      es: 'Los talleres llevan órdenes, cotizaciones y vehículos en cuadernos y chats. CarX centraliza la operación: recepción, órdenes de servicio, cotizaciones, calendario, reportes y una app para los mecánicos.',
+      en: 'Repair shops track orders, quotes and vehicles in notebooks and chats. CarX centralizes operations: intake, service orders, quotes, calendar, reports and an app for mechanics.',
     },
-    role: { es: 'Desarrollo frontend completo.', en: 'Full frontend development.' },
+    role: {
+      es: 'Principal desarrollador frontend: 944 de 1.131 commits en la web, más la app móvil de mecánicos.',
+      en: 'Lead frontend developer: 944 of 1,131 commits on the web app, plus the mechanics\' mobile app.',
+    },
     highlights: {
       es: [
-        'Dashboards por rol (asesor de servicio, mecánico, administrador).',
-        'Agenda de citas con disponibilidad por fecha y búsqueda de vehículos.',
-        'Seguimiento de órdenes por estado con historial de servicios.',
+        'Multi-tenant por dominio, dashboards por rol (administrador, jefe de taller) y landing con i18n ES/EN.',
+        'Órdenes, cotizaciones, servicios por cliente, vehículos, calendario, reportes de ingresos (ApexCharts) e importador CSV.',
+        'Módulo de IA con LangChain (OpenAI / Gemini) que autogenera los servicios de una orden y un chat asistente.',
+        'App de mecánicos en React Native/Expo con notificaciones push, SecureStore y temporizador de servicio.',
       ],
       en: [
-        'Role-based dashboards (service advisor, mechanic, admin).',
-        'Appointment scheduling with per-date availability and vehicle search.',
-        'Order tracking by status with service history logs.',
+        'Domain-based multi-tenancy, role dashboards (admin, shop manager) and an ES/EN landing page.',
+        'Orders, quotes, per-client services, vehicles, calendar, revenue reports (ApexCharts) and CSV import.',
+        'AI module with LangChain (OpenAI / Gemini) that auto-generates a work order\'s services, plus an assistant chat.',
+        'Mechanics app in React Native/Expo with push notifications, SecureStore and a service timer.',
       ],
     },
-    stack: ['React', 'TypeScript', 'REST APIs'], // TODO(confirmar) stack exacto
+    stack: ['Next.js', 'TypeScript', 'MUI', 'Redux Toolkit', 'NextAuth', 'LangChain', 'React Native', 'Expo'],
     accent: '#ff6a3d',
+    featured: true,
+    cv: false, // ya está en la experiencia de WANT
+    confidential: true,
+  },
+  {
+    slug: 'sgpg',
+    name: 'SGPG',
+    year: '2026',
+    kind: { es: 'Universidad · UDABOL', en: 'University · UDABOL' },
+    tagline: {
+      es: 'Sistema de gestión de proyectos de grado para mi universidad.',
+      en: 'Thesis project management system for my university.',
+    },
+    problem: {
+      // TODO(confirmar): ¿ya está en uso o "en proceso de adopción"?
+      es: 'La carrera gestionaba los proyectos de grado con archivos sueltos. SGPG centraliza los documentos, sus versiones y su revisión, y usa IA para resumir y etiquetar cada proyecto.',
+      en: 'The department managed thesis projects with scattered files. SGPG centralizes documents, versions and reviews, and uses AI to summarize and tag each project.',
+    },
+    role: { es: 'Desarrollo fullstack (prototipo inicial con v0, extendido por mí).', en: 'Fullstack development (initial v0 prototype, extended by me).' },
+    highlights: {
+      es: [
+        'Extracción automática de resumen y etiquetas desde el PDF con IA (Groq).',
+        'Visor PDF propio con memoria acotada (resolví un consumo descontrolado de RAM).',
+        'Versionado de PDFs, historial de auditoría, carga masiva y gestión de administradores.',
+        'Despliegue continuo en Vercel.',
+      ],
+      en: [
+        'Automatic summary and tag extraction from PDFs using AI (Groq).',
+        'Custom PDF viewer with bounded memory (fixed a runaway RAM issue).',
+        'PDF versioning, audit trail, bulk upload and admin management.',
+        'Continuous deployment on Vercel.',
+      ],
+    },
+    stack: ['Next.js 16', 'Firebase', 'Groq', 'pdf.js', 'shadcn/ui', 'Tailwind', 'Vercel'],
+    links: [{ label: 'GitHub', href: 'https://github.com/RossmelMax/v0-university-project-manager' }],
+    accent: '#ffb23d',
+    featured: true,
+    cv: true,
+  },
+  {
+    slug: 'agua-potable',
+    name: "Link'u",
+    year: '2026',
+    kind: { es: 'Cliente · Comunidad rural', en: 'Client · Rural community' },
+    tagline: {
+      es: 'App de escritorio offline-first para el cobro de agua potable de una comunidad.',
+      en: 'Offline-first desktop app for a rural community\'s water billing.',
+    },
+    problem: {
+      es: "La comunidad Link'u (Sipe Sipe, Cochabamba) registraba lecturas de medidores a mano y sin respaldo. La app funciona 100 % sin internet, emite boletas y respalda los datos cifrados.",
+      en: "The Link'u community (Sipe Sipe, Cochabamba) logged water meter readings by hand with no backups. The app works 100% offline, prints bills and keeps encrypted backups.",
+    },
+    role: { es: 'Análisis con el cliente, diseño y desarrollo completo.', en: 'Client analysis, design and full development.' },
+    highlights: {
+      es: [
+        'SQLite como fuente de verdad; permisos y cálculos solo en el proceso principal de Electron; montos en centavos enteros.',
+        'Respaldos cifrados AES-256-GCM en la nube, migraciones versionadas con respaldo previo automático.',
+        'Actualizaciones automáticas, multas por mora, boletas PDF y login con foto para operarios (pedido del cliente).',
+        '47 tests (Vitest) y CI en GitHub Actions que genera instalador de Windows, portable y AppImage.',
+      ],
+      en: [
+        'SQLite as source of truth; permissions and calculations only in Electron\'s main process; money stored as integer cents.',
+        'AES-256-GCM encrypted cloud backups, versioned migrations with automatic pre-migration backup.',
+        'Auto-updates, late fees, PDF bills and photo login for operators (client request).',
+        '47 tests (Vitest) and GitHub Actions CI producing a Windows installer, portable build and AppImage.',
+      ],
+    },
+    stack: ['Electron', 'React', 'Vite', 'SQLite', 'Firebase Storage', 'Vitest', 'GitHub Actions'],
+    accent: '#3db8ff',
     featured: true,
     cv: true,
     confidential: true,
   },
   {
-    slug: 'agua-potable',
-    name: "Agua Link'u",
+    slug: 'homelab',
+    name: 'Homelab',
     year: '2026',
-    kind: { es: 'Proyecto comunitario', en: 'Community project' },
+    kind: { es: 'Proyecto personal · Infraestructura', en: 'Personal project · Infrastructure' },
     tagline: {
-      es: 'App de escritorio offline-first para cobrar el agua potable de una comunidad.',
-      en: 'Offline-first desktop app for a rural community\'s water billing.',
+      es: 'Servidor casero 24/7 con una docena de servicios y un agente de IA (OpenClaw) que lo opera.',
+      en: 'A 24/7 home server running a dozen services, operated by an AI agent (OpenClaw).',
     },
     problem: {
-      es: "La comunidad Link'u (Sipe Sipe, Cochabamba) registraba lecturas de medidores a mano y sin respaldo. La app funciona 100% sin internet, emite boletas y respalda los datos cifrados en la nube.",
-      en: "The Link'u community (Sipe Sipe, Cochabamba) logged water meter readings by hand with no backups. The app works 100% offline, prints bills and backs up encrypted data to the cloud.",
+      es: 'Un Pentium de 4 hilos y 3,7 GB de RAM, detrás de CGNAT y sin poder abrir puertos. Aun así sirve 12 servicios públicos bajo mi dominio, con HTTPS, backups y monitoreo, a costo cero.',
+      en: 'A 4-thread Pentium with 3.7 GB of RAM, behind CGNAT with no way to open ports. It still serves 12 public services under my domain, with HTTPS, backups and monitoring, at zero cost.',
     },
-    role: { es: 'Análisis, diseño y desarrollo completo.', en: 'Analysis, design and full development.' },
+    role: { es: 'Todo: infraestructura, automatización y el agente.', en: 'Everything: infrastructure, automation and the agent.' },
     highlights: {
       es: [
-        'SQLite local como fuente de verdad; Electron + React con IPC.',
-        'Respaldo automático cifrado con AES-256-GCM en Firebase Storage, con restauración manual.',
-        'Boletas en PDF (doble copia) y captura con cámara.',
+        'Exposición segura con Cloudflare Tunnel (sin puertos abiertos), acceso privado por Tailscale, UFW y fail2ban.',
+        'Servicios en Docker y systemd: media server, gestión del hogar, un notebook RAG propio y más; backups con timers.',
+        'Agente OpenClaw 24/7 (webchat y Telegram) con 41 skills de procedimientos: despliegues, mantenimiento, reportes y memoria consolidada.',
+        'Gateway SMS con un módem USB: comandos por SMS con lista blanca y alertas de salud del servidor cada 5 minutos.',
+        'Virtualización KVM: Rocky Linux con LVM y Windows Server 2022 instalado de forma desatendida.',
       ],
       en: [
-        'Local SQLite as source of truth; Electron + React over IPC.',
-        'Automatic AES-256-GCM encrypted backups to Firebase Storage, with manual restore.',
-        'PDF bills (duplicate copy) and webcam capture.',
+        'Secure exposure via Cloudflare Tunnel (no open ports), private access over Tailscale, UFW and fail2ban.',
+        'Services on Docker and systemd: media server, home management, a custom RAG notebook and more; timer-based backups.',
+        '24/7 OpenClaw agent (webchat and Telegram) with 41 procedure skills: deployments, maintenance, reports and memory consolidation.',
+        'SMS gateway on a USB modem: whitelisted SMS commands and server health alerts every 5 minutes.',
+        'KVM virtualization: Rocky Linux with LVM and an unattended Windows Server 2022 install.',
       ],
     },
-    stack: ['Electron', 'React', 'SQLite', 'Firebase', 'Node.js', 'jsPDF'],
-    accent: '#3db8ff',
+    stack: ['Arch Linux', 'Docker', 'systemd', 'Cloudflare Tunnel', 'Tailscale', 'OpenClaw', 'KVM'],
+    accent: '#5dffb0',
     featured: true,
-    cv: true,
+    cv: false,
+  },
+  {
+    slug: 'ros',
+    name: 'rOS',
+    year: '2026',
+    kind: { es: 'Proyecto personal · Linux', en: 'Personal project · Linux' },
+    tagline: { es: 'Mi propio sabor de Linux sobre Arch, en uso diario.', en: 'My own flavor of Linux on top of Arch, daily-driven.' },
+    problem: {
+      es: 'No es una ISO: es una capa de escritorio propia, versionada y reversible sobre Archcraft/Arch que convierte una instalación en rOS — con identidad, arranque, escritorio y herramientas propias.',
+      en: 'Not an ISO: a custom, versioned and reversible desktop layer on top of Archcraft/Arch that turns an install into rOS — with its own identity, boot, desktop and tools.',
+    },
+    role: { es: 'Todo.', en: 'Everything.' },
+    highlights: {
+      es: [
+        'Escritorio Wayland con niri y DankMaterialShell (Quickshell/QML); greeter sobre greetd; arranque con Limine y branding propio.',
+        'ros-update: snapshot de Timeshift antes de actualizar pacman, AUR y flatpak; gestión de modos de GPU (PRIME) y perfiles de energía automáticos.',
+        'Hardening: SSH solo con llave, ufw, zram + systemd-oomd; scripts idempotentes de instalación y rollback.',
+        'Utilidades con GPU: reescalado de imágenes (waifu2x) y subtítulos automáticos (faster-whisper).',
+      ],
+      en: [
+        'Wayland desktop with niri and DankMaterialShell (Quickshell/QML); greetd greeter; Limine boot with custom branding.',
+        'ros-update: Timeshift snapshot before updating pacman, AUR and flatpak; GPU mode switching (PRIME) and automatic power profiles.',
+        'Hardening: key-only SSH, ufw, zram + systemd-oomd; idempotent install and rollback scripts.',
+        'GPU utilities: image upscaling (waifu2x) and automatic subtitles (faster-whisper).',
+      ],
+    },
+    stack: ['Arch Linux', 'niri', 'DankMaterialShell', 'Limine', 'Shell', 'systemd'],
+    accent: '#8ab4ff',
+    featured: true,
+    cv: false,
+  },
+  {
+    slug: 'adsie',
+    name: 'Adsie',
+    year: '2023 – 2025',
+    kind: WANT,
+    tagline: { es: 'Red social de anuncios y cupones para negocios locales de Florida.', en: 'Ads and coupons social app for local businesses in Florida.' },
+    problem: {
+      es: 'Los negocios locales necesitaban un canal propio para publicar novedades, eventos y cupones, y medir su efecto.',
+      en: 'Local businesses needed their own channel to publish news, events and coupons — and measure the results.',
+    },
+    role: { es: 'Desarrollo de la app móvil (434 de 497 commits).', en: 'Mobile app development (434 of 497 commits).' },
+    highlights: {
+      es: ['Perfiles de empresa, posts y highlights, eventos', 'Cupones con estadísticas de uso', 'Cámara y video, listas de alto rendimiento (FlashList), i18n'],
+      en: ['Business profiles, posts and highlights, events', 'Coupons with usage stats', 'Camera and video, high-performance lists (FlashList), i18n'],
+    },
+    stack: ['React Native', 'Expo', 'TypeScript'],
+    accent: '#ff3d8b',
+    featured: false,
+    cv: false,
+    confidential: true,
+  },
+  {
+    slug: 'bite',
+    name: 'Bite',
+    year: '2025',
+    kind: WANT,
+    tagline: { es: 'SaaS de menú digital y pedidos para restaurantes.', en: 'Digital menu and ordering SaaS for restaurants.' },
+    problem: {
+      es: 'Menú móvil multi-tenant para restaurantes de Cochabamba: el cliente pide desde la mesa escaneando un QR.',
+      en: 'Multi-tenant mobile menu for restaurants in Cochabamba: customers order from their table by scanning a QR code.',
+    },
+    role: { es: 'Desarrollo frontend (260 de 277 commits).', en: 'Frontend development (260 of 277 commits).' },
+    highlights: {
+      es: ['Pedido a mesa por QR y checkout', 'Cupones, banners, sucursales y planes', 'Google Maps y modo de alto contraste'],
+      en: ['QR table ordering and checkout', 'Coupons, banners, branches and plans', 'Google Maps and high-contrast mode'],
+    },
+    stack: ['Next.js (App Router)', 'TypeScript'],
+    accent: '#ffd23d',
+    featured: false,
+    cv: false,
+    confidential: true,
   },
   {
     slug: 'onelife',
     name: 'One Life Fitness',
     year: '2023', // TODO(confirmar)
-    kind: { es: 'Cliente · WANT Digital Agency', en: 'Client · WANT Digital Agency' },
-    tagline: { es: 'App móvil para socios de gimnasio.', en: 'Mobile app for gym members.' },
+    kind: WANT,
+    tagline: { es: 'App móvil para los socios de un gimnasio.', en: 'Mobile app for gym members.' },
     problem: {
-      es: 'Cadena de gimnasios con sedes en Cochabamba y La Paz que necesitaba una app para sus socios.',
-      en: 'Gym chain in Cochabamba and La Paz that needed an app for its members.',
+      es: 'Un gimnasio de Cochabamba necesitaba una app propia para sus socios.',
+      en: 'A gym in Cochabamba needed its own app for members.',
     },
-    role: { es: 'Desarrollo de la app en React Native.', en: 'React Native app development.' },
-    highlights: { es: ['TODO(confirmar): funcionalidades principales.'], en: ['TODO: main features.'] },
-    stack: ['React Native', 'TypeScript'],
-    accent: '#ffd23d',
-    featured: true,
+    role: { es: 'Todo el frontend de la app en React Native.', en: 'The entire React Native app frontend.' },
+    highlights: { es: ['App completa para socios del gimnasio.'], en: ['Complete app for gym members.'] },
+    stack: ['React Native'],
+    accent: '#ff8a3d',
+    featured: false,
     cv: false,
     confidential: true,
   },
@@ -344,46 +541,43 @@ export const projects: Project[] = [
     slug: 'onehand',
     name: 'OneHand',
     year: '2024', // TODO(confirmar)
-    kind: { es: 'Cliente · WANT Digital Agency', en: 'Client · WANT Digital Agency' },
+    kind: WANT,
     tagline: { es: 'Gestión de citas para un centro de fisioterapia.', en: 'Appointment management for a physiotherapy center.' },
     problem: {
-      es: 'Un centro de fisioterapia necesitaba ordenar sus citas y pacientes.',
-      en: 'A physiotherapy center needed to organize its appointments and patients.',
+      es: 'Un centro de fisioterapia necesitaba ordenar sus citas y pacientes desde el celular.',
+      en: 'A physiotherapy center needed to manage appointments and patients from a phone.',
     },
-    role: { es: 'Desarrollo frontend / móvil.', en: 'Frontend / mobile development.' },
-    highlights: { es: ['TODO(confirmar): funcionalidades principales.'], en: ['TODO: main features.'] },
-    stack: ['React Native', 'React'],
+    role: { es: 'Todo el frontend de la app en React Native.', en: 'The entire React Native app frontend.' },
+    highlights: { es: ['Agenda y gestión de citas.'], en: ['Scheduling and appointment management.'] },
+    stack: ['React Native'],
     accent: '#b58cff',
     featured: false,
     cv: false,
     confidential: true,
   },
   {
-    slug: 'adsie',
-    name: 'Adsie',
-    year: '2024', // TODO(confirmar)
-    kind: { es: 'Cliente · WANT Digital Agency', en: 'Client · WANT Digital Agency' },
-    tagline: { es: 'Marketplace de campañas entre marcas e influencers.', en: 'Brand ↔ influencer campaign marketplace.' },
+    slug: 'lynx',
+    name: 'LYNX Bolivia',
+    year: '2022', // TODO(confirmar)
+    kind: WANT,
+    tagline: { es: 'Sitio web de una tienda de electrónica y electrodomésticos.', en: 'Website for an electronics and home appliance retailer.' },
     problem: {
-      es: 'Conecta empresas con influencers por ciudad: campañas, gigs, órdenes, contratos generados con IA y pagos con QR.',
-      en: 'Connects companies with influencers by city: campaigns, gigs, orders, AI-generated contracts and QR payments.',
+      es: 'Presencia web y tienda en línea para una cadena de electrónica de Cochabamba con envíos a toda Bolivia.',
+      en: 'Web presence and online store for a Cochabamba electronics chain shipping across Bolivia.',
     },
-    role: { es: 'Desarrollo frontend.', en: 'Frontend development.' }, // TODO(confirmar)
-    highlights: {
-      es: ['Flujo de campañas y postulaciones', 'Contratos generados con Gemini', 'Pagos con QR (BNB)'],
-      en: ['Campaign and application flow', 'Gemini-generated contracts', 'QR payments (BNB)'],
-    },
-    stack: ['React', 'React Native', 'Gemini API'],
-    accent: '#ff3d8b',
+    role: { es: 'Desarrollo del sitio en WordPress.', en: 'WordPress site development.' },
+    highlights: { es: ['Sitio corporativo y tienda.'], en: ['Corporate site and store.'] },
+    stack: ['WordPress'],
+    links: [{ label: 'lynx.com.bo', href: 'https://lynx.com.bo/' }],
+    accent: '#e8e8e8',
     featured: false,
     cv: false,
-    confidential: true,
   },
   {
     slug: 'blessd',
     name: 'Blessd',
     year: '2022',
-    kind: { es: 'Cliente · WANT Digital Agency', en: 'Client · WANT Digital Agency' },
+    kind: WANT,
     tagline: { es: 'Red social para iglesias.', en: 'Social network for churches.' },
     problem: {
       es: 'Red social para comunidades de iglesias. El producto no llegó a lanzarse.',
@@ -398,6 +592,26 @@ export const projects: Project[] = [
     confidential: true,
   },
   {
+    slug: 'hackacom-2023',
+    name: 'Hackacom 2023',
+    year: '2023',
+    kind: { es: 'Hackatón · Participante', en: 'Hackathon · Participant' },
+    tagline: { es: 'App con mapas construida en un fin de semana.', en: 'Map-based app built over a weekend.' },
+    // TODO(confirmar): qué problema atacaba y cuál fue tu rol en el equipo.
+    problem: {
+      es: 'Proyecto en equipo para la hackatón Hackacom 2023: una app web con mapas interactivos. No ganamos, pero fue una gran experiencia de trabajo contra reloj.',
+      en: 'Team project for the Hackacom 2023 hackathon: a web app with interactive maps. We didn\'t win, but it was great practice working against the clock.',
+    },
+    role: { es: 'Desarrollo frontend.', en: 'Frontend development.' }, // TODO(confirmar)
+    highlights: { es: ['Mapas interactivos con Leaflet.'], en: ['Interactive maps with Leaflet.'] },
+    stack: ['React', 'Leaflet', 'Tailwind'],
+    links: [{ label: 'GitHub', href: 'https://github.com/RossmelMax/hackacom2023' }],
+    accent: '#3dffe0',
+    featured: false,
+    cv: false,
+  },
+  {
+    // TODO(confirmar): ¿cliente real? (el informe local lo marcó como dudoso)
     slug: 'capadocia',
     name: 'Condominio Capadocia',
     year: '2025',
@@ -414,10 +628,12 @@ export const projects: Project[] = [
     },
     stack: ['React', 'TypeScript', 'Vite', 'Firebase', 'Cloud Functions'],
     accent: '#e8c39e',
-    featured: true,
-    cv: true,
+    featured: false,
+    cv: false,
+    draft: true,
   },
   {
+    // TODO(confirmar): ¿fue para un negocio real? ¿se muestra?
     slug: 'eko',
     name: 'EKO',
     year: '2025',
@@ -432,32 +648,16 @@ export const projects: Project[] = [
       es: ['Arquitectura por features', 'Estado global con Redux Toolkit', 'Supabase como backend'],
       en: ['Feature-based architecture', 'Global state with Redux Toolkit', 'Supabase backend'],
     },
-    stack: ['React', 'TypeScript', 'Redux Toolkit', 'Supabase', 'MUI', 'Framer Motion'],
+    stack: ['React', 'TypeScript', 'Redux Toolkit', 'Supabase', 'MUI'],
     accent: '#5dffb0',
     featured: false,
     cv: false,
-  },
-  {
-    slug: 'ros',
-    name: 'rOS',
-    year: '2026',
-    kind: { es: 'Proyecto personal', en: 'Personal project' },
-    tagline: { es: 'Mi propia distro de Linux, basada en Arch.', en: 'My own Arch-based Linux distro.' },
-    problem: {
-      es: 'TODO(confirmar): qué es rOS, qué la hace distinta, en qué estado está.',
-      en: 'TODO: what rOS is, what makes it different, current status.',
-    },
-    role: { es: 'Todo.', en: 'Everything.' },
-    highlights: {
-      es: ['Wayland (Hyprland / DankMaterialShell)', 'Dotfiles versionados', 'TODO(confirmar)'],
-      en: ['Wayland (Hyprland / DankMaterialShell)', 'Versioned dotfiles', 'TODO'],
-    },
-    stack: ['Arch Linux', 'Hyprland', 'Shell', 'Kitty'],
-    accent: '#8ab4ff',
-    featured: true,
-    cv: false,
+    draft: true,
   },
 ];
+
+/** Proyectos visibles (sin borradores). Usar siempre esto en componentes. */
+export const visibleProjects = projects.filter((p) => !p.draft);
 
 /* ------------------------------------------------------------------ */
 /* CÓMO TRABAJO (sección IA / flujo)                                   */
@@ -479,10 +679,10 @@ export const workflow: { title: L; body: L }[] = [
     },
   },
   {
-    title: { es: 'Construir', en: 'Build' },
+    title: { es: 'Construir y medir', en: 'Build & measure' },
     body: {
-      es: 'Código tipado, componentes reutilizables y atención al detalle: rendimiento, accesibilidad y animación.',
-      en: 'Typed code, reusable components and attention to detail: performance, accessibility and motion.',
+      es: 'Código tipado, tests y métricas: en AdvAI, evaluar la búsqueda me llevó del 43 % al 80 % de acierto.',
+      en: 'Typed code, tests and metrics: in AdvAI, evaluating retrieval took me from 43% to 80% hit rate.',
     },
   },
   {
