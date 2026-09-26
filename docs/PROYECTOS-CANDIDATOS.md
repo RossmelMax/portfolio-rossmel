@@ -11,7 +11,7 @@ Actualizado: sept. 2026 (tras las respuestas de Rossmel y el informe de Claude C
 | CarX (Vulcano) · GeekLabs vía WANT | galería | en experiencia | — (IA: hecha por el jefe, tú la integraste) |
 | SGPG (gestor de proyectos de grado, UDABOL) | galería | ✅ | URL de Vercel (¿se puede mostrar?) |
 | Link'u (agua potable, Sipe Sipe) | galería | ✅ (proyecto pagado) | capturas |
-| Homelab + OpenClaw | galería | ❌ | capturas (sin mostrar URLs de admin/ssh) |
+| Homelab + OpenClaw | galería | ❌ | capturas (sin mostrar URLs internas) |
 | rOS | galería | ❌ | capturas lindas (escritorio, fastfetch, arranque) |
 | Adsie · WANT | lista | en experiencia | — |
 | Bite · WANT | lista | en experiencia | — |
