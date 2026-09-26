@@ -294,10 +294,11 @@ Flujo diario: push a `main` = producción; push a otra rama / PR = URL de vista 
 - [x] Imagen para compartir (`public/og.png`, 1200×630, `npm run og`)
 - [ ] Capturas reales de proyectos (las sube Rossmel más adelante; ver "Imágenes de proyectos")
 - [x] Publicado en Cloudflare Pages: portfolio.rossmel.top y cv.rossmel.top (sept. 2026)
-- [x] Formulario de contacto (código listo) — [ ] falta configurar Turnstile + Resend en Cloudflare (ver "Formulario de contacto")
+- [x] Formulario de contacto funcionando en producción (Resend verificado con SPF/DKIM/DMARC, Turnstile activo; prueba real llegó a la bandeja de entrada)
+- [ ] (Opcional) Copiar las 3 variables del formulario también al entorno *Preview* de Pages
 - [x] Foto en "Sobre mí" (`src/assets/rossmel.jpg`, optimizada a WebP por Astro)
 - [x] Menú móvil, sitemap, 404 propia, auditoría Lighthouse (local: perf 87–94, a11y 95–96, BP/SEO 100; CV 100 en todo)
-- [ ] Alta en Google Search Console
+- [x] Google Search Console verificado (propiedad de dominio `rossmel.top`) y sitemap enviado
 - [ ] Video corto de AdvAI + capturas (Rossmel)
 - [ ] Probar Lighthouse (meta ≥95) y accesibilidad con teclado
 
