@@ -15,7 +15,7 @@ export const ui = {
     experience: { kicker: '02 — Experiencia', present: 'Actualidad' },
     work: { kicker: '03 — Proyectos', title: 'Trabajo seleccionado', view: 'Ver caso', private: 'Código privado' },
     stack: { kicker: '04 — Stack' },
-    workflow: { kicker: '05 — Cómo trabajo', title: 'IA como parte del flujo, no como atajo.', journey: 'Programador primero: antes y después de la IA', steps: 'Mi proceso', essay: 'Lee la historia completa: No soy un vibe coder' },
+    workflow: { kicker: '05 — Cómo trabajo', title: 'IA como parte del flujo, no como atajo.', journey: 'Programador primero: antes y después de la IA', steps: 'Mi proceso', essay: 'Lee la historia completa: programar antes y después de la IA' },
     contact: {
       kicker: '06 — Contacto',
       title: '¿Construimos algo juntos?',
@@ -90,7 +90,7 @@ export const ui = {
     experience: { kicker: '02 — Experience', present: 'Present' },
     work: { kicker: '03 — Work', title: 'Selected work', view: 'View case', private: 'Private code' },
     stack: { kicker: '04 — Stack' },
-    workflow: { kicker: '05 — How I work', title: 'AI as part of the workflow, not a shortcut.', journey: 'A programmer first: before and after AI', steps: 'My process', essay: 'Read the full story (in Spanish): I\'m not a vibe coder' },
+    workflow: { kicker: '05 — How I work', title: 'AI as part of the workflow, not a shortcut.', journey: 'A programmer first: before and after AI', steps: 'My process', essay: 'Read the full story (in Spanish): coding before and after AI' },
     contact: {
       kicker: '06 — Contact',
       title: "Let's build something together?",

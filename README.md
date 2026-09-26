@@ -330,7 +330,7 @@ Flujo diario: push a `main` = producción; push a otra rama / PR = URL de vista 
 - [ ] Probar Lighthouse (meta ≥95) y accesibilidad con teclado
 - [x] v3.8: énfasis en programar sin IA (sobre mí, CV, línea de tiempo "antes y después de la IA"),
   blog con buscador/etiquetas/índice/relacionados y 10 artículos (uno o más por proyecto con código visible)
-- [ ] Subdominios en "En vivo" (`liveSites` en profile.ts): Rossmel confirma cuáles se muestran (hoy todos `draft`)
+- [x] Subdominios en "En vivo" (`liveSites` en profile.ts): notebook, rubik y selflix (confirmados por Rossmel)
 
 ---
 
@@ -371,5 +371,6 @@ Ramas:
 | 2026-09 | Despliegue en Cloudflare Pages (un proyecto, dos dominios, middleware para `cv.`). |
 | 2026-09 | v3.8: "programador primero". Sobre mí, CV y la sección Cómo trabajo cuentan que programó años sin IA (en WANT la IA llegó recién el último año) y qué herramientas usa hoy. |
 | 2026-09 | Blog "en condiciones": buscador de texto completo sin dependencias (índice JSON bajo demanda), etiquetas, índice por artículo, relacionados y enlaces artículo ↔ caso de estudio. Artículos en español. |
-| 2026-09 | Sección "En vivo" para subdominios: solo servicios públicos presentables; nunca paneles, SSH, chats ni servicios personales. |
+| 2026-09 | Sección "En vivo": notebook, rubik y selflix. Fuera: music, mcu, waitlist, stream, chat, admin, admin-music, ssh, ori, class, s, test (y los del propio portafolio). |
+| 2026-09 | Tono: transmitir que entiende lo que genera la IA, sin frases absolutas ni "no soy vibe coder" (pedido de Rossmel). |
 | 2026-09 | Fuera del sitio: watcher-backend, prototipos v0 (salvo SGPG), proyectos descartados, proyectos personales/regalos. |

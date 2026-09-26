@@ -50,14 +50,14 @@ export const profile = {
       'Empecé a programar solo, en 2019, con mi primera computadora propia. Desde entonces no paré: cursos, documentación, prueba y error, y muchas noches de “¿por qué no funciona esto?”.',
       'Pasé más de tres años en WANT Digital Agency, donde éramos dos en desarrollo: mi jefe en el backend y yo en el frontend. Ahí aprendí a hacer de todo — investigar, resolver, trabajar bajo presión y entregar.',
       'Aprendí a la vieja escuela: en la agencia, casi todo ese tiempo programamos a mano — documentación, foros, depurar línea por línea. Recién en el último año incorporamos IA al trabajo.',
-      'Con el boom de la IA fui probando de todo: GitHub Copilot, ChatGPT, Gemini, DeepSeek, Groq, modelos locales y, últimamente, Claude. Me potenció muchísimo, pero no reemplaza entender el código: la IA propone, yo reviso, decido y respondo por cada línea. Y me dio más ganas de seguir aprendiendo y entender toda tecnología que llegue a mis manos.',
+      'Con el boom de la IA fui probando de todo: GitHub Copilot, ChatGPT, Gemini, DeepSeek, Groq, modelos locales y, últimamente, Claude. Me potenció muchísimo, y como vengo de escribir todo a mano, entiendo lo que genera: sé leerlo, corregirlo y mantenerlo. Y me dio más ganas de seguir aprendiendo y entender toda tecnología que llegue a mis manos.',
       'Fuera del trabajo, vivo en Linux: uso a diario rOS, mi propio flavor de Arch que quiero convertir en una distro real, y mantengo un homelab con una docena de servicios y un agente de IA que lo cuida 24/7.',
     ],
     en: [
       'I started coding on my own in 2019, with my first personal computer. I haven\'t stopped since: courses, docs, trial and error, and many “why isn\'t this working?” nights.',
       'I spent 3+ years at WANT Digital Agency, where the dev team was two people: my boss on the backend and me on the frontend. That\'s where I learned to do a bit of everything — research, solve, work under pressure and ship.',
       'I learned the old-school way: at the agency, for almost all of that time we coded by hand — docs, forums, debugging line by line. We only brought AI into our work in the last year.',
-      'When the AI boom hit I tried everything: GitHub Copilot, ChatGPT, Gemini, DeepSeek, Groq, local models and, lately, Claude. It has boosted me a lot, but it doesn\'t replace understanding the code: AI proposes, I review, decide and own every line. And it made me even more eager to keep learning and understand every technology that comes my way.',
+      'When the AI boom hit I tried everything: GitHub Copilot, ChatGPT, Gemini, DeepSeek, Groq, local models and, lately, Claude. It has boosted me a lot, and since I come from writing everything by hand, I understand what it generates: I can read it, fix it and maintain it. And it made me even more eager to keep learning and understand every technology that comes my way.',
       'Outside work I live in Linux: I daily-drive rOS, my own flavor of Arch that I\'m growing into a real distro, and run a homelab with a dozen services and an AI agent that looks after it 24/7.',
     ],
   } as Record<Lang, string[]>,
@@ -729,8 +729,8 @@ export const workflow: { title: L; body: L }[] = [
   {
     title: { es: 'Construir y medir', en: 'Build & measure' },
     body: {
-      es: 'Leo y entiendo cada línea que entra al repo, venga de donde venga. Código tipado, tests y métricas: en AdvAI, evaluar la búsqueda me llevó del 43 % al 80 % de acierto.',
-      en: 'I read and understand every line that lands in the repo, wherever it came from. Typed code, tests and metrics: in AdvAI, evaluating retrieval took me from 43% to 80% hit rate.',
+      es: 'Entiendo lo que llega a producción, lo haya escrito yo o la IA. Código tipado, tests y métricas: en AdvAI, evaluar la búsqueda me llevó del 43 % al 80 % de acierto.',
+      en: 'I understand what ships to production, whether I or AI wrote it. Typed code, tests and metrics: in AdvAI, evaluating retrieval took me from 43% to 80% hit rate.',
     },
   },
   {
@@ -796,21 +796,28 @@ export const liveSites: { host: string; name: L; body: L; project?: string; draf
     host: 'notebook.rossmel.top',
     name: { es: 'Notebook RAG', en: 'RAG Notebook' },
     body: {
-      es: 'Mis apuntes con búsqueda y preguntas en lenguaje natural sobre ellos.', // TODO(confirmar) descripción
-      en: 'My notes, searchable and answerable in natural language.',
+      es: 'Mis apuntes con búsqueda inteligente (RAG): les puedo hacer preguntas en lenguaje natural.',
+      en: 'My notes with smart search (RAG): I can ask them questions in natural language.',
     },
     project: 'homelab',
-    draft: true, // TODO(confirmar) ¿va en el portafolio?
   },
   {
     host: 'rubik.rossmel.top',
     name: { es: 'Rubik', en: 'Rubik' },
     body: {
-      es: 'Sitio del cubo de Rubik con visor 3D y mezclas.', // TODO(confirmar) descripción
-      en: 'Rubik\'s cube site with a 3D viewer and scrambles.',
+      es: 'Para practicar cubo de Rubik y otros puzzles: mezclas oficiales WCA y visor 3D (cubing.js), sin depender de CDNs.',
+      en: 'Practice the Rubik\'s cube and other puzzles: official WCA scrambles and a 3D viewer (cubing.js), with no CDN dependency.',
     },
     project: 'homelab',
-    draft: true, // TODO(confirmar) ¿va en el portafolio?
+  },
+  {
+    host: 'selflix.rossmel.top',
+    name: { es: 'Selflix', en: 'Selflix' },
+    body: {
+      es: 'Mi servidor multimedia propio (Jellyfin), con apps en el celular y la tele. Acceso solo con cuenta.',
+      en: 'My own media server (Jellyfin), with phone and TV apps. Account-only access.',
+    },
+    project: 'homelab',
   },
 ];
 
