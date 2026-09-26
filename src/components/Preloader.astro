@@ -1,7 +1,30 @@
 ---
-import { profile } from '../data/profile';
+/**
+ * Pantalla de arranque tipo terminal (solo la primera visita de la sesión).
+ * El texto lo escribe animations.ts → initPreloader() a partir de data-boot.
+ */
+import type { Lang } from '../data/profile';
+import { visibleProjects } from '../data/profile';
+import { t } from '../data/i18n';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const b = t(lang).boot;
+const boot = {
+  prompt: 'rossmel@rOS:~$',
+  command: b.command,
+  steps: b.steps.map((x) => x.replace('{n}', String(visibleProjects.length))),
+  done: b.done,
+};
 ---
-<div data-preloader class="fixed inset-0 z-[80] flex flex-col justify-between bg-accent p-6 text-accent-ink md:p-10" aria-hidden="true">
-  <span class="font-mono text-xs uppercase tracking-widest">{profile.name} — Portfolio ©{new Date().getFullYear()}</span>
-  <span data-preloader-count class="display self-end text-[22vw] font-bold leading-none md:text-[16vw]">000</span>
+<div data-preloader data-boot={JSON.stringify(boot)} class="fixed inset-0 z-[80] flex items-center justify-center bg-bg p-5" aria-hidden="true">
+  <div class="w-full max-w-2xl overflow-hidden rounded-2xl border border-line bg-bg-2 shadow-2xl">
+    <div class="flex items-center gap-2 border-b border-line px-4 py-3">
+      <span class="h-3 w-3 rounded-full bg-[#ff5f57]"></span>
+      <span class="h-3 w-3 rounded-full bg-[#febc2e]"></span>
+      <span class="h-3 w-3 rounded-full bg-[#28c840]"></span>
+      <span class="ml-3 font-mono text-xs text-muted">rossmel — zsh</span>
+    </div>
+    <pre data-boot-log class="min-h-[13.5rem] whitespace-pre-wrap p-5 font-mono text-sm leading-relaxed text-fg md:text-base"></pre>
+  </div>
+  <p class="kicker absolute bottom-6 left-1/2 -translate-x-1/2 whitespace-nowrap">{b.skip}</p>
 </div>

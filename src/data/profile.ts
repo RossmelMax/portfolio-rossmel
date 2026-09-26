@@ -84,7 +84,7 @@ export const profile = {
 /* ------------------------------------------------------------------ */
 
 export type Experience = {
-  company: string;
+  company: L;
   role: L;
   type: L;
   start: string; // YYYY-MM
@@ -99,7 +99,7 @@ export type Experience = {
 
 export const experience: Experience[] = [
   {
-    company: 'Independiente',
+    company: { es: 'Independiente', en: 'Independent' },
     role: { es: 'Desarrollador Fullstack', en: 'Fullstack Developer' },
     type: { es: 'Freelance', en: 'Freelance' },
     start: '2026-01',
@@ -123,7 +123,7 @@ export const experience: Experience[] = [
     cv: true,
   },
   {
-    company: 'WANT Digital Agency / GeekLabs',
+    company: { es: 'WANT Digital Agency / GeekLabs', en: 'WANT Digital Agency / GeekLabs' },
     role: { es: 'Desarrollador Frontend (Web y Móvil)', en: 'Frontend Developer (Web & Mobile)' },
     type: {
       es: 'Pasantía → Freelance → Contrato (2025–2026)',
@@ -160,7 +160,7 @@ export const experience: Experience[] = [
     cv: true,
   },
   {
-    company: 'Freelance',
+    company: { es: 'Freelance', en: 'Freelance' },
     role: { es: 'Diseñador Gráfico — Identidad de marca', en: 'Graphic Designer — Brand Identity' },
     type: { es: 'Freelance esporádico', en: 'Part-time freelance' },
     start: '2025-03',

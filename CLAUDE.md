@@ -30,6 +30,7 @@ Antes de dar algo por terminado: `npm run build` sin errores, y si cambió conte
 ## Estado (actualizar al terminar cada sesión)
 - v3.3 (sept. 2026): PUBLICADO en portfolio.rossmel.top y cv.rossmel.top. Contenido confirmado (sin TODOs).
 - v3.4: foto, menú móvil, sitemap, 404, formulario (/api/contact con Resend + Turnstile).
+- v3.5: terminal de arranque, terminal de envío del formulario, arreglos de foto/título/inglés.
 - Siguiente: configurar Turnstile/Resend y Search Console (Claude local); capturas y video de AdvAI (Rossmel).
 - Analítica: inyección automática de Cloudflare, sin token.
 - Preguntas abiertas para Rossmel y decisiones por proyecto: `docs/PROYECTOS-CANDIDATOS.md`.

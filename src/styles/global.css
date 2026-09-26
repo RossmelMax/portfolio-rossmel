@@ -138,6 +138,22 @@ html.lenis body {
   .cursor { display: none; }
 }
 
+/* Terminal de arranque */
+pre {
+  font-variant-ligatures: none;
+}
+.boot-caret {
+  animation: caret 1s steps(1) infinite;
+  color: var(--accent);
+}
+@keyframes caret {
+  50% { opacity: 0; }
+}
+/* Si ya se vio en esta sesión (clase puesta en <head>), no mostrar ni un frame */
+html.booted [data-preloader] {
+  display: none;
+}
+
 /* Marquee */
 .marquee-track {
   display: flex;
@@ -156,6 +172,7 @@ html.lenis body {
     transition-duration: 0.001ms !important;
   }
   .grain { display: none; }
+  [data-preloader] { display: none; }
 }
 
 /* Transiciones de página (View Transitions API) */

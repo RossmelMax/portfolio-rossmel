@@ -10,13 +10,13 @@ const others = projects.filter((p) => !p.featured);
 ---
 <section id="work" data-horizontal class="relative overflow-hidden md:h-screen">
   <div data-track class="flex h-full flex-col gap-6 px-5 py-24 md:flex-row md:items-center md:gap-10 md:px-10 md:py-0">
-    <div class="shrink-0 md:w-[32vw]">
+    <div class="shrink-0 md:w-[38vw] md:pr-[3vw]">
       <p class="kicker mb-6">{s.work.kicker}</p>
-      <h2 class="display text-6xl font-bold md:text-[7vw]">{s.work.title}</h2>
+      <h2 class="display text-6xl font-bold md:text-[4.8vw]">{s.work.title}</h2>
       <p class="mt-6 font-mono text-sm text-muted">({String(featured.length).padStart(2, '0')}) →</p>
     </div>
     {featured.map((p, i) => (
-      <a data-card data-hover href={paths.project(lang, p.slug)} class="group relative block shrink-0 md:w-[42vw]" style={`--c:${p.accent}`}>
+      <a data-card data-hover href={paths.project(lang, p.slug)} class="group relative block shrink-0 no-underline md:w-[42vw]" style={`--c:${p.accent}`}>
         <div class="relative aspect-[4/3] overflow-hidden rounded-3xl border border-line bg-bg-2">
           <div data-card-media class="absolute inset-0" style={`background: radial-gradient(120% 90% at ${20 + i * 15}% 20%, color-mix(in oklab, ${p.accent} 70%, transparent), transparent 60%), radial-gradient(90% 90% at 90% 100%, color-mix(in oklab, ${p.accent} 30%, transparent), transparent 70%);`}></div>
           <span class="display absolute bottom-4 left-6 text-[9vw] font-bold leading-none text-fg/90 mix-blend-overlay md:text-[6vw]">{p.name}</span>

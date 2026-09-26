@@ -16,7 +16,7 @@ const { lang } = Astro.props;
 const altPath = paths.home(lang === 'es' ? 'en' : 'es');
 ---
 <Base lang={lang} altPath={altPath}>
-  <Preloader />
+  <Preloader lang={lang} />
   <Nav lang={lang} altPath={altPath} />
   <main>
     <Hero lang={lang} />

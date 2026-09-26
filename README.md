@@ -157,7 +157,11 @@ atributos HTML. Para animar algo nuevo, basta con añadir el atributo:
 | `data-hover` | Agranda el cursor personalizado |
 
 Otros detalles:
-- **Preloader** (contador 000→100) solo la primera visita de la sesión (`sessionStorage`).
+- **Arranque tipo terminal** (`Preloader.astro` + `initPreloader()`): escribe `./portfolio --start` y
+  cuatro líneas `[ ok ]` (textos en `i18n.ts → boot`); ~2 s, se salta con clic/tecla, solo la primera
+  visita de la sesión (`sessionStorage`; la clase `booted` en `<html>` evita que parpadee después).
+- **Envío del formulario como script**: un `<dialog>` tipo terminal muestra los pasos reales del envío
+  (validación → antispam+envío → respuesta HTTP real del servidor). Textos en `i18n.ts → contact.term`.
 - **Nav** se oculta al bajar y reaparece al subir.
 - **Cursor** personalizado solo con mouse (no en táctil).
 - **`prefers-reduced-motion`**: se desactivan Lenis, preloader y animaciones; el contenido se
@@ -325,6 +329,7 @@ Ramas:
 | 2026-09 | Estética dark + acento lima aprobada por Rossmel ("me encanta"). |
 | 2026-09 | Proyectos de clientes de WANT sin código ni enlaces (`confidential`); métricas de commits como evidencia. |
 | 2026-09 | CV limitado a 2 páginas: SGPG y Link'u solo en la experiencia "Independiente"; diseño gráfico solo en el portafolio. |
+| 2026-09 | Contador del preloader → terminal de arranque; envío del formulario mostrado como script (idea de Rossmel). |
 | 2026-09 | Formulario: Pages Function + Resend + Turnstile (gratis, sin backend propio). |
 | 2026-09 | Fondo WebGL limitado a 30 fps y menor resolución en móvil (rendimiento). |
 | 2026-09 | Despliegue en Cloudflare Pages (un proyecto, dos dominios, middleware para `cv.`). |

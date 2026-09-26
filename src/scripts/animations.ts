@@ -57,18 +57,38 @@ function initPreloader(): Promise<void> {
   }
   try { sessionStorage.setItem('preloaded', '1'); } catch { /* sin storage */ }
 
-  const counter = el.querySelector<HTMLElement>('[data-preloader-count]')!;
-  const obj = { v: 0 };
+  // Terminal que "arranca" el portafolio. Se salta con clic o cualquier tecla.
+  const boot = JSON.parse(el.dataset.boot ?? '{}') as { prompt: string; command: string; steps: string[]; done: string };
+  const log = el.querySelector<HTMLElement>('[data-boot-log]')!;
+  let skipped = false;
+  const wait = (ms: number) => new Promise<void>((r) => setTimeout(r, skipped ? 0 : ms));
+  const esc = (t: string) => t.replace(/[&<>]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' })[c]!);
+  let html = '';
+  const render = (extra = '') => (log.innerHTML = html + extra + '<span class="boot-caret">█</span>');
+
+  const run = async () => {
+    html = `<span class="text-accent">${esc(boot.prompt)}</span> `;
+    for (const ch of boot.command) { html += esc(ch); render(); await wait(28); }
+    html += '\n'; render(); await wait(180);
+    for (const step of boot.steps) {
+      html += `<span class="text-muted">[</span> <span class="text-accent">ok</span> <span class="text-muted">]</span> ${esc(step)}\n`;
+      render(); await wait(150);
+    }
+    html += `\n<span class="text-accent">✓</span> ${esc(boot.done)}\n`;
+    render(); await wait(420);
+  };
+
   return new Promise((resolve) => {
-    gsap
-      .timeline({ onComplete: () => { el.remove(); resolve(); } })
-      .to(obj, {
-        v: 100,
-        duration: 1.4,
-        ease: 'power2.inOut',
-        onUpdate: () => (counter.textContent = String(Math.round(obj.v)).padStart(3, '0')),
-      })
-      .to(el, { yPercent: -100, duration: 0.9, ease: 'expo.inOut' }, '+=0.1');
+    const skip = () => { skipped = true; };
+    window.addEventListener('keydown', skip, { once: true });
+    el.addEventListener('pointerdown', skip, { once: true });
+    run().then(() => {
+      window.removeEventListener('keydown', skip);
+      gsap.to(el, {
+        yPercent: -100, duration: skipped ? 0.5 : 0.9, ease: 'expo.inOut',
+        onComplete: () => { el.remove(); resolve(); },
+      });
+    });
   });
 }
 

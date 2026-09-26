@@ -58,7 +58,7 @@ const sentence = (s: string) => { const c = clean(s); return c && !/[.!?]$/.test
       <h2>{H.exp}</h2>
       {experience.filter((e) => e.cv && !e.draft).map((e) => (
         <article>
-          <h3>{e.role[lang]} — {e.company}</h3>
+          <h3>{e.role[lang]} — {e.company[lang]}</h3>
           <p class="cv-meta">{fmtMonth(e.start, lang)} – {fmtMonth(e.end, lang)} | {e.location[lang]} | {clean(e.type[lang])}</p>
           <ul>{e.bullets[lang].map((b) => <li>{clean(b)}</li>)}</ul>
         </article>
