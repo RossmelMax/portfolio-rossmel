@@ -38,6 +38,7 @@ Antes de dar algo por terminado: `npm run build` sin errores, y si cambió conte
 - v3.8: énfasis en programar sin IA (sobre mí, CV, línea de tiempo en Cómo trabajo); blog con buscador, etiquetas, índice, relacionados y 11 artículos (incluye cómo montar un media center con Jellyfin, enlazado desde la tarjeta de Selflix); sección "En vivo" = proyectos con campo `live` (notebook, rubik, selflix, cada uno con su caso de estudio; el resto de subdominios NO va).
 - v3.9: blog bilingüe (EN en src/content/blog/en/, `translationOf`), orden (recientes/antiguos/A-Z/Z-A/corta), compartir, giscus opcional (variables PUBLIC_GISCUS_*), SEO reforzado. Siempre "WANT", nunca "la agencia". Ítems de stack traducibles.
 - v3.10: foto del Sobre mí en 3 capas con parallax (scripts/build-photo-layers.py; `data-layers` en animations.ts).
+- v3.11: Sobre mí resumido + página /sobre-mi/ con la historia (desde mediados de 2020: Derecho en la UMSS, Platzi, Linux/Arch, WANT, IA, hoy); "días programando"; Cómo trabajo = flujo general.
 - Flujo de publicación: Claude web sube a su rama y abre un PR a main; Rossmel lo aprueba en GitHub → Cloudflare publica. Antes de avisar, verificar que el PR siga ABIERTO: si ya se fusionó, abrir uno nuevo (los commits posteriores a un merge no aparecen solos).
 - Siguiente: capturas y video de AdvAI (Rossmel); GitHub/LinkedIn (docs/).
 - Analítica: inyección automática de Cloudflare, sin token.

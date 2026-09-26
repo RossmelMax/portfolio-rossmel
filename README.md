@@ -437,6 +437,7 @@ Ramas:
 | 2026-09 | v3.8: "programador primero". Sobre mí, CV y la sección Cómo trabajo cuentan que programó años sin IA (en WANT la IA llegó recién el último año) y qué herramientas usa hoy. |
 | 2026-09 | Blog "en condiciones": buscador de texto completo sin dependencias (índice JSON bajo demanda), etiquetas, índice por artículo, relacionados y enlaces artículo ↔ caso de estudio. Artículos en español. |
 | 2026-09 | Sección "En vivo": notebook, rubik y selflix. Fuera: music, mcu, waitlist, stream, chat, admin, admin-music, ssh, ori, class, s, test (y los del propio portafolio). |
+| 2026-09 | "Sobre mí" corto en la home + página `/sobre-mi/` (`/en/about/`) con la historia completa (`story`, `journey` en profile.ts); cifra "días programando" desde `codingSince` (mediados de 2020); "Cómo trabajo" = flujo completo (5 pasos + entorno), la IA como una parte. Empezó a programar en 2020 (no 2019). |
 | 2026-09 | Foto del "Sobre mí" en 3 capas (fondo, contorno, persona) con parallax y tilt; capas generadas por script desde la foto original. |
 | 2026-09 | Blog bilingüe (artículos EN en `src/content/blog/en/`, pareados con `translationOf`), orden en la portada, fechas repartidas, compartir, giscus opcional, SEO (JSON-LD Person/WebSite/BlogPosting/Breadcrumb, og:locale, x-default, lastmod). Stack traducible (`SkillItem`). "La agencia" → WANT. |
 | 2026-09 | Los servicios en vivo pasan a ser proyectos con página de detalle (qué es, cómo funciona, lo que aprendí) en vez de enlaces directos; se elimina `liveSites`. Pedido de Rossmel. |

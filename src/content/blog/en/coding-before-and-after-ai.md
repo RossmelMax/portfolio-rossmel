@@ -12,9 +12,9 @@ Today anyone can ask a model to "build me a to-do app" and have something runnin
 
 ## How I learned: no shortcuts
 
-I started on my own in 2019, with my first personal computer. There were no assistants completing code: there was documentation, courses, forums and many "why isn't this working?" nights.
+I taught myself to code in mid-2020, in the middle of the pandemic, while studying law. I discovered programming through Platzi and learned from courses and YouTube creators. There were no assistants completing code: there was documentation, courses, forums and many "why isn't this working?" nights.
 
-In 2022 I joined WANT Digital Agency as an intern. The dev team was two people: my boss on the backend and me on the frontend. There I built the web and mobile interfaces of real products for clients in Bolivia and the United States: a multi-tenant SaaS for auto repair shops, React Native apps, a digital menu for restaurants, websites.
+In 2022, already with a solid web development foundation, I joined WANT Digital Agency as an intern. The dev team was two people: my boss on the backend and me on the frontend. There I built the web and mobile interfaces of real products for clients in Bolivia and the United States: a multi-tenant SaaS for auto repair shops, React Native apps, a digital menu for restaurants, websites.
 
 For almost all of that time **we coded by hand**. If something broke in production, you had to read the stack trace, reproduce the error and understand the whole flow until you found the cause. We only brought AI into our work in my **last year** at WANT.
 

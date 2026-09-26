@@ -40,35 +40,36 @@ export const profile = {
 
   /** Resumen profesional (CV). 3–4 líneas, con palabras clave para ATS. */
   summary: {
-    es: 'Desarrollador Frontend con más de 3 años de experiencia en WANT construyendo SaaS multi-tenant, apps móviles y sitios web con React, Next.js, React Native y TypeScript (~1.800 commits en productos para clientes de Bolivia y EE. UU.). Base sólida de programación: autodidacta desde 2019 y años escribiendo código de producción sin asistentes de IA. Evolucionando a Fullstack con FastAPI, Node.js, SQLite/PostgreSQL, Firebase y Supabase. Desde 2025 integro IA en productos (RAG híbrido, LLMs locales y en la nube) y en mi flujo diario, para entregar más rápido sin sacrificar calidad.',
-    en: 'Frontend Developer with 3+ years of experience at WANT building multi-tenant SaaS, mobile apps and websites with React, Next.js, React Native and TypeScript (~1,800 commits across client products in Bolivia and the US). Solid programming foundation: self-taught since 2019, with years of writing production code without AI assistants. Growing into Fullstack with FastAPI, Node.js, SQLite/PostgreSQL, Firebase and Supabase. Since 2025 I integrate AI into products (hybrid RAG, local and cloud LLMs) and into my daily workflow, to ship faster without sacrificing quality.',
+    es: 'Desarrollador Frontend con más de 3 años de experiencia en WANT construyendo SaaS multi-tenant, apps móviles y sitios web con React, Next.js, React Native y TypeScript (~1.800 commits en productos para clientes de Bolivia y EE. UU.). Base sólida de programación: autodidacta desde 2020 y años escribiendo código de producción sin asistentes de IA. Evolucionando a Fullstack con FastAPI, Node.js, SQLite/PostgreSQL, Firebase y Supabase. Desde 2025 integro IA en productos (RAG híbrido, LLMs locales y en la nube) y en mi flujo diario, para entregar más rápido sin sacrificar calidad.',
+    en: 'Frontend Developer with 3+ years of experience at WANT building multi-tenant SaaS, mobile apps and websites with React, Next.js, React Native and TypeScript (~1,800 commits across client products in Bolivia and the US). Solid programming foundation: self-taught since 2020, with years of writing production code without AI assistants. Growing into Fullstack with FastAPI, Node.js, SQLite/PostgreSQL, Firebase and Supabase. Since 2025 I integrate AI into products (hybrid RAG, local and cloud LLMs) and into my daily workflow, to ship faster without sacrificing quality.',
   } as L,
 
-  /** "Sobre mí" del portafolio: más humano que el resumen del CV. */
+  /** "Sobre mí" de la home: una frase grande y un resumen corto. La historia completa va en `story` (/sobre-mi/). */
   about: {
     es: [
-      'Empecé a programar solo, en 2019, con mi primera computadora propia. Desde entonces no paré: cursos, documentación, prueba y error, y muchas noches de “¿por qué no funciona esto?”.',
-      'Pasé más de tres años en WANT Digital Agency, donde éramos dos en desarrollo: mi jefe en el backend y yo en el frontend. Ahí aprendí a hacer de todo — investigar, resolver, trabajar bajo presión y entregar.',
-      'Aprendí a la vieja escuela: en WANT, casi todo ese tiempo programamos a mano — documentación, foros, depurar línea por línea. Recién en el último año incorporamos IA al trabajo.',
-      'Con el boom de la IA fui probando de todo: GitHub Copilot, ChatGPT, Gemini, DeepSeek, Groq, modelos locales y, últimamente, Claude. Me potenció muchísimo, y como vengo de escribir todo a mano, entiendo lo que genera: sé leerlo, corregirlo y mantenerlo. Y me dio más ganas de seguir aprendiendo y entender toda tecnología que llegue a mis manos.',
-      'Fuera del trabajo, vivo en Linux: uso a diario rOS, mi propio flavor de Arch que quiero convertir en una distro real, y mantengo un homelab con una docena de servicios y un agente de IA que lo cuida 24/7.',
+      'Empecé a programar de forma autodidacta en plena pandemia, y desde entonces no paré: cursos, documentación, prueba y error, y muchas noches de “¿por qué esto no funciona?”.',
+      'Estudiaba Derecho cuando descubrí la programación gracias a Platzi, y supe que esa era mi vocación. Aprendí con cursos y creadores de YouTube, siguiendo una sola regla: nunca parar de aprender.',
+      'Con una buena base de desarrollo web entré a WANT, donde pasé más de tres años construyendo productos reales para clientes de Bolivia y EE. UU. Hoy trabajo de forma independiente mientras termino Ingeniería de Sistemas, y uso la IA para llegar más lejos con lo que ya sé hacer.',
+      'Y vivo en Linux: probé muchas distros, pero Arch siempre fue especial. Uso a diario rOS, mi propia versión, y tengo un homelab en casa que cuida un agente de IA.',
     ],
     en: [
-      'I started coding on my own in 2019, with my first personal computer. I haven\'t stopped since: courses, docs, trial and error, and many “why isn\'t this working?” nights.',
-      'I spent 3+ years at WANT Digital Agency, where the dev team was two people: my boss on the backend and me on the frontend. That\'s where I learned to do a bit of everything — research, solve, work under pressure and ship.',
-      'I learned the old-school way: at WANT, for almost all of that time we coded by hand — docs, forums, debugging line by line. We only brought AI into our work in the last year.',
-      'When the AI boom hit I tried everything: GitHub Copilot, ChatGPT, Gemini, DeepSeek, Groq, local models and, lately, Claude. It has boosted me a lot, and since I come from writing everything by hand, I understand what it generates: I can read it, fix it and maintain it. And it made me even more eager to keep learning and understand every technology that comes my way.',
-      'Outside work I live in Linux: I daily-drive rOS, my own flavor of Arch that I\'m growing into a real distro, and run a homelab with a dozen services and an AI agent that looks after it 24/7.',
+      'I taught myself to code in the middle of the pandemic, and I haven\'t stopped since: courses, docs, trial and error, and many “why isn\'t this working?” nights.',
+      'I was studying law when I discovered programming through Platzi, and I knew it was my calling. I learned from courses and YouTube creators, following one rule: never stop learning.',
+      'With a solid web development foundation I joined WANT, where I spent 3+ years building real products for clients in Bolivia and the US. Today I work independently while finishing my Systems Engineering degree, and I use AI to go further with what I already know how to do.',
+      'And I live in Linux: I\'ve tried many distros, but Arch was always special. I daily-drive rOS, my own take on it, and run a homelab at home looked after by an AI agent.',
     ],
   } as Record<Lang, string[]>,
 
+  /** Desde cuándo programa (para la cifra "días programando"). Mediados de 2020. */
+  codingSince: '2020-06-15', // TODO(confirmar) fecha exacta aproximada: "mediados de 2020"
+
   /** Cifras del "Sobre mí". `count` anima el número; `text` se muestra tal cual. */
   stats: [
+    { count: 0, days: true, suffix: '+', label: { es: 'días programando', en: 'days coding' } as L }, // se calcula desde codingSince
     { count: 3, suffix: '+', label: { es: 'años en producción', en: 'years shipping' } as L },
     { count: 1800, suffix: '+', label: { es: 'commits en proyectos de clientes', en: 'commits on client projects' } as L },
     { count: 8, suffix: '', label: { es: 'productos para clientes', en: 'client products' } as L },
-    { count: 12, suffix: '', label: { es: 'servicios en mi homelab', en: 'self-hosted services' } as L },
-  ],
+  ] as { count: number; days?: boolean; suffix: string; label: L }[],
 
   softSkills: {
     es: ['Resolución de problemas', 'Autonomía', 'Trabajo bajo presión', 'Aprendizaje rápido', 'Comunicación con clientes', 'Documentación técnica'],
@@ -869,70 +870,156 @@ export const workflow: { title: L; body: L }[] = [
   {
     title: { es: 'Entender', en: 'Understand' },
     body: {
-      es: 'Antes de escribir código, entiendo el problema y a quien lo usa. Investigo con IA para llegar rápido al contexto.',
-      en: 'Before writing code I understand the problem and who has it. I research with AI to get context fast.',
+      es: 'Antes de escribir código entiendo el problema, a quien lo usa y qué no puede fallar. Pregunto mucho al principio para no rehacer al final.',
+      en: 'Before writing code I understand the problem, who uses it and what can\'t fail. I ask a lot up front so I don\'t redo things at the end.',
     },
   },
   {
-    title: { es: 'Prototipar', en: 'Prototype' },
+    title: { es: 'Diseñar', en: 'Design' },
     body: {
-      es: 'Prototipos funcionales en horas, no semanas (v0, Claude Code), para validar la idea con algo real.',
-      en: 'Working prototypes in hours, not weeks (v0, Claude Code), to validate ideas with something real.',
+      es: 'Datos, arquitectura e interfaz antes que pantallas. Cuando conviene, un prototipo rápido para validar la idea con algo real.',
+      en: 'Data, architecture and UI before screens. When it helps, a quick prototype to validate the idea with something real.',
     },
   },
   {
-    title: { es: 'Construir y medir', en: 'Build & measure' },
+    title: { es: 'Construir', en: 'Build' },
     body: {
-      es: 'Entiendo lo que llega a producción, lo haya escrito yo o la IA. Código tipado, tests y métricas: en AdvAI, evaluar la búsqueda me llevó del 43 % al 80 % de acierto.',
-      en: 'I understand what ships to production, whether I or AI wrote it. Typed code, tests and metrics: in AdvAI, evaluating retrieval took me from 43% to 80% hit rate.',
+      es: 'Código tipado, commits chicos y revisados. La IA me ayuda con lo repetitivo; lo que llega a producción lo entiendo y lo puedo mantener.',
+      en: 'Typed code, small reviewed commits. AI helps with the repetitive parts; what ships to production is code I understand and can maintain.',
     },
   },
   {
-    title: { es: 'Automatizar', en: 'Automate' },
+    title: { es: 'Probar y medir', en: 'Test & measure' },
     body: {
-      es: 'Agentes, scripts y LLMs locales para lo repetitivo. Mi tiempo va a lo que no se puede automatizar.',
-      en: 'Agents, scripts and local LLMs for the repetitive stuff. My time goes where automation can\'t.',
+      es: 'Tests, datos reales y métricas en vez de impresiones: en AdvAI, medir la búsqueda me llevó del 43 % al 80 % de acierto.',
+      en: 'Tests, real data and metrics instead of impressions: in AdvAI, measuring retrieval took me from 43% to 80% hit rate.',
+    },
+  },
+  {
+    title: { es: 'Entregar y mantener', en: 'Ship & maintain' },
+    body: {
+      es: 'CI/CD, despliegues automáticos, documentación y respaldos. Automatizo lo que se repite para dedicar el tiempo a lo que importa.',
+      en: 'CI/CD, automatic deploys, docs and backups. I automate what repeats so my time goes where it matters.',
     },
   },
 ];
 
+/** Herramientas del día a día (sección "Cómo trabajo"). */
+export const setup = ['rOS (Arch Linux)', 'Git + GitHub', 'GitHub Actions', 'Docker', 'Figma', 'Bruno', 'Claude Code', 'GitHub Copilot'];
+
 /* ------------------------------------------------------------------ */
-/* PROGRAMADOR PRIMERO: antes y después de la IA (sección "Cómo trabajo") */
+/* MI HISTORIA (página /sobre-mi/ · /en/about/)                        */
 /* ------------------------------------------------------------------ */
 
-export const aiJourney: { period: L; title: L; body: L; tools?: string[] }[] = [
+/** Línea de tiempo de la historia. */
+export const journey: { period: L; title: L; body: L; tools?: string[] }[] = [
   {
-    period: { es: '2019', en: '2019' },
-    title: { es: 'Aprender sin atajos', en: 'Learning with no shortcuts' },
+    period: { es: '2020', en: '2020' },
+    title: { es: 'Descubro la programación', en: 'Discovering programming' },
     body: {
-      es: 'Autodidacta con mi primera computadora: cursos, documentación y mucho prueba y error.',
-      en: 'Self-taught on my first computer: courses, docs and lots of trial and error.',
+      es: 'En plena pandemia, estudiando Derecho, conozco la programación gracias a Platzi. Y casi al mismo tiempo, Linux.',
+      en: 'In the middle of the pandemic, while studying law, I discover programming through Platzi. And almost at the same time, Linux.',
     },
   },
   {
-    period: { es: '2022 – 2024', en: '2022 – 2024' },
-    title: { es: 'A mano, a la vieja escuela', en: 'By hand, old-school' },
+    period: { es: '2021', en: '2021' },
+    title: { es: 'Ingeniería de Sistemas', en: 'Systems Engineering' },
     body: {
-      es: 'Productos reales para clientes en React, Next.js y React Native, escritos y depurados sin asistentes de IA.',
-      en: 'Real client products in React, Next.js and React Native, written and debugged without AI assistants.',
+      es: 'Empiezo la carrera en la UDABOL, sin dejar de aprender por mi cuenta.',
+      en: 'I start the degree at UDABOL, while I keep learning on my own.',
+    },
+  },
+  {
+    period: { es: '2022', en: '2022' },
+    title: { es: 'Primer trabajo: WANT', en: 'First job: WANT' },
+    body: {
+      es: 'Entro como pasante con base en desarrollo web y me quedo más de tres años construyendo productos reales.',
+      en: 'I join as an intern with a web development foundation and stay 3+ years building real products.',
     },
   },
   {
     period: { es: '2025', en: '2025' },
     title: { es: 'La IA llega al trabajo', en: 'AI arrives at work' },
     body: {
-      es: 'En mi último año en WANT incorporamos IA al flujo de desarrollo y a los productos.',
-      en: 'In my last year at WANT we brought AI into our development workflow and our products.',
+      es: 'Después de años programando a mano, en mi último año en WANT incorporamos IA al flujo y a los productos.',
+      en: 'After years of coding by hand, in my last year at WANT we brought AI into our workflow and products.',
     },
+    tools: ['GitHub Copilot', 'ChatGPT', 'Gemini', 'DeepSeek', 'Groq', 'Ollama', 'Claude'],
   },
   {
     period: { es: 'Hoy', en: 'Today' },
-    title: { es: 'IA como multiplicador', en: 'AI as a multiplier' },
+    title: { es: 'Independiente', en: 'Independent' },
     body: {
-      es: 'Uso cada herramienta para lo que hace mejor, pero el criterio y la responsabilidad del código siguen siendo míos.',
-      en: 'I use each tool for what it does best, but the judgment and ownership of the code are still mine.',
+      es: 'Proyectos pagados y para mi universidad, mi proyecto de grado, rOS y mi homelab.',
+      en: 'Paid and university projects, my capstone, rOS and my homelab.',
     },
-    tools: ['GitHub Copilot', 'ChatGPT', 'Gemini', 'DeepSeek', 'Groq', 'Ollama', 'Claude'],
+  },
+];
+
+/** Historia completa: secciones con título y párrafos. */
+export const story: { heading: L; body: Record<Lang, string[]> }[] = [
+  {
+    heading: { es: 'Cómo empezó', en: 'How it started' },
+    body: {
+      es: [
+        'A mediados de 2020, en plena pandemia, estudiaba Derecho en la Universidad Mayor de San Simón. Pasar mucho más tiempo frente a la computadora me llevó a curiosear el mundo de la tecnología, y un día, gracias a Platzi, descubrí la programación. Ahí supe cuál era mi verdadera vocación.',
+        'Desde entonces me tomé muy en serio el “Nunca pares de aprender” de Freddy Vega. Aprendí en Platzi y en YouTube: Programación ATS, midudev y muchos otros creadores fueron mis maestros. Cursos, documentación, prueba y error, y muchas noches de “¿por qué esto no funciona?”. En 2021 empecé Ingeniería de Sistemas en la UDABOL.',
+      ],
+      en: [
+        'In mid-2020, in the middle of the pandemic, I was studying law at Universidad Mayor de San Simón. Spending much more time in front of the computer got me curious about the tech world, and one day, thanks to Platzi, I discovered programming. That\'s when I knew what my real calling was.',
+        'From then on I took Freddy Vega\'s “Never stop learning” very seriously. I learned on Platzi and YouTube: Programación ATS, midudev and many other creators were my teachers. Courses, docs, trial and error, and many “why isn\'t this working?” nights. In 2021 I started Systems Engineering at UDABOL.',
+      ],
+    },
+  },
+  {
+    heading: { es: 'Linux, el otro gran descubrimiento', en: 'Linux, the other big discovery' },
+    body: {
+      es: [
+        'En esa misma época descubrí Linux, y fue otro mindblow: entender que el sistema operativo también se puede aprender, desarmar y armar a tu medida. Probé muchas distros, pero Arch siempre fue especial para mí: te obliga a entender cada pieza de tu sistema.',
+        'Hoy uso a diario rOS, mi propio flavor de Arch, que quiero convertir en una distro real, y mantengo un homelab en casa con una docena de servicios, cuidado por un agente de IA. Gran parte de lo que sé de servidores, redes y automatización lo aprendí rompiendo y arreglando mi propio sistema.',
+      ],
+      en: [
+        'Around the same time I discovered Linux, and it blew my mind again: realizing the operating system is also something you can learn, take apart and put back together your way. I\'ve tried many distros, but Arch was always special to me: it makes you understand every piece of your system.',
+        'Today I daily-drive rOS, my own flavor of Arch that I want to turn into a real distro, and I run a homelab at home with a dozen services, looked after by an AI agent. A lot of what I know about servers, networking and automation I learned by breaking and fixing my own system.',
+      ],
+    },
+  },
+  {
+    heading: { es: 'Del aprendizaje al trabajo', en: 'From learning to working' },
+    body: {
+      es: [
+        'Con una buena base de desarrollo web entré a WANT Digital Agency en 2022. Empecé como pasante y terminé con contrato: más de tres años construyendo las interfaces web y móviles de productos para clientes de Bolivia y EE. UU., en un equipo de desarrollo de dos personas.',
+        'Casi todo ese tiempo programamos a mano. Recién en mi último año ahí incorporamos IA al trabajo, y llegar a ella con años de práctica encima hizo toda la diferencia.',
+      ],
+      en: [
+        'With a solid web development foundation I joined WANT Digital Agency in 2022. I started as an intern and ended up on contract: 3+ years building the web and mobile interfaces of products for clients in Bolivia and the US, on a two-person dev team.',
+        'For almost all of that time we coded by hand. We only brought AI into our work in my last year there, and coming to it with years of practice made all the difference.',
+      ],
+    },
+  },
+  {
+    heading: { es: 'La IA, como multiplicador', en: 'AI as a multiplier' },
+    body: {
+      es: [
+        'Con el boom fui probando de todo: GitHub Copilot, ChatGPT, Gemini, DeepSeek, Groq, modelos locales y, últimamente, Claude. Me potenció muchísimo, y como vengo de escribir todo a mano, entiendo lo que genera: sé leerlo, corregirlo y mantenerlo.',
+        'Sobre todo, me dio más ganas de seguir aprendiendo y de entender toda tecnología que llegue a mis manos.',
+      ],
+      en: [
+        'When the boom hit I tried everything: GitHub Copilot, ChatGPT, Gemini, DeepSeek, Groq, local models and, lately, Claude. It has boosted me a lot, and since I come from writing everything by hand, I understand what it generates: I can read it, fix it and maintain it.',
+        'Above all, it made me even more eager to keep learning and understand every technology that comes my way.',
+      ],
+    },
+  },
+  {
+    heading: { es: 'Hoy', en: 'Today' },
+    body: {
+      es: [
+        'Trabajo de forma independiente mientras termino la carrera: AdvAI, mi proyecto de grado; Link\'u, para una comunidad de Sipe Sipe; SGPG, para mi universidad; y mis proyectos personales. La regla sigue siendo la misma de 2020: nunca parar de aprender.',
+      ],
+      en: [
+        'I work independently while finishing my degree: AdvAI, my capstone; Link\'u, for a community in Sipe Sipe; SGPG, for my university; and my personal projects. The rule is still the same as in 2020: never stop learning.',
+      ],
+    },
   },
 ];
 
