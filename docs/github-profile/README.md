@@ -1,4 +1,4 @@
-<!-- README del perfil de GitHub → repo público RossmelMax/RossmelMax.
+<!-- README del perfil de GitHub → repo público rossmelabasto/rossmelabasto.
      Generado desde portfolio-rossmel/docs/github-profile (ver INSTRUCCIONES.md). -->
 
 <a href="https://portfolio.rossmel.top">
@@ -36,7 +36,7 @@ const rossmel = {
 | | |
 |---|---|
 | **AdvAI** · proyecto de grado | Auditoría de contratos con IA y **citas legales verificables**: búsqueda híbrida BM25 + embeddings; el modelo no puede inventar citas. Recuperación **42,9 % → 80 %**. |
-| **[SGPG](https://github.com/RossmelMax/v0-university-project-manager)** · UDABOL | Gestor de proyectos de grado en uso por la jefatura de carrera, con resumen y etiquetas de PDFs por IA. |
+| **[SGPG](https://github.com/rossmelabasto/v0-university-project-manager)** · UDABOL | Gestor de proyectos de grado en uso por la jefatura de carrera, con resumen y etiquetas de PDFs por IA. |
 | **Link'u** · cliente | App de escritorio offline-first para el cobro de agua de una comunidad rural: respaldos cifrados, auto-update, 47 tests, CI multiplataforma. |
 | **CarX** · GeekLabs | SaaS multi-tenant para talleres mecánicos; principal dev frontend (944 de 1.131 commits). |
 | **rOS** · personal | Mi flavor de Arch en camino a distro: niri + DankMaterialShell, Limine, actualizaciones con snapshots. |
@@ -52,7 +52,7 @@ const rossmel = {
 ### 🐍 Actividad
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/RossmelMax/RossmelMax/output/snake-dark.svg" />
-  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/RossmelMax/RossmelMax/output/snake-light.svg" />
-  <img alt="Serpiente comiéndose mi gráfico de contribuciones" src="https://raw.githubusercontent.com/RossmelMax/RossmelMax/output/snake-dark.svg" width="100%" />
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/rossmelabasto/rossmelabasto/output/snake-dark.svg" />
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/rossmelabasto/rossmelabasto/output/snake-light.svg" />
+  <img alt="Serpiente comiéndose mi gráfico de contribuciones" src="https://raw.githubusercontent.com/rossmelabasto/rossmelabasto/output/snake-dark.svg" width="100%" />
 </picture>

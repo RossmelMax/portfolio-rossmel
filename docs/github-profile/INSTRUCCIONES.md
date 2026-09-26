@@ -1,6 +1,6 @@
-# Perfil de GitHub (repo RossmelMax/RossmelMax)
+# Perfil de GitHub (repo rossmelabasto/rossmelabasto)
 
-1. Crear el repo **público** `RossmelMax/RossmelMax` (mismo nombre que el usuario: GitHub lo muestra
+1. Crear el repo **público** `rossmelabasto/rossmelabasto` (mismo nombre que el usuario: GitHub lo muestra
    en el perfil).
 2. Copiar a su raíz: `README.md`, `assets/header.svg` y `.github/workflows/` de esta carpeta.
 3. En el repo: Settings → Actions → General → Workflow permissions → "Read and write".

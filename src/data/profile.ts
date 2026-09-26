@@ -24,7 +24,7 @@ export const profile = {
   location: { es: 'Cochabamba, Bolivia · Remoto', en: 'Cochabamba, Bolivia · Remote' } as L,
   email: 'abastorossmel@gmail.com',
   links: {
-    github: 'https://github.com/RossmelMax',
+    github: 'https://github.com/rossmelabasto',
     linkedin: 'https://www.linkedin.com/in/rossmel/',
     gitlab: 'https://gitlab.com/RossmelAbasto',
   },
@@ -381,7 +381,7 @@ export const projects: Project[] = [
       en: ["An AI-generated prototype is a starting point, not a product: the hard part came afterwards (performance, permissions, versioning).", "Large PDFs punish memory: I learned to render only what’s visible and release resources on time.", "Building for a real user (the head of the program) forces you to prioritize what actually gets used."],
     },
     stack: ['Next.js 16', 'Firebase', 'Groq', 'pdf.js', 'shadcn/ui', 'Tailwind', 'Vercel'],
-    links: [{ label: 'GitHub', href: 'https://github.com/RossmelMax/v0-university-project-manager' }],
+    links: [{ label: 'GitHub', href: 'https://github.com/rossmelabasto/v0-university-project-manager' }],
     accent: '#ffb23d',
     featured: true,
     cv: false, // ya está en la experiencia "Independiente" del CV
@@ -670,7 +670,7 @@ export const projects: Project[] = [
       en: ["At a hackathon, whoever cuts scope wins: defining the minimum that proves the idea is the key skill.", "Working with someone you just met, against the clock, splitting tasks from minute one."],
     },
     stack: ['React', 'Leaflet', 'Tailwind'],
-    links: [{ label: 'GitHub', href: 'https://github.com/RossmelMax/hackacom2023' }],
+    links: [{ label: 'GitHub', href: 'https://github.com/rossmelabasto/hackacom2023' }],
     accent: '#3dffe0',
     featured: false,
     cv: false,

@@ -220,7 +220,7 @@ aparte `rossmel-web`, que duplicaba el sitio.)
 | Ajuste | Valor |
 |---|---|
 | Proyecto | `rossmel-portfolio` (Workers & Pages → Create → Pages → **Connect to Git**; nunca "Direct Upload": no se puede pasar a Git después) |
-| Repo / rama de producción | `RossmelMax/portfolio-rossmel` · `main` |
+| Repo / rama de producción | `rossmelabasto/portfolio-rossmel` · `main` |
 | Framework preset | Astro (o None) |
 | Build command | `npm run build` |
 | Output directory | `dist` |
@@ -321,7 +321,7 @@ Flujo diario: push a `main` = producción; push a otra rama / PR = URL de vista 
 
 ## Continuar con Claude Code local
 
-1. `git clone git@github.com:RossmelMax/portfolio-rossmel.git && cd portfolio-rossmel`
+1. `git clone git@github.com:rossmelabasto/portfolio-rossmel.git && cd portfolio-rossmel`
 2. `git checkout <rama de trabajo>` (ver sección siguiente) y `npm install`
 3. Abrir `claude` en la carpeta: lee `CLAUDE.md` automáticamente, que resume convenciones y estado.
 4. Pedirle algo como: *"Lee README.md y docs/, y sigue con los pendientes."*

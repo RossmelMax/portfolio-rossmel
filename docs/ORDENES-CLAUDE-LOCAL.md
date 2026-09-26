@@ -1,13 +1,13 @@
 # Órdenes para Claude Code local: publicar en Cloudflare Pages
 
-Contexto: el portafolio y el CV viven en **este repo** (`RossmelMax/portfolio-rossmel`, Astro 7),
+Contexto: el portafolio y el CV viven en **este repo** (`rossmelabasto/portfolio-rossmel`, Astro 7),
 construido en sesiones de Claude Code web. Se publica con **un solo** proyecto de Cloudflare Pages
 conectado a Git, con dos dominios. Todo el detalle está en `README.md` → "Despliegue".
 
 Pega esto en Claude Code local:
 
 ```text
-Lee README.md (sección "Despliegue"), CLAUDE.md y este archivo del repo RossmelMax/portfolio-rossmel.
+Lee README.md (sección "Despliegue"), CLAUDE.md y este archivo del repo rossmelabasto/portfolio-rossmel.
 Vamos a publicarlo en Cloudflare Pages. Haz esto en orden y pídeme confirmación antes de cualquier
 paso irreversible o que toque producción:
 
