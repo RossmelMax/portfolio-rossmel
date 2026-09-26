@@ -29,7 +29,7 @@ Antes de dar algo por terminado: `npm run build` sin errores, y si cambió conte
 
 ## Estado (actualizar al terminar cada sesión)
 - v3.3 (sept. 2026): PUBLICADO en portfolio.rossmel.top y cv.rossmel.top. Contenido confirmado (sin TODOs).
-- Siguiente: capturas reales de proyectos, imagen OG, token de Web Analytics.
+- Siguiente: capturas reales de proyectos (Rossmel las sube después). Analítica: inyección automática, sin token.
 - Preguntas abiertas para Rossmel y decisiones por proyecto: `docs/PROYECTOS-CANDIDATOS.md`.
 - Despliegue: Cloudflare Pages, proyecto `rossmel-portfolio` conectado a este repo (rama `main`). Ver README → Despliegue.
 - Los PDF del CV se commitean (Cloudflare no los genera): tras cambiar contenido, `npm run build && npm run cv:pdf`.

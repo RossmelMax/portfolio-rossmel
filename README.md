@@ -35,6 +35,7 @@ npm run dev          # http://localhost:4321  (recarga en vivo)
 npm run build        # genera el sitio estático en dist/
 npm run cv:pdf       # genera los PDF del CV (requiere build previo)
 npm run check        # verificación de tipos de Astro/TS
+npm run og           # regenera public/og.png (imagen al compartir el link)
 ```
 
 Flujo típico para publicar: `npm run build && npm run cv:pdf` → subir `dist/`.
@@ -228,9 +229,10 @@ Piezas del repo que lo hacen funcionar:
   **siempre** correr `npm run cv:pdf` y commitear los PDF cuando cambie el contenido del CV.
 - El enlace "Ver portafolio" del CV es absoluto (`portfolio.rossmel.top`) porque en `cv.` la raíz es el CV.
 
-Analítica: Cloudflare Web Analytics (sin cookies). La inyección automática no llega a Pages, así que el
-script se añade en `Base.astro` si existe la variable de build `PUBLIC_CF_BEACON_TOKEN` (token público
-del sitio en Analytics → Web Analytics). Sin la variable, no se carga nada.
+Analítica: Cloudflare Web Analytics (sin cookies) con **inyección automática** de la zona: ya funciona
+en portfolio. y cv. (Cloudflare solo inyecta el script a navegadores reales, no a `curl`).
+Respaldo: si algún día se apaga la inyección automática, definir la variable de build
+`PUBLIC_CF_BEACON_TOKEN` y `Base.astro` añade el script. **No** usar ambas a la vez (contaría doble).
 
 Extras en Cloudflare (Rules → Redirect Rules):
 - `rossmel.top` y `www.rossmel.top` → 301 a `https://portfolio.rossmel.top` (preservar ruta).
@@ -254,9 +256,9 @@ Flujo diario: push a `main` = producción; push a otra rama / PR = URL de vista 
 
 ⏳ Pendiente
 - [x] Todos los datos confirmados (sin `TODO(confirmar)` pendientes)
-- [ ] Capturas/imágenes reales de proyectos + imagen OG (`public/og.png`, 1200×630)
+- [x] Imagen para compartir (`public/og.png`, 1200×630, `npm run og`)
+- [ ] Capturas reales de proyectos (las sube Rossmel más adelante; ver "Imágenes de proyectos")
 - [x] Publicado en Cloudflare Pages: portfolio.rossmel.top y cv.rossmel.top (sept. 2026)
-- [ ] Definir `PUBLIC_CF_BEACON_TOKEN` en Pages para activar la analítica
 - [ ] Formulario de contacto real (hoy: mailto + copiar correo). Opción: endpoint propio en el
       servidor o servicio tipo Formspree/Resend
 - [ ] Foto profesional (opcional)
