@@ -1,7 +1,7 @@
 ---
 import type { Lang } from '../data/profile';
 import { visibleLiveSites } from '../data/profile';
-import { t } from '../data/i18n';
+import { t, paths } from '../data/i18n';
 /** Subdominios públicos (profile.ts → liveSites). No se muestra nada si no hay ninguno confirmado. */
 interface Props { lang: Lang; project?: string }
 const { lang, project } = Astro.props;
@@ -15,12 +15,11 @@ const sites = project ? visibleLiveSites.filter((x) => x.project === project) : 
     <p data-reveal class="mt-6 max-w-2xl text-muted">{s.live.body}</p>
     <ul class="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
       {sites.map((x, i) => (
-        <li data-reveal data-reveal-delay={i * 0.06}>
-          <a href={`https://${x.host}`} target="_blank" rel="noopener" data-hover class="group block h-full rounded-2xl border border-line bg-bg-2 p-6 transition-colors hover:border-accent">
-            <span class="flex items-center gap-2 font-mono text-xs text-muted"><span class="h-2 w-2 rounded-full bg-accent"></span>{x.host}</span>
-            <span class="display mt-4 block text-2xl font-semibold transition-colors group-hover:text-accent">{x.name[lang]} ↗</span>
-            <span class="mt-2 block text-muted">{x.body[lang]}</span>
-          </a>
+        <li data-reveal data-reveal-delay={i * 0.06} class="group relative flex h-full flex-col rounded-2xl border border-line bg-bg-2 p-6 transition-colors hover:border-accent">
+          <span class="flex items-center gap-2 font-mono text-xs text-muted"><span class="h-2 w-2 rounded-full bg-accent"></span>{x.host}</span>
+          <a href={`https://${x.host}`} target="_blank" rel="noopener" data-hover class="display mt-4 block text-2xl font-semibold transition-colors after:absolute after:inset-0 after:rounded-2xl group-hover:text-accent">{x.name[lang]} ↗</a>
+          <span class="mt-2 block flex-1 text-muted">{x.body[lang]}</span>
+          {x.post && <a href={paths.post(x.post)} data-hover class="relative z-10 mt-4 inline-block font-mono text-xs text-accent underline-offset-4 hover:underline">{s.live.howto} →</a>}
         </li>
       ))}
     </ul>
