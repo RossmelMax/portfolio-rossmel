@@ -8,6 +8,7 @@ import { postsForProject, postUrl, fmtDate, readingTime } from '../data/blog';
 import LiveSites from './LiveSites.astro';
 import Marked from './Marked.astro';
 import Sketch from './Sketch.astro';
+import SketchFlight from './SketchFlight.astro';
 interface Props { lang: Lang; project: Project }
 const { lang, project: p } = Astro.props;
 const s = t(lang);
@@ -21,6 +22,7 @@ const posts = await postsForProject(p.slug, lang);
   <main style={`--accent:${p.accent}`}>
     <section class="relative flex min-h-[90svh] flex-col justify-end overflow-hidden px-5 pb-12 pt-40 md:px-10">
       <div class="absolute inset-0 -z-0" data-parallax="0.3" style={`background: radial-gradient(80% 70% at 70% 20%, color-mix(in oklab, ${p.accent} 45%, transparent), transparent 70%);`}></div>
+      {p.doodle && <SketchFlight icon={p.doodle} seed={idx * 7 + 131} variant={idx} class="pointer-events-none absolute right-4 top-24 h-auto w-[62vw] max-w-[34rem] text-[var(--accent)] opacity-90 md:right-10 md:top-28" />}
       <div class="relative">
         <p class="kicker mb-6" data-reveal>{p.kind[lang]} · {p.year}{p.confidential ? ` · ${s.work.private}` : ''}</p>
         <h1 data-split class="display text-[18vw] font-bold md:text-[12vw]">{p.name}</h1>

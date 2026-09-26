@@ -1,3 +1,4 @@
+import type { SketchName } from './sketches';
 /**
  * FUENTE ÚNICA DE CONTENIDO
  * ------------------------------------------------------------------
@@ -40,8 +41,8 @@ export const profile = {
 
   /** Resumen profesional (CV). 3–4 líneas, con palabras clave para ATS. */
   summary: {
-    es: 'Desarrollador Frontend con más de 3 años de experiencia en WANT construyendo SaaS multi-tenant, apps móviles y sitios web con React, Next.js, React Native y TypeScript (~1.800 commits en productos para clientes de Bolivia y EE. UU.). Base sólida de programación: autodidacta desde 2020 y años escribiendo código de producción sin asistentes de IA. Evolucionando a Fullstack con FastAPI, Node.js, SQLite/PostgreSQL, Firebase y Supabase. Desde 2025 integro IA en productos (RAG híbrido, LLMs locales y en la nube) y en mi flujo diario, para entregar más rápido sin sacrificar calidad.',
-    en: 'Frontend Developer with 3+ years of experience at WANT building multi-tenant SaaS, mobile apps and websites with React, Next.js, React Native and TypeScript (~1,800 commits across client products in Bolivia and the US). Solid programming foundation: self-taught since 2020, with years of writing production code without AI assistants. Growing into Fullstack with FastAPI, Node.js, SQLite/PostgreSQL, Firebase and Supabase. Since 2025 I integrate AI into products (hybrid RAG, local and cloud LLMs) and into my daily workflow, to ship faster without sacrificing quality.',
+    es: 'Desarrollador Frontend con más de 3 años de experiencia en WANT Digital Agency construyendo SaaS multi-tenant, apps móviles y sitios web con React, Next.js, React Native y TypeScript (~1.800 commits en productos para clientes de Bolivia y EE. UU.). Base sólida de programación: autodidacta desde 2020 y años escribiendo código de producción sin asistentes de IA. Evolucionando a Fullstack con FastAPI, Node.js, SQLite/PostgreSQL, Firebase y Supabase. Desde 2025 integro IA en productos (RAG híbrido, LLMs locales y en la nube) y en mi flujo diario, para entregar más rápido sin sacrificar calidad.',
+    en: 'Frontend Developer with 3+ years of experience at WANT Digital Agency building multi-tenant SaaS, mobile apps and websites with React, Next.js, React Native and TypeScript (~1,800 commits across client products in Bolivia and the US). Solid programming foundation: self-taught since 2020, with years of writing production code without AI assistants. Growing into Fullstack with FastAPI, Node.js, SQLite/PostgreSQL, Firebase and Supabase. Since 2025 I integrate AI into products (hybrid RAG, local and cloud LLMs) and into my daily workflow, to ship faster without sacrificing quality.',
   } as L,
 
   /** "Sobre mí" de la home: una frase grande y un resumen corto. La historia completa va en `story` (/sobre-mi/). */
@@ -266,6 +267,8 @@ export type Project = {
   links?: { label: string; href: string }[];
   live?: string; // host público (p. ej. 'rubik.rossmel.top'): botón "Ver en vivo" y sección En vivo
   accent: string; // color del caso de estudio
+  /** dibujo a mano que lo representa (src/data/sketches.ts) */
+  doodle?: SketchName;
   featured: boolean;
   cv: boolean;
   confidential?: boolean; // código privado / sin demo pública
@@ -312,6 +315,7 @@ export const projects: Project[] = [
       en: ["Measure before optimizing: without an eval set I would have kept tweaking prompts blindly. With metrics, every change became a decision.", "An LLM is not a database: the fix for hallucinated citations wasn’t a better prompt, it was an architecture where the model can’t write the citation.", "Privacy by design: anonymizing before sending text to the cloud shaped everything from the data schema to the prompts.", "Design for graceful failure: providers with failover and a worker that resumes after a restart."],
     },
     stack: ['Next.js 16', 'React 19', 'TypeScript', 'Python', 'FastAPI', 'SQLite FTS5', 'Ollama', 'RAG', 'SSE', 'pytest'],
+    doodle: 'scales',
     accent: '#c8ff2e',
     featured: true,
     cv: true,
@@ -353,6 +357,7 @@ export const projects: Project[] = [
       en: ["Sustaining a large product for years: most of the work isn’t new screens but maintaining, refactoring and not breaking what the client already uses.", "Multi-tenancy from the frontend: every decision (routes, sessions, theme, data) has to account for many shops at once.", "Speaking the business’s language: understanding how a real shop works made the screens get used, not just work."],
     },
     stack: ['Next.js', 'TypeScript', 'MUI', 'Redux Toolkit', 'NextAuth', 'React Native', 'Expo'],
+    doodle: 'car',
     accent: '#ff6a3d',
     featured: true,
     cv: false, // ya está en la experiencia de WANT
@@ -392,6 +397,7 @@ export const projects: Project[] = [
     },
     stack: ['Next.js 16', 'Firebase', 'Groq', 'pdf.js', 'shadcn/ui', 'Tailwind', 'Vercel'],
     links: [{ label: 'GitHub', href: 'https://github.com/rossmelabasto/v0-university-project-manager' }],
+    doodle: 'gradcap',
     accent: '#ffb23d',
     featured: true,
     cv: false, // ya está en la experiencia "Independiente" del CV
@@ -429,6 +435,7 @@ export const projects: Project[] = [
       en: ["True offline-first: with no internet the app must work the same, and the cloud is only a backup.", "Never store money as floats: integer cents avoid rounding errors on bills.", "Listen to the client even when the idea isn’t the one you’d pick (like photo login): the software is for them.", "Migrations with a prior backup: in an app running on someone else’s computer there’s no second chance."],
     },
     stack: ['Electron', 'React', 'Vite', 'SQLite', 'Firebase Storage', 'Vitest', 'GitHub Actions'],
+    doodle: 'drop',
     accent: '#3db8ff',
     featured: true,
     cv: false, // ya está en la experiencia "Independiente" del CV
@@ -469,9 +476,10 @@ export const projects: Project[] = [
       en: ["Constraints teach: with no public IP or open ports I learned tunnels, DNS and how to expose services securely.", "Automate what repeats: backups, alerts and reports with systemd timers instead of relying on memory.", "An AI agent with memory and written procedures is far more useful than a chat: documentation is what makes it reliable."],
     },
     stack: ['Arch Linux', 'Docker', 'systemd', 'Cloudflare Tunnel', 'Tailscale', 'OpenClaw', 'KVM'],
+    doodle: 'homelab',
     accent: '#5dffb0',
     featured: true,
-    cv: false,
+    cv: true,
   },
   {
     slug: 'notebook',
@@ -520,9 +528,10 @@ export const projects: Project[] = [
     },
     stack: ['Node.js', 'Express', 'SQLite', 'sqlite-vec', 'RAG', 'Embeddings', 'DeepSeek', 'JavaScript', 'systemd'],
     live: 'notebook.rossmel.top',
+    doodle: 'notebook',
     accent: '#ffd166',
     featured: false,
-    cv: false,
+    cv: true,
   },
   {
     slug: 'rubik',
@@ -568,9 +577,10 @@ export const projects: Project[] = [
     },
     stack: ['JavaScript', 'cubing.js', 'WebAssembly', 'HTML', 'CSS'],
     live: 'rubik.rossmel.top',
+    doodle: 'cube',
     accent: '#ff5f5f',
     featured: false,
-    cv: false,
+    cv: true,
   },
   {
     slug: 'selflix',
@@ -616,6 +626,7 @@ export const projects: Project[] = [
     },
     stack: ['Jellyfin', 'Docker', 'Cloudflare Tunnel', 'Linux', 'REST API'],
     live: 'selflix.rossmel.top',
+    doodle: 'tv',
     accent: '#a78bfa',
     featured: false,
     cv: false,
@@ -650,9 +661,10 @@ export const projects: Project[] = [
       en: ["Every system change must be reversible: snapshots before updating and idempotent scripts.", "Understanding boot end to end (UEFI, bootloader, initramfs, greeter) removes the fear of breaking the system.", "Design is also a system: rOS’s visual identity came from the same care I put into a web interface."],
     },
     stack: ['Arch Linux', 'niri', 'DankMaterialShell', 'Limine', 'Shell', 'systemd'],
+    doodle: 'linux',
     accent: '#8ab4ff',
     featured: true,
-    cv: false,
+    cv: true,
   },
   {
     slug: 'adsie',
@@ -674,6 +686,7 @@ export const projects: Project[] = [
       en: ["Requirements change midway: an ads app also became an influencer marketplace, and the architecture had to hold up.", "Mobile performance: long lists with images and video demand virtualization and care with every render.", "Building for a market in another country and language: i18n from day one, not as a patch."],
     },
     stack: ['React Native', 'Expo', 'TypeScript'],
+    doodle: 'megaphone',
     accent: '#ff3d8b',
     featured: false,
     cv: false,
@@ -699,6 +712,7 @@ export const projects: Project[] = [
       en: ["Next.js App Router on a real product: cleanly separating what runs on the server and on the client.", "The end user is hungry and in a hurry: every extra step in the order is a lost order.", "Accessibility (high contrast) isn’t an extra: menus get read in dim places."],
     },
     stack: ['Next.js (App Router)', 'TypeScript'],
+    doodle: 'plate',
     accent: '#ffd23d',
     featured: false,
     cv: false,
@@ -724,6 +738,7 @@ export const projects: Project[] = [
       en: ["Write code for whoever picks it up next, even if it’s yourself two years later.", "Upgrading React Native and its libraries is a project in itself: plan it, don’t improvise it."],
     },
     stack: ['React Native'],
+    doodle: 'dumbbell',
     accent: '#ff8a3d',
     featured: false,
     cv: false,
@@ -749,6 +764,7 @@ export const projects: Project[] = [
       en: ["A scheduler looks simple until real cases show up: cancellations, rescheduling and overlapping slots.", "Finish and ship: closing out a complete project teaches as much as building it."],
     },
     stack: ['React Native'],
+    doodle: 'calendar',
     accent: '#b58cff',
     featured: false,
     cv: false,
@@ -775,6 +791,7 @@ export const projects: Project[] = [
     },
     stack: ['WordPress'],
     links: [{ label: 'lynx.com.bo', href: 'https://lynx.com.bo/' }],
+    doodle: 'bag',
     accent: '#e8e8e8',
     featured: false,
     cv: false,
@@ -799,6 +816,7 @@ export const projects: Project[] = [
       en: ["A product not launching doesn’t mean the work wasn’t worth it: it was my school.", "Read and understand someone else’s code before writing your own."],
     },
     stack: ['React Native'],
+    doodle: 'heart',
     accent: '#ffffff',
     featured: false,
     cv: false,
@@ -828,6 +846,7 @@ export const projects: Project[] = [
     },
     stack: ['React', 'Leaflet', 'Tailwind'],
     links: [{ label: 'GitHub', href: 'https://github.com/rossmelabasto/hackacom2023' }],
+    doodle: 'pin',
     accent: '#3dffe0',
     featured: false,
     cv: false,
@@ -853,6 +872,7 @@ export const projects: Project[] = [
     },
     stack: ['React', 'TypeScript', 'Redux Toolkit', 'Supabase', 'MUI'],
     links: [{ label: 'eko-store.vercel.app', href: 'https://eko-store.vercel.app/' }],
+    doodle: 'bag',
     accent: '#7dffc4',
     featured: false,
     cv: false,
