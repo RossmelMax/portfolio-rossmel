@@ -15,9 +15,9 @@ Empecé de forma autodidacta a mediados de 2020, en plena pandemia, mientras est
 
 En 2022, ya con una buena base de desarrollo web, entré a WANT Digital Agency como pasante. Éramos dos en desarrollo: mi jefe en el backend y yo en el frontend. Ahí construí las interfaces web y móviles de productos reales para clientes de Bolivia y Estados Unidos: un SaaS multi-tenant para talleres mecánicos, apps en React Native, un menú digital para restaurantes, sitios web.
 
-Durante casi todo ese tiempo **programamos a mano**. Si algo se rompía en producción, había que leer el stack trace, reproducir el error y entender el flujo completo hasta encontrar la causa. Recién en mi **último año** en WANT incorporamos IA al trabajo.
+Durante casi todo ese tiempo **==programamos a mano==**. Si algo se rompía en producción, había que leer el stack trace, reproducir el error y entender el flujo completo hasta encontrar la causa. Recién en mi **último año** en WANT incorporamos IA al trabajo.
 
-Esos años me dejaron algo que hoy valoro mucho: cuando la IA me devuelve código, **lo entiendo**. Sé por qué funciona, dónde se va a romper y cómo mantenerlo.
+Esos años me dejaron algo que hoy valoro mucho: cuando la IA me devuelve código, **((lo entiendo))**. Sé por qué funciona, dónde se va a romper y cómo mantenerlo.
 
 ## Cuando llegó el boom
 

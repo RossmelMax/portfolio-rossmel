@@ -11,6 +11,7 @@
 import type { Lang } from '../data/profile';
 import { profile, experience, education, skills, projects, learning, tr } from '../data/profile';
 import { fmtMonth, paths } from '../data/i18n';
+import { stripMarks } from '../data/sketches';
 import Base from '../layouts/Base.astro';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
@@ -26,7 +27,7 @@ const contact = [
   profile.portfolioUrl.replace(/^https?:\/\//, ''),
 ].filter(Boolean);
 // Limpia TODOs y símbolos que algunos ATS leen mal; asegura punto final.
-const clean = (s: string) => s.replace(/TODO\S*[^.]*\.?/g, '').replace(/\s*→\s*/g, ' — ').trim();
+const clean = (s: string) => stripMarks(s).replace(/TODO\S*[^.]*\.?/g, '').replace(/\s*→\s*/g, ' — ').trim();
 const sentence = (s: string) => { const c = clean(s); return c && !/[.!?]$/.test(c) ? c + '.' : c; };
 ---
 <Base lang={lang} altPath={altPath} title={lang === 'es' ? 'CV' : 'Resume'} description={profile.summary[lang]} plain>
@@ -46,7 +47,7 @@ const sentence = (s: string) => { const c = clean(s); return c && !/[.!?]$/.test
 
     <section>
       <h2>{H.summary}</h2>
-      <p>{profile.summary[lang]}</p>
+      <p>{clean(profile.summary[lang])}</p>
     </section>
 
     <section>

@@ -56,9 +56,9 @@ total       = base_rate + consumption × cost_per_m3 + other_charges
 
 The problem shows up when **rates change**. If the bill only stores the consumption and computes the total with the current rate, a price increase in June would change the amount of March's bills. In a community where billing is a sensitive topic, that's a guaranteed conflict.
 
-The fix: every bill stores a **snapshot of the rates** at the moment it was issued (`tarifa_basica_snapshot`, `costo_m3_snapshot`, `otros_snapshot`), along with the total and the **amount in words** that gets printed. What's issued stays frozen.
+The fix: every bill stores a **==snapshot of the rates==** at the moment it was issued (`tarifa_basica_snapshot`, `costo_m3_snapshot`, `otros_snapshot`), along with the total and the **amount in words** that gets printed. What's issued stays frozen.
 
-And money is never stored as floating-point numbers: `0.1 + 0.2` isn't `0.3` in JavaScript. Amounts are handled as **integer cents** and only formatted when displayed.
+And money is never stored as floating-point numbers: `0.1 + 0.2` isn't `0.3` in JavaScript. Amounts are handled as **((integer cents))** and only formatted when displayed.
 
 ## Rule 3: everything leaves a trail
 

@@ -29,7 +29,7 @@ Step 3 is where LLMs fail if you leave them alone.
 
 The obvious approach would be to give the model the clause and the retrieved articles and ask for an analysis with citations. The problem is that, even with the sources in the prompt, an LLM can mix articles, change words or cite one that wasn't among them: it generates text, it doesn't copy it.
 
-No prompt guarantees that won't happen. What does guarantee it is **changing who writes the citation**:
+No prompt guarantees that won't happen. What does guarantee it is **==changing who writes the citation==**:
 
 - The system retrieves the candidate sources and shows each one to the model with a short **key** (for example, `AS/0039/2018#1` for case law).
 - The model answers in JSON with a fixed schema: its analysis and **only the keys** of the sources that back each point.
@@ -66,7 +66,7 @@ The corpus has 3,267 articles and 971 case-law entries.
 
 It's very easy to "feel" that results are improving. So I built an evaluation set with clauses and the sources that should come up for each one. With that, every change stopped being a hunch:
 
-- Retrieval (hit@8: the right source among the top 8) went from **42.9% to 80%**.
+- Retrieval (hit@8: the right source among the top 8) went from **((42.9% to 80%))**.
 - Over 40 evaluated clauses: **82.9%** correct citations and **94.6%** of clauses with no severe risk error.
 
 An honest caveat: this is an internal evaluation, not yet validated by lawyers. But it already lets me compare versions of the system with numbers instead of impressions.

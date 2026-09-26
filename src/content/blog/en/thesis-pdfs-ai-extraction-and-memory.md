@@ -19,7 +19,7 @@ Two problems took most of the work, and both involve PDFs:
 
 When the program office uploads a PDF (or a whole folder with bulk upload), the form has to fill itself in: title, author, program, year, abstract and keywords.
 
-The temptation was to send the whole PDF to an LLM and ask for everything. I didn't, for three reasons: the documents are long (tokens = time and quota), the model sometimes makes things up, and some fields are better solved with rules. The result is a **hybrid pipeline** that runs in the browser:
+The temptation was to send the whole PDF to an LLM and ask for everything. I didn't, for three reasons: the documents are long (tokens = time and quota), the model sometimes makes things up, and some fields are better solved with rules. The result is a **((hybrid pipeline))** that runs in the browser:
 
 ```ts
 export async function extractPdfData(file: File): Promise<PdfExtraction> {
@@ -86,7 +86,7 @@ The first version of the viewer used pdf.js and **rendered every page on open**.
 
 The solution takes two paths, depending on the browser:
 
-- **Chrome, Edge and Safari** have a native PDF viewer that already loads pages on demand. I download the file, create a `blob:` URL and show it in an `<iframe>`. The important part: **revoke the URL** with `URL.revokeObjectURL` when the component unmounts, or the PDF stays in memory.
+- **Chrome, Edge and Safari** have a native PDF viewer that already loads pages on demand. I download the file, create a `blob:` URL and show it in an `<iframe>`. The important part: **==revoke the URL==** with `URL.revokeObjectURL` when the component unmounts, or the PDF stays in memory.
 - **Firefox** uses pdf.js, but with **lazy rendering**: only the visible pages are drawn, and the ones that leave the screen are released.
 
 The heart of lazy rendering is an `IntersectionObserver`:

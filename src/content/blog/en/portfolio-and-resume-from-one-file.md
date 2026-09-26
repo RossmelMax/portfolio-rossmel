@@ -9,7 +9,7 @@ translationOf: 'portafolio-y-cv-desde-un-solo-archivo'
 
 My previous portfolio was from 2022, built in Angular, and it did what most portfolios do: go stale. When the website, the resume and the profile are maintained separately, one of them is always out of date.
 
-For this version I set myself a rule: **content is written only once**. This post covers how the site you're reading is built, and the [code is public](https://github.com/rossmelabasto/portfolio-rossmel).
+For this version I set myself a rule: **==content is written only once==**. This post covers how the site you're reading is built, and the [code is public](https://github.com/rossmelabasto/portfolio-rossmel).
 
 ## A single source of truth
 
@@ -41,7 +41,7 @@ A few simple flags control where everything appears: `featured` for the home pag
 
 Many companies filter resumes with an **ATS** (Applicant Tracking System) before a person ever sees them. A heavily designed resume, with columns, icons and tables, can come out scrambled or empty on the other side.
 
-That's why the resume is deliberately boring on the inside: **one column**, no tables, images or icons, standard headings ("Experience", "Education", "Skills") and a common font. The design is in the typography and spacing, not in decoration.
+That's why the resume is deliberately boring on the inside: **((one column))**, no tables, images or icons, standard headings ("Experience", "Education", "Skills") and a common font. The design is in the typography and spacing, not in decoration.
 
 The PDFs are generated from that same page with **headless Chromium** and Playwright:
 

@@ -8,7 +8,7 @@ lang: 'es'
 
 Mi portafolio anterior era de 2022, en Angular, y hacía lo que hace la mayoría de los portafolios: quedarse viejo. Cuando la web, el CV y el perfil se mantienen por separado, siempre alguno queda desactualizado.
 
-Para esta versión me puse una regla: **el contenido se escribe una sola vez**. Este artículo cuenta cómo está hecho el sitio que estás leyendo, y el [código es público](https://github.com/rossmelabasto/portfolio-rossmel).
+Para esta versión me puse una regla: **==el contenido se escribe una sola vez==**. Este artículo cuenta cómo está hecho el sitio que estás leyendo, y el [código es público](https://github.com/rossmelabasto/portfolio-rossmel).
 
 ## Una sola fuente de verdad
 
@@ -40,7 +40,7 @@ Unas banderas simples controlan dónde aparece cada cosa: `featured` para la por
 
 Muchas empresas filtran los CV con un **ATS** (Applicant Tracking System) antes de que los vea una persona. Un CV muy diseñado, con columnas, íconos y tablas, puede salir desordenado o vacío en ese filtro.
 
-Por eso el CV es deliberadamente aburrido por dentro: **una columna**, sin tablas ni imágenes ni íconos, encabezados estándar ("Experiencia", "Educación", "Habilidades") y una fuente común. El diseño está en la tipografía y el espacio, no en adornos.
+Por eso el CV es deliberadamente aburrido por dentro: **((una columna))**, sin tablas ni imágenes ni íconos, encabezados estándar ("Experiencia", "Educación", "Habilidades") y una fuente común. El diseño está en la tipografía y el espacio, no en adornos.
 
 Los PDF se generan desde esa misma página con **Chromium sin interfaz** y Playwright:
 

@@ -16,9 +16,9 @@ En **AdvAI**, mi proyecto de grado, la regla es simple: **a la nube solo llega t
 Lo primero que se le ocurre a cualquiera es pedirle a un modelo: "reemplaza los datos personales de este texto". Tiene dos problemas:
 
 1. **Para anonimizar con un modelo en la nube, primero tienes que mandarle los datos.** Justo lo que querías evitar.
-2. **No es determinista.** Hoy reemplaza el nombre, mañana se le escapa uno. Y no puedes probarlo con un test que pase siempre.
+2. **==No es determinista.==** Hoy reemplaza el nombre, mañana se le escapa uno. Y no puedes probarlo con un test que pase siempre.
 
-Así que el anonimizador de AdvAI es **código normal**: expresiones regulares y reglas pensadas para contratos bolivianos. Sin servicios externos, rápido y con resultados que se pueden probar.
+Así que el anonimizador de AdvAI es **((código normal))**: expresiones regulares y reglas pensadas para contratos bolivianos. Sin servicios externos, rápido y con resultados que se pueden probar.
 
 ## Marcadores estables, no asteriscos
 

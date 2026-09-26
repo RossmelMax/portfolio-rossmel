@@ -20,7 +20,7 @@ The plan has three steps, each one reversible:
 2. **Test it on a single reboot** using UEFI's `BootNext`.
 3. **Promote it** to first option only if it worked. GRUB stays as a fallback.
 
-The key piece is `BootNext`: a UEFI variable that says "on the next boot, and **only that one**, use this entry". If Limine fails, just reboot: the firmware goes back to the normal order on its own and boots GRUB.
+The key piece is `BootNext`: a UEFI variable that says "on the next boot, and **((only that one))**, use this entry". If Limine fails, just reboot: the firmware goes back to the normal order on its own and boots GRUB.
 
 ```bash
 efibootmgr -n "$NUM"   # next boot, ONCE only, goes into Limine
@@ -28,7 +28,7 @@ efibootmgr -n "$NUM"   # next boot, ONCE only, goes into Limine
 
 ## Step 1: install side by side, with a backup first
 
-The install script is **idempotent**: you can run it ten times and the result is the same. If Limine is already installed, it only updates the config, the wallpaper and the binary on the EFI partition (ESP).
+The install script is **==idempotent==**: you can run it ten times and the result is the same. If Limine is already installed, it only updates the config, the wallpaper and the binary on the EFI partition (ESP).
 
 Before touching anything, back up what's about to change:
 

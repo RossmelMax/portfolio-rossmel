@@ -34,8 +34,8 @@ export const profile = {
   photoAlt: { es: 'Foto de Rossmel Abasto', en: 'Photo of Rossmel Abasto' } as L,
 
   headline: {
-    es: 'Programador de base: construyo interfaces rápidas, cuidadas y listas para producción — y la IA multiplica lo que ya sé hacer.',
-    en: 'A programmer first: I build fast, polished, production-ready interfaces — and AI multiplies what I already know how to do.',
+    es: 'Programador de base: construyo interfaces rápidas, cuidadas y ==listas para producción== — y la IA multiplica lo que ya sé hacer.',
+    en: 'A programmer first: I build fast, polished, ==production-ready== interfaces — and AI multiplies what I already know how to do.',
   } as L,
 
   /** Resumen profesional (CV). 3–4 líneas, con palabras clave para ATS. */
@@ -49,13 +49,13 @@ export const profile = {
     es: [
       'Empecé a programar de forma autodidacta en plena pandemia, y desde entonces no paré: cursos, documentación, prueba y error, y muchas noches de “¿por qué esto no funciona?”.',
       'Estudiaba Derecho cuando descubrí la programación gracias a Platzi, y supe que esa era mi vocación. Aprendí con cursos y creadores de YouTube, siguiendo una sola regla: ==nunca parar de aprender==.',
-      'Con una buena base de desarrollo web entré a WANT, donde pasé más de tres años construyendo productos reales para clientes de Bolivia y EE. UU. Hoy trabajo de forma independiente mientras termino Ingeniería de Sistemas, y uso la IA para llegar más lejos con lo que ya sé hacer.',
+      'Con una buena base de desarrollo web entré a WANT, donde pasé más de tres años construyendo ==productos reales== para clientes de Bolivia y EE. UU. Hoy trabajo de forma independiente mientras termino Ingeniería de Sistemas, y uso la IA para llegar más lejos con lo que ya sé hacer.',
       'Y vivo en Linux: probé muchas distros, pero ((Arch)) siempre fue especial. Uso a diario rOS, mi propia versión, y tengo un homelab en casa que cuida un agente de IA.',
     ],
     en: [
       'I taught myself to code in the middle of the pandemic, and I haven\'t stopped since: courses, docs, trial and error, and many “why isn\'t this working?” nights.',
       'I was studying law when I discovered programming through Platzi, and I knew it was my calling. I learned from courses and YouTube creators, following one rule: ==never stop learning==.',
-      'With a solid web development foundation I joined WANT, where I spent 3+ years building real products for clients in Bolivia and the US. Today I work independently while finishing my Systems Engineering degree, and I use AI to go further with what I already know how to do.',
+      'With a solid web development foundation I joined WANT, where I spent 3+ years building ==real products== for clients in Bolivia and the US. Today I work independently while finishing my Systems Engineering degree, and I use AI to go further with what I already know how to do.',
       'And I live in Linux: I\'ve tried many distros, but ((Arch)) was always special. I daily-drive rOS, my own take on it, and run a homelab at home looked after by an AI agent.',
     ],
   } as Record<Lang, string[]>,
@@ -136,8 +136,8 @@ export const experience: Experience[] = [
     end: '2026-01',
     location: { es: 'Cochabamba, Bolivia', en: 'Cochabamba, Bolivia' },
     summary: {
-      es: 'Único desarrollador frontend en un equipo de desarrollo de dos personas. Responsable de las interfaces web y móviles de 8 productos para clientes de Bolivia y EE. UU.',
-      en: 'Sole frontend developer on a two-person dev team. Owned the web and mobile interfaces of 8 client products in Bolivia and the US.',
+      es: '==Único desarrollador frontend== en un equipo de desarrollo de dos personas. Responsable de las interfaces web y móviles de 8 productos para clientes de Bolivia y EE. UU.',
+      en: '==Sole frontend developer== on a two-person dev team. Owned the web and mobile interfaces of 8 client products in Bolivia and the US.',
     },
     bullets: {
       es: [
@@ -293,14 +293,14 @@ export const projects: Project[] = [
     role: { es: 'Diseño, arquitectura y desarrollo fullstack (individual).', en: 'Design, architecture and fullstack development (solo).' },
     highlights: {
       es: [
-        'Búsqueda híbrida BM25 (SQLite FTS5) + embeddings bge-m3 fusionados por RRF sobre 3.267 artículos y 971 autos supremos: el acierto de recuperación (acierto@8) subió de 42,9 % a 80 %.',
+        'Búsqueda híbrida BM25 (SQLite FTS5) + embeddings bge-m3 fusionados por RRF sobre 3.267 artículos y 971 autos supremos: el acierto de recuperación (acierto@8) subió ((de 42,9 % a 80 %)).',
         'El modelo solo elige claves de las fuentes mostradas y el texto citado lo inserta el sistema: 82,9 % de citas correctas y 94,6 % de cláusulas sin error grave en la evaluación interna.',
         'Anonimización de datos personales antes de enviar texto a la nube; LLM local (Ollama, qwen3.5 9B) y proveedores gratuitos con respaldo automático.',
         'Trabajador en segundo plano reanudable, progreso en vivo por SSE, comparación entre versiones e informe DOCX/PDF.',
         'Backend con 69 tests y cobertura ≥ 90 % exigida en CI; frontend en Next.js 16 + React 19 con visor PDF y cláusulas resaltadas por riesgo.',
       ],
       en: [
-        'Hybrid search: BM25 (SQLite FTS5) + bge-m3 embeddings fused with RRF over 3,267 articles and 971 supreme court rulings — retrieval hit@8 went from 42.9% to 80%.',
+        'Hybrid search: BM25 (SQLite FTS5) + bge-m3 embeddings fused with RRF over 3,267 articles and 971 supreme court rulings — retrieval hit@8 went ((from 42.9% to 80%)).',
         'The model only picks keys from the sources shown and the quoted text is inserted by the system: 82.9% correct citations and 94.6% of clauses with no severe error in internal evaluation.',
         'Personal data is anonymized before any text reaches the cloud; local LLM (Ollama, qwen3.5 9B) plus free providers with automatic failover.',
         'Resumable background worker, live progress via SSE, version diffing and DOCX/PDF reports.',
@@ -375,13 +375,13 @@ export const projects: Project[] = [
     highlights: {
       es: [
         'Extracción automática de resumen y etiquetas desde el PDF con IA (Groq).',
-        'Visor PDF propio con memoria acotada (resolví un consumo descontrolado de RAM).',
+        'Visor PDF propio con ==memoria acotada== (resolví un consumo descontrolado de RAM).',
         'Versionado de PDFs, historial de auditoría, carga masiva y gestión de administradores.',
         'Despliegue continuo en Vercel.',
       ],
       en: [
         'Automatic summary and tag extraction from PDFs using AI (Groq).',
-        'Custom PDF viewer with bounded memory (fixed a runaway RAM issue).',
+        'Custom PDF viewer with ==bounded memory== (fixed a runaway RAM issue).',
         'PDF versioning, audit trail, bulk upload and admin management.',
         'Continuous deployment on Vercel.',
       ],
@@ -413,13 +413,13 @@ export const projects: Project[] = [
     highlights: {
       es: [
         'SQLite como fuente de verdad; permisos y cálculos solo en el proceso principal de Electron; montos en centavos enteros.',
-        'Respaldos cifrados AES-256-GCM en la nube, migraciones versionadas con respaldo previo automático.',
+        'Respaldos ==cifrados AES-256-GCM== en la nube, migraciones versionadas con respaldo previo automático.',
         'Actualizaciones automáticas, multas por mora, boletas PDF y login con foto para operarios (pedido del cliente).',
         '47 tests (Vitest) y CI en GitHub Actions que genera instalador de Windows, portable y AppImage.',
       ],
       en: [
         'SQLite as source of truth; permissions and calculations only in Electron\'s main process; money stored as integer cents.',
-        'AES-256-GCM encrypted cloud backups, versioned migrations with automatic pre-migration backup.',
+        '==AES-256-GCM encrypted== cloud backups, versioned migrations with automatic pre-migration backup.',
         'Auto-updates, late fees, PDF bills and photo login for operators (client request).',
         '47 tests (Vitest) and GitHub Actions CI producing a Windows installer, portable build and AppImage.',
       ],
@@ -962,11 +962,11 @@ export const story: { heading: L; body: Record<Lang, string[]> }[] = [
     heading: { es: 'Cómo empezó', en: 'How it started' },
     body: {
       es: [
-        'A mediados de 2020, en plena pandemia, estudiaba Derecho en la Universidad Mayor de San Simón. Pasar mucho más tiempo frente a la computadora me llevó a curiosear el mundo de la tecnología, y un día, gracias a Platzi, descubrí la programación. Ahí supe cuál era mi verdadera vocación.',
+        'A mediados de 2020, en plena pandemia, estudiaba Derecho en la Universidad Mayor de San Simón. Pasar mucho más tiempo frente a la computadora me llevó a curiosear el mundo de la tecnología, y un día, gracias a Platzi, descubrí la programación. Ahí supe cuál era mi ==verdadera vocación==.',
         'Desde entonces me tomé muy en serio el “==Nunca pares de aprender==” de Freddy Vega. Aprendí en Platzi y en YouTube: Programación ATS, midudev y muchos otros creadores fueron mis maestros. Cursos, documentación, prueba y error, y muchas noches de “¿por qué esto no funciona?”. En 2021 empecé Ingeniería de Sistemas en la UDABOL.',
       ],
       en: [
-        'In mid-2020, in the middle of the pandemic, I was studying law at Universidad Mayor de San Simón. Spending much more time in front of the computer got me curious about the tech world, and one day, thanks to Platzi, I discovered programming. That\'s when I knew what my real calling was.',
+        'In mid-2020, in the middle of the pandemic, I was studying law at Universidad Mayor de San Simón. Spending much more time in front of the computer got me curious about the tech world, and one day, thanks to Platzi, I discovered programming. That\'s when I knew what my ==real calling== was.',
         'From then on I took Freddy Vega\'s “==Never stop learning==” very seriously. I learned on Platzi and YouTube: Programación ATS, midudev and many other creators were my teachers. Courses, docs, trial and error, and many “why isn\'t this working?” nights. In 2021 I started Systems Engineering at UDABOL.',
       ],
     },
@@ -975,12 +975,12 @@ export const story: { heading: L; body: Record<Lang, string[]> }[] = [
     heading: { es: 'Linux, el otro gran descubrimiento', en: 'Linux, the other big discovery' },
     body: {
       es: [
-        'En esa misma época descubrí Linux, y fue otro mindblow: entender que el sistema operativo también se puede aprender, desarmar y armar a tu medida. Probé muchas distros, pero Arch siempre fue especial para mí: te obliga a entender cada pieza de tu sistema.',
-        'Hoy uso a diario rOS, mi propio flavor de Arch, que quiero convertir en una distro real, y mantengo un homelab en casa con una docena de servicios, cuidado por un agente de IA. Gran parte de lo que sé de servidores, redes y automatización lo aprendí rompiendo y arreglando mi propio sistema.',
+        'En esa misma época descubrí Linux, y fue otro mindblow: entender que el sistema operativo también se puede aprender, desarmar y armar a tu medida. Probé muchas distros, pero ((Arch)) siempre fue especial para mí: te obliga a entender cada pieza de tu sistema.',
+        'Hoy uso a diario rOS, mi propio flavor de Arch, que quiero convertir en una distro real, y mantengo un homelab en casa con una docena de servicios, cuidado por un agente de IA. Gran parte de lo que sé de servidores, redes y automatización lo aprendí ==rompiendo y arreglando== mi propio sistema.',
       ],
       en: [
-        'Around the same time I discovered Linux, and it blew my mind again: realizing the operating system is also something you can learn, take apart and put back together your way. I\'ve tried many distros, but Arch was always special to me: it makes you understand every piece of your system.',
-        'Today I daily-drive rOS, my own flavor of Arch that I want to turn into a real distro, and I run a homelab at home with a dozen services, looked after by an AI agent. A lot of what I know about servers, networking and automation I learned by breaking and fixing my own system.',
+        'Around the same time I discovered Linux, and it blew my mind again: realizing the operating system is also something you can learn, take apart and put back together your way. I\'ve tried many distros, but ((Arch)) was always special to me: it makes you understand every piece of your system.',
+        'Today I daily-drive rOS, my own flavor of Arch that I want to turn into a real distro, and I run a homelab at home with a dozen services, looked after by an AI agent. A lot of what I know about servers, networking and automation I learned by ==breaking and fixing== my own system.',
       ],
     },
   },
@@ -989,11 +989,11 @@ export const story: { heading: L; body: Record<Lang, string[]> }[] = [
     body: {
       es: [
         'Con una buena base de desarrollo web entré a WANT Digital Agency en 2022. Empecé como pasante y terminé con contrato: más de tres años construyendo las interfaces web y móviles de productos para clientes de Bolivia y EE. UU., en un equipo de desarrollo de dos personas.',
-        'Casi todo ese tiempo programamos a mano. Recién en mi último año ahí incorporamos IA al trabajo, y llegar a ella con años de práctica encima hizo toda la diferencia.',
+        'Casi todo ese tiempo programamos a mano. Recién en mi último año ahí incorporamos IA al trabajo, y llegar a ella con ==años de práctica== encima hizo toda la diferencia.',
       ],
       en: [
         'With a solid web development foundation I joined WANT Digital Agency in 2022. I started as an intern and ended up on contract: 3+ years building the web and mobile interfaces of products for clients in Bolivia and the US, on a two-person dev team.',
-        'For almost all of that time we coded by hand. We only brought AI into our work in my last year there, and coming to it with years of practice made all the difference.',
+        'For almost all of that time we coded by hand. We only brought AI into our work in my last year there, and coming to it with ==years of practice== made all the difference.',
       ],
     },
   },
@@ -1001,11 +1001,11 @@ export const story: { heading: L; body: Record<Lang, string[]> }[] = [
     heading: { es: 'La IA, como multiplicador', en: 'AI as a multiplier' },
     body: {
       es: [
-        'Con el boom fui probando de todo: GitHub Copilot, ChatGPT, Gemini, DeepSeek, Groq, modelos locales y, últimamente, Claude. Me potenció muchísimo, y como vengo de escribir todo a mano, entiendo lo que genera: sé leerlo, corregirlo y mantenerlo.',
+        'Con el boom fui probando de todo: GitHub Copilot, ChatGPT, Gemini, DeepSeek, Groq, modelos locales y, últimamente, Claude. Me potenció muchísimo, y como vengo de escribir todo a mano, ==entiendo lo que genera==: sé leerlo, corregirlo y mantenerlo.',
         'Sobre todo, me dio más ganas de seguir aprendiendo y de entender toda tecnología que llegue a mis manos.',
       ],
       en: [
-        'When the boom hit I tried everything: GitHub Copilot, ChatGPT, Gemini, DeepSeek, Groq, local models and, lately, Claude. It has boosted me a lot, and since I come from writing everything by hand, I understand what it generates: I can read it, fix it and maintain it.',
+        'When the boom hit I tried everything: GitHub Copilot, ChatGPT, Gemini, DeepSeek, Groq, local models and, lately, Claude. It has boosted me a lot, and since I come from writing everything by hand, ==I understand what it generates==: I can read it, fix it and maintain it.',
         'Above all, it made me even more eager to keep learning and understand every technology that comes my way.',
       ],
     },
@@ -1014,10 +1014,10 @@ export const story: { heading: L; body: Record<Lang, string[]> }[] = [
     heading: { es: 'Hoy', en: 'Today' },
     body: {
       es: [
-        'Trabajo de forma independiente mientras termino la carrera: AdvAI, mi proyecto de grado; Link\'u, para una comunidad de Sipe Sipe; SGPG, para mi universidad; y mis proyectos personales. La regla sigue siendo la misma de 2020: nunca parar de aprender.',
+        'Trabajo de forma independiente mientras termino la carrera: AdvAI, mi proyecto de grado; Link\'u, para una comunidad de Sipe Sipe; SGPG, para mi universidad; y mis proyectos personales. La regla sigue siendo la misma de 2020: ==nunca parar de aprender==.',
       ],
       en: [
-        'I work independently while finishing my degree: AdvAI, my capstone; Link\'u, for a community in Sipe Sipe; SGPG, for my university; and my personal projects. The rule is still the same as in 2020: never stop learning.',
+        'I work independently while finishing my degree: AdvAI, my capstone; Link\'u, for a community in Sipe Sipe; SGPG, for my university; and my personal projects. The rule is still the same as in 2020: ==never stop learning==.',
       ],
     },
   },

@@ -19,7 +19,7 @@ AdvAI trabaja con modelos gratuitos: uno **local** con Ollama (privado, sin lím
 ADVAI_LLM=ollama,groq,gemini
 ```
 
-Las capas gratuitas tienen límites por minuto: tantas peticiones, tantos tokens. En vez de chocar contra el límite y esperar el `429`, cada proveedor **lleva la cuenta** de lo que usó en el último minuto y dice si puede atender antes de intentarlo:
+Las capas gratuitas tienen límites por minuto: tantas peticiones, tantos tokens. En vez de chocar contra el límite y esperar el `429`, cada proveedor **((lleva la cuenta))** de lo que usó en el último minuto y dice si puede atender antes de intentarlo:
 
 ```python
 class Proveedor:
@@ -89,7 +89,7 @@ Y cada etapa revisa qué ya está hecho antes de hacerlo: si las cláusulas de e
 
 Un bonus de guardar todo por cláusula: cuando el abogado sube **una nueva versión** del mismo contrato, el sistema alinea las cláusulas con la versión anterior y **reutiliza el análisis de las que no cambiaron**. Solo se paga (en tiempo) por lo nuevo.
 
-Y una regla de oro del bucle: **una excepción nunca mata al hilo**. Se registra, la versión queda en estado `error` con un mensaje legible y el trabajador sigue con la siguiente.
+Y una regla de oro del bucle: **==una excepción nunca mata al hilo==**. Se registra, la versión queda en estado `error` con un mensaje legible y el trabajador sigue con la siguiente.
 
 ## 3. Progreso en vivo con Server-Sent Events
 

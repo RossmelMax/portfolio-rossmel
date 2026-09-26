@@ -32,6 +32,7 @@ function initLenis() {
   if (reduced) return null;
   const lenis = new Lenis({ lerp: 0.1, wheelMultiplier: 1 });
   lenis.on('scroll', ScrollTrigger.update);
+  (window as unknown as { __lenis: Lenis }).__lenis = lenis; // lo usa el botón "volver arriba"
   gsap.ticker.add((time) => lenis.raf(time * 1000));
   gsap.ticker.lagSmoothing(0);
 

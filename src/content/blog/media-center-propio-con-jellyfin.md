@@ -96,7 +96,7 @@ Refrescas el ítem y aparece. Sin API keys y sin pelearte con los proveedores.
 
 ## 4. Verlo desde fuera de casa, sin abrir puertos
 
-Mi servidor está detrás de **CGNAT**: no tengo IP pública, así que abrir puertos en el router ni siquiera es una opción. Y aunque lo fuera, exponer un servicio de casa directamente a internet no es buena idea.
+Mi servidor está detrás de **((CGNAT))**: no tengo IP pública, así que abrir puertos en el router ni siquiera es una opción. Y aunque lo fuera, exponer un servicio de casa directamente a internet no es buena idea.
 
 La solución es un **túnel**. Con **Cloudflare Tunnel**, un pequeño programa (`cloudflared`) corre en el servidor y abre una conexión **saliente** hacia Cloudflare. Las visitas llegan a Cloudflare, que las manda por ese túnel al Jellyfin local. Del lado de mi casa no hay ningún puerto abierto.
 
@@ -121,7 +121,7 @@ A cambio obtienes HTTPS automático y tu dominio propio. Un detalle: reiniciar `
 
 ## 5. Cuentas para cada persona
 
-Cada persona tiene **su propia cuenta**: así cada uno tiene su historial, su "seguir viendo" y, si quieres, solo ciertas bibliotecas visibles. Las cuentas nuevas se crean sin permisos de administrador.
+Cada persona tiene **==su propia cuenta==**: así cada uno tiene su historial, su "seguir viendo" y, si quieres, solo ciertas bibliotecas visibles. Las cuentas nuevas se crean sin permisos de administrador.
 
 Se puede hacer desde el panel, pero también por la API, útil para automatizarlo. Una trampa de la versión 10.11: **el encabezado `X-Emby-Authorization` es obligatorio incluso para iniciar sesión**. Sin él, la respuesta es un críptico `Error processing request.`
 

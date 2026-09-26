@@ -20,7 +20,7 @@ AdvAI works with free models: one **local** model with Ollama (private, no limit
 ADVAI_LLM=ollama,groq,gemini
 ```
 
-Free tiers have per-minute limits: so many requests, so many tokens. Instead of hitting the limit and waiting for the `429`, each provider **keeps track** of what it used in the last minute and says whether it can take a request before trying:
+Free tiers have per-minute limits: so many requests, so many tokens. Instead of hitting the limit and waiting for the `429`, each provider **((keeps track))** of what it used in the last minute and says whether it can take a request before trying:
 
 ```python
 class Proveedor:
@@ -90,7 +90,7 @@ And each stage checks what's already done before doing it: if that version's cla
 
 A bonus of storing everything per clause: when the lawyer uploads **a new version** of the same contract, the system aligns its clauses with the previous version and **reuses the analysis of the ones that didn't change**. You only pay (in time) for what's new.
 
-And a golden rule for the loop: **an exception never kills the thread**. It's logged, the version is marked as `error` with a readable message, and the worker moves on to the next one.
+And a golden rule for the loop: **==an exception never kills the thread==**. It's logged, the version is marked as `error` with a readable message, and the worker moves on to the next one.
 
 ## 3. Live progress with Server-Sent Events
 

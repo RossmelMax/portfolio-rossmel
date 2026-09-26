@@ -19,7 +19,7 @@ El plan tiene tres pasos, cada uno reversible:
 2. **Probarlo en un único reinicio** usando `BootNext` de UEFI.
 3. **Promoverlo** a primera opción solo si funcionó. GRUB queda como respaldo.
 
-La pieza clave es `BootNext`: una variable de UEFI que dice "en el próximo arranque, y **solo en ese**, usa esta entrada". Si Limine falla, basta con reiniciar: el firmware vuelve solo al orden normal y entra por GRUB.
+La pieza clave es `BootNext`: una variable de UEFI que dice "en el próximo arranque, y **((solo en ese))**, usa esta entrada". Si Limine falla, basta con reiniciar: el firmware vuelve solo al orden normal y entra por GRUB.
 
 ```bash
 efibootmgr -n "$NUM"   # próximo arranque, UNA sola vez, entra a Limine
@@ -27,7 +27,7 @@ efibootmgr -n "$NUM"   # próximo arranque, UNA sola vez, entra a Limine
 
 ## Paso 1: instalar al lado, con respaldo previo
 
-El script de instalación es **idempotente**: se puede correr diez veces y el resultado es el mismo. Si Limine ya está instalado, solo actualiza la configuración, el fondo y el binario en la partición EFI (ESP).
+El script de instalación es **==idempotente==**: se puede correr diez veces y el resultado es el mismo. Si Limine ya está instalado, solo actualiza la configuración, el fondo y el binario en la partición EFI (ESP).
 
 Antes de tocar nada, respalda lo que va a cambiar:
 

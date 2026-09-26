@@ -6,6 +6,8 @@ import Nav from './Nav.astro';
 import { t, paths } from '../data/i18n';
 import { postsForProject, postUrl, fmtDate, readingTime } from '../data/blog';
 import LiveSites from './LiveSites.astro';
+import Marked from './Marked.astro';
+import Sketch from './Sketch.astro';
 interface Props { lang: Lang; project: Project }
 const { lang, project: p } = Astro.props;
 const s = t(lang);
@@ -49,15 +51,15 @@ const posts = await postsForProject(p.slug, lang);
       <div class="md:col-span-7 md:col-start-6">
         <p class="kicker mb-6">{s.project.problem}</p>
         <p data-words class="display text-3xl font-medium md:text-5xl">{p.problem[lang]}</p>
-        <p class="kicker mb-6 mt-24">{s.project.highlights}</p>
+        <p class="kicker mb-6 mt-24 flex items-center gap-2"><Sketch name="star" seed={41} class="h-7 w-7 text-accent" />{s.project.highlights}</p>
         <ol class="space-y-0 border-t border-line">
           {p.highlights[lang].map((h, i) => (
             <li data-reveal class="flex gap-6 border-b border-line py-6 text-lg">
-              <span class="font-mono text-sm text-accent">{String(i + 1).padStart(2, '0')}</span><span>{h}</span>
+              <span class="font-mono text-sm text-accent">{String(i + 1).padStart(2, '0')}</span><span><Marked text={h} /></span>
             </li>
           ))}
         </ol>
-        <p class="kicker mb-6 mt-24">{s.project.learned}</p>
+        <p class="kicker mb-6 mt-24 flex items-center gap-2"><Sketch name="bulb" seed={43} class="h-8 w-8 text-accent" />{s.project.learned}</p>
         <ul class="grid gap-4">
           {p.learned[lang].map((l, i) => (
             <li data-reveal data-reveal-delay={i * 0.06} class="rounded-2xl border border-line bg-bg-2 p-6 text-lg">

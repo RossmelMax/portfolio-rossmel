@@ -3,6 +3,7 @@ import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 import sitemap from '@astrojs/sitemap';
 import { readdirSync, readFileSync } from 'node:fs';
+import remarkMarks from './src/lib/remark-marks.ts';
 
 const SITE = 'https://portfolio.rossmel.top';
 
@@ -36,6 +37,7 @@ export default defineConfig({
     }),
   ],
   markdown: {
+    remarkPlugins: [remarkMarks], // ==subrayado== y ((círculo)) a mano en el blog
     shikiConfig: { theme: 'github-dark' },
   },
   vite: {
