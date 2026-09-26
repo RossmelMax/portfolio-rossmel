@@ -35,6 +35,7 @@ npm run dev          # http://localhost:4321  (recarga en vivo)
 npm run build        # genera el sitio estático en dist/
 npm run cv:pdf       # genera los PDF del CV (requiere build previo)
 npm run check        # verificación de tipos de Astro/TS
+npm run verify       # tras el build: desborde móvil, marcas sin procesar, errores JS, CV ≤ 2 págs (-- --shots = capturas)
 npm run og           # regenera public/og.png (imagen al compartir el link)
 npm run icons        # regenera los íconos PNG desde public/favicon.svg
 ```
@@ -69,30 +70,31 @@ se puede añadir `@astrojs/react`.
 ```
 src/
   data/
-    profile.ts        ← TODO EL CONTENIDO (experiencia, proyectos, skills…) en ES/EN
+    profile.ts        ← TODO EL CONTENIDO (experiencia, proyectos, skills, historia…) en ES/EN
     i18n.ts           ← textos de la interfaz, rutas por idioma, formato de fechas
-  styles/global.css   ← tokens de diseño (colores, fuentes), grano, cursor, marquee
-  layouts/Base.astro  ← <head>, SEO, JSON-LD, tema, carga de animaciones
+    blog.ts           ← helpers del blog (posts por idioma, traducciones, relacionados, búsqueda)
+    sketches.ts       ← dibujos a mano (rough.js en el build) + marcas ==…== / ((…))
+  lib/remark-marks.ts ← plugin de Markdown para las marcas en el blog
+  content/blog/       ← artículos (ES) · content/blog/en/ ← versiones EN
+  styles/global.css   ← tokens de diseño (colores, fuentes), grano, cursor, marquee, .prose
+  layouts/Base.astro  ← <head>, SEO, JSON-LD, tema, carga de animaciones, botón volver arriba
   components/
-    Home.astro        ← compone la página principal (se usa en / y /en/)
-    Nav, Preloader, Hero, About, Experience, Projects, Stack, Workflow, Contact
-    ProjectPage.astro ← plantilla de caso de estudio (/proyectos/<slug>)
+    Home.astro        ← compone la home (/ y /en/)
+    Nav, Preloader, Hero, About, Experience, Projects, LiveSites, Stack, Workflow, BlogTeaser, Contact
+    ProjectPage.astro ← caso de estudio · AboutPage.astro ← /sobre-mi/ · BlogIndex/BlogPost ← blog
     Resume.astro      ← el CV (ATS)
+    Sketch, SketchFlight, Marked, ToTop, PhotoLayers, ContactForm, Comments, ShareLinks, Logo
   scripts/
     animations.ts     ← GSAP + Lenis; se activa con atributos data-*
     shader.ts         ← fondo WebGL del hero
-  pages/
-    index.astro, cv.astro, proyectos/[slug].astro      (ES)
-    en/index.astro, en/cv.astro, en/projects/[slug].astro (EN)
-public/
-  favicon.svg
-  cv/Rossmel-Abasto-CV-{ES,EN}.pdf   ← generados por npm run cv:pdf
-scripts/
-  build-cv-pdf.mjs    ← genera los PDF
-  serve-dist.mjs      ← servidor estático mínimo que usa el script anterior
+  pages/              ← rutas ES (/, /proyectos, /sobre-mi, /blog, /cv) y EN (/en/…)
+functions/            ← Cloudflare Pages Functions (middleware de cv., /api/contact)
+public/cv/            ← PDFs del CV (versionados; los genera npm run cv:pdf)
+scripts/              ← build-cv-pdf, verify, build-og, build-icons, build-photo-layers.py, serve-dist
 docs/
-  PROYECTOS-CANDIDATOS.md   ← lista filtrada de repos para decidir qué mostrar
-CLAUDE.md             ← instrucciones para Claude Code (local o nube)
+  CONTINUAR.md        ← guía de traspaso para seguir con Claude local (empezar por aquí)
+  PROYECTOS-CANDIDATOS.md, LINKEDIN.md, github-profile/, REVISION.md, ORDENES-CLAUDE-LOCAL.md
+CLAUDE.md             ← instrucciones cortas para Claude Code (local o nube)
 ```
 
 ### Rutas generadas
@@ -433,10 +435,13 @@ Flujo diario: push a `main` = producción; push a otra rama / PR = URL de vista 
 
 ## Continuar con Claude Code local
 
-1. `git clone git@github.com:rossmelabasto/portfolio-rossmel.git && cd portfolio-rossmel`
-2. `git checkout <rama de trabajo>` (ver sección siguiente) y `npm install`
-3. Abrir `claude` en la carpeta: lee `CLAUDE.md` automáticamente, que resume convenciones y estado.
-4. Pedirle algo como: *"Lee README.md y docs/, y sigue con los pendientes."*
+**Guía completa: [`docs/CONTINUAR.md`](docs/CONTINUAR.md)** (mapa del código, recetas, preferencias de
+Rossmel, pendientes y trampas conocidas).
+
+1. `git clone git@github.com:rossmelabasto/portfolio-rossmel.git && cd portfolio-rossmel && npm install`
+2. Abrir `claude` en la carpeta: lee `CLAUDE.md` automáticamente.
+3. Primer mensaje sugerido: *"Lee docs/CONTINUAR.md, CLAUDE.md y README.md. Corre build, check y
+   verify para confirmar que todo está bien y dime qué pendientes ves."*
 
 Ramas:
 - `master` → v1 (Angular, 2022), solo como archivo histórico.
@@ -477,5 +482,6 @@ Ramas:
 | 2026-09 | Entrada del nombre fluida en móvil: las demás animaciones se preparan después del intro y en pedazos (antes, un bloqueo de ~380 ms con CPU de gama media). |
 | 2026-09 | Tono: transmitir que entiende lo que genera la IA, sin frases absolutas ni "no soy vibe coder" (pedido de Rossmel). |
 | 2026-09 | v3.13: botón "volver arriba" con anillo de progreso y más dibujos a mano (subrayados/círculos en hero, experiencia, proyectos, historia y los 22 artículos). Pedido de Rossmel. |
+| 2026-09 | Traspaso a Claude local: guía `docs/CONTINUAR.md` y `npm run verify` (chequeo automático tras el build). |
 | 2026-09 | v3.14: dibujo por proyecto y dibujos "en vuelo" en más secciones; CV con "WANT Digital Agency" completo y más proyectos (Homelab, Notebook, Rubik, rOS). Pedido de Rossmel. |
 | 2026-09 | Fuera del sitio: watcher-backend, prototipos v0 (salvo SGPG), proyectos descartados, proyectos personales/regalos. |

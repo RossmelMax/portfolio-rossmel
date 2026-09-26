@@ -9,10 +9,13 @@ Actualizado: sept. 2026 (tras las respuestas de Rossmel y el informe de Claude C
 |---|---|---|---|
 | AdvAI (proyecto de grado) | galería | ✅ | capturas / demo grabada |
 | CarX (Vulcano) · GeekLabs vía WANT | galería | en experiencia | — (IA: hecha por el jefe, tú la integraste) |
-| SGPG (gestor de proyectos de grado, UDABOL) | galería | ✅ | URL de Vercel (¿se puede mostrar?) |
-| Link'u (agua potable, Sipe Sipe) | galería | ✅ (proyecto pagado) | capturas |
-| Homelab + OpenClaw | galería | ❌ | capturas (sin mostrar URLs internas) |
-| rOS | galería | ❌ | capturas lindas (escritorio, fastfetch, arranque) |
+| SGPG (gestor de proyectos de grado, UDABOL) | galería | en experiencia | URL de Vercel (¿se puede mostrar?) |
+| Link'u (agua potable, Sipe Sipe) | galería | en experiencia (proyecto pagado) | capturas |
+| Homelab + OpenClaw | galería | ✅ | capturas (sin mostrar URLs internas) |
+| rOS | galería | ✅ | capturas lindas (escritorio, fastfetch, arranque) |
+| Notebook (en vivo) | lista + En vivo | ✅ | revisar textos |
+| Rubik (en vivo) | lista + En vivo | ✅ | revisar textos |
+| Selflix (en vivo) | lista + En vivo | ❌ | revisar textos |
 | Adsie · WANT | lista | en experiencia | — |
 | Bite · WANT | lista | en experiencia | — |
 | One Life Fitness · WANT (2023–2025) | lista | en experiencia | — |

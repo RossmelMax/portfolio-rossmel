@@ -1,5 +1,8 @@
 # Órdenes para Claude Code local: publicar en Cloudflare Pages
 
+> **Histórico (ya ejecutado, sept. 2026).** El sitio está publicado. Para seguir trabajando, usar
+> [`CONTINUAR.md`](CONTINUAR.md).
+
 Contexto: el portafolio y el CV viven en **este repo** (`rossmelabasto/portfolio-rossmel`, Astro 7),
 construido en sesiones de Claude Code web. Se publica con **un solo** proyecto de Cloudflare Pages
 conectado a Git, con dos dominios. Todo el detalle está en `README.md` → "Despliegue".
