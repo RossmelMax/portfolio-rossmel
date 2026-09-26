@@ -13,6 +13,8 @@ interface Props {
   plain?: boolean;
 }
 const { lang, title, description, altPath, plain = false } = Astro.props;
+// Cloudflare Web Analytics: token público, se define en Pages → Settings → Variables (build).
+const cfBeacon = import.meta.env.PUBLIC_CF_BEACON_TOKEN;
 const pageTitle = title ? `${title} — ${profile.name}` : `${profile.name} — ${profile.role[lang]}`;
 const desc = description ?? profile.headline[lang];
 const canonical = new URL(Astro.url.pathname, Astro.site);
@@ -62,6 +64,9 @@ const personLd = {
     <style is:global>
       @view-transition { navigation: auto; }
     </style>
+    {cfBeacon && (
+      <script is:inline defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon={JSON.stringify({ token: cfBeacon })}></script>
+    )}
   </head>
   <body class={plain ? '' : 'cursor-none-fine'}>
     <slot />
