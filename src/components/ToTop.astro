@@ -19,7 +19,11 @@ const s = t(lang);
   const btn = document.querySelector<HTMLButtonElement>('[data-totop]');
   if (btn) {
     const ring = btn.querySelectorAll<SVGPathElement>('.totop-ring path');
+    const footer = document.querySelector('footer');
     const update = () => {
+      // al llegar al footer el botón sube para no tapar sus enlaces (GitHub, LinkedIn, GitLab)
+      const lift = footer ? Math.max(0, innerHeight - footer.getBoundingClientRect().top) : 0;
+      btn.style.setProperty('--lift', `${lift}px`);
       const max = document.documentElement.scrollHeight - innerHeight;
       const p = max > 0 ? Math.min(1, scrollY / max) : 0;
       btn.classList.toggle('is-visible', scrollY > innerHeight * 0.8);
