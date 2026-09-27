@@ -34,8 +34,8 @@ const sentence = (s: string) => { const c = clean(s); return c && !/[.!?]$/.test
   <div class="cv-toolbar">
     <a href={new URL(paths.home(lang), profile.portfolioUrl).href}>← {H.back}</a>
     <span>
-      <a href={altPath}>{lang === 'es' ? 'English' : 'Español'}</a>
-      <a href={paths.cvPdf(lang)} download>{H.download}</a>
+      <a href={altPath}><svg class="cv-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9" /><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3Z" /></svg>{lang === 'es' ? 'English' : 'Español'}</a>
+      <a href={paths.cvPdf(lang)} download><svg class="cv-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8Z" /><path d="M14 3v5h5M9 13h6M9 17h4" /></svg>{H.download}</a>
     </span>
   </div>
   <main class="cv">
@@ -102,7 +102,8 @@ const sentence = (s: string) => { const c = clean(s); return c && !/[.!?]$/.test
   /* El CV ignora el tema del sitio: siempre blanco y negro, fuentes estándar. */
   html:has(.cv), html:has(.cv) body { background: #fff !important; color: #111 !important; color-scheme: light; }
   .cv-toolbar { max-width: 800px; margin: 0 auto; padding: 16px 24px; display: flex; justify-content: space-between; font: 13px/1.4 Arial, Helvetica, sans-serif; }
-  .cv-toolbar a { color: #111; margin-left: 16px; }
+  .cv-toolbar a { color: #111; margin-left: 16px; display: inline-flex; align-items: center; gap: 5px; }
+  .cv-toolbar .cv-ico { width: 15px; height: 15px; }
   .cv { max-width: 800px; margin: 0 auto 64px; padding: 0 24px; font: 10pt/1.4 Arial, Helvetica, sans-serif; color: #111; }
   .cv h1 { font-size: 22pt; font-weight: 700; margin: 0; letter-spacing: 0; }
   .cv .cv-title { font-size: 12pt; margin: 2px 0 4px; }

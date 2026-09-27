@@ -35,8 +35,8 @@ export const profile = {
   photoAlt: { es: 'Foto de Rossmel Abasto', en: 'Photo of Rossmel Abasto' } as L,
 
   headline: {
-    es: 'Programador de base: construyo interfaces rápidas, cuidadas y ==listas para producción== — y la IA multiplica lo que ya sé hacer.',
-    en: 'A programmer first: I build fast, polished, ==production-ready== interfaces — and AI multiplies what I already know how to do.',
+    es: 'Construyo interfaces rápidas, cuidadas y ==listas para producción==. Programo desde 2020, y hoy la IA me ayuda a llegar más lejos.',
+    en: 'I build fast, polished, ==production-ready== interfaces. I\'ve been coding since 2020, and today AI helps me go further.',
   } as L,
 
   /** Resumen profesional (CV). 3–4 líneas, con palabras clave para ATS. */

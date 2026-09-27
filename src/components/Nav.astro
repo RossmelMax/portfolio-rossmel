@@ -24,8 +24,8 @@ const blogHref = paths.blog(lang);
       <li><a href={blogHref} class="transition-colors hover:text-fg">{s.nav.blog}</a></li>
     </ul>
     <div class="flex items-center gap-1.5 font-mono text-xs sm:gap-2">
-      <a href={paths.cv(lang)} class="hidden rounded-full bg-accent px-4 py-2 font-medium text-accent-ink sm:inline-block">{s.nav.cv}</a>
-      <a href={altPath} class="rounded-full border border-line px-3 py-2 hover:border-fg" hreflang={lang === 'es' ? 'en' : 'es'}>{s.langSwitch}</a>
+      <a href={paths.cv(lang)} class="hidden items-center gap-1.5 rounded-full bg-accent px-4 py-2 font-medium text-accent-ink sm:inline-flex"><svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8Z" /><path d="M14 3v5h5M9 13h6M9 17h4" /></svg>{s.nav.cv}</a>
+      <a href={altPath} class="inline-flex items-center gap-1.5 rounded-full border border-line px-3 py-2 hover:border-fg" hreflang={lang === 'es' ? 'en' : 'es'}><svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9" /><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3Z" /></svg>{s.langSwitch}</a>
       <button type="button" data-theme-toggle class="grid h-9 w-9 place-items-center rounded-full border border-line hover:border-fg" aria-label={s.nav.theme} title={s.nav.theme}>
         <!-- Luna en modo oscuro, sol en modo claro (se alterna por CSS según data-theme) -->
         <svg class="theme-moon h-[18px] w-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 14.5A8.5 8.5 0 1 1 9.5 3.5a7 7 0 0 0 11 11Z" /></svg>

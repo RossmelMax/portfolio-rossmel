@@ -355,7 +355,7 @@ El formulario de contacto al final de cada artículo sigue funcionando igual.
   (servidor), Cómo trabajo (cohete), Del blog (lápiz), /sobre-mi/ (laptop), /blog/ (foco) y el hero de
   cada proyecto. `variant` 0–2 cambia la forma de la estela.
 - **Botón "volver arriba"** (`ToTop.astro`): aparece tras bajar ~una pantalla, con un anillo dibujado a
-  mano que se completa según el progreso del scroll; usa Lenis (`window.__lenis`) si está activo.
+  mano que se completa según el progreso del scroll; usa Lenis (`window.__lenis`) si está activo. Al llegar al `<footer>` sube (variable CSS `--lift`) para no tapar los enlaces.
 - Letra manuscrita solo para etiquetas (`font-hand`, Caveat).
 
 ### Foto en capas ("Sobre mí")
@@ -482,6 +482,7 @@ Ramas:
 | 2026-09 | Entrada del nombre fluida en móvil: las demás animaciones se preparan después del intro y en pedazos (antes, un bloqueo de ~380 ms con CPU de gama media). |
 | 2026-09 | Tono: transmitir que entiende lo que genera la IA, sin frases absolutas ni "no soy vibe coder" (pedido de Rossmel). |
 | 2026-09 | v3.13: botón "volver arriba" con anillo de progreso y más dibujos a mano (subrayados/círculos en hero, experiencia, proyectos, historia y los 22 artículos). Pedido de Rossmel. |
+| 2026-09 | v3.15: nuevo titular del hero ("Construyo interfaces rápidas, cuidadas y listas para producción. Programo desde 2020…"), íconos en los botones CV y ES/EN (nav y barra del CV) y el botón "volver arriba" sube al llegar al footer para no tapar sus enlaces. Pedido de Rossmel. |
 | 2026-09 | Traspaso a Claude local: guía `docs/CONTINUAR.md` y `npm run verify` (chequeo automático tras el build). |
 | 2026-09 | v3.14: dibujo por proyecto y dibujos "en vuelo" en más secciones; CV con "WANT Digital Agency" completo y más proyectos (Homelab, Notebook, Rubik, rOS). Pedido de Rossmel. |
 | 2026-09 | Fuera del sitio: watcher-backend, prototipos v0 (salvo SGPG), proyectos descartados, proyectos personales/regalos. |

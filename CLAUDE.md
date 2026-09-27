@@ -44,6 +44,7 @@ Antes de dar algo por terminado: `npm run build`, `npm run check` y `npm run ver
 - v3.13: botón "volver arriba" (ToTop.astro, anillo de progreso) y marcas ==…==/((…)) también en el blog (plugin remark en src/lib/remark-marks.ts, requiere @astrojs/markdown-remark).
 - Traspaso: docs/CONTINUAR.md + npm run verify (sept. 2026).
 - v3.14: `doodle` por proyecto (galería, lista, En vivo, hero del caso) y <SketchFlight> (estela + dibujo con scroll) en varias secciones; CV con más proyectos (sigue en 2 páginas).
+- v3.15: titular del hero nuevo, íconos en CV y ES/EN, botón volver arriba no tapa el footer.
 - Flujo de publicación: Claude web sube a su rama y abre un PR a main; Rossmel lo aprueba en GitHub → Cloudflare publica. Antes de avisar, verificar que el PR siga ABIERTO: si ya se fusionó, abrir uno nuevo (los commits posteriores a un merge no aparecen solos).
 - Siguiente: capturas y video de AdvAI (Rossmel); GitHub/LinkedIn (docs/).
 - Analítica: inyección automática de Cloudflare, sin token.
