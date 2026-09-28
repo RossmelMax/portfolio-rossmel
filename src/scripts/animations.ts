@@ -12,6 +12,10 @@
  *  data-magnetic       botón que "atrae" el cursor
  *  data-count="42"     contador numérico
  *  data-hover          agranda el cursor personalizado
+ *  data-draw           dibujo fine line (<Sketch>) que se traza solo al entrar en pantalla
+ *  data-layers         foto en capas: parallax por profundidad al hacer scroll + inclinación con el mouse
+ *    └ data-layer="0.5"   profundidad de cada capa (0 = quieta, 1 = la que más se mueve)
+ *    └ data-layer-outline la capa del contorno: aparece y crece para sobresalir
  */
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -29,6 +33,7 @@ function initLenis() {
   if (reduced) return null;
   const lenis = new Lenis({ lerp: 0.1, wheelMultiplier: 1 });
   lenis.on('scroll', ScrollTrigger.update);
+  (window as unknown as { __lenis: Lenis }).__lenis = lenis; // lo usa el botón "volver arriba"
   gsap.ticker.add((time) => lenis.raf(time * 1000));
   gsap.ticker.lagSmoothing(0);
 
@@ -94,9 +99,9 @@ function initPreloader(): Promise<void> {
 }
 
 /* ---------------- Hero intro ---------------- */
-function heroIntro() {
+function heroIntro(): gsap.core.Timeline | null {
   const hero = document.querySelector('[data-hero]');
-  if (!hero) return;
+  if (!hero) return null;
   // Se quita en el mismo tick en que arranca la animación: nunca se ve el nombre quieto antes.
   document.documentElement.classList.remove('hero-pending');
   const title = hero.querySelector<HTMLElement>('[data-hero-title]');
@@ -114,11 +119,14 @@ function heroIntro() {
     ease: 'none',
     scrollTrigger: { trigger: hero, start: 'top top', end: 'bottom top', scrub: true },
   });
+  return tl;
 }
 
 /* ---------------- Reveals ---------------- */
-function initReveals() {
-  document.querySelectorAll<HTMLElement>('[data-split]').forEach((el) => {
+/** Una tarea por elemento: se ejecutan en pedazos (runChunked) para no congelar el hero. */
+function revealTasks(): (() => void)[] {
+  const tasks: (() => void)[] = [];
+  document.querySelectorAll<HTMLElement>('[data-split]').forEach((el) => tasks.push(() => {
     const split = SplitText.create(el, { type: 'lines', mask: 'lines', linesClass: 'split-line' });
     gsap.from(split.lines, {
       yPercent: 105,
@@ -127,9 +135,9 @@ function initReveals() {
       stagger: 0.08,
       scrollTrigger: { trigger: el, start: 'top 85%' },
     });
-  });
+  }));
 
-  document.querySelectorAll<HTMLElement>('[data-reveal]').forEach((el) => {
+  document.querySelectorAll<HTMLElement>('[data-reveal]').forEach((el) => tasks.push(() => {
     gsap.from(el, {
       y: 48,
       opacity: 0,
@@ -138,9 +146,9 @@ function initReveals() {
       delay: Number(el.dataset.revealDelay ?? 0),
       scrollTrigger: { trigger: el, start: 'top 88%' },
     });
-  });
+  }));
 
-  document.querySelectorAll<HTMLElement>('[data-words]').forEach((el) => {
+  document.querySelectorAll<HTMLElement>('[data-words]').forEach((el) => tasks.push(() => {
     // aria 'hidden': el lector de pantalla lee una copia limpia del párrafo (no se permite aria-label en <p>)
     const split = SplitText.create(el, { type: 'words', aria: 'hidden' });
     gsap.fromTo(
@@ -153,11 +161,35 @@ function initReveals() {
         scrollTrigger: { trigger: el, start: 'top 80%', end: 'bottom 45%', scrub: true },
       },
     );
-  });
+  }));
 
-  document.querySelectorAll<HTMLElement>('[data-count]').forEach((el) => {
+  document.querySelectorAll<SVGSVGElement>('[data-draw]').forEach((svg) => tasks.push(() => {
+    // Los <path> traen pathLength="1": el trazo va de 0 a 1 sin medir nada
+    const paths = svg.querySelectorAll('path');
+    if (svg.dataset.draw === 'scrub') {
+      gsap.fromTo(paths, { strokeDasharray: 1, strokeDashoffset: 1 }, {
+        strokeDashoffset: 0, ease: 'none', stagger: 0.1,
+        scrollTrigger: { trigger: svg, start: 'top 92%', end: 'bottom 45%', scrub: 0.6 },
+      });
+      return;
+    }
+    const tween = gsap.fromTo(
+      paths,
+      { strokeDasharray: 1, strokeDashoffset: 1 },
+      // 'top 97%': los que están al final de la página (footer) también llegan a dibujarse
+      { strokeDashoffset: 0, duration: 1.2, ease: 'power2.inOut', stagger: 0.12, scrollTrigger: { trigger: svg, start: 'top 97%' } },
+    );
+    // Volver a dibujar al pasar el mouse por la tarjeta que lo contiene
+    const host = finePointer ? svg.closest<HTMLElement>('[data-draw-host]') : null;
+    host?.addEventListener('pointerenter', () => {
+      if (tween.isActive()) return;
+      gsap.fromTo(paths, { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 0.9, ease: 'power2.inOut', stagger: 0.08, overwrite: true });
+    });
+  }));
+
+  document.querySelectorAll<HTMLElement>('[data-count]').forEach((el) => tasks.push(() => {
     const target = Number(el.dataset.count);
-    if (Number.isNaN(target)) return;
+    if (!el.dataset.count || Number.isNaN(target)) return; // data-count vacío no es un contador
     const obj = { v: 0 };
     gsap.to(obj, {
       v: target,
@@ -166,16 +198,17 @@ function initReveals() {
       scrollTrigger: { trigger: el, start: 'top 90%' },
       onUpdate: () => (el.textContent = Math.round(obj.v).toLocaleString(document.documentElement.lang) + (el.dataset.suffix ?? '')),
     });
-  });
+  }));
 
-  document.querySelectorAll<HTMLElement>('[data-parallax]').forEach((el) => {
+  document.querySelectorAll<HTMLElement>('[data-parallax]').forEach((el) => tasks.push(() => {
     const amt = Number(el.dataset.parallax || 0.2);
     gsap.to(el, {
       yPercent: -100 * amt,
       ease: 'none',
       scrollTrigger: { trigger: el, start: 'top bottom', end: 'bottom top', scrub: true },
     });
-  });
+  }));
+  return tasks;
 }
 
 /* ---------------- Scroll horizontal (proyectos) ---------------- */
@@ -211,6 +244,38 @@ function initHorizontal() {
         );
       });
     });
+  });
+}
+
+/* ---------------- Foto en capas ---------------- */
+function initLayers() {
+  document.querySelectorAll<HTMLElement>('[data-layers]').forEach((box) => {
+    const layers = [...box.querySelectorAll<HTMLElement>('[data-layer]')];
+    const outline = box.querySelector<HTMLElement>('[data-layer-outline]');
+    // Scroll: cada capa se desplaza según su profundidad; en el centro de la pantalla quedan alineadas
+    const tl = gsap.timeline({ scrollTrigger: { trigger: box, start: 'top bottom', end: 'bottom top', scrub: 0.8 } });
+    layers.forEach((l) => {
+      const d = Number(l.dataset.layer) || 0;
+      tl.fromTo(l, { yPercent: 10 * d }, { yPercent: -10 * d, ease: 'none', duration: 1 }, 0);
+    });
+    // El contorno aparece y crece un poco para sobresalir detrás de la persona
+    if (outline) {
+      tl.fromTo(outline, { opacity: 0, scale: 0.86 }, { opacity: 1, scale: 1.03, ease: 'power2.out', duration: 0.45 }, 0)
+        .to(outline, { scale: 1.07, ease: 'none', duration: 0.55 }, 0.45);
+    }
+    // Mouse: inclinación con profundidad (solo punteros finos)
+    if (!finePointer) return;
+    const movers = layers.map((l) => {
+      const d = Number(l.dataset.layer) || 0;
+      return { d, x: gsap.quickTo(l, 'x', { duration: 0.6, ease: 'power3' }), y: gsap.quickTo(l, 'y', { duration: 0.6, ease: 'power3' }) };
+    });
+    box.addEventListener('pointermove', (e) => {
+      const r = box.getBoundingClientRect();
+      const px = (e.clientX - r.left) / r.width - 0.5;
+      const py = (e.clientY - r.top) / r.height - 0.5;
+      movers.forEach((m) => { m.x(px * 28 * m.d); m.y(py * 20 * m.d); });
+    });
+    box.addEventListener('pointerleave', () => movers.forEach((m) => { m.x(0); m.y(0); }));
   });
 }
 
@@ -266,6 +331,40 @@ function initNav() {
   });
 }
 
+/* ---------------- Trabajo en pedazos ---------------- */
+const nextFrame = () => new Promise<void>((r) => requestAnimationFrame(() => r()));
+
+/** Ejecuta tareas en tandas de ~8 ms, cediendo un frame entre tandas: el navegador sigue animando. */
+async function runChunked(tasks: (() => void)[], budget = 8) {
+  let start = performance.now();
+  for (const task of tasks) {
+    task();
+    if (performance.now() - start > budget) {
+      await nextFrame();
+      start = performance.now();
+    }
+  }
+}
+
+/**
+ * Espera a que la entrada del nombre termine (o a que el usuario interactúe, o 1,6 s como máximo).
+ * Preparar el resto de animaciones durante la entrada congelaba el hero ~300 ms en celulares.
+ */
+function introSettled(tl: gsap.core.Timeline | null): Promise<void> {
+  if (!tl) return Promise.resolve();
+  return new Promise((resolve) => {
+    let done = false;
+    const finish = () => {
+      if (done) return;
+      done = true;
+      ['wheel', 'touchstart', 'keydown'].forEach((e) => window.removeEventListener(e, finish));
+      resolve();
+    };
+    ['wheel', 'touchstart', 'keydown'].forEach((e) => window.addEventListener(e, finish, { passive: true, once: true }));
+    setTimeout(finish, 1600);
+  });
+}
+
 /* ---------------- Arranque ---------------- */
 export async function initAnimations() {
   // Si hay reduced-motion, se muestra todo sin animar
@@ -277,10 +376,15 @@ export async function initAnimations() {
   }
   await document.fonts.ready; // SplitText necesita las fuentes cargadas para medir líneas
   await initPreloader();
-  heroIntro();
-  initReveals();
+  const intro = heroIntro();
+  initNav();
+  await introSettled(intro);
+  // El resto de la página se prepara después, en pedazos, sin trabar la entrada del nombre
+  await nextFrame();
   initHorizontal();
   initTimeline();
-  initNav();
+  initLayers();
+  await nextFrame();
+  await runChunked(revealTasks());
   ScrollTrigger.refresh();
 }

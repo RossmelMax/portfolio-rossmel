@@ -1,0 +1,24 @@
+---
+import Sketch from './Sketch.astro';
+/**
+ * Texto con anotaciones a mano. En profile.ts:
+ *   ==texto==   → subrayado a mano
+ *   ((texto))   → círculo a mano
+ * Mantener las marcas cortas (no se parten en dos líneas).
+ */
+interface Props { text: string }
+const { text } = Astro.props;
+const parts = text.split(/(==[^=]+==|\(\([^)]+\)\))/).filter(Boolean).map((p) =>
+  p.startsWith('==') ? { kind: 'underline' as const, t: p.slice(2, -2) } : p.startsWith('((') ? { kind: 'circle' as const, t: p.slice(2, -2) } : { kind: 'text' as const, t: p },
+);
+---
+{parts.map((p, i) =>
+  p.kind === 'text' ? p.t : (
+    <span class={`relative inline-block whitespace-nowrap text-fg ${p.kind === 'circle' ? 'mx-2' : ''}`}>
+      {p.t}
+      {p.kind === 'underline'
+        ? <Sketch name="underline" seed={i + 3} class="pointer-events-none absolute -bottom-2 left-0 h-3 w-full text-accent" />
+        : <Sketch name="circle" seed={i + 7} class="pointer-events-none absolute -left-3 -top-2 h-[calc(100%+1rem)] w-[calc(100%+1.5rem)] text-accent" />}
+    </span>
+  ),
+)}

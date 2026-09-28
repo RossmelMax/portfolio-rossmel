@@ -1,8 +1,9 @@
 ---
 title: 'Cómo evité que un LLM invente artículos del Código Civil'
 description: 'En AdvAI, mi proyecto de grado, el modelo no escribe las citas legales: solo elige entre fuentes reales y el sistema pone el texto literal. Así pasé de "suena bien" a citas verificables.'
-date: 2026-09-26
-tags: ['ia', 'rag', 'llm', 'advai']
+date: 2026-09-15
+tags: ['ia', 'llm', 'rag', 'python']
+project: 'advai'
 lang: 'es'
 ---
 
@@ -27,7 +28,7 @@ El paso 3 es donde los LLMs fallan si los dejas solos.
 
 Lo obvio sería pasarle al modelo la cláusula y los artículos recuperados, y pedirle un análisis con citas. El problema es que, aunque las fuentes estén en el prompt, un LLM puede mezclar artículos, cambiar palabras o citar uno que no estaba entre ellas: genera texto, no lo copia.
 
-Ningún prompt garantiza que eso no pase. Lo que sí lo garantiza es **cambiar quién escribe la cita**:
+Ningún prompt garantiza que eso no pase. Lo que sí lo garantiza es **==cambiar quién escribe la cita==**:
 
 - El sistema recupera las fuentes candidatas y le muestra cada una al modelo con una **clave** corta (por ejemplo, `AS/0039/2018#1` en el caso de la jurisprudencia).
 - El modelo responde en JSON con un esquema fijo: su análisis y **solo las claves** de las fuentes que respaldan cada punto.
@@ -64,7 +65,7 @@ El corpus tiene 3.267 artículos y 971 entradas de jurisprudencia.
 
 Es muy fácil "sentir" que los resultados mejoran. Por eso armé un set de evaluación con cláusulas y las fuentes que deberían aparecer para cada una. Con eso, cada cambio dejó de ser una intuición:
 
-- La recuperación (acierto@8: la fuente correcta entre las 8 primeras) pasó de **42,9 % a 80 %**.
+- La recuperación (acierto@8: la fuente correcta entre las 8 primeras) pasó de **((42,9 % a 80 %))**.
 - Sobre 40 cláusulas evaluadas: **82,9 %** de citas correctas y **94,6 %** de cláusulas sin un error grave de riesgo.
 
 Una aclaración honesta: es una evaluación interna, todavía no validada por abogados. Pero ya permite comparar versiones del sistema con números en lugar de impresiones.

@@ -1,0 +1,73 @@
+---
+import type { Lang } from '../data/profile';
+import { profile, journey, story } from '../data/profile';
+import Base from '../layouts/Base.astro';
+import Nav from './Nav.astro';
+import PhotoLayers from './PhotoLayers.astro';
+import Marked from './Marked.astro';
+import Sketch from './Sketch.astro';
+import SketchFlight from './SketchFlight.astro';
+import type { SketchName } from '../data/sketches';
+const doodles: SketchName[] = ['laptop', 'linux', 'work', 'spark', 'homelab'];
+import { t, paths } from '../data/i18n';
+import { postUrlById } from '../data/blog';
+/** Historia completa ("Sobre mí"): /sobre-mi/ y /en/about/. Todo el texto viene de profile.ts (journey, story). */
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const s = t(lang);
+const altPath = paths.about(lang === 'es' ? 'en' : 'es');
+const essayUrl = await postUrlById('programar-antes-de-la-ia', lang);
+---
+<Base lang={lang} altPath={altPath} title={s.about.pageTitle} description={s.about.pageIntro}>
+  <Nav lang={lang} altPath={altPath} onHome={false} />
+  <main class="relative px-5 pb-24 pt-40 md:px-10">
+    <SketchFlight icon="laptop" seed={141} variant={0} class="pointer-events-none absolute right-4 h-auto w-[48vw] max-w-[26rem] text-accent opacity-80 md:right-10 top-28" />
+    <p class="kicker mb-6">{s.about.pageKicker}</p>
+    <h1 data-split class="display max-w-5xl text-6xl font-bold md:text-8xl">{s.about.pageTitle}</h1>
+    <Sketch name="scribble" seed={27} draw="scrub" class="mt-3 h-5 w-2/3 max-w-xl text-accent" />
+    <p data-reveal class="mt-8 max-w-2xl text-lg text-muted md:text-xl">{s.about.pageIntro}</p>
+
+    <div class="mt-20 grid items-start gap-12 md:grid-cols-12">
+      <figure class="mx-auto w-full max-w-[22rem] md:sticky md:top-32 md:col-span-4 md:mx-0 md:max-w-[26rem]">
+        <PhotoLayers lang={lang} loading="eager" />
+        <figcaption class="kicker mt-4 flex items-center gap-2"><span class="h-2 w-2 rounded-full bg-accent"></span>{profile.location[lang]}</figcaption>
+      </figure>
+      <div class="md:col-span-7 md:col-start-6">
+        {story.map((sec, i) => (
+          <section class={i ? 'mt-16 border-t border-line pt-10' : ''}>
+            {doodles[i] && <Sketch name={doodles[i]} seed={i + 30} class={`mb-6 text-accent ${doodles[i] === 'linux' ? 'h-20 w-40' : 'h-20 w-20'}`} />}
+            <h2 data-reveal class="display text-3xl font-semibold md:text-4xl">{sec.heading[lang]}</h2>
+            <div class="mt-6 space-y-5 text-lg text-muted md:text-xl">
+              {sec.body[lang].map((p) => <p data-reveal><Marked text={p} /></p>)}
+            </div>
+          </section>
+        ))}
+        <a href={essayUrl} data-hover class="mt-12 inline-flex items-center gap-2 text-accent underline-offset-4 hover:underline">{s.about.essay} →</a>
+      </div>
+    </div>
+
+    <section class="mt-32">
+      <p class="kicker mb-8">{s.about.journey}</p>
+      <ol class="grid gap-10 border-t border-line pt-10 md:grid-cols-5 md:gap-8">
+        {journey.map((j, i) => (
+          <li class="relative" data-reveal data-reveal-delay={i * 0.06}>
+            <span class="absolute -top-[2.875rem] left-0 hidden h-3 w-3 rounded-full border border-line bg-bg md:block" style={i === journey.length - 1 ? 'background: var(--accent); border-color: var(--accent)' : ''}></span>
+            <span class="flex items-center gap-2 font-mono text-sm text-accent">{j.period[lang]}{i === journey.length - 1 && <Sketch name="star" seed={47} class="h-5 w-5" />}</span>
+            <h3 class="display mt-3 text-2xl font-semibold">{j.title[lang]}</h3>
+            <p class="mt-3 text-muted">{j.body[lang]}</p>
+            {j.tools && (
+              <ul class="mt-4 flex flex-wrap gap-2">
+                {j.tools.map((tool) => <li class="rounded-full border border-line px-3 py-1 font-mono text-xs">{tool}</li>)}
+              </ul>
+            )}
+          </li>
+        ))}
+      </ol>
+    </section>
+
+    <div class="mt-32 flex flex-wrap items-center gap-4 border-t border-line pt-10">
+      <a href={paths.home(lang) + '#contact'} data-magnetic class="rounded-full bg-accent px-6 py-3 font-medium text-accent-ink">{s.about.cta} ↘</a>
+      <a href={paths.home(lang)} class="kicker hover:text-fg">← {s.about.back}</a>
+    </div>
+  </main>
+</Base>

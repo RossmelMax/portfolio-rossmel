@@ -2,11 +2,15 @@
 import type { Lang } from '../data/profile';
 import { experience } from '../data/profile';
 import { t, fmtMonth } from '../data/i18n';
+import Sketch from './Sketch.astro';
+import Marked from './Marked.astro';
+import SketchFlight from './SketchFlight.astro';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 const s = t(lang);
 ---
-<section id="experience" class="px-5 py-32 md:px-10">
+<section id="experience" class="relative overflow-hidden px-5 py-32 md:px-10">
+  <SketchFlight icon="laptop" seed={101} variant={2} class="pointer-events-none absolute right-4 h-auto w-[48vw] max-w-[26rem] text-accent opacity-80 md:right-10 top-16" />
   <h2 class="kicker mb-10">{s.experience.kicker}</h2>
   <div data-timeline class="relative">
     <div class="absolute left-0 top-0 h-full w-px bg-line md:left-[25%]"></div>
@@ -17,11 +21,17 @@ const s = t(lang);
         <div class="kicker md:pr-10 md:text-right" data-reveal>
           {fmtMonth(job.start, lang)} — {fmtMonth(job.end, lang)}
           <br /><span class="normal-case tracking-normal">{job.type[lang]}</span>
+          {!job.end && (
+            <span class="mt-4 flex items-center gap-1 text-accent md:justify-end" aria-hidden="true">
+              <span class="font-hand text-3xl normal-case tracking-normal">{s.experience.now}</span>
+              <Sketch name="hook" seed={3} class="h-10 w-12 -scale-x-100" />
+            </span>
+          )}
         </div>
         <div class="md:col-span-3 md:pl-12">
           <h3 data-split class="display text-4xl font-semibold md:text-6xl">{job.company[lang]}</h3>
           <p class="mt-3 text-accent" data-reveal>{job.role[lang]}</p>
-          <p class="mt-6 max-w-2xl text-lg text-fg/85" data-reveal>{job.summary[lang]}</p>
+          <p class="mt-6 max-w-2xl text-lg text-fg/85" data-reveal><Marked text={job.summary[lang]} /></p>
           <ul class="mt-8 max-w-2xl space-y-3 text-muted">
             {job.bullets[lang].map((b) => <li class="flex gap-3" data-reveal><span class="text-accent">→</span><span>{b}</span></li>)}
           </ul>

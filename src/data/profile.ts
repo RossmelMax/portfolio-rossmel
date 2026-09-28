@@ -1,3 +1,4 @@
+import type { SketchName } from './sketches';
 /**
  * FUENTE ÚNICA DE CONTENIDO
  * ------------------------------------------------------------------
@@ -34,39 +35,42 @@ export const profile = {
   photoAlt: { es: 'Foto de Rossmel Abasto', en: 'Photo of Rossmel Abasto' } as L,
 
   headline: {
-    es: 'Construyo interfaces rápidas, cuidadas y listas para producción — y uso IA para llegar más lejos, más rápido.',
-    en: 'I build fast, polished, production-ready interfaces — and use AI to go further, faster.',
+    es: 'Construyo interfaces rápidas, cuidadas y ==listas para producción==. Programo desde 2020, y hoy la IA me ayuda a llegar más lejos.',
+    en: 'I build fast, polished, ==production-ready== interfaces. I\'ve been coding since 2020, and today AI helps me go further.',
   } as L,
 
   /** Resumen profesional (CV). 3–4 líneas, con palabras clave para ATS. */
   summary: {
-    es: 'Desarrollador Frontend con más de 3 años de experiencia en agencia construyendo SaaS multi-tenant, apps móviles y sitios web con React, Next.js, React Native y TypeScript (~1.800 commits en productos para clientes de Bolivia y EE. UU.). Evolucionando a Fullstack con FastAPI, Node.js, SQLite/PostgreSQL, Firebase y Supabase. Integro IA tanto en productos (RAG híbrido, LLMs locales y en la nube) como en mi flujo diario (Claude Code, agentes), lo que me permite entregar más rápido sin sacrificar calidad.',
-    en: 'Frontend Developer with 3+ years of agency experience building multi-tenant SaaS, mobile apps and websites with React, Next.js, React Native and TypeScript (~1,800 commits across client products in Bolivia and the US). Growing into Fullstack with FastAPI, Node.js, SQLite/PostgreSQL, Firebase and Supabase. I integrate AI both into products (hybrid RAG, local and cloud LLMs) and into my daily workflow (Claude Code, agents), which lets me ship faster without sacrificing quality.',
+    es: 'Desarrollador Frontend con más de 3 años de experiencia en WANT Digital Agency construyendo SaaS multi-tenant, apps móviles y sitios web con React, Next.js, React Native y TypeScript (~1.800 commits en productos para clientes de Bolivia y EE. UU.). Base sólida de programación: autodidacta desde 2020 y años escribiendo código de producción sin asistentes de IA. Evolucionando a Fullstack con FastAPI, Node.js, SQLite/PostgreSQL, Firebase y Supabase. Desde 2025 integro IA en productos (RAG híbrido, LLMs locales y en la nube) y en mi flujo diario, para entregar más rápido sin sacrificar calidad.',
+    en: 'Frontend Developer with 3+ years of experience at WANT Digital Agency building multi-tenant SaaS, mobile apps and websites with React, Next.js, React Native and TypeScript (~1,800 commits across client products in Bolivia and the US). Solid programming foundation: self-taught since 2020, with years of writing production code without AI assistants. Growing into Fullstack with FastAPI, Node.js, SQLite/PostgreSQL, Firebase and Supabase. Since 2025 I integrate AI into products (hybrid RAG, local and cloud LLMs) and into my daily workflow, to ship faster without sacrificing quality.',
   } as L,
 
-  /** "Sobre mí" del portafolio: más humano que el resumen del CV. */
+  /** "Sobre mí" de la home: una frase grande y un resumen corto. La historia completa va en `story` (/sobre-mi/). */
   about: {
     es: [
-      'Empecé a programar solo, en 2019, con mi primera computadora propia. Desde entonces no paré: cursos, documentación, prueba y error, y muchas noches de “¿por qué no funciona esto?”.',
-      'Pasé más de tres años en WANT Digital Agency, donde éramos dos en desarrollo: mi jefe en el backend y yo en el frontend. Ahí aprendí a hacer de todo — investigar, resolver, trabajar bajo presión y entregar.',
-      'Hoy la IA es parte de cómo trabajo: agentes, LLMs locales y automatizaciones me permiten dedicar el tiempo a lo que importa — el diseño, la arquitectura y el detalle.',
-      'Fuera del trabajo, vivo en Linux: uso a diario rOS, mi propio flavor de Arch que quiero convertir en una distro real, y mantengo un homelab con una docena de servicios y un agente de IA que lo cuida 24/7.',
+      'Empecé a programar de forma autodidacta en plena pandemia, y desde entonces no paré: cursos, documentación, prueba y error, y muchas noches de “¿por qué esto no funciona?”.',
+      'Estudiaba Derecho cuando descubrí la programación gracias a Platzi, y supe que esa era mi vocación. Aprendí con cursos y creadores de YouTube, siguiendo una sola regla: ==nunca parar de aprender==.',
+      'Con una buena base de desarrollo web entré a WANT, donde pasé más de tres años construyendo ==productos reales== para clientes de Bolivia y EE. UU. Hoy trabajo de forma independiente mientras termino Ingeniería de Sistemas, y uso la IA para llegar más lejos con lo que ya sé hacer.',
+      'Y vivo en Linux: probé muchas distros, pero ((Arch)) siempre fue especial. Uso a diario rOS, mi propia versión, y tengo un homelab en casa que cuida un agente de IA.',
     ],
     en: [
-      'I started coding on my own in 2019, with my first personal computer. I haven\'t stopped since: courses, docs, trial and error, and many “why isn\'t this working?” nights.',
-      'I spent 3+ years at WANT Digital Agency, where the dev team was two people: my boss on the backend and me on the frontend. That\'s where I learned to do a bit of everything — research, solve, work under pressure and ship.',
-      'Today AI is part of how I work: agents, local LLMs and automations let me spend my time on what matters — design, architecture and detail.',
-      'Outside work I live in Linux: I daily-drive rOS, my own flavor of Arch that I\'m growing into a real distro, and run a homelab with a dozen services and an AI agent that looks after it 24/7.',
+      'I taught myself to code in the middle of the pandemic, and I haven\'t stopped since: courses, docs, trial and error, and many “why isn\'t this working?” nights.',
+      'I was studying law when I discovered programming through Platzi, and I knew it was my calling. I learned from courses and YouTube creators, following one rule: ==never stop learning==.',
+      'With a solid web development foundation I joined WANT, where I spent 3+ years building ==real products== for clients in Bolivia and the US. Today I work independently while finishing my Systems Engineering degree, and I use AI to go further with what I already know how to do.',
+      'And I live in Linux: I\'ve tried many distros, but ((Arch)) was always special. I daily-drive rOS, my own take on it, and run a homelab at home looked after by an AI agent.',
     ],
   } as Record<Lang, string[]>,
 
+  /** Desde cuándo programa (para la cifra "días programando"). Mediados de 2020. */
+  codingSince: '2020-06-15', // TODO(confirmar) fecha exacta aproximada: "mediados de 2020"
+
   /** Cifras del "Sobre mí". `count` anima el número; `text` se muestra tal cual. */
   stats: [
+    { count: 0, days: true, suffix: '+', label: { es: 'días programando', en: 'days coding' } as L }, // se calcula desde codingSince
     { count: 3, suffix: '+', label: { es: 'años en producción', en: 'years shipping' } as L },
     { count: 1800, suffix: '+', label: { es: 'commits en proyectos de clientes', en: 'commits on client projects' } as L },
     { count: 8, suffix: '', label: { es: 'productos para clientes', en: 'client products' } as L },
-    { count: 12, suffix: '', label: { es: 'servicios en mi homelab', en: 'self-hosted services' } as L },
-  ],
+  ] as { count: number; days?: boolean; suffix: string; label: L }[],
 
   softSkills: {
     es: ['Resolución de problemas', 'Autonomía', 'Trabajo bajo presión', 'Aprendizaje rápido', 'Comunicación con clientes', 'Documentación técnica'],
@@ -133,8 +137,8 @@ export const experience: Experience[] = [
     end: '2026-01',
     location: { es: 'Cochabamba, Bolivia', en: 'Cochabamba, Bolivia' },
     summary: {
-      es: 'Único desarrollador frontend en un equipo de desarrollo de dos personas. Responsable de las interfaces web y móviles de 8 productos para clientes de Bolivia y EE. UU.',
-      en: 'Sole frontend developer on a two-person dev team. Owned the web and mobile interfaces of 8 client products in Bolivia and the US.',
+      es: '==Único desarrollador frontend== en un equipo de desarrollo de dos personas. Responsable de las interfaces web y móviles de 8 productos para clientes de Bolivia y EE. UU.',
+      en: '==Sole frontend developer== on a two-person dev team. Owned the web and mobile interfaces of 8 client products in Bolivia and the US.',
     },
     bullets: {
       es: [
@@ -219,10 +223,14 @@ export const learning = ['Platzi', 'Coursera', 'Udemy', 'freeCodeCamp', 'Google 
 /* HABILIDADES (agrupadas para ATS)                                    */
 /* ------------------------------------------------------------------ */
 
-export const skills: { group: L; items: string[] }[] = [
+/** Ítem de habilidad: nombre de tecnología (igual en ES/EN) o texto traducible. */
+export type SkillItem = string | L;
+export const tr = (x: SkillItem, lang: Lang) => (typeof x === 'string' ? x : x[lang]);
+
+export const skills: { group: L; items: SkillItem[] }[] = [
   {
     group: { es: 'Frontend y móvil', en: 'Frontend & Mobile' },
-    items: ['React', 'Next.js (Pages y App Router)', 'React Native', 'Expo', 'TypeScript', 'JavaScript', 'HTML5', 'CSS3 / Sass', 'Tailwind CSS', 'MUI', 'shadcn/ui', 'Redux Toolkit', 'i18n', 'PWA', 'Astro', 'GSAP', 'Motion'],
+    items: ['React', { es: 'Next.js (Pages y App Router)', en: 'Next.js (Pages & App Router)' }, 'React Native', 'Expo', 'TypeScript', 'JavaScript', 'HTML5', 'CSS3 / Sass', 'Tailwind CSS', 'MUI', 'shadcn/ui', 'Redux Toolkit', 'i18n', 'PWA', 'Astro', 'GSAP', 'Motion'],
   },
   {
     group: { es: 'Backend y datos', en: 'Backend & Data' },
@@ -230,7 +238,7 @@ export const skills: { group: L; items: string[] }[] = [
   },
   {
     group: { es: 'IA aplicada', en: 'Applied AI' },
-    items: ['RAG', 'Búsqueda híbrida (BM25 + embeddings)', 'Evaluación de LLMs', 'Ollama', 'Groq', 'Gemini', 'OpenAI API', 'sqlite-vec', 'Claude Code', 'Agentes'],
+    items: ['RAG', { es: 'Búsqueda híbrida (BM25 + embeddings)', en: 'Hybrid search (BM25 + embeddings)' }, { es: 'Evaluación de LLMs', en: 'LLM evaluation' }, 'Ollama', 'Groq', 'Gemini', 'OpenAI API', 'DeepSeek', 'sqlite-vec', 'GitHub Copilot', 'Claude Code', { es: 'Agentes de IA', en: 'AI agents' }],
   },
   {
     group: { es: 'DevOps, calidad y herramientas', en: 'DevOps, Quality & Tools' },
@@ -257,7 +265,10 @@ export type Project = {
   learned: Record<Lang, string[]>; // "Lo que aprendí"
   stack: string[];
   links?: { label: string; href: string }[];
+  live?: string; // host público (p. ej. 'rubik.rossmel.top'): botón "Ver en vivo" y sección En vivo
   accent: string; // color del caso de estudio
+  /** dibujo a mano que lo representa (src/data/sketches.ts) */
+  doodle?: SketchName;
   featured: boolean;
   cv: boolean;
   confidential?: boolean; // código privado / sin demo pública
@@ -265,6 +276,8 @@ export type Project = {
 };
 
 const WANT: L = { es: 'Cliente · WANT Digital Agency', en: 'Client · WANT Digital Agency' };
+
+const SELF_HOSTED: L = { es: 'Proyecto personal · En mi servidor', en: 'Personal project · On my server' };
 
 export const projects: Project[] = [
   {
@@ -283,14 +296,14 @@ export const projects: Project[] = [
     role: { es: 'Diseño, arquitectura y desarrollo fullstack (individual).', en: 'Design, architecture and fullstack development (solo).' },
     highlights: {
       es: [
-        'Búsqueda híbrida BM25 (SQLite FTS5) + embeddings bge-m3 fusionados por RRF sobre 3.267 artículos y 971 autos supremos: el acierto de recuperación (acierto@8) subió de 42,9 % a 80 %.',
+        'Búsqueda híbrida BM25 (SQLite FTS5) + embeddings bge-m3 fusionados por RRF sobre 3.267 artículos y 971 autos supremos: el acierto de recuperación (acierto@8) subió ((de 42,9 % a 80 %)).',
         'El modelo solo elige claves de las fuentes mostradas y el texto citado lo inserta el sistema: 82,9 % de citas correctas y 94,6 % de cláusulas sin error grave en la evaluación interna.',
         'Anonimización de datos personales antes de enviar texto a la nube; LLM local (Ollama, qwen3.5 9B) y proveedores gratuitos con respaldo automático.',
         'Trabajador en segundo plano reanudable, progreso en vivo por SSE, comparación entre versiones e informe DOCX/PDF.',
         'Backend con 69 tests y cobertura ≥ 90 % exigida en CI; frontend en Next.js 16 + React 19 con visor PDF y cláusulas resaltadas por riesgo.',
       ],
       en: [
-        'Hybrid search: BM25 (SQLite FTS5) + bge-m3 embeddings fused with RRF over 3,267 articles and 971 supreme court rulings — retrieval hit@8 went from 42.9% to 80%.',
+        'Hybrid search: BM25 (SQLite FTS5) + bge-m3 embeddings fused with RRF over 3,267 articles and 971 supreme court rulings — retrieval hit@8 went ((from 42.9% to 80%)).',
         'The model only picks keys from the sources shown and the quoted text is inserted by the system: 82.9% correct citations and 94.6% of clauses with no severe error in internal evaluation.',
         'Personal data is anonymized before any text reaches the cloud; local LLM (Ollama, qwen3.5 9B) plus free providers with automatic failover.',
         'Resumable background worker, live progress via SSE, version diffing and DOCX/PDF reports.',
@@ -302,6 +315,7 @@ export const projects: Project[] = [
       en: ["Measure before optimizing: without an eval set I would have kept tweaking prompts blindly. With metrics, every change became a decision.", "An LLM is not a database: the fix for hallucinated citations wasn’t a better prompt, it was an architecture where the model can’t write the citation.", "Privacy by design: anonymizing before sending text to the cloud shaped everything from the data schema to the prompts.", "Design for graceful failure: providers with failover and a worker that resumes after a restart."],
     },
     stack: ['Next.js 16', 'React 19', 'TypeScript', 'Python', 'FastAPI', 'SQLite FTS5', 'Ollama', 'RAG', 'SSE', 'pytest'],
+    doodle: 'scales',
     accent: '#c8ff2e',
     featured: true,
     cv: true,
@@ -343,6 +357,7 @@ export const projects: Project[] = [
       en: ["Sustaining a large product for years: most of the work isn’t new screens but maintaining, refactoring and not breaking what the client already uses.", "Multi-tenancy from the frontend: every decision (routes, sessions, theme, data) has to account for many shops at once.", "Speaking the business’s language: understanding how a real shop works made the screens get used, not just work."],
     },
     stack: ['Next.js', 'TypeScript', 'MUI', 'Redux Toolkit', 'NextAuth', 'React Native', 'Expo'],
+    doodle: 'car',
     accent: '#ff6a3d',
     featured: true,
     cv: false, // ya está en la experiencia de WANT
@@ -365,13 +380,13 @@ export const projects: Project[] = [
     highlights: {
       es: [
         'Extracción automática de resumen y etiquetas desde el PDF con IA (Groq).',
-        'Visor PDF propio con memoria acotada (resolví un consumo descontrolado de RAM).',
+        'Visor PDF propio con ==memoria acotada== (resolví un consumo descontrolado de RAM).',
         'Versionado de PDFs, historial de auditoría, carga masiva y gestión de administradores.',
         'Despliegue continuo en Vercel.',
       ],
       en: [
         'Automatic summary and tag extraction from PDFs using AI (Groq).',
-        'Custom PDF viewer with bounded memory (fixed a runaway RAM issue).',
+        'Custom PDF viewer with ==bounded memory== (fixed a runaway RAM issue).',
         'PDF versioning, audit trail, bulk upload and admin management.',
         'Continuous deployment on Vercel.',
       ],
@@ -382,6 +397,7 @@ export const projects: Project[] = [
     },
     stack: ['Next.js 16', 'Firebase', 'Groq', 'pdf.js', 'shadcn/ui', 'Tailwind', 'Vercel'],
     links: [{ label: 'GitHub', href: 'https://github.com/rossmelabasto/v0-university-project-manager' }],
+    doodle: 'gradcap',
     accent: '#ffb23d',
     featured: true,
     cv: false, // ya está en la experiencia "Independiente" del CV
@@ -403,13 +419,13 @@ export const projects: Project[] = [
     highlights: {
       es: [
         'SQLite como fuente de verdad; permisos y cálculos solo en el proceso principal de Electron; montos en centavos enteros.',
-        'Respaldos cifrados AES-256-GCM en la nube, migraciones versionadas con respaldo previo automático.',
+        'Respaldos ==cifrados AES-256-GCM== en la nube, migraciones versionadas con respaldo previo automático.',
         'Actualizaciones automáticas, multas por mora, boletas PDF y login con foto para operarios (pedido del cliente).',
         '47 tests (Vitest) y CI en GitHub Actions que genera instalador de Windows, portable y AppImage.',
       ],
       en: [
         'SQLite as source of truth; permissions and calculations only in Electron\'s main process; money stored as integer cents.',
-        'AES-256-GCM encrypted cloud backups, versioned migrations with automatic pre-migration backup.',
+        '==AES-256-GCM encrypted== cloud backups, versioned migrations with automatic pre-migration backup.',
         'Auto-updates, late fees, PDF bills and photo login for operators (client request).',
         '47 tests (Vitest) and GitHub Actions CI producing a Windows installer, portable build and AppImage.',
       ],
@@ -419,6 +435,7 @@ export const projects: Project[] = [
       en: ["True offline-first: with no internet the app must work the same, and the cloud is only a backup.", "Never store money as floats: integer cents avoid rounding errors on bills.", "Listen to the client even when the idea isn’t the one you’d pick (like photo login): the software is for them.", "Migrations with a prior backup: in an app running on someone else’s computer there’s no second chance."],
     },
     stack: ['Electron', 'React', 'Vite', 'SQLite', 'Firebase Storage', 'Vitest', 'GitHub Actions'],
+    doodle: 'drop',
     accent: '#3db8ff',
     featured: true,
     cv: false, // ya está en la experiencia "Independiente" del CV
@@ -459,8 +476,159 @@ export const projects: Project[] = [
       en: ["Constraints teach: with no public IP or open ports I learned tunnels, DNS and how to expose services securely.", "Automate what repeats: backups, alerts and reports with systemd timers instead of relying on memory.", "An AI agent with memory and written procedures is far more useful than a chat: documentation is what makes it reliable."],
     },
     stack: ['Arch Linux', 'Docker', 'systemd', 'Cloudflare Tunnel', 'Tailscale', 'OpenClaw', 'KVM'],
+    doodle: 'homelab',
     accent: '#5dffb0',
     featured: true,
+    cv: true,
+  },
+  {
+    slug: 'notebook',
+    name: 'Notebook',
+    year: '2026',
+    kind: SELF_HOSTED,
+    tagline: {
+      es: 'Apuntes de estudio con un chat que responde citando tus propias notas.',
+      en: 'Study notes with a chat that answers by citing your own notes.',
+    },
+    problem: {
+      es: 'Los apuntes de la universidad terminan repartidos entre cuadernos, fotos del pizarrón y chats. Notebook los junta por materia y permite preguntarles en lenguaje natural: responde con fuentes numeradas y, al tocar una, salta al apunte y resalta la frase exacta.',
+      en: 'University notes end up scattered across notebooks, whiteboard photos and chats. Notebook groups them by subject and lets you ask them questions in natural language: it answers with numbered sources and, when you tap one, jumps to the note and highlights the exact sentence.',
+    },
+    role: {
+      es: 'Idea, arquitectura y desarrollo, con mi agente de IA como pareja de programación.',
+      en: 'Idea, architecture and development, with my AI agent as a pair programmer.',
+    },
+    highlights: {
+      es: [
+        'RAG propio: los apuntes se dividen en fragmentos, se convierten en embeddings y se buscan por similitud con sqlite-vec dentro de SQLite. Sin base vectorial aparte.',
+        'Respuestas con fuentes: solo se muestran las que superan un umbral calibrado con datos reales, y cada cita lleva al texto exacto dentro del apunte.',
+        'Imágenes que se pueden buscar: fotos del pizarrón o capturas (subidas, pegadas o arrastradas) se transcriben y describen solas, y entran al índice.',
+        'Importador de chats exportados de WhatsApp: cada mensaje como burbuja con su hora original, y todo queda buscable.',
+        'Liviano a propósito: Node.js + Express, frontend sin framework y servicio de systemd en vez de Docker, porque el servidor tiene muy poca RAM. Cuentas propias y respaldo diario automático.',
+      ],
+      en: [
+        'Custom RAG: notes are split into chunks, embedded and searched by similarity with sqlite-vec inside SQLite. No separate vector database.',
+        'Answers with sources: only those above a threshold calibrated on real data are shown, and each citation links to the exact text in the note.',
+        'Searchable images: whiteboard photos or screenshots (uploaded, pasted or dragged) are transcribed and described automatically and added to the index.',
+        'WhatsApp chat importer: each message becomes a bubble with its original time, and everything is searchable.',
+        'Lightweight on purpose: Node.js + Express, a framework-free frontend and a systemd service instead of Docker, because the server has very little RAM. Built-in accounts and automatic daily backups.',
+      ],
+    },
+    learned: {
+      es: [
+        'Los umbrales se calibran con datos, no se copian: el valor "recomendado" no servía; medí distancias de resultados relevantes e irrelevantes y elegí el corte con eso.',
+        'Las extensiones nativas tienen sus reglas: sqlite-vec exige enteros reales como ID y sus tablas no se pueden renombrar, así que las migraciones se hacen recreando y reindexando.',
+        'Elegir el stack según el hardware: descartar Next.js y Docker por RAM hizo que la app entre en un servidor chico sin sacrificar funciones.',
+      ],
+      en: [
+        'Thresholds are calibrated with data, not copied: the "recommended" value was useless; I measured distances of relevant and irrelevant results and chose the cutoff from that.',
+        'Native extensions have their own rules: sqlite-vec requires true integer IDs and its tables can\'t be renamed, so migrations are done by recreating and reindexing.',
+        'Pick the stack for the hardware: dropping Next.js and Docker for RAM reasons let the app fit on a tiny server without losing features.',
+      ],
+    },
+    stack: ['Node.js', 'Express', 'SQLite', 'sqlite-vec', 'RAG', 'Embeddings', 'DeepSeek', 'JavaScript', 'systemd'],
+    live: 'notebook.rossmel.top',
+    doodle: 'notebook',
+    accent: '#ffd166',
+    featured: false,
+    cv: true,
+  },
+  {
+    slug: 'rubik',
+    name: 'Rubik',
+    year: '2026',
+    kind: SELF_HOSTED,
+    tagline: {
+      es: 'Para practicar cubo de Rubik y otros puzzles, con mezclas oficiales y visor 3D.',
+      en: 'Practice the Rubik\'s cube and other puzzles, with official scrambles and a 3D viewer.',
+    },
+    problem: {
+      es: 'Practicar speedcubing necesita mezclas válidas y una forma de ver cada puzzle. Rubik genera mezclas oficiales (formato WCA) y muestra el puzzle en 3D, del cubo clásico a dodecaedros como el megaminx y el gigaminx.',
+      en: 'Speedcubing practice needs valid scrambles and a way to see each puzzle. Rubik generates official scrambles (WCA format) and shows the puzzle in 3D, from the classic cube to dodecahedra like the megaminx and gigaminx.',
+    },
+    role: { es: 'Todo: diseño, desarrollo y despliegue.', en: 'Everything: design, development and deployment.' },
+    highlights: {
+      es: [
+        'Mezclas oficiales y visor 3D con cubing.js, la librería de la comunidad cubera, incluido su generador de mezclas en WebAssembly.',
+        'Sin depender de CDNs: la librería va incluida en el propio sitio, así que funciona aunque un servicio externo falle.',
+        'Modo práctica con el puzzle en 3D y modo para ver cada puzzle, en muchos tipos distintos.',
+        'HTML, CSS y JavaScript sin framework, servido desde mi homelab.',
+      ],
+      en: [
+        'Official scrambles and a 3D viewer with cubing.js, the cubing community\'s library, including its WebAssembly scramble generator.',
+        'No CDN dependency: the library ships with the site itself, so it keeps working if an external service goes down.',
+        'Practice mode with the 3D puzzle and a mode to view each puzzle, across many puzzle types.',
+        'Framework-free HTML, CSS and JavaScript, served from my homelab.',
+      ],
+    },
+    learned: {
+      es: [
+        'Incluir una librería completa no es solo copiar archivos: el generador de mezclas carga un módulo WebAssembly de forma dinámica, y si ese archivo falta, todo falla en silencio.',
+        'Probar en más de un navegador: un estilo que en Chromium no hacía nada rompía el 3D en Firefox.',
+        'Cuando el componente es una caja cerrada (shadow DOM cerrado), las capturas de pantalla automáticas son la mejor forma de verificar que de verdad se dibuja.',
+        'Cada puzzle tiene su notación: algunos movimientos de dodecaedros no se animaban y hubo que traducirlos a su forma equivalente.',
+      ],
+      en: [
+        'Bundling a full library isn\'t just copying files: the scramble generator loads a WebAssembly module dynamically, and if that file is missing everything fails silently.',
+        'Test in more than one browser: a style that did nothing in Chromium broke the 3D in Firefox.',
+        'When the component is a black box (closed shadow DOM), automated screenshots are the best way to verify it actually renders.',
+        'Each puzzle has its own notation: some dodecahedron moves didn\'t animate and had to be translated to their equivalent form.',
+      ],
+    },
+    stack: ['JavaScript', 'cubing.js', 'WebAssembly', 'HTML', 'CSS'],
+    live: 'rubik.rossmel.top',
+    doodle: 'cube',
+    accent: '#ff5f5f',
+    featured: false,
+    cv: true,
+  },
+  {
+    slug: 'selflix',
+    name: 'Selflix',
+    year: '2026',
+    kind: SELF_HOSTED,
+    tagline: {
+      es: 'Mi propio "Netflix": un media center con Jellyfin en mi servidor casero.',
+      en: 'My own "Netflix": a Jellyfin media center on my home server.',
+    },
+    problem: {
+      es: 'Películas y series repartidas en carpetas y discos, sin saber cuál era el capítulo siguiente. Selflix las ordena en una biblioteca con pósters y sinopsis, recuerda por dónde ibas y se ve desde el celular o el navegador, desde cualquier lugar, con cuentas propias.',
+      en: 'Movies and shows scattered across folders and drives, never knowing which episode was next. Selflix organizes them into a library with posters and synopses, remembers where you left off and plays on a phone or browser, from anywhere, with personal accounts.',
+    },
+    role: { es: 'Todo: instalación, configuración, acceso seguro y mantenimiento.', en: 'Everything: setup, configuration, secure access and maintenance.' },
+    highlights: {
+      es: [
+        'Jellyfin en Docker, con la biblioteca montada en solo lectura y el servicio accesible solo desde el propio servidor.',
+        'Acceso desde fuera sin abrir puertos (el servidor está detrás de CGNAT), mediante un túnel de Cloudflare con HTTPS.',
+        'Una cuenta por persona, creadas y administradas también por la API de Jellyfin.',
+        'Orden de capítulos corregido comparando con la API pública de TVMaze, y pósters restaurados con archivos locales.',
+        'Disco externo NTFS montado de forma permanente y segura en Linux.',
+      ],
+      en: [
+        'Jellyfin in Docker, with the library mounted read-only and the service reachable only from the server itself.',
+        'Access from outside without opening ports (the server sits behind CGNAT), through a Cloudflare tunnel with HTTPS.',
+        'One account per person, also created and managed through the Jellyfin API.',
+        'Episode order fixed by comparing against the public TVMaze API, and posters restored with local files.',
+        'External NTFS drive mounted permanently and safely on Linux.',
+      ],
+    },
+    learned: {
+      es: [
+        'La estructura de carpetas es la mitad del trabajo: Jellyfin es tan bueno como el orden de tus archivos.',
+        'Los atajos elegantes pueden duplicarlo todo: los enlaces simbólicos hacían que cada capítulo apareciera dos veces.',
+        'Nunca exponer un servicio de casa directo a internet: un túnel da acceso desde cualquier lado sin abrir la red.',
+      ],
+      en: [
+        'Folder structure is half the work: Jellyfin is only as good as the order of your files.',
+        'Elegant shortcuts can duplicate everything: symlinks made every episode show up twice.',
+        'Never expose a home service straight to the internet: a tunnel gives access from anywhere without opening the network.',
+      ],
+    },
+    stack: ['Jellyfin', 'Docker', 'Cloudflare Tunnel', 'Linux', 'REST API'],
+    live: 'selflix.rossmel.top',
+    doodle: 'tv',
+    accent: '#a78bfa',
+    featured: false,
     cv: false,
   },
   {
@@ -493,9 +661,10 @@ export const projects: Project[] = [
       en: ["Every system change must be reversible: snapshots before updating and idempotent scripts.", "Understanding boot end to end (UEFI, bootloader, initramfs, greeter) removes the fear of breaking the system.", "Design is also a system: rOS’s visual identity came from the same care I put into a web interface."],
     },
     stack: ['Arch Linux', 'niri', 'DankMaterialShell', 'Limine', 'Shell', 'systemd'],
+    doodle: 'linux',
     accent: '#8ab4ff',
     featured: true,
-    cv: false,
+    cv: true,
   },
   {
     slug: 'adsie',
@@ -517,6 +686,7 @@ export const projects: Project[] = [
       en: ["Requirements change midway: an ads app also became an influencer marketplace, and the architecture had to hold up.", "Mobile performance: long lists with images and video demand virtualization and care with every render.", "Building for a market in another country and language: i18n from day one, not as a patch."],
     },
     stack: ['React Native', 'Expo', 'TypeScript'],
+    doodle: 'megaphone',
     accent: '#ff3d8b',
     featured: false,
     cv: false,
@@ -542,6 +712,7 @@ export const projects: Project[] = [
       en: ["Next.js App Router on a real product: cleanly separating what runs on the server and on the client.", "The end user is hungry and in a hurry: every extra step in the order is a lost order.", "Accessibility (high contrast) isn’t an extra: menus get read in dim places."],
     },
     stack: ['Next.js (App Router)', 'TypeScript'],
+    doodle: 'plate',
     accent: '#ffd23d',
     featured: false,
     cv: false,
@@ -567,6 +738,7 @@ export const projects: Project[] = [
       en: ["Write code for whoever picks it up next, even if it’s yourself two years later.", "Upgrading React Native and its libraries is a project in itself: plan it, don’t improvise it."],
     },
     stack: ['React Native'],
+    doodle: 'dumbbell',
     accent: '#ff8a3d',
     featured: false,
     cv: false,
@@ -592,6 +764,7 @@ export const projects: Project[] = [
       en: ["A scheduler looks simple until real cases show up: cancellations, rescheduling and overlapping slots.", "Finish and ship: closing out a complete project teaches as much as building it."],
     },
     stack: ['React Native'],
+    doodle: 'calendar',
     accent: '#b58cff',
     featured: false,
     cv: false,
@@ -605,12 +778,12 @@ export const projects: Project[] = [
     tagline: { es: 'Sitio web de una tienda de electrónica y electrodomésticos.', en: 'Website for an electronics and home appliance retailer.' },
     role: { es: 'Desarrollo del sitio en WordPress.', en: 'WordPress site development.' },
     problem: {
-      es: "LYNX Bolivia vende electrónica y electrodomésticos de marcas líderes, con tienda en Cochabamba y envíos a todo el país. Necesitaba un sitio corporativo y tienda en línea que pudieran administrar ellos mismos. Fue de los primeros proyectos que completé en la agencia.",
-      en: "LYNX Bolivia sells electronics and home appliances from leading brands, with a store in Cochabamba and nationwide shipping. They needed a corporate site and online store they could manage themselves. It was one of the first projects I completed at the agency.",
+      es: "LYNX Bolivia vende electrónica y electrodomésticos de marcas líderes, con tienda en Cochabamba y envíos a todo el país. Necesitaba un sitio corporativo y tienda en línea que pudieran administrar ellos mismos. Fue de los primeros proyectos que completé en WANT.",
+      en: "LYNX Bolivia sells electronics and home appliances from leading brands, with a store in Cochabamba and nationwide shipping. They needed a corporate site and online store they could manage themselves. It was one of the first projects I completed at WANT.",
     },
     highlights: {
-      es: ["Sitio corporativo y tienda en línea en WordPress", "Contenido administrable por el propio cliente", "Uno de los primeros proyectos completados y entregados en la agencia"],
-      en: ["Corporate site and online store on WordPress", "Content the client can manage on their own", "One of the first projects completed and delivered at the agency"],
+      es: ["Sitio corporativo y tienda en línea en WordPress", "Contenido administrable por el propio cliente", "Uno de los primeros proyectos completados y entregados en WANT"],
+      en: ["Corporate site and online store on WordPress", "Content the client can manage on their own", "One of the first projects completed and delivered at WANT"],
     },
     learned: {
       es: ["No todo requiere código a medida: elegir la herramienta que el cliente puede mantener es parte del trabajo.", "Mi primera experiencia entregando a un cliente real: plazos, cambios y revisiones."],
@@ -618,6 +791,7 @@ export const projects: Project[] = [
     },
     stack: ['WordPress'],
     links: [{ label: 'lynx.com.bo', href: 'https://lynx.com.bo/' }],
+    doodle: 'bag',
     accent: '#e8e8e8',
     featured: false,
     cv: false,
@@ -630,8 +804,8 @@ export const projects: Project[] = [
     tagline: { es: 'Red social para iglesias.', en: 'Social network for churches.' },
     role: { es: 'Desarrollo frontend.', en: 'Frontend development.' },
     problem: {
-      es: "Una red social pensada para comunidades de iglesias: publicaciones, comunidad y contenido compartido entre miembros. Fue mi primer proyecto en la agencia y, aunque el producto no llegó a lanzarse, ahí aprendí a trabajar en equipo sobre un código real.",
-      en: "A social network designed for church communities: posts, community and shared content among members. It was my first project at the agency and, although the product never launched, it’s where I learned to work as a team on a real codebase.",
+      es: "Una red social pensada para comunidades de iglesias: publicaciones, comunidad y contenido compartido entre miembros. Fue mi primer proyecto en WANT y, aunque el producto no llegó a lanzarse, ahí aprendí a trabajar en equipo sobre un código real.",
+      en: "A social network designed for church communities: posts, community and shared content among members. It was my first project at WANT and, although the product never launched, it’s where I learned to work as a team on a real codebase.",
     },
     highlights: {
       es: ["Mi primer proyecto profesional, como pasante", "Interfaces móviles en React Native", "Primer contacto con revisiones de código y trabajo con un backend real"],
@@ -642,6 +816,7 @@ export const projects: Project[] = [
       en: ["A product not launching doesn’t mean the work wasn’t worth it: it was my school.", "Read and understand someone else’s code before writing your own."],
     },
     stack: ['React Native'],
+    doodle: 'heart',
     accent: '#ffffff',
     featured: false,
     cv: false,
@@ -671,6 +846,7 @@ export const projects: Project[] = [
     },
     stack: ['React', 'Leaflet', 'Tailwind'],
     links: [{ label: 'GitHub', href: 'https://github.com/rossmelabasto/hackacom2023' }],
+    doodle: 'pin',
     accent: '#3dffe0',
     featured: false,
     cv: false,
@@ -696,6 +872,7 @@ export const projects: Project[] = [
     },
     stack: ['React', 'TypeScript', 'Redux Toolkit', 'Supabase', 'MUI'],
     links: [{ label: 'eko-store.vercel.app', href: 'https://eko-store.vercel.app/' }],
+    doodle: 'bag',
     accent: '#7dffc4',
     featured: false,
     cv: false,
@@ -713,29 +890,158 @@ export const workflow: { title: L; body: L }[] = [
   {
     title: { es: 'Entender', en: 'Understand' },
     body: {
-      es: 'Antes de escribir código, entiendo el problema y a quien lo usa. Investigo con IA para llegar rápido al contexto.',
-      en: 'Before writing code I understand the problem and who has it. I research with AI to get context fast.',
+      es: 'Antes de escribir código entiendo el problema, a quien lo usa y qué no puede fallar. Pregunto mucho al principio para no rehacer al final.',
+      en: 'Before writing code I understand the problem, who uses it and what can\'t fail. I ask a lot up front so I don\'t redo things at the end.',
     },
   },
   {
-    title: { es: 'Prototipar', en: 'Prototype' },
+    title: { es: 'Diseñar', en: 'Design' },
     body: {
-      es: 'Prototipos funcionales en horas, no semanas (v0, Claude Code), para validar la idea con algo real.',
-      en: 'Working prototypes in hours, not weeks (v0, Claude Code), to validate ideas with something real.',
+      es: 'Datos, arquitectura e interfaz antes que pantallas. Cuando conviene, un prototipo rápido para validar la idea con algo real.',
+      en: 'Data, architecture and UI before screens. When it helps, a quick prototype to validate the idea with something real.',
     },
   },
   {
-    title: { es: 'Construir y medir', en: 'Build & measure' },
+    title: { es: 'Construir', en: 'Build' },
     body: {
-      es: 'Código tipado, tests y métricas: en AdvAI, evaluar la búsqueda me llevó del 43 % al 80 % de acierto.',
-      en: 'Typed code, tests and metrics: in AdvAI, evaluating retrieval took me from 43% to 80% hit rate.',
+      es: 'Código tipado, commits chicos y revisados. La IA me ayuda con lo repetitivo; lo que llega a producción lo entiendo y lo puedo mantener.',
+      en: 'Typed code, small reviewed commits. AI helps with the repetitive parts; what ships to production is code I understand and can maintain.',
     },
   },
   {
-    title: { es: 'Automatizar', en: 'Automate' },
+    title: { es: 'Probar y medir', en: 'Test & measure' },
     body: {
-      es: 'Agentes, scripts y LLMs locales para lo repetitivo. Mi tiempo va a lo que no se puede automatizar.',
-      en: 'Agents, scripts and local LLMs for the repetitive stuff. My time goes where automation can\'t.',
+      es: 'Tests, datos reales y métricas en vez de impresiones: en AdvAI, medir la búsqueda me llevó del 43 % al 80 % de acierto.',
+      en: 'Tests, real data and metrics instead of impressions: in AdvAI, measuring retrieval took me from 43% to 80% hit rate.',
+    },
+  },
+  {
+    title: { es: 'Entregar y mantener', en: 'Ship & maintain' },
+    body: {
+      es: 'CI/CD, despliegues automáticos, documentación y respaldos. Automatizo lo que se repite para dedicar el tiempo a lo que importa.',
+      en: 'CI/CD, automatic deploys, docs and backups. I automate what repeats so my time goes where it matters.',
     },
   },
 ];
+
+/** Herramientas del día a día (sección "Cómo trabajo"). */
+export const setup = ['rOS (Arch Linux)', 'Git + GitHub', 'GitHub Actions', 'Docker', 'Figma', 'Bruno', 'Claude Code', 'GitHub Copilot'];
+
+/* ------------------------------------------------------------------ */
+/* MI HISTORIA (página /sobre-mi/ · /en/about/)                        */
+/* ------------------------------------------------------------------ */
+
+/** Línea de tiempo de la historia. */
+export const journey: { period: L; title: L; body: L; tools?: string[] }[] = [
+  {
+    period: { es: '2020', en: '2020' },
+    title: { es: 'Descubro la programación', en: 'Discovering programming' },
+    body: {
+      es: 'En plena pandemia, estudiando Derecho, conozco la programación gracias a Platzi. Y casi al mismo tiempo, Linux.',
+      en: 'In the middle of the pandemic, while studying law, I discover programming through Platzi. And almost at the same time, Linux.',
+    },
+  },
+  {
+    period: { es: '2021', en: '2021' },
+    title: { es: 'Ingeniería de Sistemas', en: 'Systems Engineering' },
+    body: {
+      es: 'Empiezo la carrera en la UDABOL, sin dejar de aprender por mi cuenta.',
+      en: 'I start the degree at UDABOL, while I keep learning on my own.',
+    },
+  },
+  {
+    period: { es: '2022', en: '2022' },
+    title: { es: 'Primer trabajo: WANT', en: 'First job: WANT' },
+    body: {
+      es: 'Entro como pasante con base en desarrollo web y me quedo más de tres años construyendo productos reales.',
+      en: 'I join as an intern with a web development foundation and stay 3+ years building real products.',
+    },
+  },
+  {
+    period: { es: '2025', en: '2025' },
+    title: { es: 'La IA llega al trabajo', en: 'AI arrives at work' },
+    body: {
+      es: 'Después de años programando a mano, en mi último año en WANT incorporamos IA al flujo y a los productos.',
+      en: 'After years of coding by hand, in my last year at WANT we brought AI into our workflow and products.',
+    },
+    tools: ['GitHub Copilot', 'ChatGPT', 'Gemini', 'DeepSeek', 'Groq', 'Ollama', 'Claude'],
+  },
+  {
+    period: { es: 'Hoy', en: 'Today' },
+    title: { es: 'Independiente', en: 'Independent' },
+    body: {
+      es: 'Proyectos pagados y para mi universidad, mi proyecto de grado, rOS y mi homelab.',
+      en: 'Paid and university projects, my capstone, rOS and my homelab.',
+    },
+  },
+];
+
+/** Historia completa: secciones con título y párrafos. */
+export const story: { heading: L; body: Record<Lang, string[]> }[] = [
+  {
+    heading: { es: 'Cómo empezó', en: 'How it started' },
+    body: {
+      es: [
+        'A mediados de 2020, en plena pandemia, estudiaba Derecho en la Universidad Mayor de San Simón. Pasar mucho más tiempo frente a la computadora me llevó a curiosear el mundo de la tecnología, y un día, gracias a Platzi, descubrí la programación. Ahí supe cuál era mi ==verdadera vocación==.',
+        'Desde entonces me tomé muy en serio el “==Nunca pares de aprender==” de Freddy Vega. Aprendí en Platzi y en YouTube: Programación ATS, midudev y muchos otros creadores fueron mis maestros. Cursos, documentación, prueba y error, y muchas noches de “¿por qué esto no funciona?”. En 2021 empecé Ingeniería de Sistemas en la UDABOL.',
+      ],
+      en: [
+        'In mid-2020, in the middle of the pandemic, I was studying law at Universidad Mayor de San Simón. Spending much more time in front of the computer got me curious about the tech world, and one day, thanks to Platzi, I discovered programming. That\'s when I knew what my ==real calling== was.',
+        'From then on I took Freddy Vega\'s “==Never stop learning==” very seriously. I learned on Platzi and YouTube: Programación ATS, midudev and many other creators were my teachers. Courses, docs, trial and error, and many “why isn\'t this working?” nights. In 2021 I started Systems Engineering at UDABOL.',
+      ],
+    },
+  },
+  {
+    heading: { es: 'Linux, el otro gran descubrimiento', en: 'Linux, the other big discovery' },
+    body: {
+      es: [
+        'En esa misma época descubrí Linux, y fue otro mindblow: entender que el sistema operativo también se puede aprender, desarmar y armar a tu medida. Probé muchas distros, pero ((Arch)) siempre fue especial para mí: te obliga a entender cada pieza de tu sistema.',
+        'Hoy uso a diario rOS, mi propio flavor de Arch, que quiero convertir en una distro real, y mantengo un homelab en casa con una docena de servicios, cuidado por un agente de IA. Gran parte de lo que sé de servidores, redes y automatización lo aprendí ==rompiendo y arreglando== mi propio sistema.',
+      ],
+      en: [
+        'Around the same time I discovered Linux, and it blew my mind again: realizing the operating system is also something you can learn, take apart and put back together your way. I\'ve tried many distros, but ((Arch)) was always special to me: it makes you understand every piece of your system.',
+        'Today I daily-drive rOS, my own flavor of Arch that I want to turn into a real distro, and I run a homelab at home with a dozen services, looked after by an AI agent. A lot of what I know about servers, networking and automation I learned by ==breaking and fixing== my own system.',
+      ],
+    },
+  },
+  {
+    heading: { es: 'Del aprendizaje al trabajo', en: 'From learning to working' },
+    body: {
+      es: [
+        'Con una buena base de desarrollo web entré a WANT Digital Agency en 2022. Empecé como pasante y terminé con contrato: más de tres años construyendo las interfaces web y móviles de productos para clientes de Bolivia y EE. UU., en un equipo de desarrollo de dos personas.',
+        'Casi todo ese tiempo programamos a mano. Recién en mi último año ahí incorporamos IA al trabajo, y llegar a ella con ==años de práctica== encima hizo toda la diferencia.',
+      ],
+      en: [
+        'With a solid web development foundation I joined WANT Digital Agency in 2022. I started as an intern and ended up on contract: 3+ years building the web and mobile interfaces of products for clients in Bolivia and the US, on a two-person dev team.',
+        'For almost all of that time we coded by hand. We only brought AI into our work in my last year there, and coming to it with ==years of practice== made all the difference.',
+      ],
+    },
+  },
+  {
+    heading: { es: 'La IA, como multiplicador', en: 'AI as a multiplier' },
+    body: {
+      es: [
+        'Con el boom fui probando de todo: GitHub Copilot, ChatGPT, Gemini, DeepSeek, Groq, modelos locales y, últimamente, Claude. Me potenció muchísimo, y como vengo de escribir todo a mano, ==entiendo lo que genera==: sé leerlo, corregirlo y mantenerlo.',
+        'Sobre todo, me dio más ganas de seguir aprendiendo y de entender toda tecnología que llegue a mis manos.',
+      ],
+      en: [
+        'When the boom hit I tried everything: GitHub Copilot, ChatGPT, Gemini, DeepSeek, Groq, local models and, lately, Claude. It has boosted me a lot, and since I come from writing everything by hand, ==I understand what it generates==: I can read it, fix it and maintain it.',
+        'Above all, it made me even more eager to keep learning and understand every technology that comes my way.',
+      ],
+    },
+  },
+  {
+    heading: { es: 'Hoy', en: 'Today' },
+    body: {
+      es: [
+        'Trabajo de forma independiente mientras termino la carrera: AdvAI, mi proyecto de grado; Link\'u, para una comunidad de Sipe Sipe; SGPG, para mi universidad; y mis proyectos personales. La regla sigue siendo la misma de 2020: ==nunca parar de aprender==.',
+      ],
+      en: [
+        'I work independently while finishing my degree: AdvAI, my capstone; Link\'u, for a community in Sipe Sipe; SGPG, for my university; and my personal projects. The rule is still the same as in 2020: ==never stop learning==.',
+      ],
+    },
+  },
+];
+
+/** Proyectos que corren en vivo en mi dominio (sección "En vivo"). */
+export const liveProjects = visibleProjects.filter((p) => p.live);

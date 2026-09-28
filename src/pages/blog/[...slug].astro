@@ -1,58 +1,11 @@
 ---
-import { render } from 'astro:content';
-import Base from '../../layouts/Base.astro';
-import Nav from '../../components/Nav.astro';
-import ContactForm from '../../components/ContactForm.astro';
-import Logo from '../../components/Logo.astro';
-import { getPosts, readingTime, fmtDate, type Post } from '../../data/blog';
-import { profile } from '../../data/profile';
-import { t, paths } from '../../data/i18n';
+import BlogPost from '../../components/BlogPost.astro';
+import { getPosts, postSlug, type Post } from '../../data/blog';
 
 export async function getStaticPaths() {
-  const posts = await getPosts();
-  return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
+  const posts = await getPosts('es');
+  return posts.map((post) => ({ params: { slug: postSlug(post) }, props: { post } }));
 }
 interface Props { post: Post }
-const { post } = Astro.props;
-const { Content } = await render(post);
-const lang = post.data.lang;
-const s = t(lang);
-const url = new URL(paths.post(post.id), Astro.site);
-const ld = {
-  '@context': 'https://schema.org',
-  '@type': 'BlogPosting',
-  headline: post.data.title,
-  description: post.data.description,
-  datePublished: post.data.date.toISOString(),
-  dateModified: (post.data.updated ?? post.data.date).toISOString(),
-  inLanguage: lang,
-  url: url.href,
-  image: new URL('/og.png', Astro.site).href,
-  author: { '@type': 'Person', name: profile.name, url: profile.portfolioUrl },
-  keywords: post.data.tags.join(', '),
-};
 ---
-<Base lang={lang} altPath={paths.blog(lang === 'es' ? 'en' : 'es')} title={post.data.title} description={post.data.description} ogType="article" noAlt>
-  <script slot="head" type="application/ld+json" set:html={JSON.stringify(ld)} />
-  <Nav lang={lang} altPath={paths.blog(lang === 'es' ? 'en' : 'es')} onHome={false} />
-  <main class="px-5 pb-16 pt-40 md:px-10">
-    <article class="mx-auto max-w-3xl">
-      <a href={paths.blog(lang)} class="kicker hover:text-fg">← {s.blog.back}</a>
-      <p class="kicker mt-10">{fmtDate(post.data.date, lang)} · {readingTime(post.body)} {s.blog.read}</p>
-      <h1 data-split class="display mt-6 text-5xl font-bold md:text-7xl">{post.data.title}</h1>
-      <p data-reveal class="mt-8 text-xl text-muted">{post.data.description}</p>
-      <div class="mt-6 flex flex-wrap gap-2">{post.data.tags.map((tag) => <span class="rounded-full border border-line px-3 py-1 font-mono text-xs text-muted">#{tag}</span>)}</div>
-      <div class="prose prose-lg mt-16 max-w-none">
-        <Content />
-      </div>
-      <div class="mt-20 flex items-center gap-4 border-t border-line pt-8">
-        <Logo class="h-10 w-10 text-accent" />
-        <p class="text-muted"><span class="text-fg">{profile.name}</span> — {profile.role[lang]}. <a href={profile.portfolioUrl} class="text-accent hover:underline">{profile.portfolioUrl.replace('https://', '')}</a></p>
-      </div>
-    </article>
-    <section class="mx-auto mt-24 max-w-3xl">
-      <p class="kicker mb-4">{s.blog.commentIntro}</p>
-      <ContactForm lang={lang} title={s.blog.commentTitle} context={post.data.title} />
-    </section>
-  </main>
-</Base>
+<BlogPost post={Astro.props.post} />

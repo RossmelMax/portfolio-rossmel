@@ -3,6 +3,7 @@
 @import '@fontsource-variable/inter';
 @import '@fontsource-variable/space-grotesk';
 @import '@fontsource-variable/jetbrains-mono';
+@import '@fontsource/caveat/latin-400.css';
 
 /* ---------------------------------------------------------------
    TOKENS DE DISEÑO
@@ -35,6 +36,7 @@
   --font-reading: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
   --font-display: 'Space Grotesk Variable', ui-sans-serif, system-ui, sans-serif;
   --font-mono: 'JetBrains Mono Variable', ui-monospace, monospace;
+  --font-hand: 'Caveat', 'Comic Sans MS', cursive; /* solo etiquetas a mano ("yo") */
   --color-bg: var(--bg);
   --color-bg-2: var(--bg-2);
   --color-fg: var(--fg);
@@ -143,6 +145,37 @@ html.lenis body {
   border: 1px solid var(--line);
   border-radius: 1rem;
 }
+
+/* Foto en capas (About): el contorno toma el color de acento del tema */
+.photo-outline {
+  background: var(--accent);
+  -webkit-mask: var(--outline) center / 100% 100% no-repeat;
+  mask: var(--outline) center / 100% 100% no-repeat;
+  filter: drop-shadow(0 0 1.5rem color-mix(in oklab, var(--accent) 45%, transparent));
+}
+[data-layer] { will-change: transform; }
+
+/* Botón "volver arriba": oculto hasta bajar; el anillo muestra el avance del scroll */
+.totop { opacity: 0; pointer-events: none; transform: translateY(1rem); }
+.totop.is-visible { opacity: 1; pointer-events: auto; transform: translateY(calc(-1 * var(--lift, 0px))); }
+.totop-ring path { stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 0.15s linear; }
+
+/* Blog: etiquetas filtrables */
+.tag-chip {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 0.35rem 0.9rem;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--muted);
+  transition: color 0.2s, border-color 0.2s, background 0.2s;
+}
+.tag-chip:hover { color: var(--fg); border-color: var(--fg); }
+.tag-chip[aria-pressed='true'] { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+
+/* Blog: títulos con ancla y margen para el header fijo */
+.prose :where(h2, h3) { scroll-margin-top: 7rem; }
+.toc a[aria-current='true'] { color: var(--accent); }
 
 /* Utilidades de tipografía */
 .display {

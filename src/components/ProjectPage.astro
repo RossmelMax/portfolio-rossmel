@@ -4,22 +4,35 @@ import { visibleProjects as projects } from '../data/profile';
 import Base from '../layouts/Base.astro';
 import Nav from './Nav.astro';
 import { t, paths } from '../data/i18n';
+import { postsForProject, postUrl, fmtDate, readingTime } from '../data/blog';
+import LiveSites from './LiveSites.astro';
+import Marked from './Marked.astro';
+import Sketch from './Sketch.astro';
+import SketchFlight from './SketchFlight.astro';
 interface Props { lang: Lang; project: Project }
 const { lang, project: p } = Astro.props;
 const s = t(lang);
 const altPath = paths.project(lang === 'es' ? 'en' : 'es', p.slug);
 const idx = projects.findIndex((x) => x.slug === p.slug);
 const next = projects[(idx + 1) % projects.length];
+const posts = await postsForProject(p.slug, lang);
 ---
 <Base lang={lang} altPath={altPath} title={p.name} description={p.tagline[lang]}>
   <Nav lang={lang} altPath={altPath} onHome={false} />
   <main style={`--accent:${p.accent}`}>
     <section class="relative flex min-h-[90svh] flex-col justify-end overflow-hidden px-5 pb-12 pt-40 md:px-10">
       <div class="absolute inset-0 -z-0" data-parallax="0.3" style={`background: radial-gradient(80% 70% at 70% 20%, color-mix(in oklab, ${p.accent} 45%, transparent), transparent 70%);`}></div>
+      {p.doodle && <SketchFlight icon={p.doodle} seed={idx * 7 + 131} variant={idx} class="pointer-events-none absolute right-4 top-24 h-auto w-[62vw] max-w-[34rem] text-[var(--accent)] opacity-90 md:right-10 md:top-28" />}
       <div class="relative">
         <p class="kicker mb-6" data-reveal>{p.kind[lang]} · {p.year}{p.confidential ? ` · ${s.work.private}` : ''}</p>
         <h1 data-split class="display text-[18vw] font-bold md:text-[clamp(5.76rem,12vw,10.8rem)]">{p.name}</h1>
         <p data-reveal class="mt-8 max-w-3xl text-2xl md:text-4xl">{p.tagline[lang]}</p>
+        {p.live && (
+          <a data-reveal href={`https://${p.live}`} target="_blank" rel="noopener" class="mt-10 inline-flex items-center gap-3 rounded-full px-6 py-3 font-medium text-[#0a0a0b]" style={`background:${p.accent}`}>
+            <span class="relative flex h-2 w-2"><span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#0a0a0b] opacity-50"></span><span class="relative inline-flex h-2 w-2 rounded-full bg-[#0a0a0b]"></span></span>
+            {s.live.view}<span class="hidden sm:inline"> · {p.live}</span> ↗
+          </a>
+        )}
       </div>
     </section>
 
@@ -40,15 +53,15 @@ const next = projects[(idx + 1) % projects.length];
       <div class="md:col-span-7 md:col-start-6">
         <p class="kicker mb-6">{s.project.problem}</p>
         <p data-words class="display text-3xl font-medium md:text-5xl">{p.problem[lang]}</p>
-        <p class="kicker mb-6 mt-24">{s.project.highlights}</p>
+        <p class="kicker mb-6 mt-24 flex items-center gap-2"><Sketch name="star" seed={41} class="h-7 w-7 text-accent" />{s.project.highlights}</p>
         <ol class="space-y-0 border-t border-line">
           {p.highlights[lang].map((h, i) => (
             <li data-reveal class="flex gap-6 border-b border-line py-6 text-lg">
-              <span class="font-mono text-sm text-accent">{String(i + 1).padStart(2, '0')}</span><span>{h}</span>
+              <span class="font-mono text-sm text-accent">{String(i + 1).padStart(2, '0')}</span><span><Marked text={h} /></span>
             </li>
           ))}
         </ol>
-        <p class="kicker mb-6 mt-24">{s.project.learned}</p>
+        <p class="kicker mb-6 mt-24 flex items-center gap-2"><Sketch name="bulb" seed={43} class="h-8 w-8 text-accent" />{s.project.learned}</p>
         <ul class="grid gap-4">
           {p.learned[lang].map((l, i) => (
             <li data-reveal data-reveal-delay={i * 0.06} class="rounded-2xl border border-line bg-bg-2 p-6 text-lg">
@@ -58,6 +71,28 @@ const next = projects[(idx + 1) % projects.length];
         </ul>
       </div>
     </section>
+
+    {(p.slug === 'homelab' || p.live) && <LiveSites lang={lang} exclude={p.slug} />}
+
+    {posts.length > 0 && (
+      <section class="border-t border-line px-5 py-24 md:px-10">
+        <p class="kicker mb-6">{s.blog.aboutProject}</p>
+        <ul class="border-t border-line">
+          {posts.map((post) => (
+            <li class="border-b border-line" data-reveal>
+              <a href={postUrl(post)} data-hover class="group grid gap-3 py-8 md:grid-cols-12 md:items-baseline md:gap-8">
+                <span class="kicker md:col-span-3">{fmtDate(post.data.date, lang)} · {readingTime(post.body)} {s.blog.read}</span>
+                <span class="md:col-span-8">
+                  <span class="display block text-3xl font-semibold transition-colors group-hover:text-accent md:text-4xl">{post.data.title}</span>
+                  <span class="mt-2 block text-muted">{post.data.description}</span>
+                </span>
+                <span class="hidden text-right text-2xl md:col-span-1 md:block">↗</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )}
 
     <a href={paths.project(lang, next.slug)} data-hover class="group block border-t border-line px-5 py-24 md:px-10">
       <p class="kicker">{s.project.next}</p>

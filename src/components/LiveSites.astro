@@ -1,0 +1,39 @@
+---
+import type { Lang } from '../data/profile';
+import { liveProjects } from '../data/profile';
+import { t, paths } from '../data/i18n';
+import Sketch from './Sketch.astro';
+import SketchFlight from './SketchFlight.astro';
+/**
+ * "En vivo": proyectos con `live` en profile.ts. Cada tarjeta abre el caso de estudio
+ * (ahí está el botón al sitio real). `exclude` = slug a omitir (la página actual).
+ */
+interface Props { lang: Lang; exclude?: string }
+const { lang, exclude } = Astro.props;
+const s = t(lang);
+const items = liveProjects.filter((p) => p.slug !== exclude);
+---
+{items.length > 0 && (
+  <section id="live" class="relative overflow-hidden border-t border-line px-5 py-24 md:px-10">
+    <SketchFlight icon="homelab" seed={81} variant={1} class="pointer-events-none absolute right-4 top-8 h-auto w-[50vw] max-w-[26rem] text-accent opacity-80 md:right-10" />
+    <p class="kicker mb-6 flex items-center gap-2"><Sketch name="waves" seed={9} class="h-6 w-10 text-accent" />{s.live.kicker}</p>
+    <h2 data-split class="display max-w-4xl text-4xl font-bold md:text-6xl">{s.live.title}</h2>
+    <p data-reveal class="mt-6 max-w-2xl text-muted">{s.live.body}</p>
+    <ul class="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+      {items.map((p, i) => (
+        <li data-reveal data-reveal-delay={i * 0.06} class="h-full">
+          <a href={paths.project(lang, p.slug)} data-hover data-draw-host class="group relative flex h-full flex-col rounded-2xl border border-line bg-bg-2 p-6 transition-colors hover:border-[var(--c)]" style={`--c:${p.accent}`}>
+            <span class="flex items-center gap-2 font-mono text-xs text-muted">
+              <span class="relative flex h-2 w-2"><span class="absolute inline-flex h-full w-full animate-ping rounded-full opacity-60" style={`background:${p.accent}`}></span><span class="relative inline-flex h-2 w-2 rounded-full" style={`background:${p.accent}`}></span></span>
+              {p.live}
+            </span>
+            {p.doodle && <Sketch name={p.doodle} seed={i + 91} class="absolute right-5 top-5 h-16 w-16 text-[var(--c)] opacity-90" />}
+            <span class="display mt-4 block text-3xl font-semibold transition-colors group-hover:text-[var(--c)]">{p.name}</span>
+            <span class="mt-2 block flex-1 text-muted">{p.tagline[lang]}</span>
+            <span class="mt-6 font-mono text-xs transition-colors group-hover:text-[var(--c)]">{s.live.details} →</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </section>
+)}

@@ -1,20 +1,22 @@
 ---
 import type { Lang } from '../data/profile';
-import { getPosts, readingTime, fmtDate } from '../data/blog';
+import { getPosts, postUrl, readingTime, fmtDate } from '../data/blog';
 import { t, paths } from '../data/i18n';
+import SketchFlight from './SketchFlight.astro';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 const s = t(lang);
-const posts = (await getPosts()).slice(0, 3);
+const posts = (await getPosts(lang)).slice(0, 3);
 ---
 {posts.length > 0 && (
-  <section id="blog" class="px-5 py-32 md:px-10">
+  <section id="blog" class="relative overflow-hidden px-5 py-32 md:px-10">
+    <SketchFlight icon="pencil" seed={121} variant={1} tilt={0} class="pointer-events-none absolute right-4 h-auto w-[48vw] max-w-[26rem] text-accent opacity-80 md:right-10 top-6" />
     <p class="kicker mb-10">{s.blog.latest}</p>
     <ul class="border-t border-line">
       {posts.map((p) => (
         <li class="border-b border-line" data-reveal>
-          <a href={paths.post(p.id)} data-hover class="group grid gap-3 py-8 md:grid-cols-12 md:items-baseline md:gap-8">
-            <span class="kicker md:col-span-3">{fmtDate(p.data.date, lang)} · {readingTime(p.body)} {s.blog.read}{p.data.lang !== lang && ` · ${p.data.lang.toUpperCase()}`}</span>
+          <a href={postUrl(p)} data-hover class="group grid gap-3 py-8 md:grid-cols-12 md:items-baseline md:gap-8">
+            <span class="kicker md:col-span-3">{fmtDate(p.data.date, lang)} · {readingTime(p.body)} {s.blog.read}</span>
             <span class="display text-3xl font-semibold transition-colors group-hover:text-accent md:col-span-8 md:text-5xl">{p.data.title}</span>
             <span class="hidden text-right text-2xl md:col-span-1 md:block">↗</span>
           </a>

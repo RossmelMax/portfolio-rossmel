@@ -35,6 +35,7 @@ npm run dev          # http://localhost:4321  (recarga en vivo)
 npm run build        # genera el sitio estático en dist/
 npm run cv:pdf       # genera los PDF del CV (requiere build previo)
 npm run check        # verificación de tipos de Astro/TS
+npm run verify       # tras el build: desborde móvil, marcas sin procesar, errores JS, CV ≤ 2 págs (-- --shots = capturas)
 npm run og           # regenera public/og.png (imagen al compartir el link)
 npm run icons        # regenera los íconos PNG desde public/favicon.svg
 ```
@@ -69,30 +70,31 @@ se puede añadir `@astrojs/react`.
 ```
 src/
   data/
-    profile.ts        ← TODO EL CONTENIDO (experiencia, proyectos, skills…) en ES/EN
+    profile.ts        ← TODO EL CONTENIDO (experiencia, proyectos, skills, historia…) en ES/EN
     i18n.ts           ← textos de la interfaz, rutas por idioma, formato de fechas
-  styles/global.css   ← tokens de diseño (colores, fuentes), grano, cursor, marquee
-  layouts/Base.astro  ← <head>, SEO, JSON-LD, tema, carga de animaciones
+    blog.ts           ← helpers del blog (posts por idioma, traducciones, relacionados, búsqueda)
+    sketches.ts       ← dibujos a mano (rough.js en el build) + marcas ==…== / ((…))
+  lib/remark-marks.ts ← plugin de Markdown para las marcas en el blog
+  content/blog/       ← artículos (ES) · content/blog/en/ ← versiones EN
+  styles/global.css   ← tokens de diseño (colores, fuentes), grano, cursor, marquee, .prose
+  layouts/Base.astro  ← <head>, SEO, JSON-LD, tema, carga de animaciones, botón volver arriba
   components/
-    Home.astro        ← compone la página principal (se usa en / y /en/)
-    Nav, Preloader, Hero, About, Experience, Projects, Stack, Workflow, Contact
-    ProjectPage.astro ← plantilla de caso de estudio (/proyectos/<slug>)
+    Home.astro        ← compone la home (/ y /en/)
+    Nav, Preloader, Hero, About, Experience, Projects, LiveSites, Stack, Workflow, BlogTeaser, Contact
+    ProjectPage.astro ← caso de estudio · AboutPage.astro ← /sobre-mi/ · BlogIndex/BlogPost ← blog
     Resume.astro      ← el CV (ATS)
+    Sketch, SketchFlight, Marked, ToTop, PhotoLayers, ContactForm, Comments, ShareLinks, Logo
   scripts/
     animations.ts     ← GSAP + Lenis; se activa con atributos data-*
     shader.ts         ← fondo WebGL del hero
-  pages/
-    index.astro, cv.astro, proyectos/[slug].astro      (ES)
-    en/index.astro, en/cv.astro, en/projects/[slug].astro (EN)
-public/
-  favicon.svg
-  cv/Rossmel-Abasto-CV-{ES,EN}.pdf   ← generados por npm run cv:pdf
-scripts/
-  build-cv-pdf.mjs    ← genera los PDF
-  serve-dist.mjs      ← servidor estático mínimo que usa el script anterior
+  pages/              ← rutas ES (/, /proyectos, /sobre-mi, /blog, /cv) y EN (/en/…)
+functions/            ← Cloudflare Pages Functions (middleware de cv., /api/contact)
+public/cv/            ← PDFs del CV (versionados; los genera npm run cv:pdf)
+scripts/              ← build-cv-pdf, verify, build-og, build-icons, build-photo-layers.py, serve-dist
 docs/
-  PROYECTOS-CANDIDATOS.md   ← lista filtrada de repos para decidir qué mostrar
-CLAUDE.md             ← instrucciones para Claude Code (local o nube)
+  CONTINUAR.md        ← guía de traspaso para seguir con Claude local (empezar por aquí)
+  PROYECTOS-CANDIDATOS.md, LINKEDIN.md, github-profile/, REVISION.md, ORDENES-CLAUDE-LOCAL.md
+CLAUDE.md             ← instrucciones cortas para Claude Code (local o nube)
 ```
 
 ### Rutas generadas
@@ -142,12 +144,19 @@ está aplicado a ese elemento).
 ## Animaciones: cómo funcionan
 
 `src/scripts/animations.ts` se carga en todas las páginas (salvo el CV) y activa efectos según
-atributos HTML. Para animar algo nuevo, basta con añadir el atributo:
+atributos HTML. Para animar algo nuevo, basta con añadir el atributo (ojo: estos nombres están
+reservados; `data-count` sin valor anima a 0, por eso el contador del blog usa `data-results`).
+
+Orden de arranque: primero la entrada del nombre (hero); el resto de animaciones se prepara **después**
+(al terminar la entrada, al primer scroll/toque o a los 1,6 s) y **en pedazos de ~8 ms** (`runChunked`).
+Prepararlas todas juntas congelaba el hero ~300–400 ms en celulares (se veía "a trompicones"):
 
 | Atributo | Efecto |
 |---|---|
 | `data-split` | Título que entra línea por línea (SplitText + máscara) |
 | `data-reveal` (+ `data-reveal-delay="0.2"`) | Sube y aparece al entrar en pantalla |
+| `data-draw` (lo pone `<Sketch>`) | Dibujo fine line a mano que se traza solo al entrar en pantalla |
+| `data-layers` (+ hijos `data-layer="0.5"`, `data-layer-outline`) | Foto en capas: parallax por profundidad al hacer scroll, el contorno aparece y crece, inclinación con el mouse |
 | `data-words` | Párrafo cuyas palabras se "encienden" según el scroll |
 | `data-horizontal` + `data-track` | Sección fijada con scroll horizontal (solo ≥768px) |
 | `data-card` + `data-card-media` | Zoom del fondo de la tarjeta dentro del scroll horizontal |
@@ -283,9 +292,41 @@ Respuestas de la API: `200 {ok:true}`, `400 invalid|captcha`, `502 send_failed`,
 
 ### Blog
 
-- Artículos en `src/content/blog/<slug>.md` (Markdown). La URL es `/blog/<slug>/`.
+- Artículos en `src/content/blog/<slug>.md` (Markdown, español) → `/blog/<slug>/`.
+- **Versión en inglés**: `src/content/blog/en/<slug-en>.md` con `lang: 'en'` y `translationOf: '<slug ES>'`
+  → `/en/blog/<slug-en>/`. Las dos versiones se enlazan solas (hreflang, switch ES/EN, "Read this post
+  in English") y comparten el hilo de comentarios. Etiquetas en inglés en los EN (`ai`, `privacy`,
+  `performance`, `security`, `career`…). Cada idioma tiene su portada, RSS (`/blog/rss.xml`,
+  `/en/blog/rss.xml`) e índice de búsqueda.
 - Frontmatter: `title`, `description` (1–2 frases, sale en Google y al compartir), `date`,
-  `tags`, `lang` (`es`/`en`, por defecto `es`), `draft: true` para no publicar.
+  `tags`, `lang` (`es`/`en`, por defecto `es`), `draft: true` para no publicar,
+  `project: '<slug>'` para enlazarlo con su caso de estudio (el caso lista sus artículos y el
+  artículo muestra una tarjeta al proyecto) y `pinned: true` para que salga primero.
+- Etiquetas: reusar las existentes (`ia`, `llm`, `python`, `frontend`, `react`, `linux`,
+  `rendimiento`…). Las que tienen un solo artículo se agrupan tras el botón "+N más".
+- Portada con **buscador** (texto completo: el índice `search.json` se descarga solo al
+  empezar a buscar; tecla `/` para enfocar), **filtro por etiqueta** y **orden** (recientes, antiguos,
+  A→Z, Z→A, lectura más corta); todo queda en la URL (`/blog/?q=sqlite&tag=llm&sort=az`), así se puede
+  compartir. Sin JS se ve la lista completa.
+- Cada artículo: botones para compartir (LinkedIn, X, WhatsApp) y copiar enlace, datos estructurados
+  `BlogPosting` + `BreadcrumbList`, `article:published_time` y fecha en el sitemap (`lastmod`).
+
+#### Comentarios (giscus, opcional)
+Los comentarios usan **giscus**: se guardan como GitHub Discussions del repo (gratis, sin base de datos,
+se comenta con cuenta de GitHub). No aparecen hasta configurar estas variables:
+1. GitHub → `rossmelabasto/portfolio-rossmel` → Settings → General → Features → activar **Discussions**.
+2. Instalar la app https://github.com/apps/giscus solo en ese repo.
+3. En Discussions, crear la categoría **Comentarios** (tipo *Announcement*: solo giscus crea hilos).
+4. Entrar a https://giscus.app, poner el repo y la categoría → copiar `data-repo-id` y `data-category-id`.
+5. Cloudflare Pages → `rossmel-portfolio` → Settings → Variables and Secrets (Production), como texto:
+   `PUBLIC_GISCUS_REPO=rossmelabasto/portfolio-rossmel`, `PUBLIC_GISCUS_REPO_ID=…`,
+   `PUBLIC_GISCUS_CATEGORY=Comentarios`, `PUBLIC_GISCUS_CATEGORY_ID=…` → Deployments → Retry.
+   (No son secretos: son IDs públicos.)
+El formulario de contacto al final de cada artículo sigue funcionando igual.
+- Cada artículo: índice lateral con la sección actual resaltada (en móvil, desplegable),
+  botón "Copiar enlace", tarjeta al caso de estudio y "Sigue leyendo" (mismo proyecto o etiquetas).
+- Estilo de los artículos: problema real → decisión clave → código simplificado del repo →
+  "Lo que aprendí". Nada de datos de clientes ni detalles de infraestructura (hosts, puertos, IPs).
 - Cada artículo termina con el formulario de contacto (`ContactForm` con `context` = título):
   el correo llega con el asunto "Blog: comentario de … sobre …".
 - RSS en `/blog/rss.xml`; aparece en el sitemap; la home muestra los 3 últimos ("Del blog").
@@ -293,11 +334,78 @@ Respuestas de la API: `200 {ok:true}`, `400 invalid|captcha`, `502 send_failed`,
   mejor posicionamiento que un subdominio aparte).
 - Código con resaltado (Shiki, tema `vitesse-dark`); estilos del texto en `.prose` (global.css).
 
+### Analítica (visitas)
+- **Cloudflare Web Analytics** ya está activo (inyección automática, sin cookies). Para verlo:
+  dash.cloudflare.com → tu cuenta → **Analytics & Logs → Web Analytics** → `portfolio.rossmel.top`:
+  visitas, páginas vistas, páginas más vistas, de dónde llegan (referrers), países, dispositivos y
+  Core Web Vitals. También: Workers & Pages → `rossmel-portfolio` → *Metrics*.
+- **Google Search Console** (search.google.com/search-console, propiedad `rossmel.top`) → *Rendimiento*:
+  qué buscó la gente para llegar (p. ej. "rossmel abasto"), impresiones, clics y posición.
+  *Inspección de URLs* → pedir indexación de páginas nuevas (los artículos EN, por ejemplo).
+- No se usa Google Analytics a propósito: pesa más, usa cookies y pediría banner de consentimiento.
+
+### Dibujos a mano (fine line)
+- `src/data/sketches.ts`: cada dibujo es un viewBox + formas de **rough.js**, generadas **en el build**
+  (al navegador solo llegan `<path>`; semilla fija = mismo trazo siempre). Se usan con
+  `<Sketch name="…" />` y heredan el color del texto (lima/violeta con `text-accent`).
+- Anotaciones en textos de `profile.ts`: `==texto==` subrayado a mano, `((texto))` círculo a mano
+  (componente `Marked`; marcas cortas, no se parten en dos líneas).
+- Modos de `<Sketch draw=…>`: `true` se traza al entrar en pantalla, `"scrub"` se traza al ritmo del
+  scroll (estela del avión, subrayado de "Cómo trabajo"); un ancestro con `data-draw-host` hace que se
+  vuelva a trazar al pasar el mouse (tarjetas de Stack y Cómo trabajo).
+- Dónde están: flecha "yo" a la foto, círculo en "días programando", subrayado/círculo en el Sobre mí,
+  "hoy" en Experiencia, garabato + "sigue bajando" en Proyectos, íconos de Stack y Cómo trabajo, ondas
+  en "En vivo", avión de papel y "¡escríbeme!" en Contacto, tacita en el footer y un dibujo por capítulo
+  en `/sobre-mi/`, estrella/foco en "Lo destacado"/"Lo que aprendí" de cada proyecto, lápiz y garabato
+  en el blog, garabato bajo el título de cada artículo. En el CV no (el CV quita las marcas con
+  `stripMarks`; también la meta description, el JSON-LD y el índice del buscador).
+  Criterio: acompañar palabras clave, no decorar.
+- **Marcas en el blog:** los `.md` también aceptan `==texto==` y `((texto))` (plugin
+  `src/lib/remark-marks.ts`, registrado en `astro.config.mjs`). Ojo: en Astro 7 `remarkPlugins`
+  necesita el paquete `@astrojs/markdown-remark` (el procesador por defecto es Sätteri). No usar marcas
+  dentro de títulos (`##`) ni bloques de código; 1–2 por artículo, frases cortas.
+- **Un dibujo por proyecto:** campo `doodle` en `profile.ts` (balanza, auto, birrete, gota, cuaderno,
+  cubo de Rubik, tele, megáfono…). Aparece en la tarjeta de la galería, en la lista de otros proyectos,
+  en las tarjetas de "En vivo" y grande en el hero de cada caso de estudio.
+- **Dibujos "en vuelo"** (`SketchFlight.astro`): estela punteada que cruza el texto y termina en un
+  dibujo, trazada con el scroll (como el avión de Contacto). Están en Experiencia (laptop), En vivo
+  (servidor), Cómo trabajo (cohete), Del blog (lápiz), /sobre-mi/ (laptop), /blog/ (foco) y el hero de
+  cada proyecto. `variant` 0–2 cambia la forma de la estela.
+- **Botón "volver arriba"** (`ToTop.astro`): aparece tras bajar ~una pantalla, con un anillo dibujado a
+  mano que se completa según el progreso del scroll; usa Lenis (`window.__lenis`) si está activo. Al llegar al `<footer>` sube (variable CSS `--lift`) para no tapar los enlaces.
+- Letra manuscrita solo para etiquetas (`font-hand`, Caveat).
+
+### Foto en capas ("Sobre mí")
+La foto se arma con 3 capas: fondo negro (CSS), contorno (`src/assets/rossmel-outline.png` usado como
+máscara y pintado con `--accent`: lima en oscuro, violeta en claro) y la persona recortada
+(`src/assets/rossmel-person.png`, 28 % más alta que el cuadro: debajo va la polera real de la foto
+original, así el parallax nunca muestra un corte). Se generan con:
+
+```bash
+pip install pillow numpy scipy
+python3 scripts/build-photo-layers.py --white foto-fondo-blanco.jpg --original foto-original.jpg
+```
+
+- `--white`: la foto editada con fondo blanco (recorte fino del pelo). `--original`: la foto del celular
+  (aporta la polera). Las fuentes **no se suben al repo** (la original muestra la casa): las tiene Rossmel.
+- El script alinea solo la original con la editada (tarda ~5 min) e imprime `--align "a,tx,ty"`; pasarlo
+  en las siguientes corridas las hace instantáneas. Último valor: `--align "3.064896,-2.350,214.282"`.
+- La animación está en `animations.ts` → `initLayers()`; sin JS o con reduced-motion las capas quedan
+  alineadas. `rossmel.jpg` (la versión con contorno) sigue siendo la imagen del JSON-LD.
+
 ### SEO
 - `@astrojs/sitemap` genera `sitemap-index.xml` (ES/EN con hreflang); `robots.txt` lo declara.
 - Dar de alta `https://portfolio.rossmel.top` en **Google Search Console** (verificación por DNS,
   que ya está en Cloudflare) y enviar `sitemap-index.xml`.
 - `404.html` propia (bilingüe).
+- En cada página: canonical, hreflang ES/EN + `x-default`, Open Graph completo (`og:locale`, imagen
+  1200×630, `og:site_name`), Twitter card y JSON-LD `Person` (con foto, `sameAs` a GitHub/LinkedIn/GitLab,
+  universidad y temas); en la home además `WebSite`. Esto ayuda a que buscar "Rossmel Abasto" muestre
+  el portafolio y un panel con tus perfiles.
+- Para posicionar tu nombre, lo que más pesa fuera del código: que **LinkedIn, GitHub (perfil y README),
+  GitLab y cualquier perfil público enlacen a `https://portfolio.rossmel.top`**; volver a enviar el
+  sitemap en Search Console tras cada tanda de artículos; opcional, publicar copias en dev.to/Hashnode con
+  *canonical URL* apuntando al artículo original (traen lectores sin robar posicionamiento).
 
 Extras en Cloudflare (Rules → Redirect Rules):
 - `rossmel.top` y `www.rossmel.top` → 301 a `https://portfolio.rossmel.top` (preservar ruta).
@@ -333,15 +441,24 @@ Flujo diario: push a `main` = producción; push a otra rama / PR = URL de vista 
 - [x] Revisión exhaustiva con Claude local (`docs/REVISION.md`) — correcciones aplicadas en v3.7
 - [ ] Perfil de GitHub (`docs/github-profile/`, ver INSTRUCCIONES.md) y LinkedIn (`docs/LINKEDIN.md`)
 - [ ] Probar Lighthouse (meta ≥95) y accesibilidad con teclado
+- [ ] (Opcional) Activar comentarios con giscus (README → Blog → Comentarios)
+- [ ] Pedir indexación de los artículos EN en Search Console y reenviar el sitemap
+- [x] v3.8: énfasis en programar sin IA (sobre mí, CV, línea de tiempo "antes y después de la IA"),
+  blog con buscador/etiquetas/índice/relacionados y 11 artículos (uno o más por proyecto con código visible, más Jellyfin)
+- [x] "En vivo": notebook, rubik y selflix son **proyectos** con caso de estudio propio (campo `live` en profile.ts);
+  la tarjeta abre el caso y ahí está el botón "Ver en vivo". Textos armados desde la memoria del agente: Rossmel los revisa
 
 ---
 
 ## Continuar con Claude Code local
 
-1. `git clone git@github.com:rossmelabasto/portfolio-rossmel.git && cd portfolio-rossmel`
-2. `git checkout <rama de trabajo>` (ver sección siguiente) y `npm install`
-3. Abrir `claude` en la carpeta: lee `CLAUDE.md` automáticamente, que resume convenciones y estado.
-4. Pedirle algo como: *"Lee README.md y docs/, y sigue con los pendientes."*
+**Guía completa: [`docs/CONTINUAR.md`](docs/CONTINUAR.md)** (mapa del código, recetas, preferencias de
+Rossmel, pendientes y trampas conocidas).
+
+1. `git clone git@github.com:rossmelabasto/portfolio-rossmel.git && cd portfolio-rossmel && npm install`
+2. Abrir `claude` en la carpeta: lee `CLAUDE.md` automáticamente.
+3. Primer mensaje sugerido: *"Lee docs/CONTINUAR.md, CLAUDE.md y README.md. Corre build, check y
+   verify para confirmar que todo está bien y dime qué pendientes ves."*
 
 Ramas:
 - `master` → v1 (Angular, 2022), solo como archivo histórico.
@@ -371,4 +488,18 @@ Ramas:
 | 2026-09 | Formulario: Pages Function + Resend + Turnstile (gratis, sin backend propio). |
 | 2026-09 | Fondo WebGL limitado a 30 fps y menor resolución en móvil (rendimiento). |
 | 2026-09 | Despliegue en Cloudflare Pages (un proyecto, dos dominios, middleware para `cv.`). |
+| 2026-09 | v3.8: "programador primero". Sobre mí, CV y la sección Cómo trabajo cuentan que programó años sin IA (en WANT la IA llegó recién el último año) y qué herramientas usa hoy. |
+| 2026-09 | Blog "en condiciones": buscador de texto completo sin dependencias (índice JSON bajo demanda), etiquetas, índice por artículo, relacionados y enlaces artículo ↔ caso de estudio. Artículos en español. |
+| 2026-09 | Sección "En vivo": notebook, rubik y selflix. Fuera: music, mcu, waitlist, stream, chat, admin, admin-music, ssh, ori, class, s, test (y los del propio portafolio). |
+| 2026-09 | Dibujos fine line a mano (rough.js en el build): anotaciones, íconos de Cómo trabajo y dibujos de la historia. Pocos y con significado; nada en hero/CV/stack. |
+| 2026-09 | "Sobre mí" corto en la home + página `/sobre-mi/` (`/en/about/`) con la historia completa (`story`, `journey` en profile.ts); cifra "días programando" desde `codingSince` (mediados de 2020); "Cómo trabajo" = flujo completo (5 pasos + entorno), la IA como una parte. Empezó a programar en 2020 (no 2019). |
+| 2026-09 | Foto del "Sobre mí" en 3 capas (fondo, contorno, persona) con parallax y tilt; capas generadas por script desde la foto original. |
+| 2026-09 | Blog bilingüe (artículos EN en `src/content/blog/en/`, pareados con `translationOf`), orden en la portada, fechas repartidas, compartir, giscus opcional, SEO (JSON-LD Person/WebSite/BlogPosting/Breadcrumb, og:locale, x-default, lastmod). Stack traducible (`SkillItem`). "La agencia" → WANT. |
+| 2026-09 | Los servicios en vivo pasan a ser proyectos con página de detalle (qué es, cómo funciona, lo que aprendí) en vez de enlaces directos; se elimina `liveSites`. Pedido de Rossmel. |
+| 2026-09 | Entrada del nombre fluida en móvil: las demás animaciones se preparan después del intro y en pedazos (antes, un bloqueo de ~380 ms con CPU de gama media). |
+| 2026-09 | Tono: transmitir que entiende lo que genera la IA, sin frases absolutas ni "no soy vibe coder" (pedido de Rossmel). |
+| 2026-09 | v3.13: botón "volver arriba" con anillo de progreso y más dibujos a mano (subrayados/círculos en hero, experiencia, proyectos, historia y los 22 artículos). Pedido de Rossmel. |
+| 2026-09 | v3.15: nuevo titular del hero ("Construyo interfaces rápidas, cuidadas y listas para producción. Programo desde 2020…"), íconos en los botones CV y ES/EN (nav y barra del CV) y el botón "volver arriba" sube al llegar al footer para no tapar sus enlaces. Pedido de Rossmel. |
+| 2026-09 | Traspaso a Claude local: guía `docs/CONTINUAR.md` y `npm run verify` (chequeo automático tras el build). |
+| 2026-09 | v3.14: dibujo por proyecto y dibujos "en vuelo" en más secciones; CV con "WANT Digital Agency" completo y más proyectos (Homelab, Notebook, Rubik, rOS). Pedido de Rossmel. |
 | 2026-09 | Fuera del sitio: watcher-backend, prototipos v0 (salvo SGPG), proyectos descartados, proyectos personales/regalos. |

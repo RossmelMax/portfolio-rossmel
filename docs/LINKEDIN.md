@@ -16,7 +16,7 @@ recomienda, con los textos EN de abajo).
 
 ## Acerca de
 **ES:**
-Desarrollador Frontend con más de 3 años de experiencia en agencia construyendo SaaS multi-tenant, apps móviles y sitios web con React, Next.js, React Native y TypeScript (~1.800 commits en productos para clientes de Bolivia y EE. UU.).
+Desarrollador Frontend con más de 3 años de experiencia en WANT construyendo SaaS multi-tenant, apps móviles y sitios web con React, Next.js, React Native y TypeScript (~1.800 commits en productos para clientes de Bolivia y EE. UU.).
 
 Estoy evolucionando a Fullstack (FastAPI, Node.js, SQLite/PostgreSQL, Firebase, Supabase) y la IA es parte de cómo trabajo: la integro en productos —como AdvAI, mi proyecto de grado, que audita contratos con citas legales verificables— y en mi flujo diario con agentes y LLMs locales.
 
@@ -27,7 +27,7 @@ Fuera del trabajo: Linux (mi propio flavor de Arch, rOS) y un homelab con una do
 🌐 portfolio.rossmel.top · ✍️ portfolio.rossmel.top/blog
 
 **EN:**
-Frontend Developer with 3+ years of agency experience building multi-tenant SaaS, mobile apps and websites with React, Next.js, React Native and TypeScript (~1,800 commits across client products in Bolivia and the US).
+Frontend Developer with 3+ years of experience at WANT building multi-tenant SaaS, mobile apps and websites with React, Next.js, React Native and TypeScript (~1,800 commits across client products in Bolivia and the US).
 
 I'm growing into Fullstack (FastAPI, Node.js, SQLite/PostgreSQL, Firebase, Supabase), and AI is part of how I work: I build it into products — like AdvAI, my capstone, which audits contracts with verifiable legal citations — and into my daily workflow with agents and local LLMs.
 

@@ -1,0 +1,17 @@
+---
+import { sketchPaths, type SketchName } from '../data/sketches';
+/**
+ * Dibujo fine line (ver src/data/sketches.ts). Hereda el color del texto (`currentColor`).
+ * `draw`: true = se dibuja al entrar en pantalla · 'scrub' = se dibuja al ritmo del scroll · false = estático.
+ * Si un ancestro tiene `data-draw-host`, el dibujo se vuelve a trazar al pasar el mouse por él.
+ * Sin JS / reduced-motion se ve completo (data-draw en animations.ts).
+ */
+interface Props { name: SketchName; class?: string; seed?: number; draw?: boolean | 'scrub'; style?: string }
+const { name, class: cls = '', seed = 1, draw = true, style } = Astro.props;
+const { viewBox, stretch, paths } = sketchPaths(name, seed);
+---
+<svg viewBox={viewBox} fill="none" aria-hidden="true" class={cls} style={style} data-draw={draw === 'scrub' ? 'scrub' : draw ? '' : undefined} preserveAspectRatio={stretch ? 'none' : undefined}>
+  {paths.map((d) => (
+    <path d={d} pathLength="1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" vector-effect={stretch ? 'non-scaling-stroke' : undefined} />
+  ))}
+</svg>
