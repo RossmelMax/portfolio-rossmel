@@ -25,7 +25,7 @@ const posts = await postsForProject(p.slug, lang);
       {p.doodle && <SketchFlight icon={p.doodle} seed={idx * 7 + 131} variant={idx} class="pointer-events-none absolute right-4 top-24 h-auto w-[62vw] max-w-[34rem] text-[var(--accent)] opacity-90 md:right-10 md:top-28" />}
       <div class="relative">
         <p class="kicker mb-6" data-reveal>{p.kind[lang]} · {p.year}{p.confidential ? ` · ${s.work.private}` : ''}</p>
-        <h1 data-split class="display text-[18vw] font-bold md:text-[12vw]">{p.name}</h1>
+        <h1 data-split class="display text-[18vw] font-bold md:text-[clamp(5.76rem,12vw,10.8rem)]">{p.name}</h1>
         <p data-reveal class="mt-8 max-w-3xl text-2xl md:text-4xl">{p.tagline[lang]}</p>
         {p.live && (
           <a data-reveal href={`https://${p.live}`} target="_blank" rel="noopener" class="mt-10 inline-flex items-center gap-3 rounded-full px-6 py-3 font-medium text-[#0a0a0b]" style={`background:${p.accent}`}>
@@ -96,7 +96,7 @@ const posts = await postsForProject(p.slug, lang);
 
     <a href={paths.project(lang, next.slug)} data-hover class="group block border-t border-line px-5 py-24 md:px-10">
       <p class="kicker">{s.project.next}</p>
-      <p class="display mt-6 text-[14vw] font-bold leading-none transition-colors group-hover:text-[var(--n)] md:text-[9vw]" style={`--n:${next.accent}`}>{next.name} →</p>
+      <p class="display mt-6 text-[14vw] font-bold leading-none transition-colors group-hover:text-[var(--n)] md:text-[clamp(4.32rem,9vw,8.1rem)]" style={`--n:${next.accent}`}>{next.name} →</p>
     </a>
     <div class="px-5 pb-10 md:px-10"><a href={paths.home(lang) + '#work'} class="kicker hover:text-fg">← {s.project.back}</a></div>
   </main>

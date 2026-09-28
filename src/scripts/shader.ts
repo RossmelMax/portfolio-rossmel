@@ -139,7 +139,7 @@ export function mountShader(canvas: HTMLCanvasElement): boolean {
     mouse.ty = 1 - e.clientY / window.innerHeight;
   });
 
-  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const reduced = document.documentElement.dataset.motion === 'reduced';
   let visible = true;
   new IntersectionObserver(([e]) => (visible = e.isIntersecting)).observe(canvas);
 

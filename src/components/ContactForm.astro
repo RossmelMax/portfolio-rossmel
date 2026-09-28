@@ -53,7 +53,7 @@ const field = 'w-full rounded-2xl border border-line bg-bg-2 px-5 py-4 text-fg p
   const dialog = document.querySelector<HTMLDialogElement>('[data-term-dialog]');
   dialog?.querySelector('[data-term-close]')?.addEventListener('click', () => dialog.close());
   const esc = (x: string) => x.replace(/[&<>]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' })[c]!);
-  const sleep = (ms: number) => new Promise((r) => setTimeout(r, matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : ms));
+  const sleep = (ms: number) => new Promise((r) => setTimeout(r, document.documentElement.dataset.motion === 'reduced' ? 0 : ms));
 
   document.querySelectorAll<HTMLFormElement>('[data-contact-form]').forEach((form) => {
     const status = form.querySelector<HTMLElement>('[data-form-status]')!;

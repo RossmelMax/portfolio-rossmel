@@ -176,7 +176,24 @@ Otros detalles:
 - **Cursor** personalizado solo con mouse (no en táctil).
 - **`prefers-reduced-motion`**: se desactivan Lenis, preloader y animaciones; el contenido se
   ve completo y estático. Respetar esto siempre al añadir efectos.
+- **Botón de movimiento** (header, junto al de tema): fuerza el modo reducido aunque el sistema no
+  lo pida. Guarda `localStorage.motion` (`'reduced'` | `'auto'`) y **recarga la página** al hacer
+  clic — el estado real (`prefers-reduced-motion` del sistema, salvo que el botón lo fuerce) se
+  calcula una sola vez en el script inline de `Base.astro` y queda en `document.documentElement
+  .dataset.motion`; `animations.ts`, `shader.ts` y `ContactForm.astro` leen ese dato en vez de
+  `matchMedia` directo. `global.css` repite el bloque de `@media (prefers-reduced-motion: reduce)`
+  bajo `html[data-motion='reduced']` para que el CSS puro (marquee, etc.) también se detenga.
+- **Nombre del hero sin "salto" en hard reload**: el mismo script inline agrega `hero-pending` a
+  `<html>` antes de pintar (si no hay movimiento reducido); eso esconde `[data-hero-title]` y
+  `[data-hero-fade]` por CSS hasta que `heroIntro()` la quita, en el mismo tick en que arma el
+  `SplitText` y arranca el tween. Sin esto, con fuentes lentas (hard reload) el nombre se veía
+  posado y estático un instante antes de que la animación lo "forzara" a re-aparecer. Tiene un
+  `setTimeout` de 3 s por si `animations.ts` no llega a correr, y el `<noscript>` la revela también.
 - Tema oscuro por defecto; botón ◐ cambia a claro y se guarda en `localStorage`.
+- **Títulos con `vw`** (hero, "Trabajo seleccionado", nombre de proyecto en la tarjeta y en su
+  página, "¿Construimos algo juntos?", 404): usan `clamp(mínimo, Xvw, tope)` en vez de `Xvw` a
+  secas. El mínimo es el tamaño a 768px y el tope es el tamaño a 1440px, así no cambia nada hasta
+  1440px y deja de crecer sin control en monitores más anchos (antes se veía gigante a 1920px+).
 
 ---
 

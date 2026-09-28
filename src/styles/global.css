@@ -231,6 +231,11 @@ html.lenis body {
 :root[data-theme='light'] .theme-sun { display: block; }
 :root[data-theme='light'] .theme-moon { display: none; }
 
+/* Botón de movimiento: ondas si está activo, líneas quietas si está reducido */
+.motion-off { display: none; }
+:root[data-motion='reduced'] .motion-off { display: block; }
+:root[data-motion='reduced'] .motion-on { display: none; }
+
 /* Hero: respaldo sin WebGL (solo visible si el shader no pudo montarse) */
 .hero-fallback {
   display: none;
@@ -274,6 +279,12 @@ html.booted [data-preloader] {
   display: none;
 }
 
+/* Nombre del hero escondido hasta que heroIntro() arranca su animación (ver Base.astro) */
+html.hero-pending [data-hero-title],
+html.hero-pending [data-hero-fade] {
+  opacity: 0;
+}
+
 /* Marquee */
 .marquee-track {
   display: flex;
@@ -284,7 +295,7 @@ html.booted [data-preloader] {
   to { transform: translateX(-50%); }
 }
 
-/* Accesibilidad: sin animaciones si el usuario lo pide */
+/* Accesibilidad: sin animaciones si el usuario lo pide (sistema operativo o botón del header) */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.001ms !important;
@@ -294,6 +305,15 @@ html.booted [data-preloader] {
   .grain { display: none; }
   [data-preloader] { display: none; }
 }
+html[data-motion='reduced'] *,
+html[data-motion='reduced'] *::before,
+html[data-motion='reduced'] *::after {
+  animation-duration: 0.001ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001ms !important;
+}
+html[data-motion='reduced'] .grain { display: none; }
+html[data-motion='reduced'] [data-preloader] { display: none; }
 
 /* Transiciones de página (View Transitions API) */
 ::view-transition-old(root),

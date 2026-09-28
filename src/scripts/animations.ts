@@ -24,7 +24,8 @@ import Lenis from 'lenis';
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
-const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+// Ya resuelto en el script del <head> (Base.astro): sistema operativo + botón de movimiento.
+const reduced = document.documentElement.dataset.motion === 'reduced';
 const finePointer = matchMedia('(pointer: fine)').matches;
 
 /* ---------------- Smooth scroll ---------------- */
@@ -101,6 +102,8 @@ function initPreloader(): Promise<void> {
 function heroIntro(): gsap.core.Timeline | null {
   const hero = document.querySelector('[data-hero]');
   if (!hero) return null;
+  // Se quita en el mismo tick en que arranca la animación: nunca se ve el nombre quieto antes.
+  document.documentElement.classList.remove('hero-pending');
   const title = hero.querySelector<HTMLElement>('[data-hero-title]');
   const tl = gsap.timeline({ defaults: { ease: 'expo.out' } });
   if (title) {

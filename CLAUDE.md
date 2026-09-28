@@ -46,6 +46,10 @@ Antes de dar algo por terminado: `npm run build`, `npm run check` y `npm run ver
 - v3.14: `doodle` por proyecto (galería, lista, En vivo, hero del caso) y <SketchFlight> (estela + dibujo con scroll) en varias secciones; CV con más proyectos (sigue en 2 páginas).
 - v3.15: titular del hero nuevo, íconos en CV y ES/EN, botón volver arriba no tapa el footer.
 - Flujo de publicación: Claude web sube a su rama y abre un PR a main; Rossmel lo aprueba en GitHub → Cloudflare publica. Antes de avisar, verificar que el PR siga ABIERTO: si ya se fusionó, abrir uno nuevo (los commits posteriores a un merge no aparecen solos).
+- v3.16: botón de reducir movimiento en el header (junto al de tema; se guarda y recarga), arreglo del
+  nombre del hero "trabado" en hard reload (se escondía hasta que animations.ts corría), y clamp() en
+  los títulos con vw (hero, proyectos, contacto, 404) para que no se vean gigantes en monitores anchos
+  (1920 px+): el tamaño no cambia hasta 1440 px, de ahí topa en el valor que ya tenía a 1440 px.
 - Siguiente: capturas y video de AdvAI (Rossmel); GitHub/LinkedIn (docs/).
 - Analítica: inyección automática de Cloudflare, sin token.
 - Preguntas abiertas para Rossmel y decisiones por proyecto: `docs/PROYECTOS-CANDIDATOS.md`.
