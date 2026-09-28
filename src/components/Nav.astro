@@ -31,6 +31,11 @@ const blogHref = paths.blog(lang);
         <svg class="theme-moon h-[18px] w-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 14.5A8.5 8.5 0 1 1 9.5 3.5a7 7 0 0 0 11 11Z" /></svg>
         <svg class="theme-sun h-[18px] w-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2" /><path d="M12 2.5v2.2M12 19.3v2.2M4.6 4.6l1.6 1.6M17.8 17.8l1.6 1.6M2.5 12h2.2M19.3 12h2.2M4.6 19.4l1.6-1.6M17.8 6.2l1.6-1.6" /></svg>
       </button>
+      <button type="button" data-motion-toggle class="grid h-9 w-9 place-items-center rounded-full border border-line hover:border-fg" aria-label={s.nav.motion} title={s.nav.motion} aria-pressed="false">
+        <!-- Ondas: movimiento activo. Líneas quietas: reducido (se alterna por CSS según data-motion) -->
+        <svg class="motion-on h-[18px] w-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12c2 0 2-6 4-6s2 6 4 6 2-6 4-6 2 6 4 6 2-6 4-6" /></svg>
+        <svg class="motion-off h-[18px] w-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M2 12h20" /></svg>
+      </button>
       <button type="button" data-menu-toggle aria-expanded="false" aria-controls="mobile-menu" class="rounded-full border border-line px-3 py-2 md:hidden" data-open={s.nav.menu} data-close={s.nav.close}>{s.nav.menu}</button>
     </div>
   </nav>
@@ -78,4 +83,15 @@ const blogHref = paths.blog(lang);
       try { localStorage.setItem('theme', next); } catch {}
     }),
   );
+
+  // Movimiento: se decide una sola vez al cargar (script en Base.astro), así que al hacer clic
+  // guardamos la preferencia y recargamos para que todo (hero, scroll, shader) nazca ya coherente.
+  document.querySelectorAll<HTMLButtonElement>('[data-motion-toggle]').forEach((b) => {
+    b.setAttribute('aria-pressed', String(document.documentElement.dataset.motion === 'reduced'));
+    b.addEventListener('click', () => {
+      const next = document.documentElement.dataset.motion === 'reduced' ? 'auto' : 'reduced';
+      try { localStorage.setItem('motion', next); } catch {}
+      location.reload();
+    });
+  });
 </script>

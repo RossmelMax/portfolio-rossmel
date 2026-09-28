@@ -34,6 +34,10 @@ Antes de dar algo por terminado: `npm run build` sin errores, y si cambió conte
 - Formulario de contacto y Search Console: configurados y funcionando (sept. 2026).
 - v3.6: blog (/blog, Markdown en src/content/blog), 'Lo que aprendí' por proyecto, CTAs y fondo de respaldo en el hero.
 - v3.7: correcciones de la revisión de Claude local (móvil 360 px, LCP, blog EN, contraste, validación).
+- v3.8: botón de reducir movimiento en el header (junto al de tema; se guarda y recarga), arreglo del
+  nombre del hero "trabado" en hard reload (se escondía hasta que animations.ts corría), y clamp() en
+  los títulos con vw (hero, proyectos, contacto, 404) para que no se vean gigantes en monitores anchos
+  (1920 px+): el tamaño no cambia hasta 1440 px, de ahí topa en el valor que ya tenía a 1440 px.
 - Flujo de publicación: Claude web sube a su rama y abre un PR a main; Rossmel lo aprueba en GitHub → Cloudflare publica.
 - Siguiente: capturas y video de AdvAI (Rossmel); GitHub/LinkedIn (docs/).
 - Analítica: inyección automática de Cloudflare, sin token.

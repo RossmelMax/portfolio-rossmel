@@ -3,7 +3,7 @@ import type { Lang } from './profile';
 /** Textos de interfaz (no de contenido). */
 export const ui = {
   es: {
-    nav: { about: 'Sobre mí', work: 'Proyectos', experience: 'Experiencia', stack: 'Stack', contact: 'Contacto', cv: 'CV', blog: 'Blog', menu: 'Menú', close: 'Cerrar', theme: 'Cambiar tema' },
+    nav: { about: 'Sobre mí', work: 'Proyectos', experience: 'Experiencia', stack: 'Stack', contact: 'Contacto', cv: 'CV', blog: 'Blog', menu: 'Menú', close: 'Cerrar', theme: 'Cambiar tema', motion: 'Reducir movimiento' },
     hero: { hello: 'Hola, soy', scroll: 'Desliza', available: 'Disponible para nuevos proyectos', ctaWork: 'Ver proyectos', ctaCv: 'Descargar CV' },
     boot: {
       command: './portfolio --start',
@@ -62,7 +62,7 @@ export const ui = {
     langSwitch: 'EN',
   },
   en: {
-    nav: { about: 'About', work: 'Work', experience: 'Experience', stack: 'Stack', contact: 'Contact', cv: 'Resume', blog: 'Blog', menu: 'Menu', close: 'Close', theme: 'Toggle theme' },
+    nav: { about: 'About', work: 'Work', experience: 'Experience', stack: 'Stack', contact: 'Contact', cv: 'Resume', blog: 'Blog', menu: 'Menu', close: 'Close', theme: 'Toggle theme', motion: 'Reduce motion' },
     hero: { hello: "Hi, I'm", scroll: 'Scroll', available: 'Available for new projects', ctaWork: 'See my work', ctaCv: 'Download resume' },
     boot: {
       command: './portfolio --start',

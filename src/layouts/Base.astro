@@ -60,19 +60,32 @@ const personLd = {
     <meta property="og:image" content={new URL('/og.png', Astro.site)} />
     <meta name="twitter:card" content="summary_large_image" />
     <script type="application/ld+json" set:html={JSON.stringify(personLd)} />
-    <!-- Tema antes de pintar: evita parpadeo -->
+    <!-- Tema y movimiento antes de pintar: evita parpadeos -->
     <script is:inline>
       (function () {
+        var root = document.documentElement;
         try {
           var t = localStorage.getItem('theme');
           // Oscuro por defecto (el diseño está pensado dark-first); respeta la elección guardada.
           if (t !== 'light') t = 'dark';
-          document.documentElement.dataset.theme = t;
-          if (sessionStorage.getItem('preloaded') === '1') document.documentElement.classList.add('booted');
+          root.dataset.theme = t;
+          if (sessionStorage.getItem('preloaded') === '1') root.classList.add('booted');
+        } catch (e) {}
+        try {
+          // 'reduced' forzado por el botón del header, o si no, lo que diga el sistema.
+          var m = localStorage.getItem('motion');
+          var reduced = m === 'reduced' || matchMedia('(prefers-reduced-motion: reduce)').matches;
+          root.dataset.motion = reduced ? 'reduced' : 'auto';
+          if (!reduced) {
+            // Esconde el nombre del hero hasta que animations.ts arranque su animación (heroIntro
+            // la quita en el mismo tick). Si algo falla, se revela sola a los 3 s.
+            root.classList.add('hero-pending');
+            setTimeout(function () { root.classList.remove('hero-pending'); }, 3000);
+          }
         } catch (e) {}
       })();
     </script>
-    <noscript><style>[data-preloader]{display:none!important}</style></noscript>
+    <noscript><style>[data-preloader]{display:none!important}[data-hero-title],[data-hero-fade]{opacity:1!important}</style></noscript>
     <style is:global>
       @view-transition { navigation: auto; }
     </style>
