@@ -213,11 +213,19 @@ function revealTasks(): (() => void)[] {
 
 /* ---------------- Scroll horizontal (proyectos) ---------------- */
 function initHorizontal() {
+  // Por defecto (CSS) la fila de proyectos ya se puede desplazar a mano: scroll nativo, snap,
+  // foco de teclado (ver Projects.astro). Acá GSAP la toma para el efecto "fijo" en pantallas
+  // grandes con movimiento permitido; con reduced-motion nunca se llama a esta función y el
+  // scroll nativo queda como única forma de ver las tarjetas (accesible igual).
   const mm = gsap.matchMedia();
   mm.add('(min-width: 768px)', () => {
+    const cleanups: (() => void)[] = [];
     document.querySelectorAll<HTMLElement>('[data-horizontal]').forEach((section) => {
       const track = section.querySelector<HTMLElement>('[data-track]');
       if (!track) return;
+      track.scrollLeft = 0;
+      track.style.overflowX = 'hidden'; // evita pelear con el transform de abajo
+      cleanups.push(() => { track.style.overflowX = ''; });
       const distance = () => track.scrollWidth - window.innerWidth;
       const tween = gsap.to(track, {
         x: () => -distance(),
@@ -244,6 +252,7 @@ function initHorizontal() {
         );
       });
     });
+    return () => cleanups.forEach((fn) => fn());
   });
 }
 

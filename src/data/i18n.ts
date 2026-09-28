@@ -13,7 +13,7 @@ export const ui = {
     },
     about: { kicker: '01 — Sobre mí', me: 'yo', more: 'Conoce mi historia', pageKicker: 'Sobre mí', pageTitle: 'Mi historia', pageIntro: 'De estudiar Derecho en plena pandemia a construir productos, mi propia distro de Linux y un homelab. Así llegué hasta aquí.', journey: 'Mi camino', essay: 'Más sobre cómo uso la IA: programar antes y después de la IA', back: 'Volver al inicio', cta: '¿Hablamos?' },
     experience: { kicker: '02 — Experiencia', present: 'Actualidad', now: 'hoy' },
-    work: { kicker: '03 — Proyectos', swipe: 'sigue bajando', title: 'Trabajo seleccionado', view: 'Ver caso', private: 'Código privado' },
+    work: { kicker: '03 — Proyectos', swipe: 'sigue bajando', title: 'Trabajo seleccionado', view: 'Ver caso', private: 'Código privado', scrollRegion: 'Proyectos destacados, se puede desplazar' },
     stack: { kicker: '04 — Stack' },
     workflow: { kicker: '05 — Cómo trabajo', title: 'Del problema a producción.', setup: 'Mi entorno' },
     contact: {
@@ -99,7 +99,7 @@ export const ui = {
     },
     about: { kicker: '01 — About', me: 'me', more: 'Read my story', pageKicker: 'About', pageTitle: 'My story', pageIntro: 'From studying law in the middle of the pandemic to building products, my own Linux distro and a homelab. This is how I got here.', journey: 'My path', essay: 'More on how I use AI: coding before and after AI', back: 'Back home', cta: 'Let\'s talk?' },
     experience: { kicker: '02 — Experience', present: 'Present', now: 'now' },
-    work: { kicker: '03 — Work', swipe: 'keep scrolling', title: 'Selected work', view: 'View case', private: 'Private code' },
+    work: { kicker: '03 — Work', swipe: 'keep scrolling', title: 'Selected work', view: 'View case', private: 'Private code', scrollRegion: 'Featured projects, scrollable' },
     stack: { kicker: '04 — Stack' },
     workflow: { kicker: '05 — How I work', title: 'From problem to production.', setup: 'My setup' },
     contact: {

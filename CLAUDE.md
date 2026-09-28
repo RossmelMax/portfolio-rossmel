@@ -50,6 +50,10 @@ Antes de dar algo por terminado: `npm run build`, `npm run check` y `npm run ver
   nombre del hero "trabado" en hard reload (se escondía hasta que animations.ts corría), y clamp() en
   los títulos con vw (hero, proyectos, contacto, 404) para que no se vean gigantes en monitores anchos
   (1920 px+): el tamaño no cambia hasta 1440 px, de ahí topa en el valor que ya tenía a 1440 px.
+- v3.17: proyectos destacados accesibles sin el efecto de scroll fijo (reduced-motion o sin JS):
+  `[data-track]` en Projects.astro pasa a `overflow-x-auto` + scroll-snap + `role="region"`/
+  `tabindex="0"` por defecto en CSS; `initHorizontal()` solo le pone `overflow-x: hidden` mientras
+  el pin de GSAP está activo.
 - Siguiente: capturas y video de AdvAI (Rossmel); GitHub/LinkedIn (docs/).
 - Analítica: inyección automática de Cloudflare, sin token.
 - Preguntas abiertas para Rossmel y decisiones por proyecto: `docs/PROYECTOS-CANDIDATOS.md`.
