@@ -158,7 +158,7 @@ Prepararlas todas juntas congelaba el hero ~300–400 ms en celulares (se veía 
 | `data-draw` (lo pone `<Sketch>`) | Dibujo fine line a mano que se traza solo al entrar en pantalla |
 | `data-layers` (+ hijos `data-layer="0.5"`, `data-layer-outline`) | Foto en capas: parallax por profundidad al hacer scroll, el contorno aparece y crece, inclinación con el mouse |
 | `data-words` | Párrafo cuyas palabras se "encienden" según el scroll |
-| `data-horizontal` + `data-track` | Sección fijada con scroll horizontal (solo ≥768px) |
+| `data-horizontal` + `data-track` | Sección fijada con scroll horizontal (solo ≥768px, con movimiento permitido) |
 | `data-card` + `data-card-media` | Zoom del fondo de la tarjeta dentro del scroll horizontal |
 | `data-timeline` + `data-progress` | Barra de progreso vertical de la experiencia |
 | `data-parallax="0.3"` | Parallax |
@@ -189,6 +189,13 @@ Otros detalles:
   `SplitText` y arranca el tween. Sin esto, con fuentes lentas (hard reload) el nombre se veía
   posado y estático un instante antes de que la animación lo "forzara" a re-aparecer. Tiene un
   `setTimeout` de 3 s por si `animations.ts` no llega a correr, y el `<noscript>` la revela también.
+- **Proyectos destacados sin JS o con movimiento reducido**: `[data-track]` (Projects.astro) ya es
+  `overflow-x: auto` con scroll-snap y `role="region"`/`tabindex="0"` por defecto en CSS — se puede
+  recorrer con touch, rueda o teclado (Tab enfoca una tarjeta fuera de vista y el navegador la
+  desplaza solo) sin depender de JS. `initHorizontal()` solo le pone `overflow-x: hidden` mientras
+  el efecto "fijo" de GSAP está activo (para no pelear con el scroll nativo), y lo devuelve a `auto`
+  si la media query deja de matchear. Con `reduced-motion` esa función nunca corre, así que el
+  scroll nativo queda como única forma de ver las tarjetas — y es plenamente accesible.
 - Tema oscuro por defecto; botón ◐ cambia a claro y se guarda en `localStorage`.
 - **Títulos con `vw`** (hero, "Trabajo seleccionado", nombre de proyecto en la tarjeta y en su
   página, "¿Construimos algo juntos?", 404): usan `clamp(mínimo, Xvw, tope)` en vez de `Xvw` a
