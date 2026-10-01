@@ -54,6 +54,15 @@ Antes de dar algo por terminado: `npm run build`, `npm run check` y `npm run ver
   `[data-track]` en Projects.astro pasa a `overflow-x-auto` + scroll-snap + `role="region"`/
   `tabindex="0"` por defecto en CSS; `initHorizontal()` solo le pone `overflow-x: hidden` mientras
   el pin de GSAP está activo.
+- v3.18: dos bugs reales en el scroll de Proyectos con movimiento completo (el scroll se quedaba
+  pegado al llegar a la sección, o quedaba en negro a mitad de camino). Causas y arreglo:
+  (1) Lenis nunca se enteraba de que GSAP agrega miles de píxeles de alto con el pin-spacer →
+  `ScrollTrigger.addEventListener('refresh', () => lenis.resize())` en `initLenis()`.
+  (2) el `overflow-x-auto` de v3.17 estaba en `[data-track]`, el elemento que GSAP transforma — eso
+  le impide crecer a su ancho de contenido real, así que el transform movía una caja angosta en vez
+  de revelar las tarjetas. El scroll nativo accesible ahora va en la `<section data-horizontal>`
+  (el track no lleva overflow). Probado con scroll real (rueda) en las 6 tarjetas, ida y vuelta,
+  en ambos modos de movimiento.
 - Siguiente: capturas y video de AdvAI (Rossmel); GitHub/LinkedIn (docs/).
 - Analítica: inyección automática de Cloudflare, sin token.
 - Preguntas abiertas para Rossmel y decisiones por proyecto: `docs/PROYECTOS-CANDIDATOS.md`.

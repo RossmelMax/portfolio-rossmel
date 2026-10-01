@@ -189,13 +189,23 @@ Otros detalles:
   `SplitText` y arranca el tween. Sin esto, con fuentes lentas (hard reload) el nombre se veía
   posado y estático un instante antes de que la animación lo "forzara" a re-aparecer. Tiene un
   `setTimeout` de 3 s por si `animations.ts` no llega a correr, y el `<noscript>` la revela también.
-- **Proyectos destacados sin JS o con movimiento reducido**: `[data-track]` (Projects.astro) ya es
-  `overflow-x: auto` con scroll-snap y `role="region"`/`tabindex="0"` por defecto en CSS — se puede
-  recorrer con touch, rueda o teclado (Tab enfoca una tarjeta fuera de vista y el navegador la
-  desplaza solo) sin depender de JS. `initHorizontal()` solo le pone `overflow-x: hidden` mientras
-  el efecto "fijo" de GSAP está activo (para no pelear con el scroll nativo), y lo devuelve a `auto`
-  si la media query deja de matchear. Con `reduced-motion` esa función nunca corre, así que el
-  scroll nativo queda como única forma de ver las tarjetas — y es plenamente accesible.
+- **Proyectos destacados sin JS o con movimiento reducido**: la `<section id="work">` (no el
+  `[data-track]` de adentro) es `overflow-x: auto` con scroll-snap y `role="region"`/`tabindex="0"`
+  por defecto en CSS — se puede recorrer con touch, rueda o teclado (Tab enfoca una tarjeta fuera
+  de vista y el navegador la desplaza solo) sin depender de JS. **Importante:** el scroll nativo va
+  en la sección, no en el track — el track tiene que poder crecer libre a su ancho de contenido real
+  para que el `transform: translateX()` de GSAP funcione; si el track también clipa con overflow, su
+  propia caja se encoge al ancho del viewport y el transform mueve esa caja angosta en vez de revelar
+  el resto de las tarjetas (pantalla en negro a mitad de scroll). `initHorizontal()` le pone
+  `overflow-x: hidden` a la SECCIÓN solo mientras el efecto "fijo" de GSAP está activo (para no pelear
+  con el scroll nativo), y lo devuelve a `auto` si la media query deja de matchear. Con
+  `reduced-motion` esa función nunca corre, así que el scroll nativo queda como única forma de ver
+  las tarjetas — y es plenamente accesible.
+- **Lenis + ScrollTrigger**: `ScrollTrigger.addEventListener('refresh', () => lenis.resize())` es
+  obligatorio. Lenis mide el alto scrolleable de la página una sola vez y su `ResizeObserver` no
+  detecta que creció cuando GSAP agrega el pin-spacer del scroll horizontal (ese spacer agrega
+  miles de píxeles de alto). Sin este listener, el scroll se queda pegado justo al llegar a la
+  sección de Proyectos — el usuario nunca avanza más allá de la primera tarjeta.
 - Tema oscuro por defecto; botón ◐ cambia a claro y se guarda en `localStorage`.
 - **Títulos con `vw`** (hero, "Trabajo seleccionado", nombre de proyecto en la tarjeta y en su
   página, "¿Construimos algo juntos?", 404): usan `clamp(mínimo, Xvw, tope)` en vez de `Xvw` a

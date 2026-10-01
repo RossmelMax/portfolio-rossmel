@@ -36,6 +36,10 @@ function initLenis() {
   (window as unknown as { __lenis: Lenis }).__lenis = lenis; // lo usa el botón "volver arriba"
   gsap.ticker.add((time) => lenis.raf(time * 1000));
   gsap.ticker.lagSmoothing(0);
+  // Lenis mide el alto scrolleable una sola vez y su ResizeObserver no detecta que creció
+  // (el pin-spacer del scroll horizontal de Proyectos agrega harto alto): sin esto, el
+  // scroll se queda pegado justo al llegar a esa sección.
+  ScrollTrigger.addEventListener('refresh', () => lenis.resize());
 
   // Anclas internas con scroll suave
   document.querySelectorAll<HTMLAnchorElement>('a[href^="#"]').forEach((a) => {
@@ -223,9 +227,13 @@ function initHorizontal() {
     document.querySelectorAll<HTMLElement>('[data-horizontal]').forEach((section) => {
       const track = section.querySelector<HTMLElement>('[data-track]');
       if (!track) return;
-      track.scrollLeft = 0;
-      track.style.overflowX = 'hidden'; // evita pelear con el transform de abajo
-      cleanups.push(() => { track.style.overflowX = ''; });
+      // El scroll nativo accesible vive en la sección (track tiene que poder crecer libre a su
+      // ancho de contenido para que el transform de abajo funcione; si track también clipa con
+      // overflow, su propia caja se encoge al ancho del viewport y el transform mueve esa caja
+      // angosta en vez de revelar el resto de las tarjetas).
+      section.scrollLeft = 0;
+      section.style.overflowX = 'hidden';
+      cleanups.push(() => { section.style.overflowX = ''; });
       const distance = () => track.scrollWidth - window.innerWidth;
       const tween = gsap.to(track, {
         x: () => -distance(),
