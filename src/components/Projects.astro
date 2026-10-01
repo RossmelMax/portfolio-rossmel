@@ -9,13 +9,17 @@ const s = t(lang);
 const featured = projects.filter((p) => p.featured);
 const others = projects.filter((p) => !p.featured);
 ---
-<section id="work" data-horizontal class="relative overflow-hidden md:h-screen">
+<section
+  id="work"
+  data-horizontal
+  role="region"
+  aria-label={s.work.scrollRegion}
+  tabindex="0"
+  class="relative overflow-hidden md:h-screen md:overflow-x-auto md:overscroll-x-contain md:snap-x md:snap-mandatory md:focus-visible:outline md:focus-visible:outline-2 md:focus-visible:outline-offset-4 md:focus-visible:outline-accent"
+>
   <div
     data-track
-    role="region"
-    aria-label={s.work.scrollRegion}
-    tabindex="0"
-    class="flex h-full flex-col gap-6 px-5 py-24 md:flex-row md:items-center md:gap-10 md:overflow-x-auto md:overscroll-x-contain md:px-10 md:py-0 md:snap-x md:snap-mandatory md:focus-visible:outline md:focus-visible:outline-2 md:focus-visible:outline-offset-4 md:focus-visible:outline-accent"
+    class="flex h-full flex-col gap-6 px-5 py-24 md:flex-row md:items-center md:gap-10 md:px-10 md:py-0"
   >
     <div class="shrink-0 md:w-[38vw] md:snap-start md:pr-[3vw]">
       <p class="kicker mb-6">{s.work.kicker}</p>
@@ -36,7 +40,7 @@ const others = projects.filter((p) => !p.featured);
           <span class="absolute right-5 top-5 font-mono text-xs text-fg/70">{String(i + 1).padStart(2, '0')}</span>
         </div>
         <div class="mt-5 flex items-start justify-between gap-6">
-          <div>
+          <div class="min-w-0">
             <h3 class="display text-2xl font-semibold">{p.name} <span class="text-muted">· {p.year}</span></h3>
             <p class="mt-1 text-muted">{p.tagline[lang]}</p>
           </div>
