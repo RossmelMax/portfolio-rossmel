@@ -63,7 +63,21 @@ Antes de dar algo por terminado: `npm run build`, `npm run check` y `npm run ver
   de revelar las tarjetas. El scroll nativo accesible ahora va en la `<section data-horizontal>`
   (el track no lleva overflow). Probado con scroll real (rueda) en las 6 tarjetas, ida y vuelta,
   en ambos modos de movimiento.
-- Siguiente: capturas y video de AdvAI (Rossmel); GitHub/LinkedIn (docs/).
+- v3.19: tarjetas de Proyectos con `md:min-h-[3rem]` en la descripción (una con 2 líneas ya no
+  "levanta" su imagen respecto a las vecinas, por el `md:items-center` de la fila); `min-w-0` en el
+  bloque de texto para que ajuste línea en vez de desbordar. Las 4 tarjetas de Stack (`#stack`) usan
+  el mismo efecto de invertir colores al hover que Workflow (`hover:bg-accent hover:text-accent-ink`
+  + `group-hover` en ícono/pills), y las pills individuales suman su propio hover (lift + borde).
+  Footer sin mencionar GSAP ("Hecho con Astro y mucho café."). Corregida una contradicción en "Mi
+  historia": la home decía "mi propia versión" de rOS (ambiguo, sonaba a distro ya terminada) → ahora
+  dice "mi propio flavor de Arch", igual que en rOS y en /sobre-mi (que ya aclaraba bien que todavía
+  NO es una distro). También se sacó la frase repetida del hero ("cursos, documentación, prueba y
+  error...") del párrafo "Cómo empezó" de /sobre-mi, reemplazada por una variante propia.
+  Responsividad en tablet (768–1024px) revisada con capturas reales (Playwright): el diseño fluido
+  basado en `vw`/`clamp()` ya se adapta bien ahí, incluido el scroll horizontal de Proyectos; no hizo
+  falta ningún breakpoint nuevo.
+- Siguiente: capturas y video de AdvAI (Rossmel); GitHub/LinkedIn (docs/); entrevista pendiente con
+  Rossmel para ampliar "Mi historia" (hobbies, Rubik, deportes) — ver próxima sesión.
 - Analítica: inyección automática de Cloudflare, sin token.
 - Preguntas abiertas para Rossmel y decisiones por proyecto: `docs/PROYECTOS-CANDIDATOS.md`.
 - Despliegue: Cloudflare Pages, proyecto `rossmel-portfolio` conectado a este repo (rama `main`). Ver README → Despliegue.

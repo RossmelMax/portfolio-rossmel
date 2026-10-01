@@ -42,7 +42,7 @@ const others = projects.filter((p) => !p.featured);
         <div class="mt-5 flex items-start justify-between gap-6">
           <div class="min-w-0">
             <h3 class="display text-2xl font-semibold">{p.name} <span class="text-muted">· {p.year}</span></h3>
-            <p class="mt-1 text-muted">{p.tagline[lang]}</p>
+            <p class="mt-1 text-muted md:min-h-[3rem]">{p.tagline[lang]}</p>
           </div>
           <span class="kicker shrink-0 transition-colors group-hover:text-[var(--c)]">{s.work.view} ↗</span>
         </div>

@@ -20,11 +20,15 @@ const s = t(lang);
   </div>
   <div class="mt-16 grid gap-4 px-5 md:grid-cols-2 md:px-10 lg:grid-cols-4">
     {skills.map((g, i) => (
-      <div class="rounded-3xl border border-line bg-bg-2 p-7" data-reveal data-reveal-delay={i * 0.06} data-draw-host>
-        {icons[i] && <Sketch name={icons[i]} seed={i + 14} class="mb-5 h-12 w-12 text-accent" />}
+      <div class="group rounded-3xl border border-line bg-bg-2 p-7 transition-colors hover:bg-accent hover:text-accent-ink" data-reveal data-reveal-delay={i * 0.06} data-draw-host>
+        {icons[i] && <Sketch name={icons[i]} seed={i + 14} class="mb-5 h-12 w-12 text-accent transition-colors group-hover:text-accent-ink" />}
         <h3 class="display text-2xl font-semibold">{g.group[lang]}</h3>
         <ul class="mt-6 flex flex-wrap gap-2">
-          {g.items.map((it) => <li class="rounded-full border border-line px-3 py-1 text-sm text-muted">{tr(it, lang)}</li>)}
+          {g.items.map((it) => (
+            <li class="rounded-full border border-line px-3 py-1 text-sm text-muted transition-all duration-150 hover:-translate-y-0.5 hover:border-fg hover:text-fg group-hover:border-accent-ink/30 group-hover:text-accent-ink/80 group-hover:hover:border-accent-ink group-hover:hover:text-accent-ink">
+              {tr(it, lang)}
+            </li>
+          ))}
         </ul>
       </div>
     ))}
