@@ -931,68 +931,25 @@ export const setup = ['rOS (Arch Linux)', 'Git + GitHub', 'GitHub Actions', 'Doc
 /* MI HISTORIA (página /sobre-mi/ · /en/about/)                        */
 /* ------------------------------------------------------------------ */
 
-/** Línea de tiempo de la historia. */
-export const journey: { period: L; title: L; body: L; tools?: string[] }[] = [
-  {
-    period: { es: '2020', en: '2020' },
-    title: { es: 'Descubro la programación', en: 'Discovering programming' },
-    body: {
-      es: 'En plena pandemia, estudiando Derecho, conozco la programación gracias a Platzi. Y casi al mismo tiempo, Linux.',
-      en: 'In the middle of the pandemic, while studying law, I discover programming through Platzi. And almost at the same time, Linux.',
-    },
-  },
-  {
-    period: { es: '2021', en: '2021' },
-    title: { es: 'Ingeniería de Sistemas', en: 'Systems Engineering' },
-    body: {
-      es: 'Empiezo la carrera en la UDABOL, sin dejar de aprender por mi cuenta.',
-      en: 'I start the degree at UDABOL, while I keep learning on my own.',
-    },
-  },
-  {
-    period: { es: '2022', en: '2022' },
-    title: { es: 'Primer trabajo: WANT', en: 'First job: WANT' },
-    body: {
-      es: 'Entro como pasante con base en desarrollo web y me quedo más de tres años construyendo productos reales.',
-      en: 'I join as an intern with a web development foundation and stay 3+ years building real products.',
-    },
-  },
-  {
-    period: { es: '2025', en: '2025' },
-    title: { es: 'La IA llega al trabajo', en: 'AI arrives at work' },
-    body: {
-      es: 'Después de años programando a mano, en mi último año en WANT incorporamos IA al flujo y a los productos.',
-      en: 'After years of coding by hand, in my last year at WANT we brought AI into our workflow and products.',
-    },
-    tools: ['GitHub Copilot', 'ChatGPT', 'Gemini', 'DeepSeek', 'Groq', 'Ollama', 'Claude'],
-  },
-  {
-    period: { es: 'Hoy', en: 'Today' },
-    title: { es: 'Independiente', en: 'Independent' },
-    body: {
-      es: 'Proyectos pagados y para mi universidad, mi proyecto de grado, rOS y mi homelab.',
-      en: 'Paid and university projects, my capstone, rOS and my homelab.',
-    },
-  },
-];
-
-/** Historia completa: secciones con título y párrafos. */
-export const story: { heading: L; body: Record<Lang, string[]> }[] = [
+/** Historia completa: secciones con título, párrafos y sus dibujos (el primero es el principal). */
+export const story: { heading: L; doodles: SketchName[]; body: Record<Lang, string[]> }[] = [
   {
     heading: { es: 'Cómo empezó', en: 'How it started' },
+    doodles: ['laptop', 'scales', 'notebook', 'bulb'],
     body: {
       es: [
         'A mediados de 2020, en plena pandemia, estudiaba Derecho en la Universidad Mayor de San Simón. Pasar mucho más tiempo frente a la computadora me llevó a curiosear el mundo de la tecnología, y un día, gracias a Platzi, descubrí la programación. Ahí supe cuál era mi ==verdadera vocación==.',
-        'Desde entonces me tomé muy en serio el “==Nunca pares de aprender==” de Freddy Vega. Aprendí en Platzi y en YouTube: Programación ATS, midudev y muchos otros creadores fueron mis maestros. Tutoriales, mucho copy-paste al principio, y noches enteras leyendo un mismo error hasta entenderlo. En 2021 empecé Ingeniería de Sistemas en la UDABOL.',
+        'Desde entonces me tomé muy en serio el ==“Nunca pares de aprender”== de Freddy Vega. Aprendí en Platzi y en YouTube: Programación ATS, midudev y muchos otros creadores fueron mis maestros. Tutoriales, mucho copy-paste al principio, y noches enteras leyendo un mismo error hasta entenderlo. En 2021 empecé Ingeniería de Sistemas en la UDABOL.',
       ],
       en: [
         'In mid-2020, in the middle of the pandemic, I was studying law at Universidad Mayor de San Simón. Spending much more time in front of the computer got me curious about the tech world, and one day, thanks to Platzi, I discovered programming. That\'s when I knew what my ==real calling== was.',
-        'From then on I took Freddy Vega\'s “==Never stop learning==” very seriously. I learned on Platzi and YouTube: Programación ATS, midudev and many other creators were my teachers. Tutorials, a lot of copy-pasting at first, and whole nights reading the same error until it finally clicked. In 2021 I started Systems Engineering at UDABOL.',
+        'From then on I took Freddy Vega\'s ==“Never stop learning”== very seriously. I learned on Platzi and YouTube: Programación ATS, midudev and many other creators were my teachers. Tutorials, a lot of copy-pasting at first, and whole nights reading the same error until it finally clicked. In 2021 I started Systems Engineering at UDABOL.',
       ],
     },
   },
   {
     heading: { es: 'Linux, el otro gran descubrimiento', en: 'Linux, the other big discovery' },
+    doodles: ['linux', 'terminal', 'build', 'database'],
     body: {
       es: [
         'En esa misma época descubrí Linux, y fue otro mindblow: entender que el sistema operativo también se puede aprender, desarmar y armar a tu medida. Probé muchas distros, pero ((Arch)) siempre fue especial para mí: te obliga a entender cada pieza de tu sistema.',
@@ -1006,6 +963,7 @@ export const story: { heading: L; body: Record<Lang, string[]> }[] = [
   },
   {
     heading: { es: 'Del aprendizaje al trabajo', en: 'From learning to working' },
+    doodles: ['work', 'browser', 'cup', 'calendar'],
     body: {
       es: [
         'Con una buena base de desarrollo web entré a WANT Digital Agency en 2022. Empecé como pasante y terminé con contrato: más de tres años construyendo las interfaces web y móviles de productos para clientes de Bolivia y EE. UU., en un equipo de desarrollo de dos personas.',
@@ -1019,6 +977,7 @@ export const story: { heading: L; body: Record<Lang, string[]> }[] = [
   },
   {
     heading: { es: 'La IA, como multiplicador', en: 'AI as a multiplier' },
+    doodles: ['spark', 'pencil', 'question', 'up'],
     body: {
       es: [
         'Con el boom fui probando de todo: GitHub Copilot, ChatGPT, Gemini, DeepSeek, Groq, modelos locales y, últimamente, Claude. Me potenció muchísimo, y como vengo de escribir todo a mano, ==entiendo lo que genera==: sé leerlo, corregirlo y mantenerlo.',
@@ -1031,22 +990,50 @@ export const story: { heading: L; body: Record<Lang, string[]> }[] = [
     },
   },
   {
-    heading: { es: 'Fuera del código', en: 'Outside the code' },
+    heading: { es: 'Cubos de Rubik', en: 'Rubik\'s cubes' },
+    doodles: ['cube', 'timer', 'cube', 'star'],
     body: {
       es: [
-        'Fuera de la pantalla tengo pasatiempos que, sin darme cuenta, terminaron pareciéndose a cómo trabajo: ((obsesionarme)) con un problema, probar, fallar, mejorar y, si hace falta, rearmar todo desde cero. A los 12 o 13 años empecé a armar cubos de Rubik viendo tutoriales del canal de ((Cuby)) en YouTube; hoy tengo entre 20 y 30 cubos distintos y sigo practicando ==velocidad== en [rubik.rossmel.top](https://rubik.rossmel.top), un timer que construí yo mismo. Me engancha lo mismo que la programación: algoritmos, patrones y la sensación de resolver algo pieza por pieza.',
-        'De chico también jugué fútbol: pasé por las divisiones menores del Club Wilstermann hasta que la distancia, el tiempo y el colegio me hicieron dejarlo. Ya no juego tan seguido, pero sigo la liga y me gusta pensar en la historia y la táctica detrás de cada partido.',
-        'La música fue un hilo constante: de chico escuchaba los clásicos de los 80 y 90 con mis papás, después pasé por una etapa de música electrónica, pero [José Madero](https://open.spotify.com/search/Jos%C3%A9%20Madero) y [PXNDX](https://open.spotify.com/search/PXNDX) nunca dejaron de sonar — hoy mis gustos son bastante abiertos. También escucho bastantes podcasts: [The Wild Project](https://open.spotify.com/search/The%20Wild%20Project) es, por lejos, mi favorito.',
+        'Fuera de la pantalla, mis pasatiempos terminaron pareciéndose a cómo trabajo: ((obsesionarme)) con un problema, probar, fallar, mejorar y, si hace falta, rearmar todo desde cero. El mejor ejemplo son los cubos de Rubik.',
+        'Empecé a los 12 o 13 años con los tutoriales del canal de ((Cuby)) en YouTube, y hoy tengo entre 20 y 30 cubos distintos. Sigo practicando ==velocidad== en [rubik.rossmel.top](https://rubik.rossmel.top), un timer que construí yo mismo: algoritmos, patrones y resolver algo pieza por pieza, igual que al programar.',
       ],
       en: [
-        'Away from the screen I have hobbies that, without me noticing, ended up looking a lot like how I work: ((obsessing)) over a problem, trying, failing, improving, and tearing everything down to rebuild it if needed. At 12 or 13 I started solving Rubik\'s cubes watching tutorials from ((Cuby))\'s YouTube channel; today I own between 20 and 30 different cubes and still practice ==speed-solving== on [rubik.rossmel.top](https://rubik.rossmel.top), a timer I built myself. It hooks me the same way programming does: algorithms, patterns, and the feeling of solving something piece by piece.',
-        'As a kid I also played football: I went through Club Wilstermann\'s youth divisions until distance, time and school made me stop. I don\'t play as often anymore, but I still follow the league and like thinking about the history and tactics behind every match.',
-        'Music has been a constant thread: as a kid I listened to 80s and 90s classics with my parents, then went through an electronic music phase, but [José Madero](https://open.spotify.com/search/Jos%C3%A9%20Madero) and [PXNDX](https://open.spotify.com/search/PXNDX) never stopped playing — these days my taste is pretty open. I also listen to a fair number of podcasts: [The Wild Project](https://open.spotify.com/search/The%20Wild%20Project) is, by far, my favorite.',
+        'Away from the screen, my hobbies ended up looking a lot like how I work: ((obsessing)) over a problem, trying, failing, improving and, if needed, tearing everything down to rebuild it. Rubik\'s cubes are the best example.',
+        'I started at 12 or 13 with the tutorials from ((Cuby))\'s YouTube channel, and today I own between 20 and 30 different cubes. I still practice ==speed-solving== on [rubik.rossmel.top](https://rubik.rossmel.top), a timer I built myself: algorithms, patterns and solving something piece by piece, just like programming.',
+      ],
+    },
+  },
+  {
+    heading: { es: 'Fútbol', en: 'Football' },
+    doodles: ['ball', 'goal', 'tv', 'heart'],
+    body: {
+      es: [
+        'De chico, el fútbol era mi otra pasión. Pasé por las divisiones menores del Club ==Wilstermann==, hasta que la distancia, el tiempo y el colegio me hicieron dejarlo.',
+        'Ya no juego tan seguido, pero sigo la liga y el fútbol me gusta también desde otro lado: su historia y la ((táctica)) detrás de cada partido. Entender por qué un equipo gana no es tan distinto de entender por qué un sistema funciona.',
+      ],
+      en: [
+        'As a kid, football was my other passion. I went through the youth divisions of Club ==Wilstermann==, until distance, time and school made me stop.',
+        'I don\'t play as often anymore, but I still follow the league and enjoy football from another angle too: its history and the ((tactics)) behind every match. Understanding why a team wins isn\'t that different from understanding why a system works.',
+      ],
+    },
+  },
+  {
+    heading: { es: 'Música y podcasts', en: 'Music and podcasts' },
+    doodles: ['headphones', 'note', 'mic', 'waves'],
+    body: {
+      es: [
+        'La música fue un hilo constante: de chico escuchaba los clásicos de los 80 y 90 con mis papás y después pasé por una etapa de música electrónica, pero [José Madero](https://open.spotify.com/search/Jos%C3%A9%20Madero) y [PXNDX](https://open.spotify.com/search/PXNDX) nunca dejaron de sonar. Hoy mis gustos son bastante ==abiertos==.',
+        'Y cuando no es música, es un podcast: [The Wild Project](https://open.spotify.com/search/The%20Wild%20Project) es, por lejos, el que más escucho — cientos de horas, según mi propio Spotify.',
+      ],
+      en: [
+        'Music has been a constant thread: as a kid I listened to 80s and 90s classics with my parents and later went through an electronic music phase, but [José Madero](https://open.spotify.com/search/Jos%C3%A9%20Madero) and [PXNDX](https://open.spotify.com/search/PXNDX) never stopped playing. These days my taste is pretty ==open==.',
+        'And when it\'s not music, it\'s a podcast: [The Wild Project](https://open.spotify.com/search/The%20Wild%20Project) is, by far, the one I listen to the most — hundreds of hours, according to my own Spotify.',
       ],
     },
   },
   {
     heading: { es: 'Hoy', en: 'Today' },
+    doodles: ['homelab', 'gradcap', 'drop', 'ship'],
     body: {
       es: [
         'Trabajo de forma independiente mientras termino la carrera: AdvAI, mi proyecto de grado; Link\'u, para una comunidad de Sipe Sipe; SGPG, para mi universidad; y mis proyectos personales. La regla sigue siendo la misma de 2020: ==nunca parar de aprender==.',
