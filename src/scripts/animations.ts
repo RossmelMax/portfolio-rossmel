@@ -3,6 +3,8 @@
  *
  *  data-split          título que entra línea por línea al aparecer
  *  data-reveal         bloque que sube y aparece (data-reveal-delay="0.2")
+ *  data-slide="left"   bloque que entra desde un costado ("left" | "right"; acepta data-reveal-delay).
+ *                      El contenedor debe recortar en x (overflow-x-clip) para no generar scroll lateral.
  *  data-words          párrafo cuyas palabras se "encienden" con el scroll (scrub)
  *  data-horizontal     sección fijada con scroll horizontal (contenedor)
  *    └ data-track      la fila que se desplaza
@@ -149,6 +151,19 @@ function revealTasks(): (() => void)[] {
       ease: 'expo.out',
       delay: Number(el.dataset.revealDelay ?? 0),
       scrollTrigger: { trigger: el, start: 'top 88%' },
+    });
+  }));
+
+  document.querySelectorAll<HTMLElement>('[data-slide]').forEach((el) => tasks.push(() => {
+    const dir = el.dataset.slide === 'right' ? 1 : -1;
+    gsap.from(el, {
+      x: () => dir * Math.min(180, innerWidth * 0.18),
+      rotate: dir * 2.5,
+      opacity: 0,
+      duration: 1.3,
+      ease: 'expo.out',
+      delay: Number(el.dataset.revealDelay ?? 0),
+      scrollTrigger: { trigger: el, start: 'top 85%' },
     });
   }));
 

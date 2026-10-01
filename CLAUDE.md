@@ -82,6 +82,13 @@ Antes de dar algo por terminado: `npm run build`, `npm run check` y `npm run ver
   embed genérico de "perfil"/stats en Spotify, solo track/álbum/artista/playlist/podcast puntuales).
   `Marked.astro` soporta `[texto](url)` como enlace real. Nuevo doodle compuesto `hobbies` (cubo +
   pelota + nota musical) en `sketches.ts`, mismo patrón que `linux` (Tux + logo de Arch).
+- v3.21: `/sobre-mi/` rehecha (pedido de Rossmel): foto solo en la cabecera (ya no sticky); capítulos
+  intercalados izq./der. que entran desde su costado (nuevo `data-slide` en animations.ts, el `main`
+  lleva `overflow-x-clip`); cada capítulo tiene `doodles` en profile.ts (principal + 3 secundarios con
+  parallax) y número grande de fondo; flechas `hook` entre capítulos. Se quitó "Mi camino" (`journey`).
+  "Fuera del código" → 3 capítulos: Cubos de Rubik, Fútbol, Música y podcasts. Dibujos nuevos: timer,
+  ball, goal, headphones, note, mic (se quitó el compuesto `hobbies`). La intro ya no dice "mi propia
+  distro": rOS es "mi propio flavor de Arch" en todo el sitio.
 - Siguiente: capturas y video de AdvAI (Rossmel); GitHub/LinkedIn (docs/).
 - Analítica: inyección automática de Cloudflare, sin token.
 - Preguntas abiertas para Rossmel y decisiones por proyecto: `docs/PROYECTOS-CANDIDATOS.md`.

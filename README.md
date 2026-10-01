@@ -155,6 +155,7 @@ Prepararlas todas juntas congelaba el hero ~300–400 ms en celulares (se veía 
 |---|---|
 | `data-split` | Título que entra línea por línea (SplitText + máscara) |
 | `data-reveal` (+ `data-reveal-delay="0.2"`) | Sube y aparece al entrar en pantalla |
+| `data-slide="left"` / `"right"` | Entra desde ese costado con un leve giro (acepta `data-reveal-delay`); el contenedor necesita `overflow-x-clip` |
 | `data-draw` (lo pone `<Sketch>`) | Dibujo fine line a mano que se traza solo al entrar en pantalla |
 | `data-layers` (+ hijos `data-layer="0.5"`, `data-layer-outline`) | Foto en capas: parallax por profundidad al hacer scroll, el contorno aparece y crece, inclinación con el mouse |
 | `data-words` | Párrafo cuyas palabras se "encienden" según el scroll |
@@ -372,8 +373,8 @@ El formulario de contacto al final de cada artículo sigue funcionando igual.
   vuelva a trazar al pasar el mouse (tarjetas de Stack y Cómo trabajo).
 - Dónde están: flecha "yo" a la foto, círculo en "días programando", subrayado/círculo en el Sobre mí,
   "hoy" en Experiencia, garabato + "sigue bajando" en Proyectos, íconos de Stack y Cómo trabajo, ondas
-  en "En vivo", avión de papel y "¡escríbeme!" en Contacto, tacita en el footer y un dibujo por capítulo
-  en `/sobre-mi/`, estrella/foco en "Lo destacado"/"Lo que aprendí" de cada proyecto, lápiz y garabato
+  en "En vivo", avión de papel y "¡escríbeme!" en Contacto, tacita en el footer, varios dibujos por
+  capítulo en `/sobre-mi/` (campo `doodles` de `story`, el primero es el principal), estrella/foco en "Lo destacado"/"Lo que aprendí" de cada proyecto, lápiz y garabato
   en el blog, garabato bajo el título de cada artículo. En el CV no (el CV quita las marcas con
   `stripMarks`; también la meta description, el JSON-LD y el índice del buscador).
   Criterio: acompañar palabras clave, no decorar.
@@ -386,7 +387,7 @@ El formulario de contacto al final de cada artículo sigue funcionando igual.
   en las tarjetas de "En vivo" y grande en el hero de cada caso de estudio.
 - **Dibujos "en vuelo"** (`SketchFlight.astro`): estela punteada que cruza el texto y termina en un
   dibujo, trazada con el scroll (como el avión de Contacto). Están en Experiencia (laptop), En vivo
-  (servidor), Cómo trabajo (cohete), Del blog (lápiz), /sobre-mi/ (laptop), /blog/ (foco) y el hero de
+  (servidor), Cómo trabajo (cohete), Del blog (lápiz), /blog/ (foco) y el hero de
   cada proyecto. `variant` 0–2 cambia la forma de la estela.
 - **Botón "volver arriba"** (`ToTop.astro`): aparece tras bajar ~una pantalla, con un anillo dibujado a
   mano que se completa según el progreso del scroll; usa Lenis (`window.__lenis`) si está activo. Al llegar al `<footer>` sube (variable CSS `--lift`) para no tapar los enlaces.
@@ -518,5 +519,6 @@ Ramas:
 | 2026-09 | v3.13: botón "volver arriba" con anillo de progreso y más dibujos a mano (subrayados/círculos en hero, experiencia, proyectos, historia y los 22 artículos). Pedido de Rossmel. |
 | 2026-09 | v3.15: nuevo titular del hero ("Construyo interfaces rápidas, cuidadas y listas para producción. Programo desde 2020…"), íconos en los botones CV y ES/EN (nav y barra del CV) y el botón "volver arriba" sube al llegar al footer para no tapar sus enlaces. Pedido de Rossmel. |
 | 2026-09 | Traspaso a Claude local: guía `docs/CONTINUAR.md` y `npm run verify` (chequeo automático tras el build). |
+| 2026-10 | `/sobre-mi/` rehecha: foto solo arriba (ya no sticky), capítulos intercalados izquierda/derecha que entran desde su costado (`data-slide`), cada uno con un dibujo principal + 3 secundarios con parallax y un número grande de fondo; flechas a mano entre capítulos. Se quitó "Mi camino" (`journey`). "Fuera del código" se dividió en Cubos de Rubik / Fútbol / Música y podcasts. Pedido de Rossmel. |
 | 2026-09 | v3.14: dibujo por proyecto y dibujos "en vuelo" en más secciones; CV con "WANT Digital Agency" completo y más proyectos (Homelab, Notebook, Rubik, rOS). Pedido de Rossmel. |
 | 2026-09 | Fuera del sitio: watcher-backend, prototipos v0 (salvo SGPG), proyectos descartados, proyectos personales/regalos. |

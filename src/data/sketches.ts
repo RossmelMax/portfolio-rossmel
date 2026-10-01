@@ -263,41 +263,68 @@ export const sketches = {
       ];
     },
   },
-  hobbies: {
-    // cubo de Rubik + pelota de fútbol + nota musical, uno al lado del otro
-    viewBox: '0 0 220 100',
+  timer: {
+    viewBox: '0 0 100 100',
+    shapes: (g, o) => [
+      g.circle(50, 56, 68, o),
+      g.rectangle(42, 6, 16, 9, o),
+      g.line(50, 15, 50, 22, o),
+      g.line(76, 28, 83, 21, o),
+      g.line(50, 56, 50, 34, o),
+      g.line(50, 56, 64, 64, { ...o, seed: 5 }),
+    ],
+  },
+  ball: {
+    viewBox: '0 0 100 100',
     shapes: (g, o) => {
-      const L = (a: number[], b: number[], t: number) => [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t];
-      const face = (a: number[], b: number[], c: number[], d: number[], s: number) => {
-        const out = [g.polygon([a, b, c, d] as [number, number][], { ...o, seed: s })];
-        for (const t of [1 / 3, 2 / 3]) {
-          const [p, q] = [L(a, b, t), L(d, c, t)];
-          const [r, u] = [L(a, d, t), L(b, c, t)];
-          out.push(g.line(p[0], p[1], q[0], q[1], { ...o, seed: s + 1 }), g.line(r[0], r[1], u[0], u[1], { ...o, seed: s + 2 }));
-        }
-        return out;
-      };
-      const pentagon: [number, number][] = [[110, 30], [129, 43.8], [121.8, 66.2], [98.2, 66.2], [91, 43.8]];
-      const spokes = pentagon.map(([px, py], i) => {
-        const [cx, cy] = [px - 110, py - 50];
-        const k = 32 / Math.hypot(cx, cy);
-        return g.line(px, py, 110 + cx * k, 50 + cy * k, { ...o, seed: 22 + i });
-      });
+      // pentágono central y "costuras" hacia el borde
+      const pent = [-90, -18, 54, 126, 198].map((a) => [50 + 18 * Math.cos((a * P) / 180), 50 + 18 * Math.sin((a * P) / 180)] as [number, number]);
       return [
-        // cubo (mini, 0.6×)
-        ...face([30, 24.8], [52.8, 36.8], [30, 48.8], [7.2, 36.8], 3),
-        ...face([7.2, 36.8], [30, 48.8], [30, 75.2], [7.2, 63.2], 7),
-        ...face([30, 48.8], [52.8, 36.8], [52.8, 63.2], [30, 75.2], 11),
-        // pelota de fútbol
-        g.circle(110, 50, 64, { ...o, seed: 20 }),
-        g.polygon(pentagon, { ...o, seed: 21 }),
-        ...spokes,
-        // nota musical
-        g.ellipse(182, 78, 30, 22, { ...o, seed: 40 }),
-        g.line(197, 78, 197, 18, { ...o, seed: 41 }),
-        g.path('M197 18 C208 22 214 30 210 42', { ...o, seed: 42 }),
+        g.circle(50, 50, 86, o),
+        g.polygon(pent, { ...o, seed: 4 }),
+        ...pent.map(([x, y], i) => g.line(x, y, 50 + (x - 50) * (42 / 18), 50 + (y - 50) * (42 / 18), { ...o, seed: 10 + i })),
       ];
     },
+  },
+  goal: {
+    viewBox: '0 0 100 100',
+    shapes: (g, o) => [
+      g.linearPath([[10, 84], [10, 22], [90, 22], [90, 84]], o),
+      ...[30, 50, 70].map((x, i) => g.line(x, 22, x, 84, { ...o, seed: 20 + i })),
+      ...[42, 63].map((y, i) => g.line(10, y, 90, y, { ...o, seed: 30 + i })),
+      g.line(2, 86, 98, 86, o),
+    ],
+  },
+  headphones: {
+    viewBox: '0 0 100 100',
+    shapes: (g, o) => [
+      g.arc(50, 60, 74, 80, P, 2 * P, false, o),
+      g.ellipse(20, 68, 18, 32, o),
+      g.ellipse(80, 68, 18, 32, { ...o, seed: 6 }),
+      g.line(13, 60, 13, 76, o),
+      g.line(87, 60, 87, 76, o),
+    ],
+  },
+  note: {
+    viewBox: '0 0 100 100',
+    shapes: (g, o) => [
+      g.ellipse(28, 80, 24, 16, o),
+      g.ellipse(72, 72, 24, 16, { ...o, seed: 5 }),
+      g.line(39, 78, 39, 24, o),
+      g.line(83, 70, 83, 16, o),
+      g.polygon([[39, 24], [83, 16], [83, 27], [39, 35]], o),
+    ],
+  },
+  mic: {
+    viewBox: '0 0 100 100',
+    shapes: (g, o) => [
+      g.path('M36 30 C36 6 64 6 64 30 L64 44 C64 62 36 62 36 44 Z', o),
+      g.line(36, 28, 64, 28, { ...o, seed: 4 }),
+      g.line(36, 38, 64, 38, { ...o, seed: 5 }),
+      g.arc(50, 44, 44, 40, 0, P, false, o),
+      g.line(50, 64, 50, 86, o),
+      g.line(34, 88, 66, 88, o),
+    ],
   },
   notebook: {
     viewBox: '0 0 100 100',

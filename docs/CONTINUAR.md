@@ -58,7 +58,7 @@ Comandos del día a día:
 
 ```
 src/data/profile.ts     ← TODO el contenido ES/EN: profile, experience, education, skills, projects,
-                          workflow, journey, story. Única fuente para portafolio y CV.
+                          workflow, story. Única fuente para portafolio y CV.
 src/data/i18n.ts        ← textos de interfaz (ui.es / ui.en), rutas (paths), fmtMonth
 src/data/blog.ts        ← helpers del blog: getPosts, postUrl, getTranslation, relatedPosts, searchIndex…
 src/data/sketches.ts    ← dibujos a mano (rough.js), marcas (MARK_RE, stripMarks, markHtml), trailPaths
@@ -68,7 +68,7 @@ src/components/
   Home.astro            ← orden de la home: Hero, About, Experience, Projects, LiveSites, Stack,
                           Workflow, BlogTeaser, Contact
   ProjectPage.astro     ← caso de estudio (/proyectos/<slug>/, /en/projects/<slug>/)
-  AboutPage.astro       ← /sobre-mi/ y /en/about/ (story + journey)
+  AboutPage.astro       ← /sobre-mi/ y /en/about/ (story, intercalada)
   BlogIndex / BlogPost  ← portada y artículo
   Resume.astro          ← el CV (ATS: una columna, sin íconos/tablas, Arial)
   Sketch.astro          ← un dibujo · SketchFlight.astro ← estela + dibujo que cruza el texto
@@ -197,7 +197,7 @@ Pendiente:
   tarjeta); al pasar el mouse se vuelven a trazar.
 - **Color por proyecto:** en `ProjectPage` usar `text-[var(--accent)]`, no `text-accent`, porque este
   último se resuelve con el lima global.
-- **`overflow-hidden` rompe `sticky`:** en `/sobre-mi/` la foto es sticky, por eso ese `main` solo es `relative`.
+- **`overflow-hidden` rompe `sticky`:** para recortar en x sin romper nada usar `overflow-x-clip` (no crea contenedor de scroll); así está el `main` de `/sobre-mi/` por las entradas laterales de `data-slide`.
 - **Marcas largas:** los spans son `whitespace-nowrap`; una frase larga desborda en celular
   (`npm run verify` lo detecta).
 - **Arranque de animaciones:** primero la entrada del nombre y luego el resto, en pedazos de ~8 ms
