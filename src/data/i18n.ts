@@ -47,7 +47,7 @@ export const ui = {
     },
     project: { problem: 'El problema', role: 'Mi rol', highlights: 'Lo destacado', learned: 'Lo que aprendí', stack: 'Stack', back: 'Volver', next: 'Siguiente proyecto' },
     live: { kicker: 'En vivo', title: 'Corriendo en mi servidor', body: 'Proyectos que corren en mi homelab, bajo mi dominio. Entra a cada uno para ver cómo funciona.', view: 'Ver en vivo', details: 'Ver detalles' },
-    footer: 'Hecho con Astro, GSAP y mucho café.',
+    footer: 'Hecho con Astro y mucho café.',
     blog: {
       kicker: 'Blog',
       title: 'Notas de lo que construyo',
@@ -133,7 +133,7 @@ export const ui = {
     },
     project: { problem: 'The problem', role: 'My role', highlights: 'Highlights', learned: 'What I learned', stack: 'Stack', back: 'Back', next: 'Next project' },
     live: { kicker: 'Live', title: 'Running on my server', body: 'Projects running on my homelab, under my own domain. Open each one to see how it works.', view: 'See it live', details: 'See details' },
-    footer: 'Built with Astro, GSAP and lots of coffee.',
+    footer: 'Built with Astro and lots of coffee.',
     blog: {
       kicker: 'Blog',
       title: 'Notes on what I build',

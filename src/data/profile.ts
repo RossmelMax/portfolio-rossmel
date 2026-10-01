@@ -51,13 +51,13 @@ export const profile = {
       'Empecé a programar de forma autodidacta en plena pandemia, y desde entonces no paré: cursos, documentación, prueba y error, y muchas noches de “¿por qué esto no funciona?”.',
       'Estudiaba Derecho cuando descubrí la programación gracias a Platzi, y supe que esa era mi vocación. Aprendí con cursos y creadores de YouTube, siguiendo una sola regla: ==nunca parar de aprender==.',
       'Con una buena base de desarrollo web entré a WANT, donde pasé más de tres años construyendo ==productos reales== para clientes de Bolivia y EE. UU. Hoy trabajo de forma independiente mientras termino Ingeniería de Sistemas, y uso la IA para llegar más lejos con lo que ya sé hacer.',
-      'Y vivo en Linux: probé muchas distros, pero ((Arch)) siempre fue especial. Uso a diario rOS, mi propia versión, y tengo un homelab en casa que cuida un agente de IA.',
+      'Y vivo en Linux: probé muchas distros, pero ((Arch)) siempre fue especial. Uso a diario rOS, mi propio flavor de Arch, y tengo un homelab en casa que cuida un agente de IA.',
     ],
     en: [
       'I taught myself to code in the middle of the pandemic, and I haven\'t stopped since: courses, docs, trial and error, and many “why isn\'t this working?” nights.',
       'I was studying law when I discovered programming through Platzi, and I knew it was my calling. I learned from courses and YouTube creators, following one rule: ==never stop learning==.',
       'With a solid web development foundation I joined WANT, where I spent 3+ years building ==real products== for clients in Bolivia and the US. Today I work independently while finishing my Systems Engineering degree, and I use AI to go further with what I already know how to do.',
-      'And I live in Linux: I\'ve tried many distros, but ((Arch)) was always special. I daily-drive rOS, my own take on it, and run a homelab at home looked after by an AI agent.',
+      'And I live in Linux: I\'ve tried many distros, but ((Arch)) was always special. I daily-drive rOS, my own flavor of Arch, and run a homelab at home looked after by an AI agent.',
     ],
   } as Record<Lang, string[]>,
 
@@ -983,11 +983,11 @@ export const story: { heading: L; body: Record<Lang, string[]> }[] = [
     body: {
       es: [
         'A mediados de 2020, en plena pandemia, estudiaba Derecho en la Universidad Mayor de San Simón. Pasar mucho más tiempo frente a la computadora me llevó a curiosear el mundo de la tecnología, y un día, gracias a Platzi, descubrí la programación. Ahí supe cuál era mi ==verdadera vocación==.',
-        'Desde entonces me tomé muy en serio el “==Nunca pares de aprender==” de Freddy Vega. Aprendí en Platzi y en YouTube: Programación ATS, midudev y muchos otros creadores fueron mis maestros. Cursos, documentación, prueba y error, y muchas noches de “¿por qué esto no funciona?”. En 2021 empecé Ingeniería de Sistemas en la UDABOL.',
+        'Desde entonces me tomé muy en serio el “==Nunca pares de aprender==” de Freddy Vega. Aprendí en Platzi y en YouTube: Programación ATS, midudev y muchos otros creadores fueron mis maestros. Tutoriales, mucho copy-paste al principio, y noches enteras leyendo un mismo error hasta entenderlo. En 2021 empecé Ingeniería de Sistemas en la UDABOL.',
       ],
       en: [
         'In mid-2020, in the middle of the pandemic, I was studying law at Universidad Mayor de San Simón. Spending much more time in front of the computer got me curious about the tech world, and one day, thanks to Platzi, I discovered programming. That\'s when I knew what my ==real calling== was.',
-        'From then on I took Freddy Vega\'s “==Never stop learning==” very seriously. I learned on Platzi and YouTube: Programación ATS, midudev and many other creators were my teachers. Courses, docs, trial and error, and many “why isn\'t this working?” nights. In 2021 I started Systems Engineering at UDABOL.',
+        'From then on I took Freddy Vega\'s “==Never stop learning==” very seriously. I learned on Platzi and YouTube: Programación ATS, midudev and many other creators were my teachers. Tutorials, a lot of copy-pasting at first, and whole nights reading the same error until it finally clicked. In 2021 I started Systems Engineering at UDABOL.',
       ],
     },
   },
