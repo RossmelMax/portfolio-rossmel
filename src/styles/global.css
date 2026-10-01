@@ -17,6 +17,9 @@
   --line: rgb(237 237 234 / 0.12);
   --accent: #c8ff2e;
   --accent-ink: #0a0a0b;
+  /* Selección de texto: siempre el acento del TEMA (las páginas de proyecto redefinen --accent) */
+  --selection: #c8ff2e;
+  --selection-ink: #0a0a0b;
   color-scheme: dark;
 }
 
@@ -28,6 +31,8 @@
   --line: rgb(17 17 18 / 0.18);
   --accent: #5b3dff;
   --accent-ink: #f4f3ef;
+  --selection: #5b3dff;
+  --selection-ink: #f4f3ef;
   color-scheme: light;
 }
 
@@ -62,8 +67,8 @@ body {
 }
 
 ::selection {
-  background: var(--accent);
-  color: var(--accent-ink);
+  background: var(--selection);
+  color: var(--selection-ink);
 }
 
 /* Lenis (smooth scroll) */
