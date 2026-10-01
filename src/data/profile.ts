@@ -1031,6 +1031,21 @@ export const story: { heading: L; body: Record<Lang, string[]> }[] = [
     },
   },
   {
+    heading: { es: 'Fuera del código', en: 'Outside the code' },
+    body: {
+      es: [
+        'Fuera de la pantalla tengo pasatiempos que, sin darme cuenta, terminaron pareciéndose a cómo trabajo: ((obsesionarme)) con un problema, probar, fallar, mejorar y, si hace falta, rearmar todo desde cero. A los 12 o 13 años empecé a armar cubos de Rubik viendo tutoriales del canal de ((Cuby)) en YouTube; hoy tengo entre 20 y 30 cubos distintos y sigo practicando ==velocidad== en [rubik.rossmel.top](https://rubik.rossmel.top), un timer que construí yo mismo. Me engancha lo mismo que la programación: algoritmos, patrones y la sensación de resolver algo pieza por pieza.',
+        'De chico también jugué fútbol: pasé por las divisiones menores del Club Wilstermann hasta que la distancia, el tiempo y el colegio me hicieron dejarlo. Ya no juego tan seguido, pero sigo la liga y me gusta pensar en la historia y la táctica detrás de cada partido.',
+        'La música fue un hilo constante: de chico escuchaba los clásicos de los 80 y 90 con mis papás, después pasé por una etapa de música electrónica, pero [José Madero](https://open.spotify.com/search/Jos%C3%A9%20Madero) y [PXNDX](https://open.spotify.com/search/PXNDX) nunca dejaron de sonar — hoy mis gustos son bastante abiertos. También escucho bastantes podcasts: [The Wild Project](https://open.spotify.com/search/The%20Wild%20Project) es, por lejos, mi favorito.',
+      ],
+      en: [
+        'Away from the screen I have hobbies that, without me noticing, ended up looking a lot like how I work: ((obsessing)) over a problem, trying, failing, improving, and tearing everything down to rebuild it if needed. At 12 or 13 I started solving Rubik\'s cubes watching tutorials from ((Cuby))\'s YouTube channel; today I own between 20 and 30 different cubes and still practice ==speed-solving== on [rubik.rossmel.top](https://rubik.rossmel.top), a timer I built myself. It hooks me the same way programming does: algorithms, patterns, and the feeling of solving something piece by piece.',
+        'As a kid I also played football: I went through Club Wilstermann\'s youth divisions until distance, time and school made me stop. I don\'t play as often anymore, but I still follow the league and like thinking about the history and tactics behind every match.',
+        'Music has been a constant thread: as a kid I listened to 80s and 90s classics with my parents, then went through an electronic music phase, but [José Madero](https://open.spotify.com/search/Jos%C3%A9%20Madero) and [PXNDX](https://open.spotify.com/search/PXNDX) never stopped playing — these days my taste is pretty open. I also listen to a fair number of podcasts: [The Wild Project](https://open.spotify.com/search/The%20Wild%20Project) is, by far, my favorite.',
+      ],
+    },
+  },
+  {
     heading: { es: 'Hoy', en: 'Today' },
     body: {
       es: [

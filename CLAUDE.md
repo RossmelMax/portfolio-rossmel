@@ -76,8 +76,13 @@ Antes de dar algo por terminado: `npm run build`, `npm run check` y `npm run ver
   Responsividad en tablet (768–1024px) revisada con capturas reales (Playwright): el diseño fluido
   basado en `vw`/`clamp()` ya se adapta bien ahí, incluido el scroll horizontal de Proyectos; no hizo
   falta ningún breakpoint nuevo.
-- Siguiente: capturas y video de AdvAI (Rossmel); GitHub/LinkedIn (docs/); entrevista pendiente con
-  Rossmel para ampliar "Mi historia" (hobbies, Rubik, deportes) — ver próxima sesión.
+- v3.20: 6ª sección "Fuera del código" en Mi historia (resultado de la entrevista de hobbies): cubos
+  de Rubik (canal de Cuby, timer en rubik.rossmel.top), fútbol (divisiones menores de Wilstermann) y
+  música/podcasts (José Madero, PXNDX, The Wild Project, con enlaces de búsqueda de Spotify — no existe
+  embed genérico de "perfil"/stats en Spotify, solo track/álbum/artista/playlist/podcast puntuales).
+  `Marked.astro` soporta `[texto](url)` como enlace real. Nuevo doodle compuesto `hobbies` (cubo +
+  pelota + nota musical) en `sketches.ts`, mismo patrón que `linux` (Tux + logo de Arch).
+- Siguiente: capturas y video de AdvAI (Rossmel); GitHub/LinkedIn (docs/).
 - Analítica: inyección automática de Cloudflare, sin token.
 - Preguntas abiertas para Rossmel y decisiones por proyecto: `docs/PROYECTOS-CANDIDATOS.md`.
 - Despliegue: Cloudflare Pages, proyecto `rossmel-portfolio` conectado a este repo (rama `main`). Ver README → Despliegue.

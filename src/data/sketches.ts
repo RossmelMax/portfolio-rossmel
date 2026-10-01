@@ -263,6 +263,42 @@ export const sketches = {
       ];
     },
   },
+  hobbies: {
+    // cubo de Rubik + pelota de fútbol + nota musical, uno al lado del otro
+    viewBox: '0 0 220 100',
+    shapes: (g, o) => {
+      const L = (a: number[], b: number[], t: number) => [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t];
+      const face = (a: number[], b: number[], c: number[], d: number[], s: number) => {
+        const out = [g.polygon([a, b, c, d] as [number, number][], { ...o, seed: s })];
+        for (const t of [1 / 3, 2 / 3]) {
+          const [p, q] = [L(a, b, t), L(d, c, t)];
+          const [r, u] = [L(a, d, t), L(b, c, t)];
+          out.push(g.line(p[0], p[1], q[0], q[1], { ...o, seed: s + 1 }), g.line(r[0], r[1], u[0], u[1], { ...o, seed: s + 2 }));
+        }
+        return out;
+      };
+      const pentagon: [number, number][] = [[110, 30], [129, 43.8], [121.8, 66.2], [98.2, 66.2], [91, 43.8]];
+      const spokes = pentagon.map(([px, py], i) => {
+        const [cx, cy] = [px - 110, py - 50];
+        const k = 32 / Math.hypot(cx, cy);
+        return g.line(px, py, 110 + cx * k, 50 + cy * k, { ...o, seed: 22 + i });
+      });
+      return [
+        // cubo (mini, 0.6×)
+        ...face([30, 24.8], [52.8, 36.8], [30, 48.8], [7.2, 36.8], 3),
+        ...face([7.2, 36.8], [30, 48.8], [30, 75.2], [7.2, 63.2], 7),
+        ...face([30, 48.8], [52.8, 36.8], [52.8, 63.2], [30, 75.2], 11),
+        // pelota de fútbol
+        g.circle(110, 50, 64, { ...o, seed: 20 }),
+        g.polygon(pentagon, { ...o, seed: 21 }),
+        ...spokes,
+        // nota musical
+        g.ellipse(182, 78, 30, 22, { ...o, seed: 40 }),
+        g.line(197, 78, 197, 18, { ...o, seed: 41 }),
+        g.path('M197 18 C208 22 214 30 210 42', { ...o, seed: 42 }),
+      ];
+    },
+  },
   notebook: {
     viewBox: '0 0 100 100',
     shapes: (g, o) => [
